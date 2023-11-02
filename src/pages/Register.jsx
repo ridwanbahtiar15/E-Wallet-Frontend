@@ -1,21 +1,22 @@
 /* eslint-disable react/no-unknown-property */
 // eslint-disable-next-line no-unused-vars
 import React from "react";
+import { Link } from "react-router-dom";
 
 function register() {
   return (
     <>
-      <div className="h-screen flex items-center mx-5">
-        <div className="flex-1 bg-white font-montserrat flex">
+      <div className="h-screen flex items-center">
+        <div className="flex-1 md:flex-initial md:w-2/3 lg:w-1/2 bg-white font-montserrat mx-5 md:rounded-r-full">
           <div className="flex flex-col gap-[15px]">
             <div className="flex items-center">
               <img src="/svg/Money-Wallet-logo.svg" alt="e-wallet-logo" />
               <h1 className="text-[#2948FF] font-medium">E-Wallet</h1>
             </div>
 
-            <p className="text-lg font-medium">Start Accessing Banking Needs With All Devices and All Platforms With 30.000+ Users</p>
-            <p className="text-xs font-normal">Transfering money is eassier than ever, you can access Zwallet wherever you are. Desktop, laptop, mobile phone? we cover all of that for you!</p>
-            <div className="flex gap-[15px] justify-center">
+            <p className="text-lg md:text-5xl font-medium">Start Accessing Banking Needs With All Devices and All Platforms With 30.000+ Users</p>
+            <p className="text-xs md:leading-6 font-normal">Transfering money is eassier than ever, you can access Zwallet wherever you are. Desktop, laptop, mobile phone? we cover all of that for you!</p>
+            <div className="flex gap-[15px] justify-center md:flex-col">
               <button className="flex flex-1 border border-[#E8E8E8] h-[51px] p-[10px] gap-[10px] rounded-full justify-center">
                 <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
@@ -35,7 +36,7 @@ function register() {
                     fill="#1976D2"
                   />
                 </svg>
-                <p className="hidden">Google</p>
+                <p className="hidden md:text-lg md:text-[#4F5665] md:block">Sign In With Google</p>
               </button>
               <button className="flex flex-1 border border-[#E8E8E8] h-[51px] p-[10px] gap-[10px] rounded-full justify-center">
                 <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -44,7 +45,7 @@ function register() {
                     fill="#395185"
                   />
                 </svg>
-                <p className="hidden">Facebook</p>
+                <p className="hidden md:text-lg md:text-[#4F5665] md:block">Sign In With Facebook</p>
               </button>
             </div>
             <div className="flex justify-center">
@@ -120,13 +121,20 @@ function register() {
                   <input type="password" placeholder="Enter Your Email" name="email" className="flex-1 outline-none text-xs font-normal text-[#4F5665]" />
                 </div>
                 <button className="w-full p-[10px] h-[50px] text-white bg-[#2948FF] rounded-md">Register</button>
-                <p className="text-center font-normal text-xs">Have An Account? Login</p>
+                <p className="text-center font-normal text-xs">
+                  Have An Account?{" "}
+                  <span>
+                    <Link to="/login" className="text-blue-700">
+                      Login
+                    </Link>
+                  </span>
+                </p>
               </form>
             </div>
           </div>
         </div>
-        <div className="hidden md:flex md:flex-1 h-full md:bg-gradient-to-b md:from-[#396AFC] md:to-[#2948FF] md:justify-center md:items-center">
-          <img src="/img/register-side.png" alt="register-img" />
+        <div className="hidden md:flex md:flex-initial md:w-1/3 lg:w-1/2 h-screen md:bg-gradient-to-b md:from-[#396AFC] md:to-[#2948FF] md:justify-center md:items-center">
+          <img src="/img/register-side.png" alt="register-img" className="object-contain" />
         </div>
       </div>
     </>
