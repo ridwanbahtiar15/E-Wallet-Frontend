@@ -3,19 +3,16 @@ import { Link } from "react-router-dom";
 
 import Navbar from "../components/Navbar";
 import getImageUrl from "../utils/imageGetter";
-import IncomeChart from "../components/IncomeChart";
 import DropdownMobile from "../components/DropdownMobile";
 import Modal from "../components/Modal";
 
-function Dashboard(props) {
+function HistoryTransaction(props) {
   const [Message, setMessage] = useState({ msg: null, isError: null });
   const [openModal, setOpenModal] = useState({
     isOpen: false,
     status: null,
   });
   const [isDropdownShown, setIsDropdownShow] = useState(false);
-
-  console.log(location.origin);
   return (
     <>
       <Navbar
@@ -30,7 +27,12 @@ function Dashboard(props) {
           <div className="flex flex-col gap-y-4">
             <Link
               to="/dashboard"
-              className="flex items-center gap-x-2 py-2 px-4 bg-primary rounded-md outline-none text-base font-normal text-light"
+              className={`flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-base font-normal${
+                // eslint-disable-next-line react/prop-types
+                props.path == "/dashboard"
+                  ? " text-light bg-primary"
+                  : " text-[#4F5665]"
+              }`}
             >
               <div>
                 <svg
@@ -42,19 +44,19 @@ function Dashboard(props) {
                 >
                   <path
                     d="M4.92265 5.43523L6.4874 7M22 12.5C22 18.0229 17.5229 22.5 12 22.5C6.47715 22.5 2 18.0229 2 12.5H22ZM22 12.5H20H22ZM22 12.5C22 9.7418 20.8833 7.24435 19.0774 5.43523L22 12.5ZM2 12.5H4H2ZM2 12.5C2 9.74175 3.1167 7.24435 4.92265 5.43523L2 12.5ZM12 2.5V4.5V2.5ZM12 2.5C14.7646 2.5 17.2672 3.62189 19.0774 5.43523L12 2.5ZM12 2.5C9.2354 2.5 6.7328 3.62189 4.92265 5.43523L12 2.5ZM19.0774 5.43523L17.5126 7L19.0774 5.43523Z"
-                    stroke="white"
+                    stroke="#4F5665"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   />
                   <path
                     d="M12 10.5V16.5"
-                    stroke="white"
+                    stroke="#4F5665"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   />
                   <path
-                    d="M19.926 18.598C18.0976 20.9711 15.2273 22.5 11.9999 22.5C8.77248 22.5 5.90218 20.9711 4.07373 18.598C6.41033 17.2629 9.11603 16.5 11.9999 16.5C14.8837 16.5 17.5894 17.2629 19.926 18.598Z"
-                    stroke="white"
+                    d="M19.9265 18.598C18.0981 20.9711 15.2278 22.5 12.0004 22.5C8.77296 22.5 5.90266 20.9711 4.07422 18.598C6.41081 17.2629 9.11651 16.5 12.0004 16.5C14.8842 16.5 17.5899 17.2629 19.9265 18.598Z"
+                    stroke="#4F5665"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   />
@@ -63,8 +65,13 @@ function Dashboard(props) {
               <p className="max-xl:hidden">Dashboard</p>
             </Link>
             <Link
-              to="/transfer"
-              className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-sm font-normal text-secondary"
+              to="/admin/product"
+              className={`flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-sm font-normal${
+                // eslint-disable-next-line react/prop-types
+                props.path == "/transfer"
+                  ? " text-light bg-primary"
+                  : " text-[#4F5665]"
+              }`}
             >
               <div>
                 <svg
@@ -86,7 +93,7 @@ function Dashboard(props) {
             </Link>
             <Link
               to="/history"
-              className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-sm font-normal text-secondary"
+              className="flex items-center gap-x-2 py-2 px-4 bg-primary rounded-md outline-none text-sm font-normal text-light"
             >
               <div>
                 <svg
@@ -98,21 +105,21 @@ function Dashboard(props) {
                 >
                   <path
                     d="M2.90918 3.86365V7.5H6.54556"
-                    stroke="#4F5665"
+                    stroke="white"
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   />
                   <path
                     d="M2 12.5C2 18.0229 6.47715 22.5 12 22.5C17.5229 22.5 22 18.0229 22 12.5C22 6.97715 17.5229 2.5 12 2.5C8.299 2.5 5.06755 4.51056 3.33839 7.49905"
-                    stroke="#4F5665"
+                    stroke="white"
                     strokeWidth="1.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   />
                   <path
                     d="M12.0026 6.5L12.002 12.5044L16.2417 16.7441"
-                    stroke="#4F5665"
+                    stroke="white"
                     strokeWidth="1.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -123,12 +130,7 @@ function Dashboard(props) {
             </Link>
             <Link
               to="/admin/order"
-              className={`flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-sm font-normal${
-                // eslint-disable-next-line react/prop-types
-                props.path == "/history"
-                  ? " text-light bg-primary"
-                  : " text-[#4F5665]"
-              }`}
+              className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-sm font-normal text-secondary"
             >
               <div>
                 <svg
@@ -287,263 +289,165 @@ function Dashboard(props) {
             </button>
           </div>
         </aside>
-        <section className="flex flex-col gap-y-4 lg:flex-row md:gap-x-5 py-4 px-5 md:py-11 md:px-10 md:justify-between w-full">
-          <section className="flex flex-col lg:w-2/3 gap-y-[18px]">
-            <section className="flex flex-col gap-y-4 md:flex-row md:gap-x-4 md:justify-between">
-              <div className="border border-[#E8E8E8] p-[19px] flex flex-col gap-y-4 w-full rounded-md">
-                <div className="flex gap-x-3.5">
-                  <div>
-                    <img
-                      src={getImageUrl("balance", "svg")}
-                      alt="balance"
-                      className="w-6 h-6"
-                    />
-                  </div>
-                  <p className="text-secondary">Balance</p>
-                </div>
-                <div>
-                  <p className="text-xl xl:text-2xl text-dark font-medium">
-                    Rp. 120.000
-                  </p>
-                </div>
-                <div className="flex items-center gap-x-1 text-xs text-success">
-                  <p className="">+2%</p>
-                  <div>
-                    <img
-                      src={getImageUrl("ArrowRise-success", "svg")}
-                      alt="ArrowRise-success"
-                      className="w-4 h-4"
-                    />
-                  </div>
-                  <p>3 Days Ago</p>
-                </div>
-              </div>
-              <div className="border border-[#E8E8E8] p-[19px] flex flex-col gap-y-4 w-full rounded-md">
-                <div className="flex gap-x-3.5">
-                  <div>
-                    <img
-                      src={getImageUrl("u_money-withdraw", "svg")}
-                      alt="balance"
-                      className="w-6 h-6"
-                    />
-                  </div>
-                  <p className="text-secondary">Income</p>
-                </div>
-                <div>
-                  <p className="text-xl xl:text-2xl text-dark font-medium">
-                    Rp. 2.120.000
-                  </p>
-                </div>
-                <div className="flex items-center gap-x-1 text-xs text-success">
-                  <p className="">+11.01%</p>
-                  <div>
-                    <img
-                      src={getImageUrl("ArrowRise-success", "svg")}
-                      alt="ArrowRise-success"
-                      className="w-4 h-4"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="border border-[#E8E8E8] p-[19px] flex flex-col gap-y-4 w-full rounded-md">
-                <div className="flex gap-x-3.5">
-                  <div>
-                    <img
-                      src={getImageUrl("u_money-withdraw-1", "svg")}
-                      alt="balance"
-                      className="w-6 h-6"
-                    />
-                  </div>
-                  <p className="text-secondary">Expense</p>
-                </div>
-                <div>
-                  <p className="text-xl xl:text-2xl text-dark font-medium">
-                    Rp. 200.000
-                  </p>
-                </div>
-                <div className="flex items-center gap-x-1 text-xs text-danger">
-                  <p className="">-5.06%</p>
-                  <div>
-                    <img
-                      src={getImageUrl("ArrowRise-danger", "svg")}
-                      alt="ArrowRise-success"
-                      className="w-4 h-4"
-                    />
-                  </div>
-                </div>
-              </div>
-            </section>
-            <section className="border border-[#E8E8E8] p-[19px] rounded-md flex flex-col gap-y-3 md:flex-row justify-between md:items-center">
-              <p className="font-medium">Fast Service</p>
-              <div className="flex flex-col gap-y-3 md:flex-row md:gap-x-[14px]">
-                <button className="bg-primary p-3 rounded-md flex justify-center items-center gap-x-2 hover:bg-blue-800 focus:ring">
-                  <img
-                    src={getImageUrl("u_money-insert", "svg")}
-                    alt="u_money_insert"
-                    className="w-6 h-6"
-                  />
-                  <p className="text-sm xl:text-base text-light">Top Up</p>
-                </button>
-                <button className="bg-primary p-3 rounded-md flex justify-center items-center gap-x-2 hover:bg-blue-800 focus:ring">
-                  <img
-                    src={getImageUrl("Send", "svg")}
-                    alt="Send"
-                    className="w-6 h-6"
-                  />
-                  <p className="text-sm xl:text-base text-light">Transfer</p>
-                </button>
-              </div>
-            </section>
-            <section className="border border-[#E8E8E8] p-[19px] rounded-md flex flex-col items-center gap-y-4">
-              <div className="flex flex-col gap-y-3 md:flex-row md:justify-between w-full md:items-center">
-                <p className="font-medium text-dark">Income Chart</p>
-                <div className="flex flex-col gap-y-3 md:flex-row gap-x-4">
-                  <button className="p-3 bg-[#F1F1F1] rounded-md flex gap-x-2 items-center justify-between">
-                    <p className="text-sm font-medium text-dark">7 Days</p>
-                    <img
-                      src={getImageUrl("down-dark", "svg")}
-                      alt="down-dark"
-                    />
-                  </button>
-                  <button className="p-3 bg-[#F1F1F1] rounded-md flex gap-x-2 items-center justify-between">
-                    <p className="text-sm font-medium text-dark">Income</p>
-                    <img
-                      src={getImageUrl("down-dark", "svg")}
-                      alt="down-dark"
-                    />
-                  </button>
-                </div>
-              </div>
-              <div className="w-full">
-                <IncomeChart></IncomeChart>
-              </div>
-            </section>
-          </section>
-          <aside className="lg:w-1/3">
-            <div className="border border-[#E8E8E8] p-[19px] rounded-md flex flex-col gap-y-6">
-              <div className="flex justify-between items-center">
-                <p className="text-sm xl:text-base text-dark font-semibold">
-                  Transaction History
-                </p>
-                <Link
-                  to="/history"
-                  className="text-primary text-xs font-medium"
-                >
-                  See All
-                </Link>
-              </div>
-              <div className="flex flex-col gap-y-7">
-                <div className="flex flex-row gap-x-6">
-                  <div className="lg:self-start">
-                    <img
-                      src={getImageUrl("1", "png")}
-                      alt="profile"
-                      className="w-14 h-14"
-                    />
-                  </div>
-                  <div className="flex flex-row gap-x-6 lg:flex-col xl:flex-row">
-                    <div className="flex flex-col gap-y-1">
-                      <p className="text-dark font-semibold">Robert Fox</p>
-                      <p className="text-secondary">Transfer</p>
-                    </div>
-                    <div>
-                      <p className="font-semibold text-success">+Rp50.000</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex flex-row gap-x-6">
-                  <div className="lg:self-start">
-                    <img
-                      src={getImageUrl("1", "png")}
-                      alt="profile"
-                      className="w-14 h-14"
-                    />
-                  </div>
-                  <div className="flex flex-row gap-x-6 lg:flex-col xl:flex-row">
-                    <div className="flex flex-col gap-y-1">
-                      <p className="text-dark font-semibold">Robert Fox</p>
-                      <p className="text-secondary">Transfer</p>
-                    </div>
-                    <div>
-                      <p className="font-semibold text-success">+Rp50.000</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex flex-row gap-x-6">
-                  <div className="lg:self-start">
-                    <img
-                      src={getImageUrl("1", "png")}
-                      alt="profile"
-                      className="w-14 h-14"
-                    />
-                  </div>
-                  <div className="flex flex-row gap-x-6 lg:flex-col xl:flex-row">
-                    <div className="flex flex-col gap-y-1">
-                      <p className="text-dark font-semibold">Robert Fox</p>
-                      <p className="text-secondary">Transfer</p>
-                    </div>
-                    <div>
-                      <p className="font-semibold text-success">+Rp50.000</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex flex-row gap-x-6">
-                  <div className="lg:self-start">
-                    <img
-                      src={getImageUrl("1", "png")}
-                      alt="profile"
-                      className="w-14 h-14"
-                    />
-                  </div>
-                  <div className="flex flex-row gap-x-6 lg:flex-col xl:flex-row">
-                    <div className="flex flex-col gap-y-1">
-                      <p className="text-dark font-semibold">Robert Fox</p>
-                      <p className="text-secondary">Transfer</p>
-                    </div>
-                    <div>
-                      <p className="font-semibold text-success">+Rp50.000</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex flex-row gap-x-6">
-                  <div className="lg:self-start">
-                    <img
-                      src={getImageUrl("1", "png")}
-                      alt="profile"
-                      className="w-14 h-14"
-                    />
-                  </div>
-                  <div className="flex flex-row gap-x-6 lg:flex-col xl:flex-row">
-                    <div className="flex flex-col gap-y-1">
-                      <p className="text-dark font-semibold">Robert Fox</p>
-                      <p className="text-secondary">Transfer</p>
-                    </div>
-                    <div>
-                      <p className="font-semibold text-success">+Rp50.000</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex flex-row gap-x-6">
-                  <div className="lg:self-start">
-                    <img
-                      src={getImageUrl("1", "png")}
-                      alt="profile"
-                      className="w-14 h-14"
-                    />
-                  </div>
-                  <div className="flex flex-row gap-x-6 lg:flex-col xl:flex-row">
-                    <div className="flex flex-col gap-y-1">
-                      <p className="text-dark font-semibold">Robert Fox</p>
-                      <p className="text-secondary">Transfer</p>
-                    </div>
-                    <div>
-                      <p className="font-semibold text-success">+Rp50.000</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+        <section className="flex flex-col gap-y-8 md:gap-x-5 py-6 px-5 md:py-8 md:px-10 md:justify-between w-full">
+          <header className="flex gap-x-4">
+            <div>
+              <img
+                src={getImageUrl("history", "svg")}
+                alt="history"
+                className="w-6 h-6"
+              />
             </div>
-          </aside>
+            <p className="text-dark font-semibold">History Transaction</p>
+          </header>
+          <section className="w-full text-light flex flex-col gap-y-6">
+            <div className="flex flex-col gap-y-4 md:gap-x-5">
+              <section className="py-4 px-3 border border-[#E8E8E8] rounded-md flex flex-col gap-y-4">
+                <header className="flex flex-col gap-y-4 lg:items-center lg:flex-row justify-between w-full px-4">
+                  <p className="font-semibold text-dark">Find Transaction</p>
+                  <div className="flex flex-col gap-y-4 lg:flex-row lg:gap-x-3 lg:items-end">
+                    <div className="font-medium text-secondary lg:w-[340px] relative">
+                      <input
+                        type="text"
+                        className="text-sm p-3 border border-[#E8E8E8] rounded-md  font-medium text-secondary placeholder:font-medium placeholder:text-secondary outline-none focus:border focus:border-primary w-full"
+                        placeholder="Enter Number Or Full Name"
+                      />
+                      <div className="absolute top-3.5 right-3.5">
+                        <img
+                          src={getImageUrl("Search", "svg")}
+                          alt="Search"
+                          className="w-5 h-5"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </header>
+                <div className="text-sm min-[1440px]:text-base font-medium text-secondary overflow-x-scroll px-4">
+                  <table className="table-auto w-full">
+                    <thead className="">
+                      <tr className="border-b border-[#E8E8E84D]">
+                        <th className="p-6 text-center">Image</th>
+                        <th className="p-6 text-center">Name</th>
+                        <th className="p-6 text-center">Phone</th>
+                        <th className="p-6 text-center">Transaction</th>
+                        <th className="p-6 text-center">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr className="border-b border-[#E8E8E84D] bg-[#F9FAFB]">
+                        <td className="p-6">
+                          <div className="flex justify-center">
+                            <img
+                              src={getImageUrl("foto1", "png")}
+                              alt="product"
+                              className="w-12 rounded-md"
+                            />
+                          </div>
+                        </td>
+                        <td className="p-6 text-center">ghaluh</td>
+                        <td className="p-6 text-center">0812312831</td>
+                        <td className="p-6 text-center text-xs text-success">
+                          RP. 50.000
+                        </td>
+                        <td className="p-6 text-center">
+                          <div className="flex flex-col gap-y-2 items-center xl:flex-row md:gap-x-2 justify-center">
+                            <div className="p-1 cursor-pointer">
+                              <img
+                                src={getImageUrl("Trash", "svg")}
+                                alt="Trash"
+                                className="w-6"
+                              />
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr className="border-b border-[#E8E8E84D]">
+                        <td className="p-6">
+                          <div className="flex justify-center">
+                            <img
+                              src={getImageUrl("foto1", "png")}
+                              alt="product"
+                              className="w-12 rounded-md"
+                            />
+                          </div>
+                        </td>
+                        <td className="p-6 text-center">ghaluh</td>
+                        <td className="p-6 text-center">0812312831</td>
+                        <td className="p-6 text-center text-xs text-success">
+                          RP. 50.000
+                        </td>
+                        <td className="p-6 text-center">
+                          <div className="flex flex-col gap-y-2 items-center xl:flex-row md:gap-x-2 justify-center">
+                            <div className="p-1 cursor-pointer">
+                              <img
+                                src={getImageUrl("Trash", "svg")}
+                                alt="Trash"
+                                className="w-6"
+                              />
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr className="border-b border-[#E8E8E84D] bg-[#F9FAFB]">
+                        <td className="p-6">
+                          <div className="flex justify-center">
+                            <img
+                              src={getImageUrl("foto1", "png")}
+                              alt="product"
+                              className="w-12 rounded-md"
+                            />
+                          </div>
+                        </td>
+                        <td className="p-6 text-center">ghaluh</td>
+                        <td className="p-6 text-center">0812312831</td>
+                        <td className="p-6 text-center text-xs text-success">
+                          RP. 50.000
+                        </td>
+                        <td className="p-6 text-center">
+                          <div className="flex flex-col gap-y-2 items-center xl:flex-row md:gap-x-2 justify-center">
+                            <div className="p-1 cursor-pointer">
+                              <img
+                                src={getImageUrl("Trash", "svg")}
+                                alt="Trash"
+                                className="w-6"
+                              />
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr className="border-b border-[#E8E8E84D]">
+                        <td className="p-6">
+                          <div className="flex justify-center">
+                            <img
+                              src={getImageUrl("foto1", "png")}
+                              alt="product"
+                              className="w-12 rounded-md"
+                            />
+                          </div>
+                        </td>
+                        <td className="p-6 text-center">ghaluh</td>
+                        <td className="p-6 text-center">0812312831</td>
+                        <td className="p-6 text-center text-xs text-success">
+                          RP. 50.000
+                        </td>
+                        <td className="p-6 text-center">
+                          <div className="flex flex-col gap-y-2 items-center xl:flex-row md:gap-x-2 justify-center">
+                            <div className="p-1 cursor-pointer">
+                              <img
+                                src={getImageUrl("Trash", "svg")}
+                                alt="Trash"
+                                className="w-6"
+                              />
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+            </div>
+          </section>
         </section>
       </main>
       {isDropdownShown && (
@@ -556,4 +460,4 @@ function Dashboard(props) {
   );
 }
 
-export default Dashboard;
+export default HistoryTransaction;
