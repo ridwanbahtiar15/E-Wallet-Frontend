@@ -13,8 +13,8 @@ function register() {
               <img src="/svg/Money-Wallet-logo.svg" alt="e-wallet-logo" />
               <h1 className="text-[#2948FF] font-medium">E-Wallet</h1>
             </div>
-            <p className="text-lg md:text-2xl font-medium">Start Accessing Banking Needs With All Devices and All Platforms With 30.000+ Users</p>
-            <p className="text-xs md:leading-6 font-normal">Transfering money is eassier than ever, you can access Zwallet wherever you are. Desktop, laptop, mobile phone? we cover all of that for you!</p>
+            <p className="text-lg md:text-2xl font-medium">Hello Welcome Back 👋</p>
+            <p className="text-xs md:leading-6 font-normal">Fill out the form correctly or you can login with several option.</p>
             <div className="flex gap-[15px] justify-center md:flex-col">
               <button className="flex flex-1 border border-[#E8E8E8] bg-white h-[51px] p-[10px] gap-[10px] rounded-full justify-center hover:bg-slate-200">
                 <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -95,36 +95,13 @@ function register() {
                   </svg>
                   <input type="password" placeholder="Enter Your Email" name="email" className="flex-1 outline-none text- font-normal text-[#4F5665]" />
                 </div>
-                <p className="text-base font-medium">Confirm Password</p>
-                <div className="flex gap-[15px] px-3 py-[14px] border border-[#DEDEDE] rounded-lg bg-#FCFDFE">
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      fill-rule="evenodd"
-                      clip-rule="evenodd"
-                      d="M7.12583 7.99932C7.12583 8.68132 6.57316 9.23398 5.89116 9.23398C5.20916 9.23398 4.65649 8.68132 4.65649 7.99932C4.65649 7.31732 5.20916 6.76465 5.89116 6.76465H5.89316C6.57449 6.76532 7.12583 7.31798 7.12583 7.99932Z"
-                      stroke="#4F5665"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                    <path d="M7.12787 8H11.3399V9.23467" stroke="#4F5665" stroke-linecap="round" stroke-linejoin="round" />
-                    <path d="M9.45467 9.23467V8" stroke="#4F5665" stroke-linecap="round" stroke-linejoin="round" />
-                    <path
-                      fill-rule="evenodd"
-                      clip-rule="evenodd"
-                      d="M1.83325 7.99967C1.83325 3.37501 3.37525 1.83301 7.99992 1.83301C12.6246 1.83301 14.1666 3.37501 14.1666 7.99967C14.1666 12.6243 12.6246 14.1663 7.99992 14.1663C3.37525 14.1663 1.83325 12.6243 1.83325 7.99967Z"
-                      stroke="#4F5665"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                  <input type="password" placeholder="Enter Your Email" name="email" className="flex-1 outline-none text-xs font-normal text-[#4F5665]" />
-                </div>
-                <button className="w-full p-[10px] h-[50px] text-white bg-[#2948FF] hover:bg-blue-700 rounded-md">Register</button>
+
+                <button className="w-full p-[10px] h-[50px] text-white bg-[#2948FF] hover:bg-blue-700 rounded-md">Login</button>
                 <p className="text-center font-normal text-xs">
-                  Have An Account?{" "}
+                  Not Have An Account?{" "}
                   <span>
                     <Link to="/login" className="text-blue-700">
-                      Login
+                      Register
                     </Link>
                   </span>
                 </p>
@@ -133,7 +110,7 @@ function register() {
           </div>
         </div>
         <div className="hidden md:bg-cover md:flex md:flex-initial md:w-1/3 lg:w-1/2 h-full md:bg-gradient-to-b md:from-[#396AFC] md:to-[#2948FF] md:justify-center md:items-center">
-          <img src="/img/register-side.png" alt="register-img" className="place-self-center object-contain" />
+          <img src="/img/login-side.png" alt="login-img" className="place-self-center object-contain" />
         </div>
       </div>
     </>
