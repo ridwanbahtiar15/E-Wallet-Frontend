@@ -1,19 +1,28 @@
 /* eslint-disable react/no-unknown-property */
 // eslint-disable-next-line no-unused-vars
 import React from "react";
+import { register } from "../utils/https/auth";
 // import { useState } from "react";
 // import { useNavigate } from "react-router-dom";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-function register() {
+function Register() {
   const submitHandler = (e) => {
     e.preventDefault();
+    if (e.target.password.value !== e.target.confirmPassword.value) return console.log("error");
     const body = {
+      name: e.target.fullName.value,
       email: e.target.email.value,
-      firstPassword: e.target.password.value,
-      secondPassword: e.target.confirmPassword.value,
+      password: e.target.password.value,
     };
-    console.log(body);
+    register(body)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    // console.log(body);
   };
 
   return (
@@ -65,6 +74,32 @@ function register() {
             <div>
               {/* Form register */}
               <form onSubmit={submitHandler} className="flex flex-col gap-[13px]">
+                <label htmlFor="fullName" className="text-base font-medium">
+                  Full Name
+                </label>
+                <div className="flex gap-[15px] px-3 py-[14px] border border-[#DEDEDE] rounded-lg bg-#FCFDFE">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      fillRule="evenodd"
+                      clipRule="evenodd"
+                      d="M11.9849 15.3462C8.11731 15.3462 4.81445 15.931 4.81445 18.2729C4.81445 20.6148 8.09636 21.2205 11.9849 21.2205C15.8525 21.2205 19.1545 20.6348 19.1545 18.2938C19.1545 15.9529 15.8735 15.3462 11.9849 15.3462Z"
+                      stroke="#4F5665"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      fillRule="evenodd"
+                      clipRule="evenodd"
+                      d="M11.9849 12.0059C14.523 12.0059 16.5801 9.94779 16.5801 7.40969C16.5801 4.8716 14.523 2.81445 11.9849 2.81445C9.44679 2.81445 7.3887 4.8716 7.3887 7.40969C7.38013 9.93922 9.42394 11.9973 11.9525 12.0059H11.9849Z"
+                      stroke="#4F5665"
+                      strokeWidth="1.42857"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                  <input type="text" placeholder="Enter Your Full Name" id="fullName" className="flex-1 outline-none text-xs font-normal text-[#4F5665]" />
+                </div>
                 <label htmlFor="email" className="text-base font-medium">
                   Email
                 </label>
@@ -110,7 +145,7 @@ function register() {
                       strokeLinejoin="round"
                     />
                   </svg>
-                  <input type="password" placeholder="Enter Your Email" id="password" className="flex-1 outline-none text- font-normal text-[#4F5665]" />
+                  <input type="password" placeholder="Enter Your Password" id="password" className="flex-1 outline-none text- font-normal text-[#4F5665]" />
                 </div>
                 <label htmlFor="confirmPassword" className="text-base font-medium">
                   Confirm Password
@@ -136,7 +171,7 @@ function register() {
                       strokeLinejoin="round"
                     />
                   </svg>
-                  <input type="password" placeholder="Enter Your Email" id="confirmPassword" className="flex-1 outline-none text-xs font-normal text-[#4F5665]" />
+                  <input type="password" placeholder="Enter Your Password Again" id="confirmPassword" className="flex-1 outline-none text-xs font-normal text-[#4F5665]" />
                 </div>
                 <button type="submit" className="w-full p-[10px] h-[50px] text-white bg-[#2948FF] hover:bg-blue-700 rounded-md">
                   Register
@@ -145,9 +180,9 @@ function register() {
               <p className="text-center font-normal text-xs mt-[13px]">
                 Have An Account?{" "}
                 <span>
-                  {/* <Link to="/login" className="text-blue-700"> */}
-                  Login
-                  {/* </Link> */}
+                  <Link to="/login" className="text-blue-700">
+                    Login
+                  </Link>
                 </span>
               </p>
             </div>
@@ -161,4 +196,4 @@ function register() {
   );
 }
 
-export default register;
+export default Register;
