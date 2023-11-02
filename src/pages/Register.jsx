@@ -1,9 +1,41 @@
 /* eslint-disable react/no-unknown-property */
 // eslint-disable-next-line no-unused-vars
 import React from "react";
-import { Link } from "react-router-dom";
+// import { useState } from "react";
+// import { useNavigate } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 function register() {
+  // const navigate = useNavigate();
+  // const [email, setEmail] = useState();
+  // const [firstPwd, setFirstPwd] = useState();
+  // const [secondPwd, setSecondPdw] = useState();
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    const body = {
+      email: e.target.user_email.value,
+      firstPassword: e.target.first_pwd.value,
+      secondPassword: e.target.second_pwd.value,
+    };
+    console.log(body);
+  };
+
+  // const [firstPwd, setFirstPwd] = useState("");
+  // const [secondPwd, setSecondPwd] = useState("");
+  // const handleFirstPwd = (e) => {
+  //   setFirstPwd(e.taget.value);
+  // };
+  // const handleSecondPwd = (e) => {
+  //   setSecondPwd(e.taget.value);
+  // };
+
+  // const submitHandler = (e) => {
+  //   e.preventDefault();
+  //   console.log(e.user_email.value);
+  //   console.log(e.firstPwd.value);
+  //   console.log(e.secondPwd.value);
+  // };
   return (
     <>
       <div className="h-screen flex items-center">
@@ -51,7 +83,7 @@ function register() {
               <p className="font-normal text-xs text-[#AAAAAA]">Or</p>
             </div>
             <div>
-              <form className="flex flex-col gap-[13px]" action="">
+              <form onSubmit={submitHandler} className="flex flex-col gap-[13px]" action="">
                 <p className="text-base font-medium">Email</p>
                 <div className="flex gap-[15px] px-3 py-[14px] border border-[#DEDEDE] rounded-lg bg-#FCFDFE">
                   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -93,7 +125,7 @@ function register() {
                       stroke-linejoin="round"
                     />
                   </svg>
-                  <input type="password" placeholder="Enter Your Email" name="email" className="flex-1 outline-none text- font-normal text-[#4F5665]" />
+                  <input type="password" placeholder="Enter Your Email" name="first_pwd" className="flex-1 outline-none text- font-normal text-[#4F5665]" />
                 </div>
                 <p className="text-base font-medium">Confirm Password</p>
                 <div className="flex gap-[15px] px-3 py-[14px] border border-[#DEDEDE] rounded-lg bg-#FCFDFE">
@@ -117,15 +149,17 @@ function register() {
                       stroke-linejoin="round"
                     />
                   </svg>
-                  <input type="password" placeholder="Enter Your Email" name="email" className="flex-1 outline-none text-xs font-normal text-[#4F5665]" />
+                  <input type="password" placeholder="Enter Your Email" name="second_pwd" className="flex-1 outline-none text-xs font-normal text-[#4F5665]" />
                 </div>
-                <button className="w-full p-[10px] h-[50px] text-white bg-[#2948FF] hover:bg-blue-700 rounded-md">Register</button>
+                <button type="submit" className="w-full p-[10px] h-[50px] text-white bg-[#2948FF] hover:bg-blue-700 rounded-md">
+                  Register
+                </button>
                 <p className="text-center font-normal text-xs">
                   Have An Account?{" "}
                   <span>
-                    <Link to="/login" className="text-blue-700">
-                      Login
-                    </Link>
+                    {/* <Link to="/login" className="text-blue-700"> */}
+                    Login
+                    {/* </Link> */}
                   </span>
                 </p>
               </form>
