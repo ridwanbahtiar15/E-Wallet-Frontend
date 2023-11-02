@@ -7,17 +7,16 @@ function register() {
   return (
     <>
       <div className="h-screen flex items-center">
-        <div className="flex-1 md:flex-initial md:w-2/3 lg:w-1/2 bg-white font-montserrat mx-5 md:rounded-r-full">
-          <div className="flex flex-col gap-[15px]">
-            <div className="flex items-center">
+        <div className="flex-1 md:flex-initial md:w-2/3 lg:w-1/2 bg-white font-montserrat mx-5 lg:m-0 lg:px-10 md:rounded-r-full">
+          <div className="flex flex-col gap-[13px]">
+            <div className="flex items-center gap-[15px]">
               <img src="/svg/Money-Wallet-logo.svg" alt="e-wallet-logo" />
               <h1 className="text-[#2948FF] font-medium">E-Wallet</h1>
             </div>
-
-            <p className="text-lg md:text-5xl font-medium">Start Accessing Banking Needs With All Devices and All Platforms With 30.000+ Users</p>
+            <p className="text-lg md:text-2xl font-medium">Start Accessing Banking Needs With All Devices and All Platforms With 30.000+ Users</p>
             <p className="text-xs md:leading-6 font-normal">Transfering money is eassier than ever, you can access Zwallet wherever you are. Desktop, laptop, mobile phone? we cover all of that for you!</p>
             <div className="flex gap-[15px] justify-center md:flex-col">
-              <button className="flex flex-1 border border-[#E8E8E8] h-[51px] p-[10px] gap-[10px] rounded-full justify-center">
+              <button className="flex flex-1 border border-[#E8E8E8] bg-white h-[51px] p-[10px] gap-[10px] rounded-full justify-center hover:bg-slate-200">
                 <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M22.3055 10.5415H21.5V10.5H12.5V14.5H18.1515C17.327 16.8285 15.1115 18.5 12.5 18.5C9.1865 18.5 6.5 15.8135 6.5 12.5C6.5 9.1865 9.1865 6.5 12.5 6.5C14.0295 6.5 15.421 7.077 16.4805 8.0195L19.309 5.191C17.523 3.5265 15.134 2.5 12.5 2.5C6.9775 2.5 2.5 6.9775 2.5 12.5C2.5 18.0225 6.9775 22.5 12.5 22.5C18.0225 22.5 22.5 18.0225 22.5 12.5C22.5 11.8295 22.431 11.175 22.3055 10.5415Z"
@@ -38,7 +37,7 @@ function register() {
                 </svg>
                 <p className="hidden md:text-lg md:text-[#4F5665] md:block">Sign In With Google</p>
               </button>
-              <button className="flex flex-1 border border-[#E8E8E8] h-[51px] p-[10px] gap-[10px] rounded-full justify-center">
+              <button className="flex flex-1 border border-[#E8E8E8] h-[51px] p-[10px] gap-[10px] rounded-full justify-center hover:bg-slate-200">
                 <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M12.501 2.50195C6.97901 2.50195 2.50201 6.97895 2.50201 12.501C2.50201 17.491 6.15801 21.627 10.939 22.38V15.392H8.39901V12.501H10.939V10.298C10.939 7.78995 12.432 6.40695 14.715 6.40695C15.809 6.40695 16.955 6.60195 16.955 6.60195V9.06095H15.691C14.451 9.06095 14.063 9.83295 14.063 10.624V12.499H16.834L16.391 15.39H14.063V22.378C18.844 21.629 22.5 17.492 22.5 12.501C22.5 6.97895 18.023 2.50195 12.501 2.50195Z"
@@ -94,7 +93,7 @@ function register() {
                       stroke-linejoin="round"
                     />
                   </svg>
-                  <input type="password" placeholder="Enter Your Email" name="email" className="flex-1 outline-none text-xs font-normal text-[#4F5665]" />
+                  <input type="password" placeholder="Enter Your Email" name="email" className="flex-1 outline-none text- font-normal text-[#4F5665]" />
                 </div>
                 <p className="text-base font-medium">Confirm Password</p>
                 <div className="flex gap-[15px] px-3 py-[14px] border border-[#DEDEDE] rounded-lg bg-#FCFDFE">
@@ -120,7 +119,7 @@ function register() {
                   </svg>
                   <input type="password" placeholder="Enter Your Email" name="email" className="flex-1 outline-none text-xs font-normal text-[#4F5665]" />
                 </div>
-                <button className="w-full p-[10px] h-[50px] text-white bg-[#2948FF] rounded-md">Register</button>
+                <button className="w-full p-[10px] h-[50px] text-white bg-[#2948FF] hover:bg-blue-700 rounded-md">Register</button>
                 <p className="text-center font-normal text-xs">
                   Have An Account?{" "}
                   <span>
@@ -133,8 +132,8 @@ function register() {
             </div>
           </div>
         </div>
-        <div className="hidden md:flex md:flex-initial md:w-1/3 lg:w-1/2 h-screen md:bg-gradient-to-b md:from-[#396AFC] md:to-[#2948FF] md:justify-center md:items-center">
-          <img src="/img/register-side.png" alt="register-img" className="object-contain" />
+        <div className="hidden md:bg-cover md:flex md:flex-initial md:w-1/3 lg:w-1/2 h-full md:bg-gradient-to-b md:from-[#396AFC] md:to-[#2948FF] md:justify-center md:items-center">
+          <img src="/img/register-side.png" alt="register-img" className="place-self-center object-contain" />
         </div>
       </div>
     </>
