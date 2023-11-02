@@ -3,7 +3,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function register() {
+function Login() {
   return (
     <>
       <div className="h-screen flex items-center">
@@ -117,4 +117,4 @@ function register() {
   );
 }
 
-export default register;
+export default Login;
