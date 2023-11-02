@@ -14,7 +14,7 @@ const router = createBrowserRouter([
     element: <HistoryTransaction />,
   },
   {
-    path: "/register",
+    path: "/",
     element: <Register />,
     // errorElement: "",
   },
