@@ -4,6 +4,7 @@ import React from "react";
 // import { useState } from "react";
 // import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { login } from "../utils/https/auth";
 
 function Login() {
   const submitHandler = (e) => {
@@ -12,8 +13,16 @@ function Login() {
       email: e.target.email.value,
       password: e.target.password.value,
     };
-    console.log(body);
+    login(body)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    // console.log(body);
   };
+
   return (
     <>
       <div className="h-screen flex items-center">
