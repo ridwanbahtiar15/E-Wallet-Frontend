@@ -6,36 +6,16 @@ import React from "react";
 // import { Link } from "react-router-dom";
 
 function register() {
-  // const navigate = useNavigate();
-  // const [email, setEmail] = useState();
-  // const [firstPwd, setFirstPwd] = useState();
-  // const [secondPwd, setSecondPdw] = useState();
-
   const submitHandler = (e) => {
     e.preventDefault();
     const body = {
-      email: e.target.user_email.value,
-      firstPassword: e.target.first_pwd.value,
-      secondPassword: e.target.second_pwd.value,
+      email: e.target.email.value,
+      firstPassword: e.target.password.value,
+      secondPassword: e.target.confirmPassword.value,
     };
     console.log(body);
   };
 
-  // const [firstPwd, setFirstPwd] = useState("");
-  // const [secondPwd, setSecondPwd] = useState("");
-  // const handleFirstPwd = (e) => {
-  //   setFirstPwd(e.taget.value);
-  // };
-  // const handleSecondPwd = (e) => {
-  //   setSecondPwd(e.taget.value);
-  // };
-
-  // const submitHandler = (e) => {
-  //   e.preventDefault();
-  //   console.log(e.user_email.value);
-  //   console.log(e.firstPwd.value);
-  //   console.log(e.secondPwd.value);
-  // };
   return (
     <>
       <div className="h-screen flex items-center">
@@ -83,14 +63,17 @@ function register() {
               <p className="font-normal text-xs text-[#AAAAAA]">Or</p>
             </div>
             <div>
-              <form onSubmit={submitHandler} className="flex flex-col gap-[13px]" action="">
-                <p className="text-base font-medium">Email</p>
-                <div className="flex gap-[15px] px-3 py-[14px] border border-[#DEDEDE] rounded-lg bg-#FCFDFE">
+              {/* Form register */}
+              <form onSubmit={submitHandler} className="flex flex-col gap-[13px]">
+                <label htmlFor="email" className="text-base font-medium">
+                  Email
+                </label>
+                <div id="emailDiv" className="flex gap-[15px] px-3 py-[14px] border border-[#DEDEDE] rounded-lg bg-#FCFDFE">
                   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <g clip-path="url(#clip0_103_1168)">
+                    <g clipPath="url(#clip0_103_1168)">
                       <path
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
+                        fillRule="evenodd"
+                        clipRule="evenodd"
                         d="M1.75 2C0.783502 2 4.49654e-09 2.7835 4.49654e-09 3.75V4.48577C-0.000162957 4.49479 -0.000162567 4.50381 4.49654e-09 4.51282V12.25C4.49654e-09 13.2165 0.783501 14 1.75 14H14.25C15.2165 14 16 13.2165 16 12.25V4.51265C16.0002 4.50376 16.0002 4.49485 16 4.48594V3.75C16 2.7835 15.2165 2 14.25 2H1.75ZM14.5 4.07029V3.75C14.5 3.61193 14.3881 3.5 14.25 3.5H1.75C1.61193 3.5 1.5 3.61193 1.5 3.75V4.07029L8 7.88063L14.5 4.07029ZM1.5 5.80902V12.25C1.5 12.3881 1.61193 12.5 1.75 12.5H14.25C14.3881 12.5 14.5 12.3881 14.5 12.25V5.80902L8.37929 9.39702C8.14507 9.53432 7.85493 9.53432 7.62071 9.39702L1.5 5.80902Z"
                         fill="#4F5665"
                       />
@@ -101,68 +84,72 @@ function register() {
                       </clipPath>
                     </defs>
                   </svg>
-                  <input type="text" placeholder="Enter Your Email" name="email" className="flex-1 outline-none text-xs font-normal text-[#4F5665]" />
+                  <input type="text" placeholder="Enter Your Email" id="email" className="flex-1 outline-none text-xs font-normal text-[#4F5665]" />
                 </div>
-                <p className="text-base font-medium">Password</p>
+                <label htmlFor="password" className="text-base font-medium">
+                  Password
+                </label>
                 <div className="flex gap-[15px] px-3 py-[14px] border border-[#DEDEDE] rounded-lg bg-#FCFDFE">
                   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
-                      fill-rule="evenodd"
-                      clip-rule="evenodd"
+                      fillRule="evenodd"
+                      clipRule="evenodd"
                       d="M7.12583 7.99932C7.12583 8.68132 6.57316 9.23398 5.89116 9.23398C5.20916 9.23398 4.65649 8.68132 4.65649 7.99932C4.65649 7.31732 5.20916 6.76465 5.89116 6.76465H5.89316C6.57449 6.76532 7.12583 7.31798 7.12583 7.99932Z"
                       stroke="#4F5665"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     />
-                    <path d="M7.12787 8H11.3399V9.23467" stroke="#4F5665" stroke-linecap="round" stroke-linejoin="round" />
-                    <path d="M9.45467 9.23467V8" stroke="#4F5665" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M7.12787 8H11.3399V9.23467" stroke="#4F5665" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M9.45467 9.23467V8" stroke="#4F5665" strokeLinecap="round" strokeLinejoin="round" />
                     <path
-                      fill-rule="evenodd"
-                      clip-rule="evenodd"
+                      fillRule="evenodd"
+                      clipRule="evenodd"
                       d="M1.83325 7.99967C1.83325 3.37501 3.37525 1.83301 7.99992 1.83301C12.6246 1.83301 14.1666 3.37501 14.1666 7.99967C14.1666 12.6243 12.6246 14.1663 7.99992 14.1663C3.37525 14.1663 1.83325 12.6243 1.83325 7.99967Z"
                       stroke="#4F5665"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     />
                   </svg>
-                  <input type="password" placeholder="Enter Your Email" name="first_pwd" className="flex-1 outline-none text- font-normal text-[#4F5665]" />
+                  <input type="password" placeholder="Enter Your Email" id="password" className="flex-1 outline-none text- font-normal text-[#4F5665]" />
                 </div>
-                <p className="text-base font-medium">Confirm Password</p>
+                <label htmlFor="confirmPassword" className="text-base font-medium">
+                  Confirm Password
+                </label>
                 <div className="flex gap-[15px] px-3 py-[14px] border border-[#DEDEDE] rounded-lg bg-#FCFDFE">
                   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
-                      fill-rule="evenodd"
-                      clip-rule="evenodd"
+                      fillRule="evenodd"
+                      clipRule="evenodd"
                       d="M7.12583 7.99932C7.12583 8.68132 6.57316 9.23398 5.89116 9.23398C5.20916 9.23398 4.65649 8.68132 4.65649 7.99932C4.65649 7.31732 5.20916 6.76465 5.89116 6.76465H5.89316C6.57449 6.76532 7.12583 7.31798 7.12583 7.99932Z"
                       stroke="#4F5665"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     />
-                    <path d="M7.12787 8H11.3399V9.23467" stroke="#4F5665" stroke-linecap="round" stroke-linejoin="round" />
-                    <path d="M9.45467 9.23467V8" stroke="#4F5665" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M7.12787 8H11.3399V9.23467" stroke="#4F5665" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M9.45467 9.23467V8" stroke="#4F5665" strokeLinecap="round" strokeLinejoin="round" />
                     <path
-                      fill-rule="evenodd"
-                      clip-rule="evenodd"
+                      fillRule="evenodd"
+                      clipRule="evenodd"
                       d="M1.83325 7.99967C1.83325 3.37501 3.37525 1.83301 7.99992 1.83301C12.6246 1.83301 14.1666 3.37501 14.1666 7.99967C14.1666 12.6243 12.6246 14.1663 7.99992 14.1663C3.37525 14.1663 1.83325 12.6243 1.83325 7.99967Z"
                       stroke="#4F5665"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     />
                   </svg>
-                  <input type="password" placeholder="Enter Your Email" name="second_pwd" className="flex-1 outline-none text-xs font-normal text-[#4F5665]" />
+                  <input type="password" placeholder="Enter Your Email" id="confirmPassword" className="flex-1 outline-none text-xs font-normal text-[#4F5665]" />
                 </div>
                 <button type="submit" className="w-full p-[10px] h-[50px] text-white bg-[#2948FF] hover:bg-blue-700 rounded-md">
                   Register
                 </button>
-                <p className="text-center font-normal text-xs">
-                  Have An Account?{" "}
-                  <span>
-                    {/* <Link to="/login" className="text-blue-700"> */}
-                    Login
-                    {/* </Link> */}
-                  </span>
-                </p>
               </form>
+              <p className="text-center font-normal text-xs mt-[13px]">
+                Have An Account?{" "}
+                <span>
+                  {/* <Link to="/login" className="text-blue-700"> */}
+                  Login
+                  {/* </Link> */}
+                </span>
+              </p>
             </div>
           </div>
         </div>
