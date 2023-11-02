@@ -27,8 +27,8 @@ function Register() {
 
   return (
     <>
-      <div className="h-screen flex items-center">
-        <div className="flex-1 md:flex-initial md:w-2/3 lg:w-1/2 bg-white font-montserrat mx-5 lg:m-0 lg:px-10 md:rounded-r-full">
+      <div className="h-auto flex">
+        <div className="flex-1 py-5 h-auto md:flex-initial md:w-2/3 lg:w-1/2 bg-white font-montserrat mx-5 lg:m-0 lg:p-10 md:rounded-r-full">
           <div className="flex flex-col gap-[13px]">
             <div className="flex items-center gap-[15px]">
               <img src="/svg/Money-Wallet-logo.svg" alt="e-wallet-logo" />
@@ -78,7 +78,7 @@ function Register() {
                   Full Name
                 </label>
                 <div className="flex gap-[15px] px-3 py-[14px] border border-[#DEDEDE] rounded-lg bg-#FCFDFE">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                       fillRule="evenodd"
                       clipRule="evenodd"
@@ -145,7 +145,7 @@ function Register() {
                       strokeLinejoin="round"
                     />
                   </svg>
-                  <input type="password" placeholder="Enter Your Password" id="password" className="flex-1 outline-none text- font-normal text-[#4F5665]" />
+                  <input type="password" placeholder="Enter Your Password" id="password" className="flex-1 outline-none text-xs font-normal text-[#4F5665]" />
                 </div>
                 <label htmlFor="confirmPassword" className="text-base font-medium">
                   Confirm Password
@@ -188,7 +188,7 @@ function Register() {
             </div>
           </div>
         </div>
-        <div className="hidden md:bg-cover md:flex md:flex-initial md:w-1/3 lg:w-1/2 h-full md:bg-gradient-to-b md:from-[#396AFC] md:to-[#2948FF] md:justify-center md:items-center">
+        <div className="hidden md:bg-cover md:h-auto md:flex md:flex-initial md:w-1/3 lg:w-1/2 md:bg-gradient-to-b md:from-[#396AFC] md:to-[#2948FF] md:justify-center md:items-center">
           <img src="/img/register-side.png" alt="register-img" className="place-self-center object-contain" />
         </div>
       </div>
