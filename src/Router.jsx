@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 
 import Dashboard from "./pages/Dashboard";
 import HistoryTransaction from "./pages/HistoryTransaction";
-import Register from "./pages/register";
+import Register from "./pages/Register";
 
 const router = createBrowserRouter([
   {
