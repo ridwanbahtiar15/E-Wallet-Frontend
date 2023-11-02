@@ -29,19 +29,22 @@ function DropdownMobile(props) {
           </button>
         </div>
         <ul className="flex flex-col gap-y-2 w-full text-center">
-          <li className="p-1 hover:font-medium text-secondary hover:bg-secondary hover:text-light">
-            <Link to="/dashboard">Dashboard</Link>
-          </li>
-          <li className="p-1 hover:font-medium text-secondary hover:bg-secondary hover:text-light">
-            <Link to="/transfer">Transfer</Link>
-          </li>
-          <li className="p-1 hover:font-medium text-secondary hover:bg-secondary hover:text-light">
-            <Link to="/topup">Top Up</Link>
-          </li>
-          <li className="p-1 hover:font-medium text-secondary hover:bg-secondary hover:text-light">
+          <li className="p-3 hover:font-medium text-secondary hover:bg-primary hover:text-light rounded-md">
             <Link to="/profile">Profile</Link>
           </li>
-          <li className="p-1 hover:font-medium text-secondary hover:bg-secondary hover:text-light">
+          <li className="p-3 hover:font-medium text-secondary hover:bg-primary hover:text-light rounded-md">
+            <Link to="/dashboard">Dashboard</Link>
+          </li>
+          <li className="p-3 hover:font-medium text-secondary hover:bg-primary hover:text-light rounded-md">
+            <Link to="/transfer">Transfer</Link>
+          </li>
+          <li className="p-3 hover:font-medium text-secondary hover:bg-primary hover:text-light rounded-md">
+            <Link to="/history">History</Link>
+          </li>
+          <li className="p-3 hover:font-medium text-secondary hover:bg-primary hover:text-light rounded-md">
+            <Link to="/topup">Top Up</Link>
+          </li>
+          <li className="p-3 hover:font-medium text-secondary hover:bg-primary hover:text-light rounded-md">
             <button>Logout</button>
           </li>
         </ul>

@@ -1,11 +1,16 @@
 import { createBrowserRouter } from "react-router-dom";
 
 import Dashboard from "./pages/Dashboard";
+import HistoryTransaction from "./pages/HistoryTransaction";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/dashboard",
     element: <Dashboard />,
+  },
+  {
+    path: "/history",
+    element: <HistoryTransaction />,
   },
 ]);
 
