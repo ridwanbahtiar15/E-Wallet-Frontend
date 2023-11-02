@@ -3,6 +3,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
 import HistoryTransaction from "./pages/HistoryTransaction";
 import Register from "./pages/Register";
+import ForgotPass from "./pages/ForgotPass";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
     element: <Register />,
     // errorElement: "",
   },
+  {
+    path: "/forgotPass",
+    element: <ForgotPass/>
+  }
 ]);
 
 export default router;
