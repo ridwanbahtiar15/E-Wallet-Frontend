@@ -38,7 +38,7 @@ function EnterPin() {
                         <div className='flex items-center gap-[15px] mb-[13px]'>
 
                             <img src="/img/wallet.png" alt="" className='w-8 h-8 object-cover' />
-                            <h1 className='font-nunito-sans text-[#2948FF] text-xl font-semibold'>E-Wallet</h1>
+                            <h1 className='font-nunito text-[#2948FF] text-xl font-semibold'>E-Wallet</h1>
 
                         </div>
 
