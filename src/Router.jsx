@@ -4,6 +4,7 @@ import Dashboard from "./pages/Dashboard";
 import HistoryTransaction from "./pages/HistoryTransaction";
 import Register from "./pages/register";
 import Login from "./pages/Login";
+import Home from "./pages/Home";
 
 const router = createBrowserRouter([
   {
@@ -15,13 +16,17 @@ const router = createBrowserRouter([
     element: <HistoryTransaction />,
   },
   {
-    path: "/",
+    path: "/register",
     element: <Register />,
     // errorElement: "",
   },
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/",
+    element: <Home />,
   },
 ]);
 
