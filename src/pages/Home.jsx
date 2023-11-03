@@ -8,8 +8,8 @@ function Home() {
         <div className="flex flex-col px-10 pt-[75px] bg-[#2948FF] text-white h-auto gap-6 md:pt-[133px] lg:h-screen">
           <h1 className="text-[32px] md:font-medium md:text-5xl lg:text-6xl md:text-center">Experience the Future of Digital Payments with e-wallet</h1>
           <div className="flex flex-col-reverse md:flex-row lg:gap-[75px]">
-            <div>
-              <img className="max-w-[422px]" src="/img/mobile-dashboard-1.webp" alt="mobile-dashboard-img" />
+            <div className="flex justify-center">
+              <img className="lg:max-w-[422px]" src="/img/mobile-dashboard-1.webp" alt="mobile-dashboard-img" />
             </div>
             <div className="flex flex-col gap-6 md:self-center">
               <p className="text-base font-normal">Simplify Your Life with Secure and Convenient Mobile Payments</p>
