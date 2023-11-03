@@ -29,7 +29,7 @@ function ForgotPass() {
                     <div className='flex items-center gap-[15px] mb-[25px]'>
 
                         <img src="img/wallet.png" alt="" className='w-8 h-8 object-cover' />
-                        <h1 className='font-nunito-sans text-[#2948FF] text-xl font-semibold'>E-Wallet</h1>
+                        <h1 className='font-nunito text-[#2948FF] text-xl font-semibold'>E-Wallet</h1>
 
                     </div>
 
@@ -62,13 +62,13 @@ function ForgotPass() {
                             </defs>
                         </svg>
 
-                        <input type="email" placeholder='Enter Your Email' className='w-full py-[14px] px-2' onChange={Email} />
+                        <input type="email" placeholder='Enter Your Email' className="text-sm p-3 border border-[#E8E8E8] rounded-md  font-medium text-secondary placeholder:font-medium placeholder:text-secondary outline-none focus:border focus:border-primary w-full" onChange={Email} />
 
 
                     </div>
 
                     {/* Bagian button submit */}
-                    <button className='text-white bg-[#2948FF] w-full p-[10px] text-base font-montserrat font-medium rounded-md hover:opacity-80'>Submit</button>
+                    <button className="bg-primary p-3 rounded-md flex justify-center items-center gap-x-2 hover:bg-blue-800 focus:ring w-full text-white">Submit</button>
 
                 </div>
 
