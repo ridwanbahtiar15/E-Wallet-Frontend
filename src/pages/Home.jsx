@@ -4,15 +4,15 @@ import React from "react";
 function Home() {
   return (
     <>
-      <main>
-        <div>
-          <h1>Experience the Future of Digital Payments with e-wallet</h1>
-          <div>
+      <main className="font-montserrat">
+        <div className="px-10 pt-[75px] bg-[#2948FF] text-white h-screen md:pt-[133px]">
+          <h1 className="text-[32px] md:font-medium md:text-5xl lg:text-6xl md:text-center">Experience the Future of Digital Payments with e-wallet</h1>
+          <div className="flex flex-col-reverse md:flex-row">
             <div>
-              <img src="/img/login-side.png" alt="hero-img" />
+              <img src="/img/mobile-dashboard-1.webp" alt="mobile-dashboard-img" />
             </div>
             <div>
-              <p>Simplify Your Life with Secure and Convenient Mobile Payments</p>
+              <p className="text-base font-normal">Simplify Your Life with Secure and Convenient Mobile Payments</p>
               <div>
                 <button>
                   <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -89,8 +89,123 @@ function Home() {
             </div>
           </div>
         </div>
-        <div></div>
-        <div></div>
+        <div>
+          <div>
+            <div>
+              <div>
+                <img src="" alt="" />
+              </div>
+              <div>
+                <p>24/7 Support</p>
+                <p>We have 24/7 contact support so you can contact us whenever you want and we will respond it.</p>
+              </div>
+            </div>
+            <div>
+              <div>
+                <img src="" alt="" />
+              </div>
+              <div>
+                <p>Data Privacy</p>
+                <p>We make sure your data is safe in our database and we will encrypt any data you submitted to us.</p>
+              </div>
+            </div>
+            <div>
+              <div>
+                <img src="" alt="" />
+              </div>
+              <div>
+                <p>Easy Download</p>
+                <p>Zwallet is 100% totally free to use it&apos;s now available on Google Play Store and App Store.</p>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div>
+              <p>WELCOME TO E-WALLET</p>
+              <p>Your All-in-One Digital Payment Solution</p>
+              <p>
+                Say goodbye to cash and hello to the future of payments! With e-wallet, you have the power of secure, fast, and convenient digital transactions right at your fingertips. Whether you&apos;re shopping, dining out, or sending
+                money to loved ones, we&apos;ve got you covered.
+              </p>
+              <button>Get Started</button>
+            </div>
+            <div>
+              <img src="/img/Group-1308.webp" alt="background-img" />
+              <img src="/img/mobile-dashboard-2.webp" alt="mobile-dashboard-img-2" />
+            </div>
+          </div>
+        </div>
+        <div>
+          <div>
+            <img src="/img/online-payment-security-concept-3d-phone-bill 1.webp" alt="3d-phone-bill-img" />
+          </div>
+          <div>
+            <div>
+              <p>All The Great Zwallet Features.</p>
+              <p>We have some great features from the application and it’s totally free to use by all users around the world.</p>
+              <ul className="text-[#00A700] text-lg font-bold">
+                <li>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="12" r="12" fill="#00A700" />
+                    <g clip-path="url(#clip0_27_88)">
+                      <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M12.0001 18.6207C15.6566 18.6207 18.6208 15.6565 18.6208 12C18.6208 8.34345 15.6566 5.37927 12.0001 5.37927C8.34358 5.37927 5.37939 8.34345 5.37939 12C5.37939 15.6565 8.34358 18.6207 12.0001 18.6207ZM15.1286 10.5768C15.371 10.3344 15.371 9.94139 15.1286 9.699C14.8862 9.45661 14.4933 9.45661 14.2509 9.699L10.9656 12.9842L9.74932 11.768C9.50693 11.5256 9.11393 11.5256 8.87154 11.768C8.62914 12.0104 8.62914 12.4034 8.87154 12.6458L10.5267 14.3009C10.7691 14.5433 11.1621 14.5433 11.4045 14.3009L15.1286 10.5768Z"
+                        fill="white"
+                      />
+                    </g>
+                    <defs>
+                      <clipPath id="clip0_27_88">
+                        <rect width="13.2414" height="13.2414" fill="white" transform="translate(5.37939 5.37927)" />
+                      </clipPath>
+                    </defs>
+                  </svg>
+                  Small Fee
+                </li>
+                <li>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="12" r="12" fill="#00A700" />
+                    <g clip-path="url(#clip0_27_88)">
+                      <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M12.0001 18.6207C15.6566 18.6207 18.6208 15.6565 18.6208 12C18.6208 8.34345 15.6566 5.37927 12.0001 5.37927C8.34358 5.37927 5.37939 8.34345 5.37939 12C5.37939 15.6565 8.34358 18.6207 12.0001 18.6207ZM15.1286 10.5768C15.371 10.3344 15.371 9.94139 15.1286 9.699C14.8862 9.45661 14.4933 9.45661 14.2509 9.699L10.9656 12.9842L9.74932 11.768C9.50693 11.5256 9.11393 11.5256 8.87154 11.768C8.62914 12.0104 8.62914 12.4034 8.87154 12.6458L10.5267 14.3009C10.7691 14.5433 11.1621 14.5433 11.4045 14.3009L15.1286 10.5768Z"
+                        fill="white"
+                      />
+                    </g>
+                    <defs>
+                      <clipPath id="clip0_27_88">
+                        <rect width="13.2414" height="13.2414" fill="white" transform="translate(5.37939 5.37927)" />
+                      </clipPath>
+                    </defs>
+                  </svg>
+                  Data Secured
+                </li>
+                <li>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="12" r="12" fill="#00A700" />
+                    <g clip-path="url(#clip0_27_88)">
+                      <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M12.0001 18.6207C15.6566 18.6207 18.6208 15.6565 18.6208 12C18.6208 8.34345 15.6566 5.37927 12.0001 5.37927C8.34358 5.37927 5.37939 8.34345 5.37939 12C5.37939 15.6565 8.34358 18.6207 12.0001 18.6207ZM15.1286 10.5768C15.371 10.3344 15.371 9.94139 15.1286 9.699C14.8862 9.45661 14.4933 9.45661 14.2509 9.699L10.9656 12.9842L9.74932 11.768C9.50693 11.5256 9.11393 11.5256 8.87154 11.768C8.62914 12.0104 8.62914 12.4034 8.87154 12.6458L10.5267 14.3009C10.7691 14.5433 11.1621 14.5433 11.4045 14.3009L15.1286 10.5768Z"
+                        fill="white"
+                      />
+                    </g>
+                    <defs>
+                      <clipPath id="clip0_27_88">
+                        <rect width="13.2414" height="13.2414" fill="white" transform="translate(5.37939 5.37927)" />
+                      </clipPath>
+                    </defs>
+                  </svg>
+                  User Friendly
+                </li>
+              </ul>
+              <button>Get Started</button>
+            </div>
+          </div>
+        </div>
         <div></div>
         <div></div>
       </main>
