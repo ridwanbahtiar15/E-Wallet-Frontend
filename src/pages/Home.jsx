@@ -5,15 +5,15 @@ function Home() {
   return (
     <>
       <main className="font-montserrat">
-        <div className="flex flex-col px-10 pt-[75px] bg-[#2948FF] text-white h-screen gap-6 md:pt-[133px]">
+        <div className="flex flex-col px-10 pt-[75px] bg-[#2948FF] text-white h-auto gap-6 md:pt-[133px]">
           <h1 className="text-[32px] md:font-medium md:text-5xl lg:text-6xl md:text-center">Experience the Future of Digital Payments with e-wallet</h1>
           <div className="flex flex-col-reverse md:flex-row">
-            <div>
+            <div className="">
               <img src="/img/mobile-dashboard-1.webp" alt="mobile-dashboard-img" />
             </div>
             <div className="flex flex-col gap-6">
               <p className="text-base font-normal">Simplify Your Life with Secure and Convenient Mobile Payments</p>
-              <div className="flex w-full gap-[25px] justify-between">
+              <div className="flex gap-[25px] justify-stretch">
                 <button className="flex h-[50px] border bg-white rounded-md p-[10px] gap-[10px]">
                   <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
