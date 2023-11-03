@@ -7,7 +7,7 @@ import IncomeChart from "../components/IncomeChart";
 import DropdownMobile from "../components/DropdownMobile";
 import Modal from "../components/Modal";
 
-function Dashboard(props) {
+function Dashboard() {
   const [Message, setMessage] = useState({ msg: null, isError: null });
   const [openModal, setOpenModal] = useState({
     isOpen: false,
@@ -15,7 +15,31 @@ function Dashboard(props) {
   });
   const [isDropdownShown, setIsDropdownShow] = useState(false);
 
-  console.log(location.origin);
+  const [isSumDate, setIsSumDate] = useState(false);
+  const [sumDate, setSumDate] = useState({ time: "Weekly", values: 7 });
+  const [isSummary, setIsSummary] = useState(false);
+  const [summary, setSummary] = useState("Income");
+
+  const date = new Date();
+  const startDate = date;
+  const endDate = new Date(
+    date.getFullYear(),
+    date.getMonth(),
+    date.getDate() - sumDate.values
+  );
+
+  const startFormatDate = `${startDate.getFullYear(startDate)}-${
+    startDate.getMonth(startDate) + 1
+  }-${startDate.getDate(startDate)}`;
+
+  const endFormatDate = `${endDate.getFullYear()}-${
+    endDate.getMonth() + 1
+  }-${endDate.getDate()}`;
+
+  console.log("start date: " + startFormatDate);
+  console.log("end date: " + endFormatDate);
+  console.log("summary: " + summary);
+
   return (
     <>
       <Navbar
@@ -122,13 +146,8 @@ function Dashboard(props) {
               <p className="max-xl:hidden">History</p>
             </Link>
             <Link
-              to="/admin/order"
-              className={`flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-sm font-normal${
-                // eslint-disable-next-line react/prop-types
-                props.path == "/history"
-                  ? " text-light bg-primary"
-                  : " text-[#4F5665]"
-              }`}
+              to="/transfer"
+              className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-sm font-normal text-secondary"
             >
               <div>
                 <svg
@@ -196,12 +215,7 @@ function Dashboard(props) {
             </Link>
             <Link
               to="/profile"
-              className={`flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-sm font-normal${
-                // eslint-disable-next-line react/prop-types
-                props.path == "/profile"
-                  ? " text-light bg-primary"
-                  : " text-[#4F5665]"
-              }`}
+              className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-sm font-normal text-secondary"
             >
               <div>
                 <svg
@@ -397,21 +411,80 @@ function Dashboard(props) {
             <section className="border border-[#E8E8E8] p-[19px] rounded-md flex flex-col items-center gap-y-4">
               <div className="flex flex-col gap-y-3 md:flex-row md:justify-between w-full md:items-center">
                 <p className="font-medium text-dark">Income Chart</p>
-                <div className="flex flex-col gap-y-3 md:flex-row gap-x-4">
-                  <button className="p-3 bg-[#F1F1F1] rounded-md flex gap-x-2 items-center justify-between">
-                    <p className="text-sm font-medium text-dark">7 Days</p>
-                    <img
-                      src={getImageUrl("down-dark", "svg")}
-                      alt="down-dark"
-                    />
-                  </button>
-                  <button className="p-3 bg-[#F1F1F1] rounded-md flex gap-x-2 items-center justify-between">
-                    <p className="text-sm font-medium text-dark">Income</p>
-                    <img
-                      src={getImageUrl("down-dark", "svg")}
-                      alt="down-dark"
-                    />
-                  </button>
+                <div className="flex flex-col gap-y-3 md:flex-row gap-x-4 md:items-start">
+                  <div className="flex flex-col gap-y-3">
+                    <div
+                      className="p-3 bg-[#F1F1F1] rounded-md flex gap-x-2 items-center justify-between cursor-pointer"
+                      onClick={() => setIsSumDate((state) => !state)}
+                    >
+                      <p className="text-sm font-medium text-dark">
+                        {sumDate.time}
+                      </p>
+                      <img
+                        src={getImageUrl("down-dark", "svg")}
+                        alt="down-dark"
+                      />
+                    </div>
+                    {isSumDate && (
+                      <div className="p-3 bg-[#F1F1F1] rounded-md flex flex-col gap-y-3 justify-between cursor-pointer">
+                        <p
+                          className="text-sm font-medium text-dark"
+                          onClick={() => {
+                            setSumDate({ time: "Weekly", values: 7 });
+                            setIsSumDate(false);
+                          }}
+                        >
+                          Weekly
+                        </p>
+                        <p
+                          className="text-sm font-medium text-dark"
+                          onClick={() => {
+                            setSumDate({
+                              time: "Monthly",
+                              values: 31,
+                            });
+                            setIsSumDate(false);
+                          }}
+                        >
+                          Monthly
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                  <div className="flex flex-col gap-y-3">
+                    <div
+                      className="p-3 bg-[#F1F1F1] rounded-md flex gap-x-2 items-center justify-between cursor-pointer"
+                      onClick={() => setIsSummary((state) => !state)}
+                    >
+                      <p className="text-sm font-medium text-dark">{summary}</p>
+                      <img
+                        src={getImageUrl("down-dark", "svg")}
+                        alt="down-dark"
+                      />
+                    </div>
+                    {isSummary && (
+                      <div className="p-3 bg-[#F1F1F1] rounded-md flex flex-col gap-y-3 cursor-pointer">
+                        <p
+                          className="text-sm font-medium text-dark"
+                          onClick={() => {
+                            setIsSummary(false);
+                            setSummary("Income");
+                          }}
+                        >
+                          Income
+                        </p>
+                        <p
+                          className="text-sm font-medium text-dark"
+                          onClick={() => {
+                            setIsSummary(false);
+                            setSummary("Expense");
+                          }}
+                        >
+                          Expanse
+                        </p>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
               <div className="w-full">
