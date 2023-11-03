@@ -16,6 +16,7 @@ function Login() {
     login(body)
       .then((res) => {
         console.log(res);
+        localStorage.setItem("token", res.data.data.token);
       })
       .catch((err) => {
         console.log(err);
