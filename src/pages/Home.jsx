@@ -5,16 +5,16 @@ function Home() {
   return (
     <>
       <main className="font-montserrat">
-        <div className="px-10 pt-[75px] bg-[#2948FF] text-white h-screen md:pt-[133px]">
+        <div className="flex flex-col px-10 pt-[75px] bg-[#2948FF] text-white h-screen gap-6 md:pt-[133px]">
           <h1 className="text-[32px] md:font-medium md:text-5xl lg:text-6xl md:text-center">Experience the Future of Digital Payments with e-wallet</h1>
           <div className="flex flex-col-reverse md:flex-row">
             <div>
               <img src="/img/mobile-dashboard-1.webp" alt="mobile-dashboard-img" />
             </div>
-            <div>
+            <div className="flex flex-col gap-6">
               <p className="text-base font-normal">Simplify Your Life with Secure and Convenient Mobile Payments</p>
-              <div>
-                <button>
+              <div className="flex w-full gap-[25px] justify-between">
+                <button className="flex h-[50px] border bg-white rounded-md p-[10px] gap-[10px]">
                   <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                       d="M4.78559 4.09508C4.58568 4.29499 4.51904 4.62818 4.51904 5.02801V19.755C4.51904 20.1548 4.65232 20.488 4.85223 20.6879L4.91887 20.7545L13.182 12.4914V12.3582L4.78559 4.09508Z"
@@ -62,9 +62,9 @@ function Home() {
                       </linearGradient>
                     </defs>
                   </svg>
-                  <p>Play Store</p>
+                  <p className="text-[#2948FF] text-sm">Play Store</p>
                 </button>
-                <button>
+                <button className="flex h-[50px] border border-white p-[10px] gap-[10px] rounded-md ">
                   <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                       d="M16.778 12.7964C16.7602 10.6721 18.5166 9.63956 18.5938 9.59209C17.5969 8.14422 16.0541 7.94246 15.5141 7.92466C14.2205 7.78818 12.9625 8.70201 12.3038 8.70201C11.6333 8.70201 10.6127 7.94246 9.52082 7.96027C8.11448 7.984 6.79122 8.79695 6.07322 10.0668C4.5838 12.6481 5.69345 16.4458 7.12352 18.5345C7.84152 19.5551 8.67227 20.7004 9.77005 20.6588C10.8382 20.6173 11.2417 19.9764 12.5293 19.9764C13.811 19.9764 14.1849 20.6588 15.3005 20.6351C16.4516 20.6173 17.1696 19.6085 17.8639 18.576C18.6887 17.4071 19.021 16.2499 19.0329 16.1906C19.0032 16.1787 16.8017 15.3361 16.778 12.7964Z"
@@ -75,16 +75,15 @@ function Home() {
                       fill="white"
                     />
                   </svg>
-
                   <p>Apps Store</p>
                 </button>
               </div>
-              <div>
-                <h1>4.6 M</h1>
-                <img src="" alt="user-profile-img" />
+              <div className="flex gap-3">
+                <h1 className="text-[32px] font-medium">4.6 M</h1>
+                <img src="/img/user.webp" alt="user-profile-img" />
               </div>
               <div>
-                <p>Around the world, we already have over 4.6 happy user</p>
+                <p className="text-base font-normal">Around the world, we already have over 4.6 happy user</p>
               </div>
             </div>
           </div>
