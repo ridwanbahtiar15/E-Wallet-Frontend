@@ -32,6 +32,7 @@ const router = createBrowserRouter([
     path: "/changepassword",
     element: <ChangePassword />,
   },
+  {
     path: "/",
     element: <Register />,
     // errorElement: "",
