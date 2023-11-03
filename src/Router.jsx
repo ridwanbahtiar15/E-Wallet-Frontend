@@ -5,6 +5,7 @@ import HistoryTransaction from "./pages/HistoryTransaction";
 import Register from "./pages/Register";
 import ForgotPass from "./pages/ForgotPass";
 import EnterPin from "./pages/EnterPin";
+import Transfer from "./pages/Transfer";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
   {
     path: "/enterPin",
     element: <EnterPin/>
+  },
+  {
+    path: "/transfer",
+    element: <Transfer/>
   }
 ]);
 
