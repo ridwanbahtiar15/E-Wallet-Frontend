@@ -51,7 +51,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/enterPin",
-    element: <EnterPin/>,
+    element: <EnterPin/>
   }
 ]);
 
