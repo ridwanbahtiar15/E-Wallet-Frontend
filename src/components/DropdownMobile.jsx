@@ -30,9 +30,6 @@ function DropdownMobile(props) {
         </div>
         <ul className="flex flex-col gap-y-2 w-full text-center">
           <li className="p-3 hover:font-medium text-secondary hover:bg-primary hover:text-light rounded-md">
-            <Link to="/profile">Profile</Link>
-          </li>
-          <li className="p-3 hover:font-medium text-secondary hover:bg-primary hover:text-light rounded-md">
             <Link to="/dashboard">Dashboard</Link>
           </li>
           <li className="p-3 hover:font-medium text-secondary hover:bg-primary hover:text-light rounded-md">
@@ -43,6 +40,9 @@ function DropdownMobile(props) {
           </li>
           <li className="p-3 hover:font-medium text-secondary hover:bg-primary hover:text-light rounded-md">
             <Link to="/topup">Top Up</Link>
+          </li>
+          <li className="p-3 hover:font-medium text-secondary hover:bg-primary hover:text-light rounded-md">
+            <Link to="/profile">Profile</Link>
           </li>
           <li className="p-3 hover:font-medium text-secondary hover:bg-primary hover:text-light rounded-md">
             <button>Logout</button>
