@@ -2,10 +2,12 @@ import { createBrowserRouter } from "react-router-dom";
 
 import Dashboard from "./pages/Dashboard";
 import HistoryTransaction from "./pages/HistoryTransaction";
+import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ForgotPass from "./pages/ForgotPass";
 import Transfer from "./pages/Transfer";
 import EnterPin from "./pages/EnterPin";
+
 
 const router = createBrowserRouter([
   {
@@ -20,6 +22,11 @@ const router = createBrowserRouter([
     path: "/",
     element: <Register />,
     // errorElement: "",
+  },
+  {
+
+    path: "/login",
+    element: <Login />,
   },
   {
     path: "/forgotPass",
