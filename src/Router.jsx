@@ -23,15 +23,15 @@ const router = createBrowserRouter([
   },
   {
     path: "/forgotPass",
-    element: <ForgotPass/>
+    element: <ForgotPass/>,
   },
   {
     path: "/transfer",
-    element: <Transfer/>
+    element: <Transfer/>,
   },
   {
     path: "/enterPin",
-    element: <EnterPin/>
+    element: <EnterPin/>,
   }
 ]);
 
