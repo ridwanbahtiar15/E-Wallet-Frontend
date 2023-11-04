@@ -15,6 +15,10 @@ function Modal({
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const loginErrorHandler = () => {
+    closeModal({ isOpen: false, status: null });
+  };
+
   const logoutHandler = () => {
     const jwt = user.userInfo.token;
     const { logoutThunk } = userAction;
@@ -46,6 +50,13 @@ function Modal({
                 Cancel
               </button>
             </div>
+          )}
+          {status != "Login Error" ? (
+            <div></div>
+          ) : (
+            <button className="w-full p-[10px] bg-light border-2 hover:bg-slate-200 rounded-md text-dark text-base font-medium active:ring active:ring-slate-300" onClick={() => closeModal({ isOpen: false, status: null })}>
+              Ok
+            </button>
           )}
         </div>
       </div>
