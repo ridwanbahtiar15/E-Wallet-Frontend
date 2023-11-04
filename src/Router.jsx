@@ -11,7 +11,6 @@ import ForgotPass from "./pages/ForgotPass";
 import Transfer from "./pages/Transfer";
 import EnterPin from "./pages/EnterPin";
 import Topup from "./pages/Topup";
-import TransferDetail from "./pages/TransferDetail";
 
 const router = createBrowserRouter([
   {
@@ -59,12 +58,6 @@ const router = createBrowserRouter([
     path: "/topup",
     element: <Topup />,
   },
-    element: <EnterPin/>
-  },
-  {
-    path: "/transferDetail",
-    element: <TransferDetail/>
-  }
 ]);
 
 export default router;
