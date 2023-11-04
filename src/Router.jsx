@@ -10,7 +10,7 @@ import Register from "./pages/Register";
 import ForgotPass from "./pages/ForgotPass";
 import Transfer from "./pages/Transfer";
 import EnterPin from "./pages/EnterPin";
-import TransferDetail from "./pages/TransferDetail";
+import Topup from "./pages/Topup";
 
 const router = createBrowserRouter([
   {
@@ -44,20 +44,20 @@ const router = createBrowserRouter([
   },
   {
     path: "/forgotPass",
-    element: <ForgotPass/>,
+    element: <ForgotPass />,
   },
   {
     path: "/transfer",
-    element: <Transfer/>,
+    element: <Transfer />,
   },
   {
     path: "/enterPin",
-    element: <EnterPin/>
+    element: <EnterPin />,
   },
   {
-    path: "/transferDetail",
-    element: <TransferDetail/>
-  }
+    path: "/topup",
+    element: <Topup />,
+  },
 ]);
 
 export default router;
