@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 
+import { forgotPass } from '../utils/https/forgotPass'
+
 function ForgotPass() {
 
     const [email, setEmail] = useState()
@@ -10,6 +12,14 @@ function ForgotPass() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+
+        const body = {
+            email: email
+        }
+
+        forgotPass(body)
+        .then((res) => {console.log(res)})
+        .catch((err) => {console.log(err)})
 
         console.log(email)
 
