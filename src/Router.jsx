@@ -10,6 +10,7 @@ import Register from "./pages/Register";
 import ForgotPass from "./pages/ForgotPass";
 import Transfer from "./pages/Transfer";
 import EnterPin from "./pages/EnterPin";
+import TransferDetail from "./pages/TransferDetail";
 
 const router = createBrowserRouter([
   {
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
   {
     path: "/enterPin",
     element: <EnterPin/>
+  },
+  {
+    path: "/transferDetail",
+    element: <TransferDetail/>
   }
 ]);
 
