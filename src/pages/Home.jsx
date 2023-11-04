@@ -12,7 +12,7 @@ function Home() {
           <h1 className="text-[32px] md:font-medium md:text-5xl lg:text-6xl md:text-center">Experience the Future of Digital Payments with e-wallet</h1>
           <div className="flex flex-col-reverse md:flex-row lg:gap-[75px] lg:justify-center">
             <div className="flex justify-center">
-              <img className="lg:max-w-[422px]" src="/img/mobile-dashboard-1.webp" alt="mobile-dashboard-img" />
+              <img className="lg:max-w-[422px] mb-[-2.5vh]" src="/img/mobile-dashboard-1.webp" alt="mobile-dashboard-img" />
             </div>
             <div className="flex flex-col gap-6 md:self-center">
               <p className="text-base font-normal">Simplify Your Life with Secure and Convenient Mobile Payments</p>
@@ -161,7 +161,7 @@ function Home() {
             </div>
             <div className="relative mt-[300px] bottom-0 px-10 flex justify-center lg:pt-1 lg:flex-row lg:w-[680px]">
               <img className="relative bottom-0" src="/img/Group-1308.webp" alt="background-img" />
-              <img className="absolute bottom-0 " src="/img/mobile-dashboard-2.webp" alt="mobile-dashboard-img-2" />
+              <img className="absolute bottom-0 mb-[-2.7vh] " src="/img/mobile-dashboard-2.webp" alt="mobile-dashboard-img-2" />
             </div>
           </div>
         </div>
