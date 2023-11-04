@@ -1,15 +1,29 @@
 /* eslint-disable no-unused-vars */
 import { useNavigate, Link } from "react-router-dom";
+import { transaction, deleteTransaction } from "../utils/https/transaction";
+import { useState } from "react";
 
 function Modal({
   /*  eslint-disable-next-line react/prop-types */
-  modal: { isOpen, status },
+  modal: { isOpen, status, value },
   /*  eslint-disable-next-line react/prop-types */
   closeModal,
+  /*  eslint-disable-next-line react/prop-types */
+  dataUser,
   /*  eslint-disable-next-line react/prop-types */
   message: { msg },
 }) {
   const navigate = useNavigate();
+
+  const onDeleteHandler = () => {
+    deleteTransaction(value.id, value.type).then((res) => {
+      console.log(res.data.result);
+      transaction(1).then((res) => dataUser(res.data.result));
+      closeModal({ isOpen: false, status: null, value: null });
+    });
+
+    // dataUser(user);
+  };
 
   return (
     <div
@@ -21,8 +35,22 @@ function Modal({
           <div className="flex items-start gap-x-4">
             <h1 className="text-xl font-medium text-dark text-center">{msg}</h1>
           </div>
-          {status != "logout" ? (
-            <div></div>
+          {status == "deleteTransaction" ? (
+            <div className="flex gap-x-6">
+              <button
+                type="button"
+                className="p-[10px] bg-primary hover:bg-blue-800 rounded-md text-light text-base font-medium active:ring"
+                onClick={() => onDeleteHandler()}
+              >
+                Confirm
+              </button>
+              <button
+                className="p-[10px] bg-light border-2 hover:bg-slate-200 rounded-md text-dark text-base font-medium active:ring active:ring-slate-300"
+                onClick={() => closeModal({ isOpen: false, status: null })}
+              >
+                Cancel
+              </button>
+            </div>
           ) : (
             <div className="flex gap-x-6">
               <button

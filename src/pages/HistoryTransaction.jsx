@@ -5,13 +5,14 @@ import Navbar from "../components/Navbar";
 import getImageUrl from "../utils/imageGetter";
 import DropdownMobile from "../components/DropdownMobile";
 import Modal from "../components/Modal";
-import { transaction } from "../utils/https/transaction";
+import { transaction, deleteTransaction } from "../utils/https/transaction";
 
 function HistoryTransaction() {
   const [Message, setMessage] = useState({ msg: null, isError: null });
   const [openModal, setOpenModal] = useState({
     isOpen: false,
     status: null,
+    value: null,
   });
   const [isDropdownShown, setIsDropdownShow] = useState(false);
 
@@ -20,7 +21,20 @@ function HistoryTransaction() {
     transaction(1).then((res) => setUser(res.data.result));
   }, []);
 
-  console.log(user);
+  const onDeleteHandler = (id, type) => {
+    setMessage({ msg: "Are You Sure?", isError: null });
+    setOpenModal({
+      isOpen: true,
+      status: "deleteTransaction",
+      value: { id, type },
+    });
+
+    // deleteTransaction(id, type).then(() => {
+    //   transaction(1).then((res) => setUser(res.data.result));
+    // });
+    // console.log(user);
+  };
+
   return (
     <>
       <Navbar
@@ -364,7 +378,15 @@ function HistoryTransaction() {
                           </td>
                           <td className="p-6 text-center">
                             <div className="flex flex-col gap-y-2 items-center xl:flex-row md:gap-x-2 justify-center">
-                              <div className="p-1 cursor-pointer">
+                              <div
+                                className="p-1 cursor-pointer"
+                                onClick={() =>
+                                  onDeleteHandler(
+                                    result.id,
+                                    result.transaction_type
+                                  )
+                                }
+                              >
                                 <img
                                   src={getImageUrl("Trash", "svg")}
                                   alt="Trash"
@@ -403,7 +425,12 @@ function HistoryTransaction() {
         <DropdownMobile isClick={() => setIsDropdownShow(false)} />
       )}
       {openModal.isOpen && (
-        <Modal modal={openModal} closeModal={setOpenModal} message={Message} />
+        <Modal
+          modal={openModal}
+          closeModal={setOpenModal}
+          message={Message}
+          dataUser={setUser}
+        />
       )}
     </>
   );
