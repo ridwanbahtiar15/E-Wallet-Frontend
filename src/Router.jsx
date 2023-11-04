@@ -11,6 +11,7 @@ import ForgotPass from "./pages/ForgotPass";
 import Transfer from "./pages/Transfer";
 import EnterPin from "./pages/EnterPin";
 import TransferDetail from "./pages/TransferDetail";
+import TopUpGilang from "./pages/TopUpGilang";
 
 const router = createBrowserRouter([
   {
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
   {
     path: "/transferDetail",
     element: <TransferDetail/>
+  },
+  {
+    path: "/top-up-gilang",
+    element: <TopUpGilang/>
   }
 ]);
 
