@@ -20,6 +20,7 @@ function Topup() {
   const [gopay, setGopay] = useState(false);
   const [ovo, setOvo] = useState(false);
   const [payment, setPayment] = useState("bri");
+  console.log(payment);
 
   return (
     <>
@@ -360,6 +361,7 @@ function Topup() {
                         setBca(false);
                         setGopay(false);
                         setOvo(false);
+                        setPayment("bri");
                       }}
                       className="cursor-pointer"
                     >
@@ -390,6 +392,7 @@ function Topup() {
                         setBca(false);
                         setGopay(false);
                         setOvo(false);
+                        setPayment("dana");
                       }}
                       className="cursor-pointer"
                     >
@@ -420,6 +423,7 @@ function Topup() {
                         setBca(true);
                         setGopay(false);
                         setOvo(false);
+                        setPayment("bca");
                       }}
                       className="cursor-pointer"
                     >
@@ -450,6 +454,7 @@ function Topup() {
                         setBca(false);
                         setGopay(true);
                         setOvo(false);
+                        setPayment("gopay");
                       }}
                       className="cursor-pointer"
                     >
@@ -480,6 +485,7 @@ function Topup() {
                         setBca(false);
                         setGopay(false);
                         setOvo(true);
+                        setPayment("ovo");
                       }}
                       className="cursor-pointer"
                     >

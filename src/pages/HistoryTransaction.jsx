@@ -378,6 +378,22 @@ function HistoryTransaction() {
                     </tbody>
                   </table>
                 </div>
+                <div className="flex justify-between px-4">
+                  <p className="text-xs font-normal text-secondary">
+                    Show 5 History of 100 History
+                  </p>
+                  <div className="text-xs font-medium text-secondary flex gap-x-4">
+                    <p>Prev</p>
+                    <div className="flex gap-x-4">
+                      <p>1</p>
+                      <p>2</p>
+                      <p>3</p>
+                      <p>4</p>
+                      <p>5</p>
+                    </div>
+                    <p>Next</p>
+                  </div>
+                </div>
               </section>
             </div>
           </section>
