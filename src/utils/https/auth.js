@@ -7,7 +7,15 @@ export const register = (body) => {
   return axios.post(url, body);
 };
 
-export const login = (body) => {
+export const axiosLogin = (body) => {
   const url = baseUrl + "/login";
   return axios.post(url, body);
+};
+
+export const axiosLogout = (jwt) => {
+  return axios.delete(baseUrl, {
+    headers: {
+      Authorization: "Bearer " + jwt,
+    },
+  });
 };
