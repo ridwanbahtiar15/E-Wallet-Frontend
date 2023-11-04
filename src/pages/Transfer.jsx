@@ -16,18 +16,16 @@ function Transfer() {
     });
     const [isDropdownShown, setIsDropdownShow] = useState(false);
 
-    const [data, setData] = useState([])
+    const [nameList, setNameList] = useState([])
+    const [search, setSearch] = useState("")
 
     useEffect(() => {
-        // Menggunakan Axios untuk melakukan permintaan GET ke API
         axios.get('http://localhost:8000/user')
-          .then((response) => {
-            setData(response.data);
-          })
-          .catch((error) => {
-            console.error('Error:', error);
-          });
-      }, [])
+        .then((res) => {
+            setNameList(res.data.result)
+            // console.log(nameList)
+        })
+    }, [])
 
   return (
     <>
@@ -210,6 +208,7 @@ function Transfer() {
                                 type="text"
                                 className="text-sm p-3 border border-[#E8E8E8] rounded-md  font-medium text-secondary placeholder:font-medium placeholder:text-secondary outline-none focus:border focus:border-primary w-full"
                                 placeholder="Enter Number Or Full Name"
+                                onChange={(e) => setSearch(e.target.value)}
                             />
 
                             <div className="absolute top-3.5 right-3.5">
@@ -223,283 +222,88 @@ function Transfer() {
                     </div>
 
                     {/* Bagian List Pengguna */}
-                    <div className='flex px-6 py-4 items-center w-full bg-[#F9FAFB]'>
+                    <div className='flex'>
 
-                        <div className='w-[25%] flex justify-center items-center'>
+                        <div className='w-[25%] flex justify-center '>
 
-                            <img src="/img/profile.png" alt="" className='w-[48px] h-[48px] object-cover rounded' />
+                            <ul>
+                                {
+                                    nameList.filter((item) => {
+                                        if(item.full_name.toLowerCase().includes(search.toLowerCase())){
+                                            return item
+                                        }
+                                    })
+                                    .map((item) => {
+                                        return (
+                                            <li className='py-5'>
+                                                <img src="/img/profile.png" alt="" className='w-[48px] h-[48px] object-cover rounded' />
+                                            </li>
+                                        )
+                                    })
+                                }
+                            </ul>
 
                         </div>
 
-                        <div className='lg:flex w-[65%]'>
-                            <div className='lg:w-[60%] flex justify-center items-center'>
+                        <div className='flex w-[65%] justify-center'>
 
-                                {data.map((item) => (
-                                    <h1 className='text-[#4F5665] font-montserrat text-sm'>{item.full_name}</h1>
-                                ))}
-
+                            <div className='w-[60%] text-center'>
+                                <ul>
+                                    {
+                                        nameList.filter((item) => {
+                                            if(item.full_name.toLowerCase().includes(search.toLowerCase())){
+                                                return item
+                                            }
+                                        })
+                                        .map((item) => {
+                                            return (
+                                                <li className='py-[34px] text-[#4F5665] font-montserrat text-sm'>{item.full_name}</li>
+                                            )
+                                        })
+                                    }
+                                </ul>
                             </div>
 
-                            <div className='lg:w-[40%] flex justify-center items-center'>
-
-                                <h1 className='text-[#4F5665] text-sm'>(239) 555-0108</h1>
-
-                            </div>
-                        </div>
-
-                        <div className='w-[10%] flex justify-center items-center'>
-
-                            <svg width={25} height={24} viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <g id="Star">
-                                    <path id="Vector" d="M12.9135 17.8812L17.6419 20.8769C18.2463 21.2598 18.9967 20.6903 18.8173 19.9847L17.4512 14.6108C17.4127 14.4611 17.4173 14.3036 17.4643 14.1564C17.5114 14.0092 17.5991 13.8783 17.7172 13.7787L21.9573 10.2496C22.5144 9.78588 22.2269 8.86126 21.5111 8.81481L15.9738 8.45544C15.8247 8.44479 15.6816 8.39198 15.5613 8.30317C15.441 8.21437 15.3484 8.09321 15.2943 7.95382L13.2292 2.75323C13.173 2.60528 13.0732 2.4779 12.943 2.38802C12.8127 2.29814 12.6582 2.25 12.5 2.25C12.3418 2.25 12.1873 2.29814 12.057 2.38802C11.9268 2.4779 11.827 2.60528 11.7708 2.75323L9.70568 7.95382C9.65157 8.09321 9.55897 8.21437 9.43868 8.30317C9.31838 8.39198 9.17533 8.44479 9.02618 8.45544L3.48894 8.81481C2.77315 8.86126 2.4856 9.78588 3.04272 10.2496L7.28278 13.7787C7.40095 13.8783 7.4886 14.0092 7.53566 14.1564C7.58272 14.3036 7.58727 14.4611 7.5488 14.6108L6.28188 19.5945C6.06667 20.4412 6.96715 21.1246 7.69243 20.6651L12.0865 17.8812C12.21 17.8025 12.3535 17.7607 12.5 17.7607C12.6465 17.7607 12.79 17.8025 12.9135 17.8812V17.8812Z" stroke="#4F5665" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
-                                </g>
-                            </svg>
-
-                        </div>
-
-                    </div>
-
-                    {/* Bagian List Pengguna */}
-                    <div className='flex px-6 py-4 items-center w-full bg-[#F9FAFB]'>
-
-                        <div className='w-[25%] flex justify-center items-center'>
-
-                            <img src="/img/profile.png" alt="" className='w-[48px] h-[48px] object-cover rounded' />
-
-                        </div>
-
-                        <div className='lg:flex w-[65%]'>
-                            <div className='lg:w-[60%] flex justify-center items-center'>
-
-                                <h1 className='text-[#4F5665] font-montserrat text-sm'>Ghaluh 1</h1>
-
+                            <div className='w-[40%] text-center'>
+                                <ul>
+                                    {
+                                        nameList.filter((item) => {
+                                            if(item.full_name.toLowerCase().includes(search.toLowerCase())){
+                                                return item
+                                            }
+                                        })
+                                        .map((item) => {
+                                            return (
+                                                <li className='py-[34px] text-[#4F5665] font-montserrat text-sm'>Phone</li>
+                                            )
+                                        })
+                                    }
+                                </ul>
                             </div>
 
-                            <div className='lg:w-[40%] flex justify-center items-center'>
-
-                                <h1 className='text-[#4F5665] text-sm'>(239) 555-0108</h1>
-
-                            </div>
                         </div>
 
-                        <div className='w-[10%] flex justify-center items-center'>
-
-                            <svg width={25} height={24} viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <g id="Star">
-                                    <path id="Vector" d="M12.9135 17.8812L17.6419 20.8769C18.2463 21.2598 18.9967 20.6903 18.8173 19.9847L17.4512 14.6108C17.4127 14.4611 17.4173 14.3036 17.4643 14.1564C17.5114 14.0092 17.5991 13.8783 17.7172 13.7787L21.9573 10.2496C22.5144 9.78588 22.2269 8.86126 21.5111 8.81481L15.9738 8.45544C15.8247 8.44479 15.6816 8.39198 15.5613 8.30317C15.441 8.21437 15.3484 8.09321 15.2943 7.95382L13.2292 2.75323C13.173 2.60528 13.0732 2.4779 12.943 2.38802C12.8127 2.29814 12.6582 2.25 12.5 2.25C12.3418 2.25 12.1873 2.29814 12.057 2.38802C11.9268 2.4779 11.827 2.60528 11.7708 2.75323L9.70568 7.95382C9.65157 8.09321 9.55897 8.21437 9.43868 8.30317C9.31838 8.39198 9.17533 8.44479 9.02618 8.45544L3.48894 8.81481C2.77315 8.86126 2.4856 9.78588 3.04272 10.2496L7.28278 13.7787C7.40095 13.8783 7.4886 14.0092 7.53566 14.1564C7.58272 14.3036 7.58727 14.4611 7.5488 14.6108L6.28188 19.5945C6.06667 20.4412 6.96715 21.1246 7.69243 20.6651L12.0865 17.8812C12.21 17.8025 12.3535 17.7607 12.5 17.7607C12.6465 17.7607 12.79 17.8025 12.9135 17.8812V17.8812Z" stroke="#4F5665" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
-                                </g>
-                            </svg>
-
-                        </div>
-
-                    </div>
-
-                    {/* Bagian List Pengguna */}
-                    <div className='flex px-6 py-4 items-center w-full bg-[#F9FAFB]'>
-
-                        <div className='w-[25%] flex justify-center items-center'>
-
-                            <img src="/img/profile.png" alt="" className='w-[48px] h-[48px] object-cover rounded' />
-
-                        </div>
-
-                        <div className='lg:flex w-[65%]'>
-                            <div className='lg:w-[60%] flex justify-center items-center'>
-
-                                <h1 className='text-[#4F5665] font-montserrat text-sm'>Ghaluh 1</h1>
-
-                            </div>
-
-                            <div className='lg:w-[40%] flex justify-center items-center'>
-
-                                <h1 className='text-[#4F5665] text-sm'>(239) 555-0108</h1>
-
-                            </div>
-                        </div>
-
-                        <div className='w-[10%] flex justify-center items-center'>
-
-                            <svg width={25} height={24} viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <g id="Star">
-                                    <path id="Vector" d="M12.9135 17.8812L17.6419 20.8769C18.2463 21.2598 18.9967 20.6903 18.8173 19.9847L17.4512 14.6108C17.4127 14.4611 17.4173 14.3036 17.4643 14.1564C17.5114 14.0092 17.5991 13.8783 17.7172 13.7787L21.9573 10.2496C22.5144 9.78588 22.2269 8.86126 21.5111 8.81481L15.9738 8.45544C15.8247 8.44479 15.6816 8.39198 15.5613 8.30317C15.441 8.21437 15.3484 8.09321 15.2943 7.95382L13.2292 2.75323C13.173 2.60528 13.0732 2.4779 12.943 2.38802C12.8127 2.29814 12.6582 2.25 12.5 2.25C12.3418 2.25 12.1873 2.29814 12.057 2.38802C11.9268 2.4779 11.827 2.60528 11.7708 2.75323L9.70568 7.95382C9.65157 8.09321 9.55897 8.21437 9.43868 8.30317C9.31838 8.39198 9.17533 8.44479 9.02618 8.45544L3.48894 8.81481C2.77315 8.86126 2.4856 9.78588 3.04272 10.2496L7.28278 13.7787C7.40095 13.8783 7.4886 14.0092 7.53566 14.1564C7.58272 14.3036 7.58727 14.4611 7.5488 14.6108L6.28188 19.5945C6.06667 20.4412 6.96715 21.1246 7.69243 20.6651L12.0865 17.8812C12.21 17.8025 12.3535 17.7607 12.5 17.7607C12.6465 17.7607 12.79 17.8025 12.9135 17.8812V17.8812Z" stroke="#4F5665" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
-                                </g>
-                            </svg>
-
-                        </div>
-
-                    </div>
-
-                    {/* Bagian List Pengguna */}
-                    <div className='flex px-6 py-4 items-center w-full bg-[#F9FAFB]'>
-
-                        <div className='w-[25%] flex justify-center items-center'>
-
-                            <img src="/img/profile.png" alt="" className='w-[48px] h-[48px] object-cover rounded' />
-
-                        </div>
-
-                        <div className='lg:flex w-[65%]'>
-                            <div className='lg:w-[60%] flex justify-center items-center'>
-
-                                <h1 className='text-[#4F5665] font-montserrat text-sm'>Ghaluh 1</h1>
-
-                            </div>
-
-                            <div className='lg:w-[40%] flex justify-center items-center'>
-
-                                <h1 className='text-[#4F5665] text-sm'>(239) 555-0108</h1>
-
-                            </div>
-                        </div>
-
-                        <div className='w-[10%] flex justify-center items-center'>
-
-                            <svg width={25} height={24} viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <g id="Star">
-                                    <path id="Vector" d="M12.9135 17.8812L17.6419 20.8769C18.2463 21.2598 18.9967 20.6903 18.8173 19.9847L17.4512 14.6108C17.4127 14.4611 17.4173 14.3036 17.4643 14.1564C17.5114 14.0092 17.5991 13.8783 17.7172 13.7787L21.9573 10.2496C22.5144 9.78588 22.2269 8.86126 21.5111 8.81481L15.9738 8.45544C15.8247 8.44479 15.6816 8.39198 15.5613 8.30317C15.441 8.21437 15.3484 8.09321 15.2943 7.95382L13.2292 2.75323C13.173 2.60528 13.0732 2.4779 12.943 2.38802C12.8127 2.29814 12.6582 2.25 12.5 2.25C12.3418 2.25 12.1873 2.29814 12.057 2.38802C11.9268 2.4779 11.827 2.60528 11.7708 2.75323L9.70568 7.95382C9.65157 8.09321 9.55897 8.21437 9.43868 8.30317C9.31838 8.39198 9.17533 8.44479 9.02618 8.45544L3.48894 8.81481C2.77315 8.86126 2.4856 9.78588 3.04272 10.2496L7.28278 13.7787C7.40095 13.8783 7.4886 14.0092 7.53566 14.1564C7.58272 14.3036 7.58727 14.4611 7.5488 14.6108L6.28188 19.5945C6.06667 20.4412 6.96715 21.1246 7.69243 20.6651L12.0865 17.8812C12.21 17.8025 12.3535 17.7607 12.5 17.7607C12.6465 17.7607 12.79 17.8025 12.9135 17.8812V17.8812Z" stroke="#4F5665" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
-                                </g>
-                            </svg>
-
-                        </div>
-
-                    </div>
-
-                    {/* Bagian List Pengguna */}
-                    <div className='flex px-6 py-4 items-center w-full bg-[#F9FAFB]'>
-
-                        <div className='w-[25%] flex justify-center items-center'>
-
-                            <img src="/img/profile.png" alt="" className='w-[48px] h-[48px] object-cover rounded' />
-
-                        </div>
-
-                        <div className='lg:flex w-[65%]'>
-                            <div className='lg:w-[60%] flex justify-center items-center'>
-
-                                <h1 className='text-[#4F5665] font-montserrat text-sm'>Ghaluh 1</h1>
-
-                            </div>
-
-                            <div className='lg:w-[40%] flex justify-center items-center'>
-
-                                <h1 className='text-[#4F5665] text-sm'>(239) 555-0108</h1>
-
-                            </div>
-                        </div>
-
-                        <div className='w-[10%] flex justify-center items-center'>
-
-                            <svg width={25} height={24} viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <g id="Star">
-                                    <path id="Vector" d="M12.9135 17.8812L17.6419 20.8769C18.2463 21.2598 18.9967 20.6903 18.8173 19.9847L17.4512 14.6108C17.4127 14.4611 17.4173 14.3036 17.4643 14.1564C17.5114 14.0092 17.5991 13.8783 17.7172 13.7787L21.9573 10.2496C22.5144 9.78588 22.2269 8.86126 21.5111 8.81481L15.9738 8.45544C15.8247 8.44479 15.6816 8.39198 15.5613 8.30317C15.441 8.21437 15.3484 8.09321 15.2943 7.95382L13.2292 2.75323C13.173 2.60528 13.0732 2.4779 12.943 2.38802C12.8127 2.29814 12.6582 2.25 12.5 2.25C12.3418 2.25 12.1873 2.29814 12.057 2.38802C11.9268 2.4779 11.827 2.60528 11.7708 2.75323L9.70568 7.95382C9.65157 8.09321 9.55897 8.21437 9.43868 8.30317C9.31838 8.39198 9.17533 8.44479 9.02618 8.45544L3.48894 8.81481C2.77315 8.86126 2.4856 9.78588 3.04272 10.2496L7.28278 13.7787C7.40095 13.8783 7.4886 14.0092 7.53566 14.1564C7.58272 14.3036 7.58727 14.4611 7.5488 14.6108L6.28188 19.5945C6.06667 20.4412 6.96715 21.1246 7.69243 20.6651L12.0865 17.8812C12.21 17.8025 12.3535 17.7607 12.5 17.7607C12.6465 17.7607 12.79 17.8025 12.9135 17.8812V17.8812Z" stroke="#4F5665" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
-                                </g>
-                            </svg>
-
-                        </div>
-
-                    </div>
-
-                    {/* Bagian List Pengguna */}
-                    <div className='flex px-6 py-4 items-center w-full bg-[#F9FAFB]'>
-
-                        <div className='w-[25%] flex justify-center items-center'>
-
-                            <img src="/img/profile.png" alt="" className='w-[48px] h-[48px] object-cover rounded' />
-
-                        </div>
-
-                        <div className='lg:flex w-[65%]'>
-                            <div className='lg:w-[60%] flex justify-center items-center'>
-
-                                <h1 className='text-[#4F5665] font-montserrat text-sm'>Ghaluh 1</h1>
-
-                            </div>
-
-                            <div className='lg:w-[40%] flex justify-center items-center'>
-
-                                <h1 className='text-[#4F5665] text-sm'>(239) 555-0108</h1>
-
-                            </div>
-                        </div>
-
-                        <div className='w-[10%] flex justify-center items-center'>
-
-                            <svg width={25} height={24} viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <g id="Star">
-                                    <path id="Vector" d="M12.9135 17.8812L17.6419 20.8769C18.2463 21.2598 18.9967 20.6903 18.8173 19.9847L17.4512 14.6108C17.4127 14.4611 17.4173 14.3036 17.4643 14.1564C17.5114 14.0092 17.5991 13.8783 17.7172 13.7787L21.9573 10.2496C22.5144 9.78588 22.2269 8.86126 21.5111 8.81481L15.9738 8.45544C15.8247 8.44479 15.6816 8.39198 15.5613 8.30317C15.441 8.21437 15.3484 8.09321 15.2943 7.95382L13.2292 2.75323C13.173 2.60528 13.0732 2.4779 12.943 2.38802C12.8127 2.29814 12.6582 2.25 12.5 2.25C12.3418 2.25 12.1873 2.29814 12.057 2.38802C11.9268 2.4779 11.827 2.60528 11.7708 2.75323L9.70568 7.95382C9.65157 8.09321 9.55897 8.21437 9.43868 8.30317C9.31838 8.39198 9.17533 8.44479 9.02618 8.45544L3.48894 8.81481C2.77315 8.86126 2.4856 9.78588 3.04272 10.2496L7.28278 13.7787C7.40095 13.8783 7.4886 14.0092 7.53566 14.1564C7.58272 14.3036 7.58727 14.4611 7.5488 14.6108L6.28188 19.5945C6.06667 20.4412 6.96715 21.1246 7.69243 20.6651L12.0865 17.8812C12.21 17.8025 12.3535 17.7607 12.5 17.7607C12.6465 17.7607 12.79 17.8025 12.9135 17.8812V17.8812Z" stroke="#4F5665" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
-                                </g>
-                            </svg>
-
-                        </div>
-
-                    </div>
-
-                    {/* Bagian List Pengguna */}
-                    <div className='flex px-6 py-4 items-center w-full bg-[#F9FAFB]'>
-
-                        <div className='w-[25%] flex justify-center items-center'>
-
-                            <img src="/img/profile.png" alt="" className='w-[48px] h-[48px] object-cover rounded' />
-
-                        </div>
-
-                        <div className='lg:flex w-[65%]'>
-                            <div className='lg:w-[60%] flex justify-center items-center'>
-
-                                <h1 className='text-[#4F5665] font-montserrat text-sm'>Ghaluh 1</h1>
-
-                            </div>
-
-                            <div className='lg:w-[40%] flex justify-center items-center'>
-
-                                <h1 className='text-[#4F5665] text-sm'>(239) 555-0108</h1>
-
-                            </div>
-                        </div>
-
-                        <div className='w-[10%] flex justify-center items-center'>
-
-                            <svg width={25} height={24} viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <g id="Star">
-                                    <path id="Vector" d="M12.9135 17.8812L17.6419 20.8769C18.2463 21.2598 18.9967 20.6903 18.8173 19.9847L17.4512 14.6108C17.4127 14.4611 17.4173 14.3036 17.4643 14.1564C17.5114 14.0092 17.5991 13.8783 17.7172 13.7787L21.9573 10.2496C22.5144 9.78588 22.2269 8.86126 21.5111 8.81481L15.9738 8.45544C15.8247 8.44479 15.6816 8.39198 15.5613 8.30317C15.441 8.21437 15.3484 8.09321 15.2943 7.95382L13.2292 2.75323C13.173 2.60528 13.0732 2.4779 12.943 2.38802C12.8127 2.29814 12.6582 2.25 12.5 2.25C12.3418 2.25 12.1873 2.29814 12.057 2.38802C11.9268 2.4779 11.827 2.60528 11.7708 2.75323L9.70568 7.95382C9.65157 8.09321 9.55897 8.21437 9.43868 8.30317C9.31838 8.39198 9.17533 8.44479 9.02618 8.45544L3.48894 8.81481C2.77315 8.86126 2.4856 9.78588 3.04272 10.2496L7.28278 13.7787C7.40095 13.8783 7.4886 14.0092 7.53566 14.1564C7.58272 14.3036 7.58727 14.4611 7.5488 14.6108L6.28188 19.5945C6.06667 20.4412 6.96715 21.1246 7.69243 20.6651L12.0865 17.8812C12.21 17.8025 12.3535 17.7607 12.5 17.7607C12.6465 17.7607 12.79 17.8025 12.9135 17.8812V17.8812Z" stroke="#4F5665" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
-                                </g>
-                            </svg>
-
-                        </div>
-
-                    </div>
-
-                    {/* Bagian List Pengguna */}
-                    <div className='flex px-6 py-4 items-center w-full bg-[#F9FAFB]'>
-
-                        <div className='w-[25%] flex justify-center items-center'>
-
-                            <img src="/img/profile.png" alt="" className='w-[48px] h-[48px] object-cover rounded' />
-
-                        </div>
-
-                        <div className='lg:flex w-[65%]'>
-                            <div className='lg:w-[60%] flex justify-center items-center'>
-
-                                <h1 className='text-[#4F5665] font-montserrat text-sm'>Ghaluh 1</h1>
-
-                            </div>
-
-                            <div className='lg:w-[40%] flex justify-center items-center'>
-
-                                <h1 className='text-[#4F5665] text-sm'>(239) 555-0108</h1>
-
-                            </div>
-                        </div>
-
-                        <div className='w-[10%] flex justify-center items-center'>
-
-                            <svg width={25} height={24} viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <g id="Star">
-                                    <path id="Vector" d="M12.9135 17.8812L17.6419 20.8769C18.2463 21.2598 18.9967 20.6903 18.8173 19.9847L17.4512 14.6108C17.4127 14.4611 17.4173 14.3036 17.4643 14.1564C17.5114 14.0092 17.5991 13.8783 17.7172 13.7787L21.9573 10.2496C22.5144 9.78588 22.2269 8.86126 21.5111 8.81481L15.9738 8.45544C15.8247 8.44479 15.6816 8.39198 15.5613 8.30317C15.441 8.21437 15.3484 8.09321 15.2943 7.95382L13.2292 2.75323C13.173 2.60528 13.0732 2.4779 12.943 2.38802C12.8127 2.29814 12.6582 2.25 12.5 2.25C12.3418 2.25 12.1873 2.29814 12.057 2.38802C11.9268 2.4779 11.827 2.60528 11.7708 2.75323L9.70568 7.95382C9.65157 8.09321 9.55897 8.21437 9.43868 8.30317C9.31838 8.39198 9.17533 8.44479 9.02618 8.45544L3.48894 8.81481C2.77315 8.86126 2.4856 9.78588 3.04272 10.2496L7.28278 13.7787C7.40095 13.8783 7.4886 14.0092 7.53566 14.1564C7.58272 14.3036 7.58727 14.4611 7.5488 14.6108L6.28188 19.5945C6.06667 20.4412 6.96715 21.1246 7.69243 20.6651L12.0865 17.8812C12.21 17.8025 12.3535 17.7607 12.5 17.7607C12.6465 17.7607 12.79 17.8025 12.9135 17.8812V17.8812Z" stroke="#4F5665" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
-                                </g>
-                            </svg>
-
+                        <div className='w-[10%] flex justify-center'>
+                            <ul>
+                                {
+                                    nameList.filter((item) => {
+                                        if(item.full_name.toLowerCase().includes(search.toLowerCase())){
+                                            return item
+                                        }
+                                    })
+                                    .map((item) => {
+                                        return (
+                                            <li className='py-8'>
+                                                <svg width={25} height={24} viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <g id="Star">
+                                                        <path id="Vector" d="M12.9135 17.8812L17.6419 20.8769C18.2463 21.2598 18.9967 20.6903 18.8173 19.9847L17.4512 14.6108C17.4127 14.4611 17.4173 14.3036 17.4643 14.1564C17.5114 14.0092 17.5991 13.8783 17.7172 13.7787L21.9573 10.2496C22.5144 9.78588 22.2269 8.86126 21.5111 8.81481L15.9738 8.45544C15.8247 8.44479 15.6816 8.39198 15.5613 8.30317C15.441 8.21437 15.3484 8.09321 15.2943 7.95382L13.2292 2.75323C13.173 2.60528 13.0732 2.4779 12.943 2.38802C12.8127 2.29814 12.6582 2.25 12.5 2.25C12.3418 2.25 12.1873 2.29814 12.057 2.38802C11.9268 2.4779 11.827 2.60528 11.7708 2.75323L9.70568 7.95382C9.65157 8.09321 9.55897 8.21437 9.43868 8.30317C9.31838 8.39198 9.17533 8.44479 9.02618 8.45544L3.48894 8.81481C2.77315 8.86126 2.4856 9.78588 3.04272 10.2496L7.28278 13.7787C7.40095 13.8783 7.4886 14.0092 7.53566 14.1564C7.58272 14.3036 7.58727 14.4611 7.5488 14.6108L6.28188 19.5945C6.06667 20.4412 6.96715 21.1246 7.69243 20.6651L12.0865 17.8812C12.21 17.8025 12.3535 17.7607 12.5 17.7607C12.6465 17.7607 12.79 17.8025 12.9135 17.8812V17.8812Z" stroke="#4F5665" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
+                                                    </g>
+                                                </svg>
+                                            </li>
+                                        )
+                                    })
+                                }
+                            </ul>
                         </div>
 
                     </div>
