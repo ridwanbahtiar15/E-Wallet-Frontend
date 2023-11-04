@@ -1,13 +1,14 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
+import Footer from "../components/Footer";
 
 function Home() {
   return (
     <>
       <main className="font-montserrat">
-        <div className="flex flex-col px-10 pt-[75px] bg-[#2948FF] text-white h-auto gap-6 md:pt-[133px] lg:h-screen">
+        <div className="flex flex-col px-10 pt-[75px] bg-[#2948FF] text-white h-auto gap-6 md:pt-[133px] lg:self-center">
           <h1 className="text-[32px] md:font-medium md:text-5xl lg:text-6xl md:text-center">Experience the Future of Digital Payments with e-wallet</h1>
-          <div className="flex flex-col-reverse md:flex-row lg:gap-[75px]">
+          <div className="flex flex-col-reverse md:flex-row lg:gap-[75px] lg:justify-center">
             <div className="flex justify-center">
               <img className="lg:max-w-[422px]" src="/img/mobile-dashboard-1.webp" alt="mobile-dashboard-img" />
             </div>
@@ -146,7 +147,7 @@ function Home() {
               </div>
             </div>
           </div>
-          <div className="flex flex-col-reverse lg:flex-row">
+          <div className="flex flex-col-reverse lg:flex-row lg:justify-center">
             <div className="flex flex-col px-10 pt-7 gap-5 lg:w-[480px] lg:self-end">
               <p className="text-[#2948FF] font-bold text-lg text-center lg:text-left ">WELCOME TO E-WALLET</p>
               <p className="font-medium text-[32px] text-center lg:text-left">Your All-in-One Digital Payment Solution</p>
@@ -308,7 +309,7 @@ function Home() {
             <p className="font-medium text-4xl">Download The App</p>
             <p className="font-normal text-base">Ready to experience the future of payments? Download e-wallet now and enjoy a world of convenience at your fingertips.</p>
             <div className="flex gap-[25px]">
-              <button className="flex flex-1 items-center justify-center h-[50px] border bg-[#2948FF] rounded-md gap-[10px] hover:bg-blue-700">
+              <button className="flex flex-1 items-center justify-center h-[50px] border bg-[#2948FF] rounded-md gap-[10px] lg:max-w-[250px] hover:bg-blue-700">
                 <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M4.78559 4.09508C4.58568 4.29499 4.51904 4.62818 4.51904 5.02801V19.755C4.51904 20.1548 4.65232 20.488 4.85223 20.6879L4.91887 20.7545L13.182 12.4914V12.3582L4.78559 4.09508Z" fill="url(#paint0_linear_22_788)" />
                   <path d="M15.8474 15.2902L13.1152 12.5581V12.3582L15.8474 9.62601L15.914 9.69264L19.1793 11.5585C20.1122 12.0916 20.1122 12.9579 19.1793 13.491L15.8474 15.2902Z" fill="url(#paint1_linear_22_788)" />
@@ -355,7 +356,7 @@ function Home() {
                 </svg>
                 <p className="text-white text-sm">Play Store</p>
               </button>
-              <button className="flex flex-1 items-center justify-center text-[#2948FF] h-[50px] border gap-[10px] rounded-md border-[#2948FF] hover:bg-slate-200">
+              <button className="flex flex-1 items-center justify-center text-[#2948FF] h-[50px] border gap-[10px] rounded-md border-[#2948FF] lg:max-w-[250px] hover:bg-slate-200">
                 <svg width="14" height="18" viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M11.5787 9.29677C11.5609 7.17243 13.3173 6.13993 13.3944 6.09246C12.3975 4.64458 10.8547 4.44283 10.3147 4.42503C9.02114 4.28855 7.76315 5.20237 7.10449 5.20237C6.43395 5.20237 5.41332 4.44283 4.32148 4.46063C2.91514 4.48437 1.59188 5.29731 0.873876 6.56717C-0.615536 9.14842 0.494106 12.9461 1.92418 15.0349C2.64218 16.0555 3.47293 17.2007 4.5707 17.1592C5.63881 17.1177 6.04232 16.4768 7.32998 16.4768C8.6117 16.4768 8.98554 17.1592 10.1011 17.1355C11.2523 17.1177 11.9703 16.1089 12.6646 15.0764C13.4894 13.9074 13.8217 12.7503 13.8335 12.691C13.8039 12.6791 11.6024 11.8365 11.5787 9.29677Z"
@@ -373,6 +374,7 @@ function Home() {
           <img className="md:max-w-[422px] self-center" src="/img/mobile-dashboard-3.webp" alt="mobile-dashboard-3-img" />
         </div>
       </main>
+      <Footer />
     </>
   );
 }
