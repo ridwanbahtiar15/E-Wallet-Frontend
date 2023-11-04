@@ -1,39 +1,26 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 import Navbar from "../components/Navbar";
 import getImageUrl from "../utils/imageGetter";
 import DropdownMobile from "../components/DropdownMobile";
 import Modal from "../components/Modal";
-import { transaction, deleteTransaction } from "../utils/https/transaction";
 
-function HistoryTransaction() {
+function Topup() {
   const [Message, setMessage] = useState({ msg: null, isError: null });
   const [openModal, setOpenModal] = useState({
     isOpen: false,
     status: null,
-    value: null,
   });
   const [isDropdownShown, setIsDropdownShow] = useState(false);
 
-  const [user, setUser] = useState([]);
-  useEffect(() => {
-    transaction(1).then((res) => setUser(res.data.result));
-  }, []);
-
-  const onDeleteHandler = (id, type) => {
-    setMessage({ msg: "Are You Sure?", isError: null });
-    setOpenModal({
-      isOpen: true,
-      status: "deleteTransaction",
-      value: { id, type },
-    });
-
-    // deleteTransaction(id, type).then(() => {
-    //   transaction(1).then((res) => setUser(res.data.result));
-    // });
-    // console.log(user);
-  };
+  const [bri, setBri] = useState(true);
+  const [dana, setDana] = useState(false);
+  const [bca, setBca] = useState(false);
+  const [gopay, setGopay] = useState(false);
+  const [ovo, setOvo] = useState(false);
+  const [payment, setPayment] = useState("bri");
+  console.log(payment);
 
   return (
     <>
@@ -49,7 +36,7 @@ function HistoryTransaction() {
           <div className="flex flex-col gap-y-4">
             <Link
               to="/dashboard"
-              className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-base font-normal text-secondary"
+              className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary outline-none text-base font-normal text-secondary rounded-md"
             >
               <div>
                 <svg
@@ -72,7 +59,7 @@ function HistoryTransaction() {
                     strokeLinejoin="round"
                   />
                   <path
-                    d="M19.9265 18.598C18.0981 20.9711 15.2278 22.5 12.0004 22.5C8.77296 22.5 5.90266 20.9711 4.07422 18.598C6.41081 17.2629 9.11651 16.5 12.0004 16.5C14.8842 16.5 17.5899 17.2629 19.9265 18.598Z"
+                    d="M19.926 18.598C18.0976 20.9711 15.2273 22.5 11.9999 22.5C8.77248 22.5 5.90218 20.9711 4.07373 18.598C6.41033 17.2629 9.11603 16.5 11.9999 16.5C14.8837 16.5 17.5894 17.2629 19.926 18.598Z"
                     stroke="#4F5665"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -105,7 +92,7 @@ function HistoryTransaction() {
             </Link>
             <Link
               to="/history"
-              className="flex items-center gap-x-2 py-2 px-4 bg-primary rounded-md outline-none text-sm font-normal text-light"
+              className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-sm font-normal text-secondary"
             >
               <div>
                 <svg
@@ -117,21 +104,21 @@ function HistoryTransaction() {
                 >
                   <path
                     d="M2.90918 3.86365V7.5H6.54556"
-                    stroke="white"
+                    stroke="#4F5665"
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   />
                   <path
                     d="M2 12.5C2 18.0229 6.47715 22.5 12 22.5C17.5229 22.5 22 18.0229 22 12.5C22 6.97715 17.5229 2.5 12 2.5C8.299 2.5 5.06755 4.51056 3.33839 7.49905"
-                    stroke="white"
+                    stroke="#4F5665"
                     strokeWidth="1.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   />
                   <path
                     d="M12.0026 6.5L12.002 12.5044L16.2417 16.7441"
-                    stroke="white"
+                    stroke="#4F5665"
                     strokeWidth="1.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -142,7 +129,7 @@ function HistoryTransaction() {
             </Link>
             <Link
               to="/topup"
-              className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-sm font-normal text-secondary"
+              className="flex items-center gap-x-2 py-2 px-4 bg-primary rounded-md outline-none text-sm font-normal text-light"
             >
               <div>
                 <svg
@@ -150,7 +137,7 @@ function HistoryTransaction() {
                   width="20"
                   height="22"
                   viewBox="0 0 20 22"
-                  fill="none"
+                  fill="white"
                 >
                   <mask
                     id="mask0_234_227"
@@ -172,7 +159,7 @@ function HistoryTransaction() {
                       fillRule="evenodd"
                       clipRule="evenodd"
                       d="M15.5655 21.0381H4.43549C1.99049 21.0381 0.000488281 19.0491 0.000488281 16.6031V11.7281C0.000488281 9.2831 1.99049 7.2941 4.43549 7.2941H5.36849C5.78249 7.2941 6.11849 7.6301 6.11849 8.0441C6.11849 8.4581 5.78249 8.7941 5.36849 8.7941H4.43549C2.81649 8.7941 1.50049 10.1101 1.50049 11.7281V16.6031C1.50049 18.2221 2.81649 19.5381 4.43549 19.5381H15.5655C17.1835 19.5381 18.5005 18.2221 18.5005 16.6031V11.7191C18.5005 10.1061 17.1885 8.7941 15.5765 8.7941H14.6335C14.2195 8.7941 13.8835 8.4581 13.8835 8.0441C13.8835 7.6301 14.2195 7.2941 14.6335 7.2941H15.5765C18.0155 7.2941 20.0005 9.2791 20.0005 11.7191V16.6031C20.0005 19.0491 18.0105 21.0381 15.5655 21.0381Z"
-                      fill="#4F5665"
+                      fill="white"
                     />
                   </g>
                   <mask
@@ -195,14 +182,14 @@ function HistoryTransaction() {
                       fillRule="evenodd"
                       clipRule="evenodd"
                       d="M10 14.041C9.586 14.041 9.25 13.705 9.25 13.291V1.25C9.25 0.836 9.586 0.5 10 0.5C10.414 0.5 10.75 0.836 10.75 1.25V13.291C10.75 13.705 10.414 14.041 10 14.041Z"
-                      fill="#4F5665"
+                      fill="white"
                     />
                   </g>
                   <path
                     fillRule="evenodd"
                     clipRule="evenodd"
                     d="M7.0852 4.92868C6.8942 4.92868 6.7022 4.85568 6.5562 4.70968C6.2632 4.41768 6.2612 3.94368 6.5542 3.64968L9.4692 0.72168C9.7502 0.43868 10.2502 0.43868 10.5312 0.72168L13.4472 3.64968C13.7392 3.94368 13.7382 4.41768 13.4452 4.70968C13.1512 5.00168 12.6772 5.00168 12.3852 4.70768L10.0002 2.31368L7.6162 4.70768C7.4702 4.85568 7.2772 4.92868 7.0852 4.92868Z"
-                    fill="#4F5665"
+                    fill="whtie"
                   />
                 </svg>
               </div>
@@ -296,128 +283,274 @@ function HistoryTransaction() {
             </button>
           </div>
         </aside>
-        <section className="flex flex-col gap-y-8 md:gap-x-5 py-6 px-5 md:py-8 md:px-10 md:justify-between w-full">
+        <section className="flex flex-col gap-y-8 md:gap-x-5 py-6 px-5 md:py-8 md:px-10 w-full">
           <header className="flex gap-x-4">
             <div>
               <img
-                src={getImageUrl("history", "svg")}
+                src={getImageUrl("Upload", "svg")}
                 alt="history"
                 className="w-6 h-6"
               />
             </div>
-            <p className="text-dark font-semibold">History Transaction</p>
+            <p className="text-dark font-semibold">Top Up Account</p>
           </header>
-          <section className="w-full text-light flex flex-col gap-y-6">
-            <div className="flex flex-col gap-y-4 md:gap-x-5">
-              <section className="py-4 px-3 border border-[#E8E8E8] rounded-md flex flex-col gap-y-4">
-                <header className="flex flex-col gap-y-4 lg:items-center lg:flex-row justify-between w-full px-4">
-                  <p className="font-semibold text-dark">Find Transaction</p>
-                  <div className="flex flex-col gap-y-4 lg:flex-row lg:gap-x-3 lg:items-end">
-                    <div className="font-medium text-secondary lg:w-[340px] relative">
-                      <input
-                        type="text"
-                        className="text-sm p-3 border border-[#E8E8E8] rounded-md  font-medium text-secondary placeholder:font-medium placeholder:text-secondary outline-none focus:border focus:border-primary w-full"
-                        placeholder="Enter Number Or Full Name"
-                      />
-                      <div className="absolute top-3.5 right-3.5">
+          <section className="flex flex-col gap-y-5 lg:flex-row gap-x-5">
+            <section className="w-full flex flex-col border border-[#E8E8E8] py-5 px-8 gap-y-4 lg:w-2/3">
+              <section className="flex flex-col gap-y-4">
+                <p className="font-semibold text-dark">Account Information</p>
+                <div className="flex flex-col gap-y-4 md:flex-row md:gap-x-4 bg-[#E8E8E84D] p-3 rounded-lg lg:items-start">
+                  <div className="">
+                    <img
+                      src={getImageUrl("profile", "jpg")}
+                      alt="User"
+                      className="w-full h-full md:w-[100px] md:h-[100px] rounded-lg"
+                    />
+                  </div>
+                  <div className="text-sm flex flex-col gap-y-4">
+                    <p className="text-sm font-semibold">Ghaluh Wizard</p>
+                    <p className="text-sm text-secondary">(239) 555-0108</p>
+                    <div className="bg-primary flex items-center justify-center self-baseline py-1 px-3 rounded-md gap-x-2">
+                      <div>
                         <img
-                          src={getImageUrl("Search", "svg")}
-                          alt="Search"
-                          className="w-5 h-5"
+                          src={getImageUrl("verified", "svg")}
+                          alt="verified"
+                          className="w-4 h-4"
                         />
                       </div>
+                      <p className="text-light text-sm">Verified</p>
                     </div>
                   </div>
-                </header>
-                <div className="text-sm min-[1440px]:text-base font-medium text-secondary overflow-x-scroll px-4">
-                  <table className="table-auto w-full">
-                    <thead className="">
-                      <tr className="border-b border-[#E8E8E84D]">
-                        <th className="p-6 text-center">Image</th>
-                        <th className="p-6 text-center">Name</th>
-                        <th className="p-6 text-center">Phone</th>
-                        <th className="p-6 text-center">Transaction</th>
-                        <th className="p-6 text-center">Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {user.map((result, i) => (
-                        <tr
-                          className={`border-b border-[#E8E8E84D] ${
-                            i % 2 == 0 ? "bg-[#F9FAFB]" : ""
-                          }`}
-                          key={i}
-                        >
-                          <td className="p-6">
-                            <div className="flex justify-center">
-                              <img
-                                src={
-                                  result.photo_profile
-                                    ? result.photo_profile
-                                    : getImageUrl("foto1", "png")
-                                }
-                                alt="product"
-                                className="w-12 rounded-md"
-                              />
-                            </div>
-                          </td>
-                          <td className="p-6 text-center">
-                            {result.full_name}
-                          </td>
-                          <td className="p-6 text-center">
-                            {result.phone_number ? result.phone_number : "-"}
-                          </td>
-                          <td
-                            className={`p-6 text-center text-xs ${
-                              result.summary == "Income"
-                                ? "text-success"
-                                : "text-danger"
-                            }`}
-                          >
-                            {`Rp. ${result.transaction_amount}`}
-                          </td>
-                          <td className="p-6 text-center">
-                            <div className="flex flex-col gap-y-2 items-center xl:flex-row md:gap-x-2 justify-center">
-                              <div
-                                className="p-1 cursor-pointer"
-                                onClick={() =>
-                                  onDeleteHandler(
-                                    result.id,
-                                    result.transaction_type
-                                  )
-                                }
-                              >
-                                <img
-                                  src={getImageUrl("Trash", "svg")}
-                                  alt="Trash"
-                                  className="w-6"
-                                />
-                              </div>
-                            </div>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                  <input type="file" className="hidden" id="userImage" />
                 </div>
-                <div className="flex justify-between px-4">
-                  <p className="text-xs font-normal text-secondary">
-                    Show 5 History of 100 History
+              </section>
+              <section className="flex flex-col gap-y-4">
+                <div>
+                  <p className="text-dark font-semibold">Amount</p>
+                  <p className="text-sm text-secondary">
+                    Type the amount you want to transfer to your e-wallet
+                    account
                   </p>
-                  <div className="text-xs font-medium text-secondary flex gap-x-4">
-                    <p>Prev</p>
-                    <div className="flex gap-x-4">
-                      <p>1</p>
-                      <p>2</p>
-                      <p>3</p>
-                      <p>4</p>
-                      <p>5</p>
+                </div>
+                <div className="flex flex-col gap-y-3 relative">
+                  <input
+                    type="text"
+                    id="nominal"
+                    placeholder="Enter Nominal Transfer"
+                    className="py-4 px-10 border rounded-lg border-[#DEDEDE] text-xs tracking-wide outline-none focus:border-primary"
+                  />
+                  <div className="icon-email absolute top-[17px] left-4">
+                    <img
+                      src={getImageUrl("u_money-bill", "svg")}
+                      alt="u_money-bill"
+                      className="w-4 h-4"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <p className="text-dark font-semibold">Payment Method</p>
+                  <p className="text-sm text-secondary">
+                    Choose your payment method for top up account
+                  </p>
+                </div>
+                <div className="flex flex-col gap-y-4">
+                  <div className="flex items-center gap-x-6 p-4 bg-[#E8E8E84D] rounded-lg">
+                    <div
+                      onClick={() => {
+                        setBri(true);
+                        setDana(false);
+                        setBca(false);
+                        setGopay(false);
+                        setOvo(false);
+                        setPayment("bri");
+                      }}
+                      className="cursor-pointer"
+                    >
+                      {bri ? (
+                        <img
+                          src={getImageUrl("Dots", "svg")}
+                          alt="Dots"
+                          className="w-3.5 h-3.5"
+                        />
+                      ) : (
+                        <img
+                          src={getImageUrl("Dots-unselect", "svg")}
+                          alt="Dots"
+                          className="w-3.5 h-3.5"
+                        />
+                      )}
                     </div>
-                    <p>Next</p>
+                    <div>
+                      <img src={getImageUrl("bri", "svg")} alt="bri" />
+                    </div>
+                    <p className="text-secondary">Bank Rakyat Indonesia</p>
+                  </div>
+                  <div className="flex items-center gap-x-6 p-4 bg-[#E8E8E84D] rounded-lg">
+                    <div
+                      onClick={() => {
+                        setBri(false);
+                        setDana(true);
+                        setBca(false);
+                        setGopay(false);
+                        setOvo(false);
+                        setPayment("dana");
+                      }}
+                      className="cursor-pointer"
+                    >
+                      {dana ? (
+                        <img
+                          src={getImageUrl("Dots", "svg")}
+                          alt="Dots"
+                          className="w-3.5 h-3.5"
+                        />
+                      ) : (
+                        <img
+                          src={getImageUrl("Dots-unselect", "svg")}
+                          alt="Dots"
+                          className="w-3.5 h-3.5"
+                        />
+                      )}
+                    </div>
+                    <div>
+                      <img src={getImageUrl("dana", "svg")} alt="dana" />
+                    </div>
+                    <p className="text-secondary">Dana</p>
+                  </div>
+                  <div className="flex items-center gap-x-6 p-4 bg-[#E8E8E84D] rounded-lg">
+                    <div
+                      onClick={() => {
+                        setBri(false);
+                        setDana(false);
+                        setBca(true);
+                        setGopay(false);
+                        setOvo(false);
+                        setPayment("bca");
+                      }}
+                      className="cursor-pointer"
+                    >
+                      {bca ? (
+                        <img
+                          src={getImageUrl("Dots", "svg")}
+                          alt="Dots"
+                          className="w-3.5 h-3.5"
+                        />
+                      ) : (
+                        <img
+                          src={getImageUrl("Dots-unselect", "svg")}
+                          alt="Dots"
+                          className="w-3.5 h-3.5"
+                        />
+                      )}
+                    </div>
+                    <div>
+                      <img src={getImageUrl("bca", "svg")} alt="bca" />
+                    </div>
+                    <p className="text-secondary">Bank Central Asia</p>
+                  </div>
+                  <div className="flex items-center gap-x-6 p-4 bg-[#E8E8E84D] rounded-lg">
+                    <div
+                      onClick={() => {
+                        setBri(false);
+                        setDana(false);
+                        setBca(false);
+                        setGopay(true);
+                        setOvo(false);
+                        setPayment("gopay");
+                      }}
+                      className="cursor-pointer"
+                    >
+                      {gopay ? (
+                        <img
+                          src={getImageUrl("Dots", "svg")}
+                          alt="Dots"
+                          className="w-3.5 h-3.5"
+                        />
+                      ) : (
+                        <img
+                          src={getImageUrl("Dots-unselect", "svg")}
+                          alt="Dots"
+                          className="w-3.5 h-3.5"
+                        />
+                      )}
+                    </div>
+                    <div>
+                      <img src={getImageUrl("gopay", "svg")} alt="gopay" />
+                    </div>
+                    <p className="text-secondary">Gopay</p>
+                  </div>
+                  <div className="flex items-center gap-x-6 p-4 bg-[#E8E8E84D] rounded-lg">
+                    <div
+                      onClick={() => {
+                        setBri(false);
+                        setDana(false);
+                        setBca(false);
+                        setGopay(false);
+                        setOvo(true);
+                        setPayment("ovo");
+                      }}
+                      className="cursor-pointer"
+                    >
+                      {ovo ? (
+                        <img
+                          src={getImageUrl("Dots", "svg")}
+                          alt="Dots"
+                          className="w-3.5 h-3.5"
+                        />
+                      ) : (
+                        <img
+                          src={getImageUrl("Dots-unselect", "svg")}
+                          alt="Dots"
+                          className="w-3.5 h-3.5"
+                        />
+                      )}
+                    </div>
+                    <div>
+                      <img src={getImageUrl("ovo", "svg")} alt="ovo" />
+                    </div>
+                    <p className="text-secondary">OVO</p>
                   </div>
                 </div>
               </section>
-            </div>
+            </section>
+            <section className="w-full border border-[#E8E8E8] py-5 px-8 gap-y-4 lg:w-1/3 self-baseline">
+              <header className="mb-4">
+                <span className="text-dark font-semibold">Total</span>
+              </header>
+              <div className="flex flex-col gap-y-5">
+                <div className="flex justify-between">
+                  <span className="text-sm font-bold text-secondary">
+                    Order
+                  </span>
+                  <span className="text-sm font-bold text-dark">
+                    IDR. 100000
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-sm font-bold text-secondary">
+                    Delivery
+                  </span>
+                  <span className="text-sm font-bold text-dark">IDR. 0</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-sm font-bold text-secondary">Tax</span>
+                  <span className="text-sm font-bold text-dark">IDR. 0</span>
+                </div>
+                <hr />
+                <div className="flex justify-between">
+                  <span className="text-sm font-bold text-secondary">
+                    Subtotal
+                  </span>
+                  <span className="text-sm font-bold text-dark">
+                    IDR. 10000
+                  </span>
+                </div>
+                <button className="p-[10px] text-sm font-medium rounded-md text-light bg-primary hover:bg-blue-800 active:ring">
+                  Submit
+                </button>
+                <p className="text-sm font-normal text-secondary">
+                  *Get Discount if you pay with Bank Central Asia
+                </p>
+              </div>
+            </section>
           </section>
         </section>
       </main>
@@ -425,15 +558,10 @@ function HistoryTransaction() {
         <DropdownMobile isClick={() => setIsDropdownShow(false)} />
       )}
       {openModal.isOpen && (
-        <Modal
-          modal={openModal}
-          closeModal={setOpenModal}
-          message={Message}
-          dataUser={setUser}
-        />
+        <Modal modal={openModal} closeModal={setOpenModal} message={Message} />
       )}
     </>
   );
 }
 
-export default HistoryTransaction;
+export default Topup;

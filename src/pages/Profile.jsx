@@ -1,38 +1,22 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 import Navbar from "../components/Navbar";
 import getImageUrl from "../utils/imageGetter";
 import DropdownMobile from "../components/DropdownMobile";
 import Modal from "../components/Modal";
-import { transaction, deleteTransaction } from "../utils/https/transaction";
 
-function HistoryTransaction() {
+function Profile() {
   const [Message, setMessage] = useState({ msg: null, isError: null });
   const [openModal, setOpenModal] = useState({
     isOpen: false,
     status: null,
-    value: null,
   });
   const [isDropdownShown, setIsDropdownShow] = useState(false);
 
-  const [user, setUser] = useState([]);
-  useEffect(() => {
-    transaction(1).then((res) => setUser(res.data.result));
-  }, []);
-
-  const onDeleteHandler = (id, type) => {
-    setMessage({ msg: "Are You Sure?", isError: null });
-    setOpenModal({
-      isOpen: true,
-      status: "deleteTransaction",
-      value: { id, type },
-    });
-
-    // deleteTransaction(id, type).then(() => {
-    //   transaction(1).then((res) => setUser(res.data.result));
-    // });
-    // console.log(user);
+  const [image, setImage] = useState("");
+  const changeImageHandler = (e) => {
+    setImage(e.target.files[0]);
   };
 
   return (
@@ -49,7 +33,7 @@ function HistoryTransaction() {
           <div className="flex flex-col gap-y-4">
             <Link
               to="/dashboard"
-              className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-base font-normal text-secondary"
+              className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary outline-none text-base font-normal text-secondary rounded-md"
             >
               <div>
                 <svg
@@ -72,7 +56,7 @@ function HistoryTransaction() {
                     strokeLinejoin="round"
                   />
                   <path
-                    d="M19.9265 18.598C18.0981 20.9711 15.2278 22.5 12.0004 22.5C8.77296 22.5 5.90266 20.9711 4.07422 18.598C6.41081 17.2629 9.11651 16.5 12.0004 16.5C14.8842 16.5 17.5899 17.2629 19.9265 18.598Z"
+                    d="M19.926 18.598C18.0976 20.9711 15.2273 22.5 11.9999 22.5C8.77248 22.5 5.90218 20.9711 4.07373 18.598C6.41033 17.2629 9.11603 16.5 11.9999 16.5C14.8837 16.5 17.5894 17.2629 19.926 18.598Z"
                     stroke="#4F5665"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -105,7 +89,7 @@ function HistoryTransaction() {
             </Link>
             <Link
               to="/history"
-              className="flex items-center gap-x-2 py-2 px-4 bg-primary rounded-md outline-none text-sm font-normal text-light"
+              className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-sm font-normal text-secondary"
             >
               <div>
                 <svg
@@ -117,21 +101,21 @@ function HistoryTransaction() {
                 >
                   <path
                     d="M2.90918 3.86365V7.5H6.54556"
-                    stroke="white"
+                    stroke="#4F5665"
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   />
                   <path
                     d="M2 12.5C2 18.0229 6.47715 22.5 12 22.5C17.5229 22.5 22 18.0229 22 12.5C22 6.97715 17.5229 2.5 12 2.5C8.299 2.5 5.06755 4.51056 3.33839 7.49905"
-                    stroke="white"
+                    stroke="#4F5665"
                     strokeWidth="1.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   />
                   <path
                     d="M12.0026 6.5L12.002 12.5044L16.2417 16.7441"
-                    stroke="white"
+                    stroke="#4F5665"
                     strokeWidth="1.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -210,7 +194,7 @@ function HistoryTransaction() {
             </Link>
             <Link
               to="/profile"
-              className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-sm font-normal text-secondary"
+              className="flex items-center gap-x-2 py-2 px-4 bg-primary rounded-md outline-none text-sm font-normal text-light"
             >
               <div>
                 <svg
@@ -224,7 +208,7 @@ function HistoryTransaction() {
                     fillRule="evenodd"
                     clipRule="evenodd"
                     d="M7.59151 12.7068C11.2805 12.7068 14.4335 13.2658 14.4335 15.4988C14.4335 17.7318 11.3015 18.3068 7.59151 18.3068C3.90151 18.3068 0.749512 17.7528 0.749512 15.5188C0.749512 13.2848 3.88051 12.7068 7.59151 12.7068Z"
-                    stroke="#4F5665"
+                    stroke="white"
                     strokeWidth="1.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -233,21 +217,21 @@ function HistoryTransaction() {
                     fillRule="evenodd"
                     clipRule="evenodd"
                     d="M7.59157 9.51979C5.16957 9.51979 3.20557 7.55679 3.20557 5.13479C3.20557 2.71279 5.16957 0.749786 7.59157 0.749786C10.0126 0.749786 11.9766 2.71279 11.9766 5.13479C11.9856 7.54779 10.0356 9.51079 7.62257 9.51979H7.59157Z"
-                    stroke="#4F5665"
+                    stroke="white"
                     strokeWidth="1.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   />
                   <path
                     d="M14.4829 8.38159C16.0839 8.15659 17.3169 6.78259 17.3199 5.11959C17.3199 3.48059 16.1249 2.12059 14.5579 1.86359"
-                    stroke="#4F5665"
+                    stroke="white"
                     strokeWidth="1.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   />
                   <path
                     d="M16.5952 12.2322C18.1462 12.4632 19.2292 13.0072 19.2292 14.1272C19.2292 14.8982 18.7192 15.3982 17.8952 15.7112"
-                    stroke="#4F5665"
+                    stroke="white"
                     strokeWidth="1.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -296,128 +280,157 @@ function HistoryTransaction() {
             </button>
           </div>
         </aside>
-        <section className="flex flex-col gap-y-8 md:gap-x-5 py-6 px-5 md:py-8 md:px-10 md:justify-between w-full">
+        <section className="flex flex-col gap-y-8 md:gap-x-5 py-6 px-5 md:py-8 md:px-10 w-full">
           <header className="flex gap-x-4">
             <div>
               <img
-                src={getImageUrl("history", "svg")}
+                src={getImageUrl("2-User", "svg")}
                 alt="history"
                 className="w-6 h-6"
               />
             </div>
-            <p className="text-dark font-semibold">History Transaction</p>
+            <p className="text-dark font-semibold">Profile</p>
           </header>
-          <section className="w-full text-light flex flex-col gap-y-6">
-            <div className="flex flex-col gap-y-4 md:gap-x-5">
-              <section className="py-4 px-3 border border-[#E8E8E8] rounded-md flex flex-col gap-y-4">
-                <header className="flex flex-col gap-y-4 lg:items-center lg:flex-row justify-between w-full px-4">
-                  <p className="font-semibold text-dark">Find Transaction</p>
-                  <div className="flex flex-col gap-y-4 lg:flex-row lg:gap-x-3 lg:items-end">
-                    <div className="font-medium text-secondary lg:w-[340px] relative">
-                      <input
-                        type="text"
-                        className="text-sm p-3 border border-[#E8E8E8] rounded-md  font-medium text-secondary placeholder:font-medium placeholder:text-secondary outline-none focus:border focus:border-primary w-full"
-                        placeholder="Enter Number Or Full Name"
+          <section className="w-full flex flex-col border border-[#E8E8E8] py-10 px-8 gap-y-4">
+            <section className="flex flex-col gap-y-4">
+              <p className="font-semibold text-dark">Profile Picture</p>
+              <div className="flex flex-col gap-y-4 md:flex-row md:items-center md:gap-x-5">
+                {image ? (
+                  <div className="w-full h-full md:w-32 md:h-32">
+                    <img
+                      src={URL.createObjectURL(image)}
+                      alt="User"
+                      className="w-full h-full rounded-lg bg-cover"
+                    />
+                  </div>
+                ) : (
+                  <div className="w-full h-48 md:w-32 md:h-32 bg-[#E8E8E84D] flex items-center justify-center rounded-lg">
+                    <img
+                      src={getImageUrl("User", "svg")}
+                      alt="User"
+                      className="w-[50px] h-[50px]"
+                    />
+                  </div>
+                )}
+                <div className="text-sm flex flex-col gap-y-4">
+                  <label
+                    htmlFor="userImage"
+                    className="bg-primary text-light flex gap-x-2 items-center justify-center p-2 rounded-md hover:bg-blue-800 active:ring cursor-pointer"
+                  >
+                    <div>
+                      <img
+                        src={getImageUrl("EditSquare", "svg")}
+                        alt="editSquare"
                       />
-                      <div className="absolute top-3.5 right-3.5">
-                        <img
-                          src={getImageUrl("Search", "svg")}
-                          alt="Search"
-                          className="w-5 h-5"
-                        />
-                      </div>
                     </div>
-                  </div>
-                </header>
-                <div className="text-sm min-[1440px]:text-base font-medium text-secondary overflow-x-scroll px-4">
-                  <table className="table-auto w-full">
-                    <thead className="">
-                      <tr className="border-b border-[#E8E8E84D]">
-                        <th className="p-6 text-center">Image</th>
-                        <th className="p-6 text-center">Name</th>
-                        <th className="p-6 text-center">Phone</th>
-                        <th className="p-6 text-center">Transaction</th>
-                        <th className="p-6 text-center">Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {user.map((result, i) => (
-                        <tr
-                          className={`border-b border-[#E8E8E84D] ${
-                            i % 2 == 0 ? "bg-[#F9FAFB]" : ""
-                          }`}
-                          key={i}
-                        >
-                          <td className="p-6">
-                            <div className="flex justify-center">
-                              <img
-                                src={
-                                  result.photo_profile
-                                    ? result.photo_profile
-                                    : getImageUrl("foto1", "png")
-                                }
-                                alt="product"
-                                className="w-12 rounded-md"
-                              />
-                            </div>
-                          </td>
-                          <td className="p-6 text-center">
-                            {result.full_name}
-                          </td>
-                          <td className="p-6 text-center">
-                            {result.phone_number ? result.phone_number : "-"}
-                          </td>
-                          <td
-                            className={`p-6 text-center text-xs ${
-                              result.summary == "Income"
-                                ? "text-success"
-                                : "text-danger"
-                            }`}
-                          >
-                            {`Rp. ${result.transaction_amount}`}
-                          </td>
-                          <td className="p-6 text-center">
-                            <div className="flex flex-col gap-y-2 items-center xl:flex-row md:gap-x-2 justify-center">
-                              <div
-                                className="p-1 cursor-pointer"
-                                onClick={() =>
-                                  onDeleteHandler(
-                                    result.id,
-                                    result.transaction_type
-                                  )
-                                }
-                              >
-                                <img
-                                  src={getImageUrl("Trash", "svg")}
-                                  alt="Trash"
-                                  className="w-6"
-                                />
-                              </div>
-                            </div>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                    Change Profile
+                  </label>
+                  <button
+                    className="border border-danger text-danger flex gap-x-2 items-center justify-center p-2 rounded-md hover:bg-slate-200 focus:ring focus:ring-red-300"
+                    onClick={() => setImage("")}
+                  >
+                    <div>
+                      <img src={getImageUrl("Delete", "svg")} alt="Delete" />
+                    </div>
+                    Delete Profile
+                  </button>
                 </div>
-                <div className="flex justify-between px-4">
-                  <p className="text-xs font-normal text-secondary">
-                    Show 5 History of 100 History
-                  </p>
-                  <div className="text-xs font-medium text-secondary flex gap-x-4">
-                    <p>Prev</p>
-                    <div className="flex gap-x-4">
-                      <p>1</p>
-                      <p>2</p>
-                      <p>3</p>
-                      <p>4</p>
-                      <p>5</p>
-                    </div>
-                    <p>Next</p>
+                <input
+                  type="file"
+                  className="hidden"
+                  id="userImage"
+                  onChange={changeImageHandler}
+                />
+              </div>
+              <p className="text-sm text-secondary">
+                The profile picture must be 512 x 512 pixels or less
+              </p>
+            </section>
+            <section>
+              <form className="flex flex-col gap-y-3">
+                <div className="flex flex-col gap-y-3 relative">
+                  <label
+                    htmlFor="fullname"
+                    className="text-sm font-semibold text-dark lg:text-base"
+                  >
+                    Full Name
+                  </label>
+                  <input
+                    type="text"
+                    id="fullname"
+                    placeholder="Enter Your Full Name"
+                    className="py-3.5 px-10 border rounded-lg border-[#DEDEDE] text-xs tracking-wide outline-none focus:border-primary"
+                  />
+                  <div className="icon-email absolute top-[46px] left-4 lg:top-[50px]">
+                    <img
+                      src={getImageUrl("User-small", "svg")}
+                      alt="User-small"
+                      className="w-4 h-4"
+                    />
                   </div>
                 </div>
-              </section>
-            </div>
+                <div className="flex flex-col gap-y-3 relative">
+                  <label
+                    htmlFor="phone"
+                    className="text-sm font-semibold text-dark lg:text-base"
+                  >
+                    Phone
+                  </label>
+                  <input
+                    type="number"
+                    id="phone"
+                    placeholder="Enter your Phone"
+                    className="py-3.5 px-10 border rounded-lg border-[#DEDEDE] text-xs tracking-wide outline-none focus:border-primary"
+                  />
+                  <div className="icon-profile absolute top-[46px] left-4 lg:top-[50px]">
+                    <img
+                      src={getImageUrl("Phone", "svg")}
+                      alt="Phone"
+                      className="w-4 h-4"
+                    />
+                  </div>
+                </div>
+                <div className="flex flex-col gap-y-3 relative">
+                  <label
+                    htmlFor="email"
+                    className="text-sm font-semibold text-dark lg:text-base"
+                  >
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    placeholder="Enter Your Email"
+                    className="py-3.5 px-10 border rounded-lg border-[#DEDEDE] text-xs tracking-wide outline-none focus:border-primary"
+                  />
+                  <div className="icon-location absolute top-[46px] left-4 lg:top-[50px]">
+                    <img
+                      src={getImageUrl("mail", "svg")}
+                      alt="mail"
+                      className="w-4 h-4"
+                    />
+                  </div>
+                </div>
+                <div className="flex flex-col gap-y-3">
+                  <p className="text-dark font-medium">Password</p>
+                  <Link to="/changepassword" className="text-primary">
+                    Change Password
+                  </Link>
+                </div>
+                <div className="flex flex-col gap-y-3">
+                  <p className="text-dark font-medium">Pin</p>
+                  <Link to="/changepin" className="text-primary">
+                    Change Pin
+                  </Link>
+                </div>
+                <button
+                  type="button"
+                  className="p-3 bg-primary text-light rounded-md text-sm hover:bg-blue-800 focus:ring"
+                >
+                  Submit
+                </button>
+              </form>
+            </section>
           </section>
         </section>
       </main>
@@ -425,15 +438,10 @@ function HistoryTransaction() {
         <DropdownMobile isClick={() => setIsDropdownShow(false)} />
       )}
       {openModal.isOpen && (
-        <Modal
-          modal={openModal}
-          closeModal={setOpenModal}
-          message={Message}
-          dataUser={setUser}
-        />
+        <Modal modal={openModal} closeModal={setOpenModal} message={Message} />
       )}
     </>
   );
 }
 
-export default HistoryTransaction;
+export default Profile;

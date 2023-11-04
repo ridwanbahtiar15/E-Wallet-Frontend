@@ -1,26 +1,77 @@
 /* eslint-disable react/no-unknown-property */
 // eslint-disable-next-line no-unused-vars
-import React from "react";
+import { React, useState } from "react";
 // import { useState } from "react";
 // import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
-import { login } from "../utils/https/auth";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { userAction } from "../redux/slices/user";
+import Modal from "../components/Modal";
 
 function Login() {
-  const submitHandler = (e) => {
+  const user = useSelector((state) => state.user);
+  const [Message, setMessage] = useState({ msg: null, isError: null });
+  const [openModal, setOpenModal] = useState({
+    isOpen: false,
+    status: null,
+  });
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const submitHandler = async (e) => {
     e.preventDefault();
+    if (!e.target.email.value || !e.target.password.value) {
+      setMessage({ msg: "Email And Password Must Be Filled" });
+      return setOpenModal({
+        isOpen: true,
+        status: "Login Error",
+      });
+    }
+    // if (user.error && user.error.status === 404) {
+    //   setMessage({ msg: "Your Email is Not Registered" });
+    //   return setOpenModal({
+    //     isOpen: true,
+    //     status: "Login Error",
+    //   });
+    // }
+    // if ()
+
     const body = {
       email: e.target.email.value,
       password: e.target.password.value,
     };
-    login(body)
-      .then((res) => {
-        console.log(res);
+    const { loginThunk } = userAction;
+    dispatch(
+      loginThunk({
+        body,
+        cb: () => {
+          navigate("/dashboard");
+        },
+        errorCb: (error) => {
+          if (error.response.data.msg === "Invalid data") {
+            setMessage({ msg: "Your Email is Not Registered" });
+            return setOpenModal({
+              isOpen: true,
+              status: "Login Error",
+            });
+          }
+          if (error.response.data.msg === "Invalid E-mail or Password") {
+            setMessage({ msg: "Invalid Email or Password" });
+            return setOpenModal({
+              isOpen: true,
+              status: "Login Error",
+            });
+          }
+          if (error.response.data.msg === "Please activate email first") {
+            setMessage({ msg: "Please activate email first" });
+            return setOpenModal({
+              isOpen: true,
+              status: "Login Error",
+            });
+          }
+        },
       })
-      .catch((err) => {
-        console.log(err);
-      });
-    // console.log(body);
+    );
   };
 
   return (
@@ -138,6 +189,7 @@ function Login() {
           <img src="/img/login-side.png" alt="login-img" className="place-self-center object-contain" />
         </div>
       </div>
+      {openModal.isOpen && <Modal modal={openModal} closeModal={setOpenModal} message={Message} />}
     </>
   );
 }
