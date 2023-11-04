@@ -1,10 +1,12 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
+import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 function Home() {
   return (
     <>
+      <Header />
       <main className="font-montserrat">
         <div className="flex flex-col px-10 pt-[75px] bg-[#2948FF] text-white h-auto gap-6 md:pt-[133px] lg:self-center">
           <h1 className="text-[32px] md:font-medium md:text-5xl lg:text-6xl md:text-center">Experience the Future of Digital Payments with e-wallet</h1>
@@ -37,29 +39,29 @@ function Home() {
                     />
                     <defs>
                       <linearGradient id="paint0_linear_22_788" x1="12.3823" y1="4.90139" x2="1.19848" y2="16.0845" gradientUnits="userSpaceOnUse">
-                        <stop stop-color="#00A0FF" />
-                        <stop offset="0.007" stop-color="#00A1FF" />
-                        <stop offset="0.26" stop-color="#00BEFF" />
-                        <stop offset="0.512" stop-color="#00D2FF" />
-                        <stop offset="0.76" stop-color="#00DFFF" />
-                        <stop offset="1" stop-color="#00E3FF" />
+                        <stop stopColor="#00A0FF" />
+                        <stop offset="0.007" stopColor="#00A1FF" />
+                        <stop offset="0.26" stopColor="#00BEFF" />
+                        <stop offset="0.512" stopColor="#00D2FF" />
+                        <stop offset="0.76" stopColor="#00DFFF" />
+                        <stop offset="1" stopColor="#00E3FF" />
                       </linearGradient>
                       <linearGradient id="paint1_linear_22_788" x1="20.4014" y1="12.4255" x2="4.27707" y2="12.4255" gradientUnits="userSpaceOnUse">
-                        <stop stop-color="#FFE000" />
-                        <stop offset="0.409" stop-color="#FFBD00" />
-                        <stop offset="0.775" stop-color="#FFA500" />
-                        <stop offset="1" stop-color="#FF9C00" />
+                        <stop stopColor="#FFE000" />
+                        <stop offset="0.409" stopColor="#FFBD00" />
+                        <stop offset="0.775" stopColor="#FFA500" />
+                        <stop offset="1" stopColor="#FF9C00" />
                       </linearGradient>
                       <linearGradient id="paint2_linear_22_788" x1="14.3995" y1="13.9548" x2="-0.765949" y2="29.1202" gradientUnits="userSpaceOnUse">
-                        <stop stop-color="#FF3A44" />
-                        <stop offset="1" stop-color="#C31162" />
+                        <stop stopColor="#FF3A44" />
+                        <stop offset="1" stopColor="#C31162" />
                       </linearGradient>
                       <linearGradient id="paint3_linear_22_788" x1="2.71787" y1="-0.785412" x2="9.49027" y2="5.98699" gradientUnits="userSpaceOnUse">
-                        <stop stop-color="#32A071" />
-                        <stop offset="0.069" stop-color="#2DA771" />
-                        <stop offset="0.476" stop-color="#15CF74" />
-                        <stop offset="0.801" stop-color="#06E775" />
-                        <stop offset="1" stop-color="#00F076" />
+                        <stop stopColor="#32A071" />
+                        <stop offset="0.069" stopColor="#2DA771" />
+                        <stop offset="0.476" stopColor="#15CF74" />
+                        <stop offset="0.801" stopColor="#06E775" />
+                        <stop offset="1" stopColor="#00F076" />
                       </linearGradient>
                     </defs>
                   </svg>
@@ -98,9 +100,9 @@ function Home() {
                   <path
                     d="M41.682 30H37.682C37.1515 30 36.6428 30.2107 36.2678 30.5858C35.8927 30.9609 35.682 31.4696 35.682 32V37C35.682 37.5304 35.8927 38.0391 36.2678 38.4142C36.6428 38.7893 37.1515 39 37.682 39H39.682C40.2124 39 40.7211 38.7893 41.0962 38.4142C41.4713 38.0391 41.682 37.5304 41.682 37V30ZM41.682 30C41.682 28.4165 41.3686 26.8486 40.7598 25.3868C40.151 23.925 39.259 22.5981 38.135 21.4826C37.0111 20.3672 35.6775 19.4852 34.2111 18.8875C32.7447 18.2899 31.1745 17.9883 29.591 18.0003C28.0075 17.9883 26.4373 18.2899 24.9709 18.8875C23.5045 19.4852 22.1709 20.3672 21.0469 21.4826C19.923 22.5981 19.0309 23.925 18.4222 25.3868C17.8134 26.8486 17.5 28.4165 17.5 30V37C17.5 37.5304 17.7107 38.0391 18.0858 38.4142C18.4609 38.7893 18.9696 39 19.5 39H21.5C22.0304 39 22.5391 38.7893 22.9142 38.4142C23.2893 38.0391 23.5 37.5304 23.5 37V32C23.5 31.4696 23.2893 30.9609 22.9142 30.5858C22.5391 30.2107 22.0304 30 21.5 30H17.5"
                     stroke="white"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                 </svg>
               </div>
@@ -114,8 +116,8 @@ function Home() {
                 <svg className="self-center" width="59" height="58" viewBox="0 0 59 58" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="29.5" cy="29" r="29" fill="#2948FF" />
                   <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
+                    fillRule="evenodd"
+                    clipRule="evenodd"
                     d="M30.3205 15.801L39.1772 18.8236C40.1678 19.1622 40.8333 20.0742 40.8333 21.0955V29.95C40.8333 32.6339 39.8358 35.2325 38.026 37.2605C37.1973 38.1898 36.1339 38.9884 34.7756 39.7031L29.9884 42.2163C29.8389 42.2937 29.6742 42.3337 29.5082 42.3337C29.3435 42.3337 29.1789 42.2937 29.0293 42.2163L24.2326 39.7017C22.8715 38.9857 21.8067 38.1871 20.9794 37.2618C19.1669 35.2312 18.1666 32.6312 18.1666 29.9446C18.1666 29.4033 18.6194 28.9633 19.1765 28.9633C19.7335 28.9633 20.1863 29.4033 20.1863 29.9446C20.1863 32.1606 21.0096 34.3019 22.5038 35.9765C23.1692 36.7218 24.0487 37.3751 25.1916 37.9751L29.5082 40.2377L33.8151 37.9764C34.9553 37.3778 35.8348 36.7245 36.5017 35.9765C37.9931 34.3032 38.815 32.1646 38.815 29.95V21.0955C38.815 20.9062 38.6915 20.7382 38.509 20.6755L29.6523 17.6529C29.5548 17.6196 29.4464 17.6196 29.3477 17.6529L20.4923 20.6755C20.3098 20.7382 20.1863 20.9062 20.1863 21.0955V23.6288C20.1863 24.1714 19.7335 24.6114 19.1765 24.6114C18.6194 24.6114 18.1666 24.1714 18.1666 23.6288V21.0955C18.1666 20.0742 18.8335 19.1622 19.8241 18.8236L28.6795 15.801C29.2091 15.6223 29.7922 15.6223 30.3205 15.801ZM28.5483 32.0903C28.2794 32.0903 28.0242 31.9863 27.8348 31.8023L25.2882 29.3277C24.8945 28.9437 24.8945 28.3251 25.2882 27.9411C25.6834 27.5571 26.3214 27.5571 26.7152 27.9411L28.5483 29.721L33.0789 25.3198C33.4727 24.9372 34.112 24.9372 34.5058 25.3198C34.8996 25.7025 34.8996 26.3238 34.5058 26.7064L29.2618 31.8023C29.0724 31.9863 28.8158 32.0903 28.5483 32.0903Z"
                     fill="white"
                   />
@@ -130,14 +132,14 @@ function Home() {
               <div className="flex justify-center">
                 <svg className="self-center" width="59" height="58" viewBox="0 0 59 58" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="29.5" cy="29" r="29" fill="#2948FF" />
-                  <path d="M29.6629 33.581L29.6629 17.5264" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                  <path d="M33.5509 29.6777L29.6629 33.5817L25.7749 29.6777" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M29.6629 33.581L29.6629 17.5264" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M33.5509 29.6777L29.6629 33.5817L25.7749 29.6777" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   <path
                     d="M35.84 23.8369H37.084C39.7973 23.8369 41.996 26.0356 41.996 28.7502V35.2622C41.996 37.9689 39.8026 40.1622 37.096 40.1622H22.2426C19.5293 40.1622 17.3293 37.9622 17.3293 35.2489L17.3293 28.7356C17.3293 26.0302 19.524 23.8369 22.2293 23.8369H23.4853"
                     stroke="white"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                 </svg>
               </div>
@@ -175,10 +177,10 @@ function Home() {
                 <li className="flex gap-3">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="12" cy="12" r="12" fill="#00A700" />
-                    <g clip-path="url(#clip0_27_88)">
+                    <g clipPath="url(#clip0_27_88)">
                       <path
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
+                        fillRule="evenodd"
+                        clipRule="evenodd"
                         d="M12.0001 18.6207C15.6566 18.6207 18.6208 15.6565 18.6208 12C18.6208 8.34345 15.6566 5.37927 12.0001 5.37927C8.34358 5.37927 5.37939 8.34345 5.37939 12C5.37939 15.6565 8.34358 18.6207 12.0001 18.6207ZM15.1286 10.5768C15.371 10.3344 15.371 9.94139 15.1286 9.699C14.8862 9.45661 14.4933 9.45661 14.2509 9.699L10.9656 12.9842L9.74932 11.768C9.50693 11.5256 9.11393 11.5256 8.87154 11.768C8.62914 12.0104 8.62914 12.4034 8.87154 12.6458L10.5267 14.3009C10.7691 14.5433 11.1621 14.5433 11.4045 14.3009L15.1286 10.5768Z"
                         fill="white"
                       />
@@ -194,10 +196,10 @@ function Home() {
                 <li className="flex gap-3">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="12" cy="12" r="12" fill="#00A700" />
-                    <g clip-path="url(#clip0_27_88)">
+                    <g clipPath="url(#clip0_27_88)">
                       <path
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
+                        fillRule="evenodd"
+                        clipRule="evenodd"
                         d="M12.0001 18.6207C15.6566 18.6207 18.6208 15.6565 18.6208 12C18.6208 8.34345 15.6566 5.37927 12.0001 5.37927C8.34358 5.37927 5.37939 8.34345 5.37939 12C5.37939 15.6565 8.34358 18.6207 12.0001 18.6207ZM15.1286 10.5768C15.371 10.3344 15.371 9.94139 15.1286 9.699C14.8862 9.45661 14.4933 9.45661 14.2509 9.699L10.9656 12.9842L9.74932 11.768C9.50693 11.5256 9.11393 11.5256 8.87154 11.768C8.62914 12.0104 8.62914 12.4034 8.87154 12.6458L10.5267 14.3009C10.7691 14.5433 11.1621 14.5433 11.4045 14.3009L15.1286 10.5768Z"
                         fill="white"
                       />
@@ -213,10 +215,10 @@ function Home() {
                 <li className="flex gap-3">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="12" cy="12" r="12" fill="#00A700" />
-                    <g clip-path="url(#clip0_27_88)">
+                    <g clipPath="url(#clip0_27_88)">
                       <path
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
+                        fillRule="evenodd"
+                        clipRule="evenodd"
                         d="M12.0001 18.6207C15.6566 18.6207 18.6208 15.6565 18.6208 12C18.6208 8.34345 15.6566 5.37927 12.0001 5.37927C8.34358 5.37927 5.37939 8.34345 5.37939 12C5.37939 15.6565 8.34358 18.6207 12.0001 18.6207ZM15.1286 10.5768C15.371 10.3344 15.371 9.94139 15.1286 9.699C14.8862 9.45661 14.4933 9.45661 14.2509 9.699L10.9656 12.9842L9.74932 11.768C9.50693 11.5256 9.11393 11.5256 8.87154 11.768C8.62914 12.0104 8.62914 12.4034 8.87154 12.6458L10.5267 14.3009C10.7691 14.5433 11.1621 14.5433 11.4045 14.3009L15.1286 10.5768Z"
                         fill="white"
                       />
@@ -328,29 +330,29 @@ function Home() {
                   />
                   <defs>
                     <linearGradient id="paint0_linear_22_788" x1="12.3823" y1="4.90139" x2="1.19848" y2="16.0845" gradientUnits="userSpaceOnUse">
-                      <stop stop-color="#00A0FF" />
-                      <stop offset="0.007" stop-color="#00A1FF" />
-                      <stop offset="0.26" stop-color="#00BEFF" />
-                      <stop offset="0.512" stop-color="#00D2FF" />
-                      <stop offset="0.76" stop-color="#00DFFF" />
-                      <stop offset="1" stop-color="#00E3FF" />
+                      <stop stopColor="#00A0FF" />
+                      <stop offset="0.007" stopColor="#00A1FF" />
+                      <stop offset="0.26" stopColor="#00BEFF" />
+                      <stop offset="0.512" stopColor="#00D2FF" />
+                      <stop offset="0.76" stopColor="#00DFFF" />
+                      <stop offset="1" stopColor="#00E3FF" />
                     </linearGradient>
                     <linearGradient id="paint1_linear_22_788" x1="20.4014" y1="12.4255" x2="4.27707" y2="12.4255" gradientUnits="userSpaceOnUse">
-                      <stop stop-color="#FFE000" />
-                      <stop offset="0.409" stop-color="#FFBD00" />
-                      <stop offset="0.775" stop-color="#FFA500" />
-                      <stop offset="1" stop-color="#FF9C00" />
+                      <stop stopColor="#FFE000" />
+                      <stop offset="0.409" stopColor="#FFBD00" />
+                      <stop offset="0.775" stopColor="#FFA500" />
+                      <stop offset="1" stopColor="#FF9C00" />
                     </linearGradient>
                     <linearGradient id="paint2_linear_22_788" x1="14.3995" y1="13.9548" x2="-0.765949" y2="29.1202" gradientUnits="userSpaceOnUse">
-                      <stop stop-color="#FF3A44" />
-                      <stop offset="1" stop-color="#C31162" />
+                      <stop stopColor="#FF3A44" />
+                      <stop offset="1" stopColor="#C31162" />
                     </linearGradient>
                     <linearGradient id="paint3_linear_22_788" x1="2.71787" y1="-0.785412" x2="9.49027" y2="5.98699" gradientUnits="userSpaceOnUse">
-                      <stop stop-color="#32A071" />
-                      <stop offset="0.069" stop-color="#2DA771" />
-                      <stop offset="0.476" stop-color="#15CF74" />
-                      <stop offset="0.801" stop-color="#06E775" />
-                      <stop offset="1" stop-color="#00F076" />
+                      <stop stopColor="#32A071" />
+                      <stop offset="0.069" stopColor="#2DA771" />
+                      <stop offset="0.476" stopColor="#15CF74" />
+                      <stop offset="0.801" stopColor="#06E775" />
+                      <stop offset="1" stopColor="#00F076" />
                     </linearGradient>
                   </defs>
                 </svg>
