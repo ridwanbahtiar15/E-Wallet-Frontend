@@ -1,41 +1,56 @@
 /* eslint-disable react/no-unknown-property */
 // eslint-disable-next-line no-unused-vars
 import React from "react";
-import { register } from "../utils/https/auth";
 // import { useState } from "react";
 // import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { axiosLogin } from "../utils/https/auth";
+import { useSelector, useDispatch } from "react-redux";
+import { userAction } from "../redux/slices/user";
 
-function Register() {
+function Login() {
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const submitHandler = (e) => {
     e.preventDefault();
-    if (e.target.password.value !== e.target.confirmPassword.value) return console.log("error");
     const body = {
-      name: e.target.fullName.value,
       email: e.target.email.value,
       password: e.target.password.value,
     };
-    register(body)
-      .then((res) => {
-        console.log(res);
+    const { loginThunk } = userAction;
+    dispatch(
+      loginThunk({
+        body,
+        cb: () => {
+          navigate("/dashboard");
+        },
       })
-      .catch((err) => {
-        console.log(err);
-      });
+    );
+
+    // axiosLogin(body)
+    //   .then((res) => {
+    //     console.log(res);
+    //     localStorage.setItem("token", res.data.data.token);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
     // console.log(body);
   };
 
   return (
     <>
-      <div className="h-auto flex">
+      <div className="h-screen flex items-center">
         <div className="flex-1 py-5 h-auto md:flex-initial md:w-2/3 lg:w-1/2 bg-white font-montserrat mx-5 lg:m-0 lg:p-10 md:rounded-r-full">
           <div className="flex flex-col gap-[13px]">
             <div className="flex items-center gap-[15px]">
               <img src="/svg/Money-Wallet-logo.svg" alt="e-wallet-logo" />
               <h1 className="text-[#2948FF] font-medium">E-Wallet</h1>
             </div>
-            <p className="text-lg md:text-2xl font-medium">Start Accessing Banking Needs With All Devices and All Platforms With 30.000+ Users</p>
-            <p className="text-xs md:leading-6 font-normal">Transfering money is eassier than ever, you can access Zwallet wherever you are. Desktop, laptop, mobile phone? we cover all of that for you!</p>
+            <p className="text-lg md:text-2xl font-medium">Hello Welcome Back 👋</p>
+            <p className="text-xs md:leading-6 font-normal">Fill out the form correctly or you can login with several option.</p>
             <div className="flex gap-[15px] justify-center md:flex-col">
               <button className="flex flex-1 border border-[#E8E8E8] bg-white h-[51px] p-[10px] gap-[10px] rounded-full justify-center hover:bg-slate-200">
                 <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -72,34 +87,7 @@ function Register() {
               <p className="font-normal text-xs text-[#AAAAAA]">Or</p>
             </div>
             <div>
-              {/* Form register */}
               <form onSubmit={submitHandler} className="flex flex-col gap-[13px]">
-                <label htmlFor="fullName" className="text-base font-medium">
-                  Full Name
-                </label>
-                <div className="flex gap-[15px] px-3 py-[14px] border border-[#DEDEDE] rounded-lg bg-#FCFDFE">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      fillRule="evenodd"
-                      clipRule="evenodd"
-                      d="M11.9849 15.3462C8.11731 15.3462 4.81445 15.931 4.81445 18.2729C4.81445 20.6148 8.09636 21.2205 11.9849 21.2205C15.8525 21.2205 19.1545 20.6348 19.1545 18.2938C19.1545 15.9529 15.8735 15.3462 11.9849 15.3462Z"
-                      stroke="#4F5665"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      fillRule="evenodd"
-                      clipRule="evenodd"
-                      d="M11.9849 12.0059C14.523 12.0059 16.5801 9.94779 16.5801 7.40969C16.5801 4.8716 14.523 2.81445 11.9849 2.81445C9.44679 2.81445 7.3887 4.8716 7.3887 7.40969C7.38013 9.93922 9.42394 11.9973 11.9525 12.0059H11.9849Z"
-                      stroke="#4F5665"
-                      strokeWidth="1.42857"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                  <input type="text" placeholder="Enter Your Full Name" id="fullName" className="flex-1 outline-none text-xs font-normal text-[#4F5665]" />
-                </div>
                 <label htmlFor="email" className="text-base font-medium">
                   Email
                 </label>
@@ -145,55 +133,30 @@ function Register() {
                       strokeLinejoin="round"
                     />
                   </svg>
-                  <input type="password" placeholder="Enter Your Password" id="password" className="flex-1 outline-none text-xs font-normal text-[#4F5665]" />
+                  <input type="password" placeholder="Enter Your Password" id="password" className="flex-1 outline-none text- font-normal text-[#4F5665]" />
                 </div>
-                <label htmlFor="confirmPassword" className="text-base font-medium">
-                  Confirm Password
-                </label>
-                <div className="flex gap-[15px] px-3 py-[14px] border border-[#DEDEDE] rounded-lg bg-#FCFDFE">
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      fillRule="evenodd"
-                      clipRule="evenodd"
-                      d="M7.12583 7.99932C7.12583 8.68132 6.57316 9.23398 5.89116 9.23398C5.20916 9.23398 4.65649 8.68132 4.65649 7.99932C4.65649 7.31732 5.20916 6.76465 5.89116 6.76465H5.89316C6.57449 6.76532 7.12583 7.31798 7.12583 7.99932Z"
-                      stroke="#4F5665"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    <path d="M7.12787 8H11.3399V9.23467" stroke="#4F5665" strokeLinecap="round" strokeLinejoin="round" />
-                    <path d="M9.45467 9.23467V8" stroke="#4F5665" strokeLinecap="round" strokeLinejoin="round" />
-                    <path
-                      fillRule="evenodd"
-                      clipRule="evenodd"
-                      d="M1.83325 7.99967C1.83325 3.37501 3.37525 1.83301 7.99992 1.83301C12.6246 1.83301 14.1666 3.37501 14.1666 7.99967C14.1666 12.6243 12.6246 14.1663 7.99992 14.1663C3.37525 14.1663 1.83325 12.6243 1.83325 7.99967Z"
-                      stroke="#4F5665"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                  <input type="password" placeholder="Enter Your Password Again" id="confirmPassword" className="flex-1 outline-none text-xs font-normal text-[#4F5665]" />
-                </div>
+
                 <button type="submit" className="w-full p-[10px] h-[50px] text-white bg-[#2948FF] hover:bg-blue-700 rounded-md">
-                  Register
+                  Login
                 </button>
               </form>
               <p className="text-center font-normal text-xs mt-[13px]">
-                Have An Account?{" "}
+                Not Have An Account?{" "}
                 <span>
-                  <Link to="/login" className="text-blue-700">
-                    Login
+                  <Link to="/" className="text-blue-700">
+                    Register
                   </Link>
                 </span>
               </p>
             </div>
           </div>
         </div>
-        <div className="hidden md:bg-cover md:h-auto md:flex md:flex-initial md:w-1/3 lg:w-1/2 md:bg-gradient-to-b md:from-[#396AFC] md:to-[#2948FF] md:justify-center md:items-center">
-          <img src="/img/register-side.png" alt="register-img" className="place-self-center object-contain" />
+        <div className="hidden md:bg-cover md:h-full md:flex md:flex-initial md:w-1/3 lg:w-1/2 md:bg-gradient-to-b md:from-[#396AFC] md:to-[#2948FF] md:justify-center md:items-center">
+          <img src="/img/login-side.png" alt="login-img" className="place-self-center object-contain" />
         </div>
       </div>
     </>
   );
 }
 
-export default Register;
+export default Login;

@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from 'react'
 
-import axios from 'axios'
-
 import Navbar from "../components/Navbar";
 import getImageUrl from "../utils/imageGetter";
 import DropdownMobile from "../components/DropdownMobile";
 import Modal from "../components/Modal";
 
-function Transfer() {
-
+function TransferDetail() {
     const [Message, setMessage] = useState({ msg: null, isError: null });
     const [openModal, setOpenModal] = useState({
         isOpen: false,
@@ -16,17 +13,11 @@ function Transfer() {
     });
     const [isDropdownShown, setIsDropdownShow] = useState(false);
 
-    const [nameList, setNameList] = useState([])
-    const [search, setSearch] = useState("")
-
-    useEffect(() => {
-        axios.get('http://localhost:8000/user')
-        .then((res) => {
-            setNameList(res.data.result)
-            // console.log(nameList)
-        })
-    }, [])
-
+    const [content, setContent] = useState(''); 
+    
+    const handleContentChange = (e) => {
+        setContent(e.target.textContent);
+    };
   return (
     <>
 
@@ -160,9 +151,9 @@ function Transfer() {
 
                     <div className='px-2 py-1 flex gap-2'>
 
-                        <div className='bg-[#2948FF] w-6 h-6 rounded-full flex justify-center items-center text-white text-xs'>1</div>
+                        <div className='bg-[#4F5665] w-6 h-6 rounded-full flex justify-center items-center text-white text-xs'>1</div>
 
-                        <h1 className='font-montserrat lg:text-base text-xs text-[#2948FF]'>Find People</h1>
+                        <h1 className='font-montserrat lg:text-base text-xs text-[#4F5665]'>Find People</h1>
 
                     </div>
 
@@ -172,9 +163,9 @@ function Transfer() {
 
                     <div className='px-2 py-1 flex gap-2'>
 
-                        <div className='bg-[#4F5665] w-6 h-6 rounded-full flex justify-center items-center text-white text-xs'>2</div>
+                        <div className='bg-[#2948FF]  w-6 h-6 rounded-full flex justify-center items-center text-white text-xs'>2</div>
 
-                        <h1 className='font-montserrat text-base text-[#4F5665]'>Set Nominal</h1>
+                        <h1 className='font-montserrat text-base text-[#2948FF]'>Set Nominal</h1>
 
                     </div>
 
@@ -194,119 +185,78 @@ function Transfer() {
 
                 <div className='border-[1px] mt-4 pt-[26px] lg:pl-[31px] px-5 pb-[43px] lg:pr-[27px]'>
 
-                    {/* Bagian Search */}
-                    <div className='lg:flex w-full justify-between mb-[26px]'>
-                        <div className='flex lg:block'>
+                    <h1 className='text-[#0B132A] font-montserrat text-base font-semibold mb-[19px]'>People Information</h1>
 
-                            <h1 className='text-[#0B132A] font-montserrat text-base font-semibold mb-[1px]'>Find People</h1>
-                            <h2 className='text-[#4F5665] font-montserrat text-xs font-medium hidden lg:flex'>8 Result Found For Ghaluh</h2>
+                    <div className='flex justify-between items-center px-5 py-[10px] bg-[#e8e8e8] bg-opacity-30 rounded-lg'>
+                        
+                        <div className='flex gap-5'>
 
-                        </div>
+                            <img src="/img/profile.png" alt="foto" className='w-[88px] h-[88px] object-cover rounded' />
 
-                        <div className="font-medium text-secondary lg:w-[340px] relative">
-                            <input
-                                type="text"
-                                className="text-sm p-3 border border-[#E8E8E8] rounded-md  font-medium text-secondary placeholder:font-medium placeholder:text-secondary outline-none focus:border focus:border-primary w-full"
-                                placeholder="Enter Number Or Full Name"
-                                onChange={(e) => setSearch(e.target.value)}
-                            />
+                            <div>
 
-                            <div className="absolute top-3.5 right-3.5">
-                                <img
-                                src={getImageUrl("Search", "svg")}
-                                alt="Search"
-                                className="w-5 h-5"
-                                />
-                            </div>
-                        </div>
-                    </div>
+                                <h1 className='text-[#0B132A] font-montserrat text-sm font-semibold mb-[9px]'>Ghaluh 1</h1>
 
-                    {/* Bagian List Pengguna */}
-                    <div className='flex'>
+                                <h1 className='text-[#4F5665] font-montserrat text-sm mb-[9px]'>(239) 555-0108</h1>
 
-                        <div className='w-[25%] flex justify-center '>
+                                <div className='px-2 py-1 bg-[#2948FF] rounded-md flex gap-2 items-center'>
 
-                            <ul>
-                                {
-                                    nameList.filter((item) => {
-                                        if(item.full_name.toLowerCase().includes(search.toLowerCase())){
-                                            return item
-                                        }
-                                    })
-                                    .map((item) => {
-                                        return (
-                                            <li className='py-5'>
-                                                <img src="/img/profile.png" alt="" className='w-[48px] h-[48px] object-cover rounded' />
-                                            </li>
-                                        )
-                                    })
-                                }
-                            </ul>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width={16} height={17} viewBox="0 0 16 17" fill="none">
+                                        <g clipPath="url(#clip0_44_327)">
+                                            <path fillRule="evenodd" clipRule="evenodd" d="M9.58507 1.01936C8.64181 0.32688 7.3582 0.32688 6.41493 1.01936L5.48738 1.7003C5.33429 1.81269 5.1563 1.88642 4.96858 1.9152L3.8312 2.08958C2.67456 2.26691 1.76691 3.17456 1.58958 4.3312L1.4152 5.46858C1.38642 5.6563 1.31269 5.83429 1.2003 5.98738L0.51936 6.91493C-0.17312 7.8582 -0.17312 9.1418 0.51936 10.0851L1.2003 11.0126C1.31269 11.1657 1.38642 11.3437 1.4152 11.5314L1.58958 12.6688C1.76691 13.8254 2.67456 14.7331 3.8312 14.9104L4.96858 15.0848C5.1563 15.1136 5.33429 15.1873 5.48738 15.2997L6.41493 15.9806C7.3582 16.6731 8.6418 16.6731 9.58507 15.9806L10.5126 15.2997C10.6657 15.1873 10.8437 15.1136 11.0314 15.0848L12.1688 14.9104C13.3254 14.7331 14.2331 13.8254 14.4104 12.6688L14.5848 11.5314C14.6136 11.3437 14.6873 11.1657 14.7997 11.0126L15.4806 10.0851C16.1731 9.1418 16.1731 7.8582 15.4806 6.91493L14.7997 5.98738C14.6873 5.83429 14.6136 5.6563 14.5848 5.46858L14.4104 4.3312C14.2331 3.17456 13.3254 2.26691 12.1688 2.08958L11.0314 1.9152C10.8437 1.88642 10.6657 1.81269 10.5126 1.7003L9.58507 1.01936ZM7.3026 2.22851C7.71762 1.92383 8.28238 1.92383 8.6974 2.22851L9.62494 2.90945C9.9729 3.16489 10.3774 3.33246 10.8041 3.39787L11.9415 3.57225C12.4504 3.65027 12.8497 4.04962 12.9277 4.55852L13.1021 5.69589C13.1675 6.12256 13.3351 6.5271 13.5906 6.87506L14.2715 7.8026C14.5762 8.21762 14.5762 8.78238 14.2715 9.1974L13.5906 10.1249C13.3351 10.4729 13.1675 10.8774 13.1021 11.3041L12.9277 12.4415C12.8497 12.9504 12.4504 13.3497 11.9415 13.4277L10.8041 13.6021C10.3774 13.6675 9.9729 13.8351 9.62494 14.0906L8.6974 14.7715C8.28238 15.0762 7.71762 15.0762 7.3026 14.7715L6.37506 14.0906C6.0271 13.8351 5.62256 13.6675 5.19589 13.6021L4.05852 13.4277C3.54962 13.3497 3.15027 12.9504 3.07225 12.4415L2.89787 11.3041C2.83246 10.8774 2.66489 10.4729 2.40945 10.1249L1.72851 9.1974C1.42383 8.78238 1.42383 8.21762 1.72851 7.8026L2.40945 6.87505C2.66489 6.5271 2.83246 6.12256 2.89787 5.69589L3.07225 4.55852C3.15027 4.04962 3.54962 3.65027 4.05852 3.57225L5.19589 3.39787C5.62256 3.33246 6.0271 3.16489 6.37505 2.90945L7.3026 2.22851ZM11.2803 7.28033C11.5732 6.98744 11.5732 6.51256 11.2803 6.21967C10.9874 5.92678 10.5126 5.92678 10.2197 6.21967L7 9.43934L5.78033 8.21967C5.48744 7.92678 5.01256 7.92678 4.71967 8.21967C4.42678 8.51256 4.42678 8.98744 4.71967 9.28033L6.46967 11.0303C6.76256 11.3232 7.23744 11.3232 7.53033 11.0303L11.2803 7.28033Z" fill="white" />
+                                        </g>
 
-                        </div>
+                                        <defs>
+                                            <clipPath id="clip0_44_327">
+                                            <rect width={16} height={16} fill="white" transform="translate(0 0.5)" />
+                                            </clipPath>
+                                        </defs>
+                                    </svg>
 
-                        <div className='flex w-[65%] justify-center'>
+                                    <h1 className='text-white font-montserrat text-sm'>Verified</h1>
 
-                            <div className='w-[60%] text-center'>
-                                <ul>
-                                    {
-                                        nameList.filter((item) => {
-                                            if(item.full_name.toLowerCase().includes(search.toLowerCase())){
-                                                return item
-                                            }
-                                        })
-                                        .map((item) => {
-                                            return (
-                                                <li className='py-[34px] text-[#4F5665] font-montserrat text-sm'>{item.full_name}</li>
-                                            )
-                                        })
-                                    }
-                                </ul>
-                            </div>
 
-                            <div className='w-[40%] text-center'>
-                                <ul>
-                                    {
-                                        nameList.filter((item) => {
-                                            if(item.full_name.toLowerCase().includes(search.toLowerCase())){
-                                                return item
-                                            }
-                                        })
-                                        .map((item) => {
-                                            return (
-                                                <li className='py-[34px] text-[#4F5665] font-montserrat text-sm'>Phone</li>
-                                            )
-                                        })
-                                    }
-                                </ul>
+                                </div>
+
                             </div>
 
                         </div>
 
-                        <div className='w-[10%] flex justify-center'>
-                            <ul>
-                                {
-                                    nameList.filter((item) => {
-                                        if(item.full_name.toLowerCase().includes(search.toLowerCase())){
-                                            return item
-                                        }
-                                    })
-                                    .map((item) => {
-                                        return (
-                                            <li className='py-8'>
-                                                <svg width={25} height={24} viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <g id="Star">
-                                                        <path id="Vector" d="M12.9135 17.8812L17.6419 20.8769C18.2463 21.2598 18.9967 20.6903 18.8173 19.9847L17.4512 14.6108C17.4127 14.4611 17.4173 14.3036 17.4643 14.1564C17.5114 14.0092 17.5991 13.8783 17.7172 13.7787L21.9573 10.2496C22.5144 9.78588 22.2269 8.86126 21.5111 8.81481L15.9738 8.45544C15.8247 8.44479 15.6816 8.39198 15.5613 8.30317C15.441 8.21437 15.3484 8.09321 15.2943 7.95382L13.2292 2.75323C13.173 2.60528 13.0732 2.4779 12.943 2.38802C12.8127 2.29814 12.6582 2.25 12.5 2.25C12.3418 2.25 12.1873 2.29814 12.057 2.38802C11.9268 2.4779 11.827 2.60528 11.7708 2.75323L9.70568 7.95382C9.65157 8.09321 9.55897 8.21437 9.43868 8.30317C9.31838 8.39198 9.17533 8.44479 9.02618 8.45544L3.48894 8.81481C2.77315 8.86126 2.4856 9.78588 3.04272 10.2496L7.28278 13.7787C7.40095 13.8783 7.4886 14.0092 7.53566 14.1564C7.58272 14.3036 7.58727 14.4611 7.5488 14.6108L6.28188 19.5945C6.06667 20.4412 6.96715 21.1246 7.69243 20.6651L12.0865 17.8812C12.21 17.8025 12.3535 17.7607 12.5 17.7607C12.6465 17.7607 12.79 17.8025 12.9135 17.8812V17.8812Z" stroke="#4F5665" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
-                                                    </g>
-                                                </svg>
-                                            </li>
-                                        )
-                                    })
-                                }
-                            </ul>
+                        <div>
+                            <svg width={25} height={24} viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g id="Star">
+                                    <path id="Vector" d="M12.9135 17.8812L17.6419 20.8769C18.2463 21.2598 18.9967 20.6903 18.8173 19.9847L17.4512 14.6108C17.4127 14.4611 17.4173 14.3036 17.4643 14.1564C17.5114 14.0092 17.5991 13.8783 17.7172 13.7787L21.9573 10.2496C22.5144 9.78588 22.2269 8.86126 21.5111 8.81481L15.9738 8.45544C15.8247 8.44479 15.6816 8.39198 15.5613 8.30317C15.441 8.21437 15.3484 8.09321 15.2943 7.95382L13.2292 2.75323C13.173 2.60528 13.0732 2.4779 12.943 2.38802C12.8127 2.29814 12.6582 2.25 12.5 2.25C12.3418 2.25 12.1873 2.29814 12.057 2.38802C11.9268 2.4779 11.827 2.60528 11.7708 2.75323L9.70568 7.95382C9.65157 8.09321 9.55897 8.21437 9.43868 8.30317C9.31838 8.39198 9.17533 8.44479 9.02618 8.45544L3.48894 8.81481C2.77315 8.86126 2.4856 9.78588 3.04272 10.2496L7.28278 13.7787C7.40095 13.8783 7.4886 14.0092 7.53566 14.1564C7.58272 14.3036 7.58727 14.4611 7.5488 14.6108L6.28188 19.5945C6.06667 20.4412 6.96715 21.1246 7.69243 20.6651L12.0865 17.8812C12.21 17.8025 12.3535 17.7607 12.5 17.7607C12.6465 17.7607 12.79 17.8025 12.9135 17.8812V17.8812Z" stroke="#4F5665" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
+                                </g>
+                            </svg>
                         </div>
 
                     </div>
+
+                    <h1 className='text-[#0B132A] font-montserrat text-base font-semibold mb-[2px] mt-[26px]'>Amount</h1>
+                    <h2 className='text-[#4F5665] font-montserrat text-sm'>Type the amount you want to transfer and then press continue to the next steps.</h2>
+
+                    <div className='mt-[15px] mb-[19px] flex items-center gap-[10px] border-[1px] rounded-md'>
+
+                        <div className='ml-[10px]'>
+                            <svg width={16} height={16} viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g id="u:money-bill">
+                                    <path id="Vector" d="M4.00033 7.33333C3.86847 7.33333 3.73958 7.37243 3.62995 7.44568C3.52031 7.51894 3.43486 7.62305 3.38441 7.74487C3.33395 7.86669 3.32074 8.00073 3.34647 8.13006C3.37219 8.25938 3.43569 8.37816 3.52892 8.4714C3.62216 8.56463 3.74094 8.62813 3.87027 8.65385C3.99959 8.67958 4.13363 8.66637 4.25545 8.61591C4.37726 8.56546 4.48138 8.48001 4.55464 8.37038C4.62789 8.26074 4.66699 8.13185 4.66699 8C4.66699 7.82318 4.59675 7.65361 4.47173 7.52859C4.34671 7.40357 4.17714 7.33333 4.00033 7.33333ZM12.0003 7.33333C11.8685 7.33333 11.7396 7.37243 11.6299 7.44568C11.5203 7.51894 11.4349 7.62305 11.3844 7.74487C11.3339 7.86669 11.3207 8.00073 11.3465 8.13006C11.3722 8.25938 11.4357 8.37816 11.5289 8.4714C11.6222 8.56463 11.7409 8.62813 11.8703 8.65385C11.9996 8.67958 12.1336 8.66637 12.2554 8.61591C12.3773 8.56546 12.4814 8.48001 12.5546 8.37038C12.6279 8.26074 12.667 8.13185 12.667 8C12.667 7.82318 12.5968 7.65361 12.4717 7.52859C12.3467 7.40357 12.1771 7.33333 12.0003 7.33333ZM13.3337 3.33333H2.66699C2.13656 3.33333 1.62785 3.54404 1.25278 3.91911C0.877706 4.29419 0.666992 4.8029 0.666992 5.33333V10.6667C0.666992 11.1971 0.877706 11.7058 1.25278 12.0809C1.62785 12.4559 2.13656 12.6667 2.66699 12.6667H13.3337C13.8641 12.6667 14.3728 12.4559 14.7479 12.0809C15.1229 11.7058 15.3337 11.1971 15.3337 10.6667V5.33333C15.3337 4.8029 15.1229 4.29419 14.7479 3.91911C14.3728 3.54404 13.8641 3.33333 13.3337 3.33333ZM14.0003 10.6667C14.0003 10.8435 13.9301 11.013 13.8051 11.1381C13.68 11.2631 13.5105 11.3333 13.3337 11.3333H2.66699C2.49018 11.3333 2.32061 11.2631 2.19559 11.1381C2.07056 11.013 2.00033 10.8435 2.00033 10.6667V5.33333C2.00033 5.15652 2.07056 4.98695 2.19559 4.86192C2.32061 4.7369 2.49018 4.66666 2.66699 4.66666H13.3337C13.5105 4.66666 13.68 4.7369 13.8051 4.86192C13.9301 4.98695 14.0003 5.15652 14.0003 5.33333V10.6667ZM8.00033 5.99999C7.60476 5.99999 7.21808 6.11729 6.88918 6.33706C6.56029 6.55682 6.30394 6.86918 6.15257 7.23463C6.00119 7.60008 5.96158 8.00221 6.03875 8.39018C6.11592 8.77814 6.30641 9.1345 6.58611 9.41421C6.86582 9.69391 7.22218 9.8844 7.61014 9.96157C7.99811 10.0387 8.40024 9.99913 8.76569 9.84775C9.13114 9.69638 9.4435 9.44003 9.66326 9.11114C9.88303 8.78224 10.0003 8.39556 10.0003 8C10.0003 7.46956 9.78961 6.96085 9.41454 6.58578C9.03947 6.21071 8.53076 5.99999 8.00033 5.99999ZM8.00033 8.66666C7.86847 8.66666 7.73958 8.62756 7.62994 8.55431C7.52031 8.48105 7.43486 8.37694 7.38441 8.25512C7.33395 8.1333 7.32074 7.99926 7.34647 7.86994C7.37219 7.74061 7.43569 7.62183 7.52892 7.52859C7.62216 7.43536 7.74094 7.37186 7.87027 7.34614C7.99959 7.32041 8.13363 7.33362 8.25545 7.38408C8.37726 7.43453 8.48138 7.51998 8.55464 7.62961C8.62789 7.73925 8.66699 7.86814 8.66699 8C8.66699 8.17681 8.59675 8.34637 8.47173 8.4714C8.34671 8.59642 8.17714 8.66666 8.00033 8.66666Z" fill="#4F5665" />
+                                </g>
+                            </svg>
+                        </div>
+
+                        <input type="number" placeholder='Enter Nominal Transfer' className='w-full py-[10px] px-2 border-[#E8E8E8] rounded-md placeholder:font-medium placeholder:text-secondary outline-none focus:border focus:border-primary' />
+
+                    </div>
+
+                    <h1 className='text-[#0B132A] font-montserrat text-base font-semibold mb-[2px] mt-[26px]'>Notes</h1>
+                    <h2 className='text-[#4F5665] font-montserrat text-sm mb-[19px]'>You can add some notes for this transfer such as payment coffee or something</h2>
+
+                    <div className='w-full h-[200px] border-[1px] rounded-md border-[#E8E8E8]'>
+                        <p contentEditable="true" placeholder="Enter Some Notes" onInput={handleContentChange} className='text-[#4F5665] text-sm font-medium font-montserrat p-[10px] h-full'></p>
+                    </div>
+
+                    <button className='bg-[#2948FF] w-full p-[10px] text-white rounded-md font-montserrat text-base font-medium hover:opacity-80 mb-[13px] mt-[26px]'>Submit & Transfer</button>
 
                 </div>
 
@@ -320,9 +270,9 @@ function Transfer() {
         {openModal.isOpen && (
             <Modal modal={openModal} closeModal={setOpenModal} message={Message} />
         )}
-
+    
     </>
   )
 }
 
-export default Transfer
+export default TransferDetail

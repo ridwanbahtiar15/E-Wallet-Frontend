@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 
+import { enterPin } from '../utils/https/enterPin'
+
 function EnterPin() {
 
-    const [otp, setOtp] = useState(new Array(6).fill(""))   
+    const [otp, setOtp] = useState(new Array(6).fill(""))
     
     const handleChange = (element, index) => {
         if(isNaN(element.value)) return false
@@ -15,12 +17,24 @@ function EnterPin() {
         }
     }
 
+    const jwt = localStorage.getItem('token')
+
     const handleClick = (e) => {
         e.preventDefault()
 
         console.log(otp.join(""))
 
-        // axios backend
+        const body = {
+            userPin: parseInt(otp.join(""))
+        }
+
+        console.log(body)
+        console.log(jwt)
+
+        enterPin(body, jwt)
+        .then((res) => {console.log(res)})
+        .catch((err) => {console.log(err)})        
+        
     }
 
   return (

@@ -5,9 +5,8 @@ import Navbar from "../components/Navbar";
 import getImageUrl from "../utils/imageGetter";
 import DropdownMobile from "../components/DropdownMobile";
 import Modal from "../components/Modal";
-import { transaction } from "../utils/https/transaction";
 
-function HistoryTransaction() {
+function ChangePin() {
   const [Message, setMessage] = useState({ msg: null, isError: null });
   const [openModal, setOpenModal] = useState({
     isOpen: false,
@@ -15,7 +14,27 @@ function HistoryTransaction() {
   });
   const [isDropdownShown, setIsDropdownShow] = useState(false);
 
-  transaction(1).then((res) => console.log(res));
+  const [otp, setOtp] = useState(new Array(6).fill(""));
+
+  const handleChange = (element, index) => {
+    if (isNaN(element.value)) return false;
+
+    setOtp([...otp.map((d, idx) => (idx === index ? element.value : d))]);
+
+    //Next Input
+    if (element.nextSibling) {
+      element.nextSibling.focus();
+    }
+  };
+
+  const handleClick = (e) => {
+    e.preventDefault();
+
+    console.log(otp.join(""));
+
+    // axios backend
+  };
+
   return (
     <>
       <Navbar
@@ -30,7 +49,7 @@ function HistoryTransaction() {
           <div className="flex flex-col gap-y-4">
             <Link
               to="/dashboard"
-              className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-base font-normal text-secondary"
+              className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary outline-none text-base font-normal text-secondary rounded-md"
             >
               <div>
                 <svg
@@ -53,7 +72,7 @@ function HistoryTransaction() {
                     strokeLinejoin="round"
                   />
                   <path
-                    d="M19.9265 18.598C18.0981 20.9711 15.2278 22.5 12.0004 22.5C8.77296 22.5 5.90266 20.9711 4.07422 18.598C6.41081 17.2629 9.11651 16.5 12.0004 16.5C14.8842 16.5 17.5899 17.2629 19.9265 18.598Z"
+                    d="M19.926 18.598C18.0976 20.9711 15.2273 22.5 11.9999 22.5C8.77248 22.5 5.90218 20.9711 4.07373 18.598C6.41033 17.2629 9.11603 16.5 11.9999 16.5C14.8837 16.5 17.5894 17.2629 19.926 18.598Z"
                     stroke="#4F5665"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -63,7 +82,7 @@ function HistoryTransaction() {
               <p className="max-xl:hidden">Dashboard</p>
             </Link>
             <Link
-              to="/admin/product"
+              to="/transfer"
               className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-sm font-normal text-secondary"
             >
               <div>
@@ -86,7 +105,7 @@ function HistoryTransaction() {
             </Link>
             <Link
               to="/history"
-              className="flex items-center gap-x-2 py-2 px-4 bg-primary rounded-md outline-none text-sm font-normal text-light"
+              className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-sm font-normal text-secondary"
             >
               <div>
                 <svg
@@ -98,21 +117,21 @@ function HistoryTransaction() {
                 >
                   <path
                     d="M2.90918 3.86365V7.5H6.54556"
-                    stroke="white"
+                    stroke="#4F5665"
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   />
                   <path
                     d="M2 12.5C2 18.0229 6.47715 22.5 12 22.5C17.5229 22.5 22 18.0229 22 12.5C22 6.97715 17.5229 2.5 12 2.5C8.299 2.5 5.06755 4.51056 3.33839 7.49905"
-                    stroke="white"
+                    stroke="#4F5665"
                     strokeWidth="1.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   />
                   <path
                     d="M12.0026 6.5L12.002 12.5044L16.2417 16.7441"
-                    stroke="white"
+                    stroke="#4F5665"
                     strokeWidth="1.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -122,7 +141,7 @@ function HistoryTransaction() {
               <p className="max-xl:hidden">History</p>
             </Link>
             <Link
-              to="/admin/order"
+              to="/transfer"
               className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-sm font-normal text-secondary"
             >
               <div>
@@ -191,7 +210,7 @@ function HistoryTransaction() {
             </Link>
             <Link
               to="/profile"
-              className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-sm font-normal text-secondary"
+              className="flex items-center gap-x-2 py-2 px-4 bg-primary rounded-md outline-none text-sm font-normal text-light"
             >
               <div>
                 <svg
@@ -205,7 +224,7 @@ function HistoryTransaction() {
                     fillRule="evenodd"
                     clipRule="evenodd"
                     d="M7.59151 12.7068C11.2805 12.7068 14.4335 13.2658 14.4335 15.4988C14.4335 17.7318 11.3015 18.3068 7.59151 18.3068C3.90151 18.3068 0.749512 17.7528 0.749512 15.5188C0.749512 13.2848 3.88051 12.7068 7.59151 12.7068Z"
-                    stroke="#4F5665"
+                    stroke="white"
                     strokeWidth="1.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -214,21 +233,21 @@ function HistoryTransaction() {
                     fillRule="evenodd"
                     clipRule="evenodd"
                     d="M7.59157 9.51979C5.16957 9.51979 3.20557 7.55679 3.20557 5.13479C3.20557 2.71279 5.16957 0.749786 7.59157 0.749786C10.0126 0.749786 11.9766 2.71279 11.9766 5.13479C11.9856 7.54779 10.0356 9.51079 7.62257 9.51979H7.59157Z"
-                    stroke="#4F5665"
+                    stroke="white"
                     strokeWidth="1.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   />
                   <path
                     d="M14.4829 8.38159C16.0839 8.15659 17.3169 6.78259 17.3199 5.11959C17.3199 3.48059 16.1249 2.12059 14.5579 1.86359"
-                    stroke="#4F5665"
+                    stroke="white"
                     strokeWidth="1.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   />
                   <path
                     d="M16.5952 12.2322C18.1462 12.4632 19.2292 13.0072 19.2292 14.1272C19.2292 14.8982 18.7192 15.3982 17.8952 15.7112"
-                    stroke="#4F5665"
+                    stroke="white"
                     strokeWidth="1.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -277,164 +296,48 @@ function HistoryTransaction() {
             </button>
           </div>
         </aside>
-        <section className="flex flex-col gap-y-8 md:gap-x-5 py-6 px-5 md:py-8 md:px-10 md:justify-between w-full">
+        <section className="flex flex-col gap-y-8 md:gap-x-5 py-6 px-5 md:py-8 md:px-10 w-full">
           <header className="flex gap-x-4">
             <div>
               <img
-                src={getImageUrl("history", "svg")}
+                src={getImageUrl("2-User", "svg")}
                 alt="history"
                 className="w-6 h-6"
               />
             </div>
-            <p className="text-dark font-semibold">History Transaction</p>
+            <p className="text-dark font-semibold">Profile</p>
           </header>
-          <section className="w-full text-light flex flex-col gap-y-6">
-            <div className="flex flex-col gap-y-4 md:gap-x-5">
-              <section className="py-4 px-3 border border-[#E8E8E8] rounded-md flex flex-col gap-y-4">
-                <header className="flex flex-col gap-y-4 lg:items-center lg:flex-row justify-between w-full px-4">
-                  <p className="font-semibold text-dark">Find Transaction</p>
-                  <div className="flex flex-col gap-y-4 lg:flex-row lg:gap-x-3 lg:items-end">
-                    <div className="font-medium text-secondary lg:w-[340px] relative">
+          <section className="w-full flex flex-col border border-[#E8E8E8] py-10 px-8 gap-y-4">
+            <section className="flex flex-col gap-y-4 text-center">
+              <p className="font-semibold text-dark">Change Pin 👋</p>
+              <p className="text-secondary">
+                Please save your pin because this so important.
+              </p>
+              <div className="pt-6 pb-16">
+                {otp.map((data, index) => {
+                  return (
+                    <>
                       <input
                         type="text"
-                        className="text-sm p-3 border border-[#E8E8E8] rounded-md  font-medium text-secondary placeholder:font-medium placeholder:text-secondary outline-none focus:border focus:border-primary w-full"
-                        placeholder="Enter Number Or Full Name"
+                        maxLength="1"
+                        className="border-b lg:w-[50px] lg:h-[50px] w-[30px] h-[30px] text-center mr-1 md:mr-5 outline-none border-primary text-[30px]"
+                        key={index}
+                        value={data}
+                        onChange={(e) => handleChange(e.target, index)}
+                        onFocus={(e) => e.target.select()}
                       />
-                      <div className="absolute top-3.5 right-3.5">
-                        <img
-                          src={getImageUrl("Search", "svg")}
-                          alt="Search"
-                          className="w-5 h-5"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </header>
-                <div className="text-sm min-[1440px]:text-base font-medium text-secondary overflow-x-scroll px-4">
-                  <table className="table-auto w-full">
-                    <thead className="">
-                      <tr className="border-b border-[#E8E8E84D]">
-                        <th className="p-6 text-center">Image</th>
-                        <th className="p-6 text-center">Name</th>
-                        <th className="p-6 text-center">Phone</th>
-                        <th className="p-6 text-center">Transaction</th>
-                        <th className="p-6 text-center">Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr className="border-b border-[#E8E8E84D] bg-[#F9FAFB]">
-                        <td className="p-6">
-                          <div className="flex justify-center">
-                            <img
-                              src={getImageUrl("foto1", "png")}
-                              alt="product"
-                              className="w-12 rounded-md"
-                            />
-                          </div>
-                        </td>
-                        <td className="p-6 text-center">ghaluh</td>
-                        <td className="p-6 text-center">0812312831</td>
-                        <td className="p-6 text-center text-xs text-success">
-                          RP. 50.000
-                        </td>
-                        <td className="p-6 text-center">
-                          <div className="flex flex-col gap-y-2 items-center xl:flex-row md:gap-x-2 justify-center">
-                            <div className="p-1 cursor-pointer">
-                              <img
-                                src={getImageUrl("Trash", "svg")}
-                                alt="Trash"
-                                className="w-6"
-                              />
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr className="border-b border-[#E8E8E84D]">
-                        <td className="p-6">
-                          <div className="flex justify-center">
-                            <img
-                              src={getImageUrl("foto1", "png")}
-                              alt="product"
-                              className="w-12 rounded-md"
-                            />
-                          </div>
-                        </td>
-                        <td className="p-6 text-center">ghaluh</td>
-                        <td className="p-6 text-center">0812312831</td>
-                        <td className="p-6 text-center text-xs text-success">
-                          RP. 50.000
-                        </td>
-                        <td className="p-6 text-center">
-                          <div className="flex flex-col gap-y-2 items-center xl:flex-row md:gap-x-2 justify-center">
-                            <div className="p-1 cursor-pointer">
-                              <img
-                                src={getImageUrl("Trash", "svg")}
-                                alt="Trash"
-                                className="w-6"
-                              />
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr className="border-b border-[#E8E8E84D] bg-[#F9FAFB]">
-                        <td className="p-6">
-                          <div className="flex justify-center">
-                            <img
-                              src={getImageUrl("foto1", "png")}
-                              alt="product"
-                              className="w-12 rounded-md"
-                            />
-                          </div>
-                        </td>
-                        <td className="p-6 text-center">ghaluh</td>
-                        <td className="p-6 text-center">0812312831</td>
-                        <td className="p-6 text-center text-xs text-success">
-                          RP. 50.000
-                        </td>
-                        <td className="p-6 text-center">
-                          <div className="flex flex-col gap-y-2 items-center xl:flex-row md:gap-x-2 justify-center">
-                            <div className="p-1 cursor-pointer">
-                              <img
-                                src={getImageUrl("Trash", "svg")}
-                                alt="Trash"
-                                className="w-6"
-                              />
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr className="border-b border-[#E8E8E84D]">
-                        <td className="p-6">
-                          <div className="flex justify-center">
-                            <img
-                              src={getImageUrl("foto1", "png")}
-                              alt="product"
-                              className="w-12 rounded-md"
-                            />
-                          </div>
-                        </td>
-                        <td className="p-6 text-center">ghaluh</td>
-                        <td className="p-6 text-center">0812312831</td>
-                        <td className="p-6 text-center text-xs text-success">
-                          RP. 50.000
-                        </td>
-                        <td className="p-6 text-center">
-                          <div className="flex flex-col gap-y-2 items-center xl:flex-row md:gap-x-2 justify-center">
-                            <div className="p-1 cursor-pointer">
-                              <img
-                                src={getImageUrl("Trash", "svg")}
-                                alt="Trash"
-                                className="w-6"
-                              />
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </section>
-            </div>
+                    </>
+                  );
+                })}
+              </div>
+              <button
+                type="button"
+                className="p-3 bg-primary text-light rounded-md text-sm hover:bg-blue-800 focus:ring"
+                onClick={handleClick}
+              >
+                Submit
+              </button>
+            </section>
           </section>
         </section>
       </main>
@@ -448,4 +351,4 @@ function HistoryTransaction() {
   );
 }
 
-export default HistoryTransaction;
+export default ChangePin;

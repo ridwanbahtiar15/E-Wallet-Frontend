@@ -71,8 +71,7 @@ const userSlice = createSlice({
           isPending: false,
           isFulfilled: true,
           isUserAvailable: true,
-          token: payload.token,
-          userInfo: payload.userInfo,
+          userInfo: payload.data,
         };
       })
       .addCase(logoutThunk.pending, (prevState) => {

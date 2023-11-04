@@ -32,7 +32,7 @@ function Navbar(props) {
         </p>
         <Link to="/profile">
           <img
-            src={getImageUrl("profile", "png")}
+            src={getImageUrl("1", "png")}
             alt="icon-profile"
             className="rounded-full w-12 h-12 hidden lg:block"
           />
