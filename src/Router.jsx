@@ -6,11 +6,13 @@ import Profile from "./pages/Profile";
 import ChangePin from "./pages/ChangePin";
 import ChangePassword from "./pages/ChangePassword";
 import Login from "./pages/Login";
+import Home from "./pages/Home";
 import Register from "./pages/Register";
 import ForgotPass from "./pages/ForgotPass";
 import Transfer from "./pages/Transfer";
 import EnterPin from "./pages/EnterPin";
 import Topup from "./pages/Topup";
+
 
 const router = createBrowserRouter([
   {
@@ -34,7 +36,7 @@ const router = createBrowserRouter([
     element: <ChangePassword />,
   },
   {
-    path: "/",
+    path: "/register",
     element: <Register />,
     // errorElement: "",
   },
@@ -43,6 +45,10 @@ const router = createBrowserRouter([
     element: <Login />,
   },
   {
+    path: "/",
+    element: <Home />,
+  },
+    {
     path: "/forgotPass",
     element: <ForgotPass />,
   },
