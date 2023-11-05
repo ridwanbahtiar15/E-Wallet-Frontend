@@ -16,6 +16,10 @@ import Private from "./components/Private";
 
 const router = createBrowserRouter([
   {
+    path: "/",
+    element: <Home />,
+  },
+  {
     path: "/dashboard",
     element: (
       <Private>
@@ -63,10 +67,6 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
-  },
-  {
-    path: "/",
-    element: <Home />,
   },
   {
     path: "/forgotPass",
