@@ -11,8 +11,10 @@ import Register from "./pages/Register";
 import ForgotPass from "./pages/ForgotPass";
 import Transfer from "./pages/Transfer";
 import EnterPin from "./pages/EnterPin";
+import TransferDetail from "./pages/TransferDetail";
 import Topup from "./pages/Topup";
 import Private from "./components/Private";
+import ResetPass from "./pages/ResetPass";
 
 const router = createBrowserRouter([
   {
@@ -89,12 +91,20 @@ const router = createBrowserRouter([
     ),
   },
   {
+    path: "/transferDetail",
+    element: <TransferDetail />,
+  },
+  {
     path: "/topup",
     element: (
       <Private>
         <Topup />,
       </Private>
     ),
+  },
+  {
+    path: "/resetpass",
+    element: <ResetPass />,
   },
 ]);
 
