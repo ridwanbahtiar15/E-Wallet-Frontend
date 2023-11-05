@@ -11,6 +11,7 @@ import Register from "./pages/Register";
 import ForgotPass from "./pages/ForgotPass";
 import Transfer from "./pages/Transfer";
 import EnterPin from "./pages/EnterPin";
+import TransferDetail from "./pages/TransferDetail";
 import Topup from "./pages/Topup";
 import Private from "./components/Private";
 
@@ -87,6 +88,10 @@ const router = createBrowserRouter([
         <EnterPin />,
       </Private>
     ),
+  },
+  {
+    path: "/transferDetail",
+    element: <TransferDetail/>
   },
   {
     path: "/topup",

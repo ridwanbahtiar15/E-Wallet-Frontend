@@ -5,15 +5,24 @@ import Navbar from "../components/Navbar";
 import getImageUrl from "../utils/imageGetter";
 import DropdownMobile from "../components/DropdownMobile";
 import Modal from "../components/Modal";
+import { useSelector } from "react-redux";
+import { updateProfile } from "../utils/https/profile";
+
 import Title from "../components/Title";
 
 function ChangePassword() {
+  const jwt = useSelector((state) => state.user.userInfo.token)
+
   const [Message, setMessage] = useState({ msg: null, isError: null });
   const [openModal, setOpenModal] = useState({
     isOpen: false,
     status: null,
   });
+
+  const [submitMessage, setSubmitMessage] = useState("")
+
   const [isDropdownShown, setIsDropdownShow] = useState(false);
+  const [err, setErr] = useState("")
 
   const [isPassShown, setIsPassShown] = useState(false);
   const [isPassShown2, setIsPassShown2] = useState(false);
@@ -30,6 +39,29 @@ function ChangePassword() {
   const showPassHandler3 = () => {
     setIsPassShown3((state) => !state);
   };
+  
+  const submitUpdatePassword = (e) => {
+    e.preventDefault();
+    if (!e.target.password.value || !e.target.password2.value || !e.target.password3.value)
+    return setErr("All input must be filled")
+    if (e.target.password2.value !== e.target.password3.value)
+    return setErr("New Password not matched")
+    setErr()
+    const body = {
+      last_password: e.target.password.value,
+      new_password: e.target.password2.value
+    }
+    updateProfile(body, jwt)
+    .then((res) => {
+      console.log(res)
+      setSubmitMessage(res.data.msg)
+    })
+    .catch((err) => {
+      console.log(err)
+      setSubmitMessage(err.response.data.msg)
+    })
+  }
+
   return (
     <>
       <Title title={"Change Password"}>
@@ -189,7 +221,7 @@ function ChangePassword() {
               <header>
                 <p className="text-dark font-semibold">Change Password</p>
               </header>
-              <form className="flex flex-col gap-y-4">
+              <form onSubmit={submitUpdatePassword} className="flex flex-col gap-y-4">
                 <div className="flex flex-col gap-y-3 relative">
                   <label htmlFor="password" className="text-sm md:text-base font-semibold text-[#0B132A] lg:text-base">
                     Exiting Password
@@ -251,7 +283,7 @@ function ChangePassword() {
                   </div>
                 </div>
 
-                <button type="button" className="p-3 bg-primary text-light rounded-md text-sm hover:bg-blue-800 focus:ring">
+                <button type="submit" className="p-3 bg-primary text-light rounded-md text-sm hover:bg-blue-800 focus:ring">
                   Submit
                 </button>
               </form>
@@ -260,6 +292,22 @@ function ChangePassword() {
         </main>
         {isDropdownShown && <DropdownMobile isClick={() => setIsDropdownShow(false)} />}
         {openModal.isOpen && <Modal modal={openModal} closeModal={setOpenModal} message={Message} />}
+        {submitMessage && 
+          <div className="bg-gray-200 justify-center items-center h-screen opacity-100 absolute z-10" id="logoutModal">
+          <div className="fixed left-0 top-0 bg-black bg-opacity-50 w-screen h-screen flex justify-center items-center px-[10px] md:px-0">
+            <div className="bg-white rounded shadow-md p-6 w-full flex justify-center items-center flex-col gap-y-8 md:w-[55%] lg:w-[35%]">
+              <div className="flex items-start gap-x-4">
+                <h1 className="text-xl font-medium text-dark text-center">{submitMessage}</h1>
+              </div>
+                <div className="flex gap-x-6">
+                  <button onClick={() => {setSubmitMessage()}} className="p-[10px] bg-light border-2 hover:bg-slate-200 rounded-md text-dark text-base font-medium active:ring active:ring-slate-300">
+                    Ok
+                  </button>
+                </div>
+            </div>
+          </div>
+        </div>
+        }
       </Title>
     </>
   );
