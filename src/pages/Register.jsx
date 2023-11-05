@@ -1,15 +1,29 @@
 /* eslint-disable react/no-unknown-property */
 // eslint-disable-next-line no-unused-vars
-import React from "react";
+import { React, useState } from "react";
 import { register } from "../utils/https/auth";
 // import { useState } from "react";
 // import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import Modal from "../components/Modal";
 
 function Register() {
+  const [Message, setMessage] = useState({ msg: null, isError: null });
+  const [openModal, setOpenModal] = useState({
+    isOpen: false,
+    status: null,
+  });
+
   const submitHandler = (e) => {
     e.preventDefault();
-    if (e.target.password.value !== e.target.confirmPassword.value) return console.log("error");
+    if (e.target.password.value !== e.target.confirmPassword.value) {
+      setMessage({ msg: "The passwords do not match" });
+      return setOpenModal({
+        isOpen: true,
+        status: "Register Error",
+      });
+    }
+    // return console.log("error");
     const body = {
       name: e.target.fullName.value,
       email: e.target.email.value,
@@ -17,10 +31,20 @@ function Register() {
     };
     register(body)
       .then((res) => {
-        console.log(res);
+        setMessage({
+          msg: res.data.msg,
+          isError: false,
+        });
+        setOpenModal({ isOpen: true, status: "User success registered. Please check your email." });
+        // console.log(res);
       })
       .catch((err) => {
-        console.log(err);
+        setMessage({
+          msg: err.response.data.msg,
+          isError: true,
+        });
+        setOpenModal({ isOpen: true, status: "Something went wrong..." });
+        // console.log(err);
       });
     // console.log(body);
   };
@@ -192,6 +216,7 @@ function Register() {
           <img src="/img/register-side.png" alt="register-img" className="place-self-center object-contain" />
         </div>
       </div>
+      {openModal.isOpen && <Modal modal={openModal} closeModal={setOpenModal} message={Message} />}
     </>
   );
 }

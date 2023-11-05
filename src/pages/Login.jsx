@@ -177,7 +177,7 @@ function Login() {
               <p className="text-center font-normal text-xs mt-[13px]">
                 Not Have An Account?{" "}
                 <span>
-                  <Link to="/" className="text-blue-700">
+                  <Link to="/register" className="text-blue-700">
                     Register
                   </Link>
                 </span>

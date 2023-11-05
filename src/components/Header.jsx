@@ -25,8 +25,12 @@ function Header() {
           </Link>
         </div>
         <div className="hidden md:flex md:gap-2">
-          <button className="border border-white h-[48px] py-3 px-4 rounded-md hover:bg-blue-700">Sign In</button>
-          <button className="border text-[#2948FF] bg-white border-white h-[48px] py-3 px-4 rounded-md hover:bg-slate-200">Sign Up</button>
+          <button className="border border-white h-[48px] py-3 px-4 rounded-md hover:bg-blue-700">
+            <Link to="/login">Sign In</Link>
+          </button>
+          <button className="border text-[#2948FF] bg-white border-white h-[48px] py-3 px-4 rounded-md hover:bg-slate-200">
+            <Link to="/register">Sign Up</Link>
+          </button>
         </div>
       </header>
     </>
