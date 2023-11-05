@@ -8,6 +8,8 @@ import Modal from "../components/Modal";
 import { transaction, deleteTransaction } from "../utils/https/transaction";
 import Title from "../components/Title";
 
+import { useSelector } from "react-redux";
+
 function HistoryTransaction() {
   const [Message, setMessage] = useState({ msg: null, isError: null });
   const [openModal, setOpenModal] = useState({
@@ -17,9 +19,14 @@ function HistoryTransaction() {
   });
   const [isDropdownShown, setIsDropdownShow] = useState(false);
 
+  const userInfo = useSelector((state) => state.user.userInfo)
+  const id = userInfo.id
+  const token = userInfo.token
+
+
   const [user, setUser] = useState([]);
   useEffect(() => {
-    transaction(1).then((res) => setUser(res.data.result));
+    transaction(token, id).then((res) => setUser(res.data.result));
   }, []);
 
   const onDeleteHandler = (id, type) => {
