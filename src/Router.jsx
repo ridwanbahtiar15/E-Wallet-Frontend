@@ -12,28 +12,48 @@ import ForgotPass from "./pages/ForgotPass";
 import Transfer from "./pages/Transfer";
 import EnterPin from "./pages/EnterPin";
 import Topup from "./pages/Topup";
-
+import Private from "./components/Private";
 
 const router = createBrowserRouter([
   {
     path: "/dashboard",
-    element: <Dashboard />,
+    element: (
+      <Private>
+        <Dashboard />,
+      </Private>
+    ),
   },
   {
     path: "/history",
-    element: <HistoryTransaction />,
+    element: (
+      <Private>
+        <HistoryTransaction />,
+      </Private>
+    ),
   },
   {
     path: "/profile",
-    element: <Profile />,
+    element: (
+      <Private>
+        <Profile />,
+      </Private>
+    ),
   },
   {
     path: "/changepin",
-    element: <ChangePin />,
+    element: (
+      <Private>
+        <ChangePin />,
+      </Private>
+    ),
   },
   {
     path: "/changepassword",
-    element: <ChangePassword />,
+    element: (
+      <Private>
+        <ChangePassword />,
+      </Private>
+    ),
   },
   {
     path: "/register",
@@ -48,21 +68,33 @@ const router = createBrowserRouter([
     path: "/",
     element: <Home />,
   },
-    {
+  {
     path: "/forgotPass",
     element: <ForgotPass />,
   },
   {
     path: "/transfer",
-    element: <Transfer />,
+    element: (
+      <Private>
+        <Transfer />,
+      </Private>
+    ),
   },
   {
     path: "/enterPin",
-    element: <EnterPin />,
+    element: (
+      <Private>
+        <EnterPin />,
+      </Private>
+    ),
   },
   {
     path: "/topup",
-    element: <Topup />,
+    element: (
+      <Private>
+        <Topup />,
+      </Private>
+    ),
   },
 ]);
 
