@@ -10,7 +10,7 @@ function Home() {
       <Title title={"Home"}>
         <Header />
         <main className="font-montserrat">
-          <div className="flex flex-col px-10 pt-[75px] bg-[#2948FF] text-white h-auto gap-6 md:pt-[133px] lg:self-center">
+          <div className="flex flex-col px-4 md:px-10 pt-[75px] bg-[#2948FF] text-white h-auto gap-6 md:pt-[133px] lg:self-center">
             <h1 className="text-[32px] md:font-medium md:text-5xl lg:text-6xl md:text-center">Experience the Future of Digital Payments with e-wallet</h1>
             <div className="flex flex-col-reverse md:flex-row lg:gap-[75px] lg:justify-center">
               <div className="flex justify-center">
@@ -94,7 +94,7 @@ function Home() {
             </div>
           </div>
           <div className="pt-16 pb-10">
-            <div className="flex flex-col gap-7 px-10 justify-items-center lg:flex-row lg:justify-between ">
+            <div className="flex flex-col gap-7 px-4 md:px-10 justify-items-center lg:flex-row lg:justify-between ">
               <div className="flex flex-col gap-[15px] lg:flex-row lg:gap-[9px]">
                 <div className="flex justify-center">
                   <svg className="self-center" width="59" height="58" viewBox="0 0 59 58" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -152,7 +152,7 @@ function Home() {
               </div>
             </div>
             <div className="flex flex-col-reverse lg:flex-row lg:justify-center">
-              <div className="flex flex-col px-10 pt-7 gap-5 lg:w-[480px] lg:self-end">
+              <div className="flex flex-col px-4 md:px-10 pt-7 gap-5 lg:w-[480px] lg:self-end">
                 <p className="text-[#2948FF] font-bold text-lg text-center lg:text-left ">WELCOME TO E-WALLET</p>
                 <p className="font-medium text-[32px] text-center lg:text-left">Your All-in-One Digital Payment Solution</p>
                 <p className="font-medium text-base text-center lg:text-left">
@@ -161,13 +161,13 @@ function Home() {
                 </p>
                 <button className="h-[50px] justify-center bg-[#2948FF] text-white py-[10px] rounded-md lg:max-w-[143px] hover:bg-blue-700">Get Started</button>
               </div>
-              <div className="relative mt-[300px] bottom-0 px-10 flex justify-center lg:pt-1 lg:flex-row lg:w-[680px]">
+              <div className="relative mt-[300px] bottom-0 px-4 md:px-10 flex justify-center lg:pt-1 lg:flex-row lg:w-[680px]">
                 <img className="relative bottom-0" src="/img/Group-1308.webp" alt="background-img" />
                 <img className="absolute bottom-0 mb-[-2.7vh] " src="/img/mobile-dashboard-2.webp" alt="mobile-dashboard-img-2" />
               </div>
             </div>
           </div>
-          <div className="bg-[#F8F8F8] px-10 py-14 flex flex-col items-center lg:flex-row">
+          <div className="bg-[#F8F8F8] px-4 md:px-10 py-14 flex flex-col items-center lg:flex-row">
             <div className="lg:flex-1">
               <img src="/img/online-payment-security-concept-3d-phone-bill 1.webp" alt="3d-phone-bill-img" />
             </div>
@@ -238,7 +238,7 @@ function Home() {
               </div>
             </div>
           </div>
-          <div className="px-10 py-14 flex flex-col items-center gap-[19px] lg:flex-row lg:justify-center">
+          <div className="px-4 md:px-10 py-14 flex flex-col items-center gap-[19px] lg:flex-row lg:justify-center">
             <div className="flex flex-col lg:w-[330px]">
               <p className="font-medium text-[32px] text-center lg:text-left">100+ Trusted Partners</p>
               <p className="font-normal text-base text-center lg:text-left">We have reached global level and have 100+ brand partners around the globe.</p>
@@ -252,7 +252,7 @@ function Home() {
               <img src="/img/dell-logo.webp" alt="dell-logo" />
             </div>
           </div>
-          <div className="px-10 py-14 flex flex-col items-center gap-[19px]">
+          <div className="px-4 md:px-10 py-14 flex flex-col items-center gap-[19px]">
             <p className="font-medium text-[32px] text-center">What Our Users Are Saying</p>
             <p className="font-normal text-base text-center">Ready to experience the future of payments? Download e-wallet now and enjoy a world of convenience at your fingertips.</p>
             <div className="flex flex-col items-center mt-10 text-white gap-[19px] bg-[#2948FF] rounded-2xl p-14 lg:w-[707px]">
@@ -308,7 +308,7 @@ function Home() {
               />
             </svg>
           </div>
-          <div className="flex flex-col bg-[#F8F8F8] px-10 py-14 gap-[19px] lg:flex-row-reverse lg:items-center ">
+          <div className="flex flex-col bg-[#F8F8F8] px-4 md:px-10 py-14 gap-[19px] lg:flex-row-reverse lg:items-center ">
             <div className="flex flex-col gap-[25px]lg:max-w-[580px]">
               <p className="font-medium text-4xl">Download The App</p>
               <p className="font-normal text-base">Ready to experience the future of payments? Download e-wallet now and enjoy a world of convenience at your fingertips.</p>
