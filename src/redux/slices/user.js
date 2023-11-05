@@ -10,7 +10,7 @@ const initialState = {
   isFulfilled: false,
 };
 
-const loginThunk = createAsyncThunk("user/login", async ({ body, cb }, { rejectWithValue }) => {
+const loginThunk = createAsyncThunk("user/login", async ({ body, cb, errorCb }, { rejectWithValue }) => {
   try {
     const { data } = await axiosLogin(body);
     console.log(data);
@@ -22,6 +22,8 @@ const loginThunk = createAsyncThunk("user/login", async ({ body, cb }, { rejectW
       status: error.response.status,
       message: error.response.data.msg,
     };
+    console.log(error);
+    errorCb(error);
     return rejectWithValue(errObj);
   }
 });

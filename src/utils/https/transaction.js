@@ -12,3 +12,13 @@ export const transaction = (userId) => {
   });
   return authAxios.get(`/${userId}`);
 };
+
+export const deleteTransaction = (id, type) => {
+  const authAxios = axios.create({
+    baseURL: url,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return authAxios.delete(`/${id}?transaction_type=${type}`);
+};

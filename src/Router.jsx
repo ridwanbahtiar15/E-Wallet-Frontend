@@ -6,36 +6,58 @@ import Profile from "./pages/Profile";
 import ChangePin from "./pages/ChangePin";
 import ChangePassword from "./pages/ChangePassword";
 import Login from "./pages/Login";
+import Home from "./pages/Home";
 import Register from "./pages/Register";
 import ForgotPass from "./pages/ForgotPass";
 import Transfer from "./pages/Transfer";
 import EnterPin from "./pages/EnterPin";
 import TransferDetail from "./pages/TransferDetail";
 import Topup from "./pages/Topup";
+import Private from "./components/Private";
 
 const router = createBrowserRouter([
   {
     path: "/dashboard",
-    element: <Dashboard />,
+    element: (
+      <Private>
+        <Dashboard />,
+      </Private>
+    ),
   },
   {
     path: "/history",
-    element: <HistoryTransaction />,
+    element: (
+      <Private>
+        <HistoryTransaction />,
+      </Private>
+    ),
   },
   {
     path: "/profile",
-    element: <Profile />,
+    element: (
+      <Private>
+        <Profile />,
+      </Private>
+    ),
   },
   {
     path: "/changepin",
-    element: <ChangePin />,
+    element: (
+      <Private>
+        <ChangePin />,
+      </Private>
+    ),
   },
   {
     path: "/changepassword",
-    element: <ChangePassword />,
+    element: (
+      <Private>
+        <ChangePassword />,
+      </Private>
+    ),
   },
   {
-    path: "/",
+    path: "/register",
     element: <Register />,
     // errorElement: "",
   },
@@ -44,16 +66,28 @@ const router = createBrowserRouter([
     element: <Login />,
   },
   {
+    path: "/",
+    element: <Home />,
+  },
+  {
     path: "/forgotPass",
     element: <ForgotPass />,
   },
   {
     path: "/transfer",
-    element: <Transfer />,
+    element: (
+      <Private>
+        <Transfer />,
+      </Private>
+    ),
   },
   {
     path: "/enterPin",
-    element: <EnterPin />,
+    element: (
+      <Private>
+        <EnterPin />,
+      </Private>
+    ),
   },
   {
     path: "/transferDetail",
@@ -61,7 +95,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/topup",
-    element: <Topup />,
+    element: (
+      <Private>
+        <Topup />,
+      </Private>
+    ),
   },
 ]);
 
