@@ -283,7 +283,6 @@ function Profile() {
                       <img src={getImageUrl("User-small", "svg")} alt="User-small" className="w-4 h-4" />
                     </div>
                   </div>
-                </div>
                 <div className="flex flex-col gap-y-3 relative">
                   <label
                     htmlFor="phone"
@@ -352,7 +351,7 @@ function Profile() {
               </form>
             </section>
           </section>
-        </section>
+          </section>
       </main>
       {submitModal && 
         <div className="bg-gray-200 justify-center items-center h-screen opacity-100 absolute z-10" id="logoutModal">
@@ -379,7 +378,8 @@ function Profile() {
       {openModal.isOpen && (
         <Modal modal={openModal} closeModal={setOpenModal} message={Message} />
       )}
-    </>
+     </Title>
+  </>
   );
 }
 
