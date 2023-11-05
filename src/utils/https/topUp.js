@@ -11,7 +11,7 @@ export const completeTopUp = (jwt, body) => {
     const url = baseUrl + "/transaction/top-up/notification"
     return axios.post(url, body, {
         headers: {
-            "Authorization": "Bearer" + jwt
-        }
+            'Authorization': 'Bearer ' + jwt,
+        },
     });
 }

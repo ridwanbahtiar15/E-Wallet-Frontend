@@ -3,24 +3,40 @@
 import React from "react";
 // import { useState } from "react";
 // import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
-import { login } from "../utils/https/auth";
+import { Link, useNavigate } from "react-router-dom";
+import { axiosLogin } from "../utils/https/auth";
+import { useSelector, useDispatch } from "react-redux";
+import { userAction } from "../redux/slices/user";
 
 function Login() {
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const submitHandler = (e) => {
     e.preventDefault();
     const body = {
       email: e.target.email.value,
       password: e.target.password.value,
     };
-    login(body)
-      .then((res) => {
-        console.log(res);
-        localStorage.setItem("token", res.data.data.token);
+    const { loginThunk } = userAction;
+    dispatch(
+      loginThunk({
+        body,
+        cb: () => {
+          navigate("/dashboard");
+        },
       })
-      .catch((err) => {
-        console.log(err);
-      });
+    );
+
+    // axiosLogin(body)
+    //   .then((res) => {
+    //     console.log(res);
+    //     localStorage.setItem("token", res.data.data.token);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
     // console.log(body);
   };
 

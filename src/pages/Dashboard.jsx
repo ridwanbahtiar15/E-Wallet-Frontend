@@ -146,7 +146,7 @@ function Dashboard() {
               <p className="max-xl:hidden">History</p>
             </Link>
             <Link
-              to="/transfer"
+              to="/topup"
               className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-sm font-normal text-secondary"
             >
               <div>

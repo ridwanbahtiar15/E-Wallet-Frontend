@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import Navbar from "../components/Navbar";
@@ -15,7 +15,12 @@ function HistoryTransaction() {
   });
   const [isDropdownShown, setIsDropdownShow] = useState(false);
 
-  transaction(1).then((res) => console.log(res));
+  const [user, setUser] = useState([]);
+  useEffect(() => {
+    transaction(1).then((res) => setUser(res.data.result));
+  }, []);
+
+  console.log(user);
   return (
     <>
       <Navbar
@@ -63,7 +68,7 @@ function HistoryTransaction() {
               <p className="max-xl:hidden">Dashboard</p>
             </Link>
             <Link
-              to="/admin/product"
+              to="/transfer"
               className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-sm font-normal text-secondary"
             >
               <div>
@@ -122,7 +127,7 @@ function HistoryTransaction() {
               <p className="max-xl:hidden">History</p>
             </Link>
             <Link
-              to="/admin/order"
+              to="/topup"
               className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-sm font-normal text-secondary"
             >
               <div>
@@ -322,114 +327,54 @@ function HistoryTransaction() {
                       </tr>
                     </thead>
                     <tbody>
-                      <tr className="border-b border-[#E8E8E84D] bg-[#F9FAFB]">
-                        <td className="p-6">
-                          <div className="flex justify-center">
-                            <img
-                              src={getImageUrl("foto1", "png")}
-                              alt="product"
-                              className="w-12 rounded-md"
-                            />
-                          </div>
-                        </td>
-                        <td className="p-6 text-center">ghaluh</td>
-                        <td className="p-6 text-center">0812312831</td>
-                        <td className="p-6 text-center text-xs text-success">
-                          RP. 50.000
-                        </td>
-                        <td className="p-6 text-center">
-                          <div className="flex flex-col gap-y-2 items-center xl:flex-row md:gap-x-2 justify-center">
-                            <div className="p-1 cursor-pointer">
+                      {user.map((result, i) => (
+                        <tr
+                          className={`border-b border-[#E8E8E84D] ${
+                            i % 2 == 0 ? "bg-[#F9FAFB]" : ""
+                          }`}
+                          key={i}
+                        >
+                          <td className="p-6">
+                            <div className="flex justify-center">
                               <img
-                                src={getImageUrl("Trash", "svg")}
-                                alt="Trash"
-                                className="w-6"
+                                src={
+                                  result.photo_profile
+                                    ? result.photo_profile
+                                    : getImageUrl("foto1", "png")
+                                }
+                                alt="product"
+                                className="w-12 rounded-md"
                               />
                             </div>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr className="border-b border-[#E8E8E84D]">
-                        <td className="p-6">
-                          <div className="flex justify-center">
-                            <img
-                              src={getImageUrl("foto1", "png")}
-                              alt="product"
-                              className="w-12 rounded-md"
-                            />
-                          </div>
-                        </td>
-                        <td className="p-6 text-center">ghaluh</td>
-                        <td className="p-6 text-center">0812312831</td>
-                        <td className="p-6 text-center text-xs text-success">
-                          RP. 50.000
-                        </td>
-                        <td className="p-6 text-center">
-                          <div className="flex flex-col gap-y-2 items-center xl:flex-row md:gap-x-2 justify-center">
-                            <div className="p-1 cursor-pointer">
-                              <img
-                                src={getImageUrl("Trash", "svg")}
-                                alt="Trash"
-                                className="w-6"
-                              />
+                          </td>
+                          <td className="p-6 text-center">
+                            {result.full_name}
+                          </td>
+                          <td className="p-6 text-center">
+                            {result.phone_number ? result.phone_number : "-"}
+                          </td>
+                          <td
+                            className={`p-6 text-center text-xs ${
+                              result.summary == "Income"
+                                ? "text-success"
+                                : "text-danger"
+                            }`}
+                          >
+                            {`Rp. ${result.transaction_amount}`}
+                          </td>
+                          <td className="p-6 text-center">
+                            <div className="flex flex-col gap-y-2 items-center xl:flex-row md:gap-x-2 justify-center">
+                              <div className="p-1 cursor-pointer">
+                                <img
+                                  src={getImageUrl("Trash", "svg")}
+                                  alt="Trash"
+                                  className="w-6"
+                                />
+                              </div>
                             </div>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr className="border-b border-[#E8E8E84D] bg-[#F9FAFB]">
-                        <td className="p-6">
-                          <div className="flex justify-center">
-                            <img
-                              src={getImageUrl("foto1", "png")}
-                              alt="product"
-                              className="w-12 rounded-md"
-                            />
-                          </div>
-                        </td>
-                        <td className="p-6 text-center">ghaluh</td>
-                        <td className="p-6 text-center">0812312831</td>
-                        <td className="p-6 text-center text-xs text-success">
-                          RP. 50.000
-                        </td>
-                        <td className="p-6 text-center">
-                          <div className="flex flex-col gap-y-2 items-center xl:flex-row md:gap-x-2 justify-center">
-                            <div className="p-1 cursor-pointer">
-                              <img
-                                src={getImageUrl("Trash", "svg")}
-                                alt="Trash"
-                                className="w-6"
-                              />
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr className="border-b border-[#E8E8E84D]">
-                        <td className="p-6">
-                          <div className="flex justify-center">
-                            <img
-                              src={getImageUrl("foto1", "png")}
-                              alt="product"
-                              className="w-12 rounded-md"
-                            />
-                          </div>
-                        </td>
-                        <td className="p-6 text-center">ghaluh</td>
-                        <td className="p-6 text-center">0812312831</td>
-                        <td className="p-6 text-center text-xs text-success">
-                          RP. 50.000
-                        </td>
-                        <td className="p-6 text-center">
-                          <div className="flex flex-col gap-y-2 items-center xl:flex-row md:gap-x-2 justify-center">
-                            <div className="p-1 cursor-pointer">
-                              <img
-                                src={getImageUrl("Trash", "svg")}
-                                alt="Trash"
-                                className="w-6"
-                              />
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
+                          </td>
+                        </tr>
+                      ))}
                     </tbody>
                   </table>
                 </div>

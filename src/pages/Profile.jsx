@@ -1,24 +1,91 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import Navbar from "../components/Navbar";
 import getImageUrl from "../utils/imageGetter";
 import DropdownMobile from "../components/DropdownMobile";
 import Modal from "../components/Modal";
 
+import { getProfile, updateProfile } from "../utils/https/profile";
+
 function Profile() {
+  const user = useSelector((state) => state.user.userInfo)
+  const jwt = user.token
+
+  const [userData, setUserData] = useState({
+    full_name: "",
+    phone_number: "",
+    email: "",
+  })
+
   const [Message, setMessage] = useState({ msg: null, isError: null });
   const [openModal, setOpenModal] = useState({
     isOpen: false,
     status: null,
   });
+  const [submitModal, setSubmitModal] = useState(false)
+  const [submitMessage, setSubmitMessage] = useState("")
   const [isDropdownShown, setIsDropdownShow] = useState(false);
-
   const [image, setImage] = useState("");
-  const changeImageHandler = (e) => {
-    setImage(e.target.files[0]);
+
+  const handleChange = (e) => {
+    const dataClone = { ...userData };
+    dataClone[e.target.name] = e.target.value;
+    setUserData(dataClone);
+    console.log(dataClone)
   };
 
+  // const [imageProfile, setImageProfile] = useState("");
+  const changeImageHandler = (e) => {
+    // setImage(e.target.files[0]);
+    setUserData((prev) => {
+      return {
+        ...prev,
+        photo_profile : e.target.files[0]
+      }
+    })
+  };
+
+  const deleteImageHandler = () => {
+    setUserData((prev) => {
+      const { photo_profile, ...newUserData } = prev;
+      return newUserData
+    })
+  }
+
+  useEffect(() => {
+    getProfile(jwt)
+    .then((res) => {
+      console.log(res)
+      setUserData({
+        full_name: res.data.res.full_name,
+        phone_number: res.data.res.phone_number,
+        email: res.data.res.email,
+      })
+      setImage(res.data.res.photo_profile)
+    })
+    .catch ((err) => {
+      console.log(err)
+    })
+  }, [])
+
+  const clearanceBeforeSubmit = () => {
+    setSubmitMessage("Are you sure for updating profile?")
+    setSubmitModal(true)
+  }
+
+  const updateProfileUser = () => {
+    updateProfile(userData, jwt)
+    .then((res) => {
+      console.log(res)
+      setSubmitMessage("Profile completed update")
+    })
+    .catch((err) => {
+      console.log(err)
+      setSubmitMessage("Profile didn't updated")
+    })
+  }
   return (
     <>
       <Navbar
@@ -125,7 +192,7 @@ function Profile() {
               <p className="max-xl:hidden">History</p>
             </Link>
             <Link
-              to="/transfer"
+              to="/topup"
               className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-sm font-normal text-secondary"
             >
               <div>
@@ -295,10 +362,10 @@ function Profile() {
             <section className="flex flex-col gap-y-4">
               <p className="font-semibold text-dark">Profile Picture</p>
               <div className="flex flex-col gap-y-4 md:flex-row md:items-center md:gap-x-5">
-                {image ? (
+                {userData && userData.photo_profile || image ? (
                   <div className="w-full h-full md:w-32 md:h-32">
                     <img
-                      src={URL.createObjectURL(image)}
+                      src={userData && userData.photo_profile ? URL.createObjectURL(userData.photo_profile) : image}
                       alt="User"
                       className="w-full h-full rounded-lg bg-cover"
                     />
@@ -327,7 +394,7 @@ function Profile() {
                   </label>
                   <button
                     className="border border-danger text-danger flex gap-x-2 items-center justify-center p-2 rounded-md hover:bg-slate-200 focus:ring focus:ring-red-300"
-                    onClick={() => setImage("")}
+                    onClick={deleteImageHandler}
                   >
                     <div>
                       <img src={getImageUrl("Delete", "svg")} alt="Delete" />
@@ -358,6 +425,9 @@ function Profile() {
                   <input
                     type="text"
                     id="fullname"
+                    value={userData && userData.full_name}
+                    name="full_name"
+                    onChange={handleChange}
                     placeholder="Enter Your Full Name"
                     className="py-3.5 px-10 border rounded-lg border-[#DEDEDE] text-xs tracking-wide outline-none focus:border-primary"
                   />
@@ -377,8 +447,11 @@ function Profile() {
                     Phone
                   </label>
                   <input
-                    type="number"
+                    type="text"
                     id="phone"
+                    value={userData && userData.phone_number}
+                    name="phone_number"
+                    onChange={handleChange}
                     placeholder="Enter your Phone"
                     className="py-3.5 px-10 border rounded-lg border-[#DEDEDE] text-xs tracking-wide outline-none focus:border-primary"
                   />
@@ -400,6 +473,8 @@ function Profile() {
                   <input
                     type="email"
                     id="email"
+                    value={userData && userData.email}
+                    disabled
                     placeholder="Enter Your Email"
                     className="py-3.5 px-10 border rounded-lg border-[#DEDEDE] text-xs tracking-wide outline-none focus:border-primary"
                   />
@@ -424,7 +499,7 @@ function Profile() {
                   </Link>
                 </div>
                 <button
-                  type="button"
+                  type="button" onClick={clearanceBeforeSubmit}
                   className="p-3 bg-primary text-light rounded-md text-sm hover:bg-blue-800 focus:ring"
                 >
                   Submit
@@ -434,6 +509,25 @@ function Profile() {
           </section>
         </section>
       </main>
+      {submitModal && 
+        <div className="bg-gray-200 justify-center items-center h-screen opacity-100 absolute z-10" id="logoutModal">
+        <div className="fixed left-0 top-0 bg-black bg-opacity-50 w-screen h-screen flex justify-center items-center px-[10px] md:px-0">
+          <div className="bg-white rounded shadow-md p-6 w-full flex justify-center items-center flex-col gap-y-8 md:w-[55%] lg:w-[35%]">
+            <div className="flex items-start gap-x-4">
+              <h1 className="text-xl font-medium text-dark text-center">{submitMessage}</h1>
+            </div>
+              <div className="flex gap-x-6">
+                <button onClick={updateProfileUser} type="button" className="p-[10px] bg-primary hover:bg-blue-800 rounded-md text-light text-base font-medium active:ring">
+                  Confirm
+                </button>
+                <button onClick={() => {setSubmitModal(false)}} className="p-[10px] bg-light border-2 hover:bg-slate-200 rounded-md text-dark text-base font-medium active:ring active:ring-slate-300">
+                  Cancel
+                </button>
+              </div>
+          </div>
+        </div>
+      </div>
+      }
       {isDropdownShown && (
         <DropdownMobile isClick={() => setIsDropdownShow(false)} />
       )}
