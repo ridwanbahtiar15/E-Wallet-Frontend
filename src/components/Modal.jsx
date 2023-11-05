@@ -58,7 +58,7 @@ function Modal({
           <div className="flex items-start gap-x-4">
             <h1 className="text-xl font-medium text-dark text-center">{msg}</h1>
           </div>
-          {status == "deleteTransaction" ? (
+          {status === "deleteTransaction" && status !== "Login Error" ? (
             <div className="flex gap-x-6">
               <button
                 type="button"
