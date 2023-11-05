@@ -23,6 +23,8 @@ function Modal({
   const loginErrorHandler = () => {
     closeModal({ isOpen: false, status: null });
   };
+  
+  // const jwt = user.userInfo.token;
 
   const logoutHandler = () => {
     const jwt = user.userInfo.token;
@@ -38,9 +40,11 @@ function Modal({
   };
 
   const onDeleteHandler = () => {
-    deleteTransaction(value.id, value.type).then((res) => {
+    const jwt = user.userInfo.token;
+    const id = user.userInfo.id
+    deleteTransaction(value.id, value.type, jwt).then((res) => {
       console.log(res.data.result);
-      transaction(1).then((res) => dataUser(res.data.result));
+      transaction(jwt, id).then((res) => dataUser(res.data.result));
       closeModal({ isOpen: false, status: null, value: null });
     });
 

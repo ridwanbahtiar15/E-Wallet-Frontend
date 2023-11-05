@@ -282,7 +282,7 @@ function ChangePassword() {
                     <img src={getImageUrl("eye", "svg")} alt="eye" className="w-[18px] h-[18px]" />
                   </div>
                 </div>
-
+                {err && <p className="text-red-500 text-sm">{err}</p> }
                 <button type="submit" className="p-3 bg-primary text-light rounded-md text-sm hover:bg-blue-800 focus:ring">
                   Submit
                 </button>
