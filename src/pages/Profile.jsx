@@ -280,7 +280,7 @@ function Profile() {
                     <label htmlFor="fullname" className="text-sm font-semibold text-dark lg:text-base">
                       Full Name
                     </label>
-                    <input type="text" id="fullname" value={userData && userData.full_name} onChange={handleChange} placeholder="Enter Your Full Name" className="py-3.5 px-10 border rounded-lg border-[#DEDEDE] text-xs tracking-wide outline-none focus:border-primary" />
+                    <input type="text" id="fullname" name="full_name" value={userData && userData.full_name} onChange={handleChange} placeholder="Enter Your Full Name" className="py-3.5 px-10 border rounded-lg border-[#DEDEDE] text-xs tracking-wide outline-none focus:border-primary" />
                     <div className="icon-email absolute top-[46px] left-4 lg:top-[50px]">
                       <img src={getImageUrl("User-small", "svg")} alt="User-small" className="w-4 h-4" />
                     </div>
