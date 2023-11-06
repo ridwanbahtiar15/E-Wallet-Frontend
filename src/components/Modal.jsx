@@ -22,7 +22,7 @@ function Modal({
   const loginErrorHandler = () => {
     closeModal({ isOpen: false, status: null });
   };
-  
+
   // const jwt = user.userInfo.token;
 
   const logoutHandler = () => {
@@ -40,7 +40,7 @@ function Modal({
 
   const onDeleteHandler = () => {
     const jwt = user.userInfo.token;
-    const id = user.userInfo.id
+    const id = user.userInfo.id;
     deleteTransaction(value.id, value.type, jwt).then((res) => {
       console.log(res.data.result);
       transaction(jwt, id).then((res) => dataUser(res.data.result));
@@ -57,7 +57,7 @@ function Modal({
           <div className="flex items-start gap-x-4">
             <h1 className="text-xl font-medium text-dark text-center">{msg}</h1>
           </div>
-          {status === "deleteTransaction" && status !== "Login Error" ? (
+          {status == "deleteTransaction" ? (
             <div className="flex gap-x-6">
               <button type="button" className="p-[10px] bg-primary hover:bg-blue-800 rounded-md text-light text-base font-medium active:ring" onClick={() => onDeleteHandler()}>
                 Confirm
@@ -66,7 +66,7 @@ function Modal({
                 Cancel
               </button>
             </div>
-          ) : (
+          ) : status == "logout" ? (
             <div className="flex gap-x-6">
               <button type="button" className="p-[10px] bg-primary hover:bg-blue-800 rounded-md text-light text-base font-medium active:ring" onClick={logoutHandler}>
                 Confirm
@@ -75,20 +75,12 @@ function Modal({
                 Cancel
               </button>
             </div>
-          )}
-          {status != "Login Error" ? (
-            <div></div>
-          ) : (
+          ) : status == "Login Error" ? (
             <button className="w-full p-[10px] bg-light border-2 hover:bg-slate-200 rounded-md text-dark text-base font-medium active:ring active:ring-slate-300" onClick={() => closeModal({ isOpen: false, status: null })}>
               Ok
             </button>
-          )}
-          {status != "Register Error" ? (
-            <div></div>
           ) : (
-            <button className="w-full p-[10px] bg-light border-2 hover:bg-slate-200 rounded-md text-dark text-base font-medium active:ring active:ring-slate-300" onClick={() => closeModal({ isOpen: false, status: null })}>
-              Ok
-            </button>
+            <div></div>
           )}
         </div>
       </div>
