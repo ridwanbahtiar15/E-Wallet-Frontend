@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { useSelector } from "react-redux";
 import { enterPin } from "../utils/https/enterPin";
 import Title from "../components/Title";
 
@@ -16,8 +16,7 @@ function EnterPin() {
       element.nextSibling.focus();
     }
   };
-
-  const jwt = localStorage.getItem("token");
+  const jwt = useSelector((state) => state.user.userInfo.token)
 
   const handleClick = (e) => {
     e.preventDefault();
