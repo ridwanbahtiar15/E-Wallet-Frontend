@@ -13,6 +13,8 @@ function Modal({
   /*  eslint-disable-next-line react/prop-types */
   dataUser,
   /*  eslint-disable-next-line react/prop-types */
+  historyMeta,
+  /*  eslint-disable-next-line react/prop-types */
   message: { msg },
 }) {
   const user = useSelector((state) => state.user);
@@ -43,7 +45,9 @@ function Modal({
     const id = user.userInfo.id;
     deleteTransaction(value.id, value.type, jwt).then((res) => {
       console.log(res.data.result);
-      transaction(jwt, id).then((res) => dataUser(res.data.result));
+      transaction(jwt, id).then((res) => {
+        dataUser(res.data.result), historyMeta(res.data.meta);
+      });
       closeModal({ isOpen: false, status: null, value: null });
     });
 
