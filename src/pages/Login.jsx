@@ -180,7 +180,9 @@ function Login() {
                     <img src="/svg/hide.svg" alt="hide-svg" className={`${isPassShown ? " hidden" : " block"} w-[16px]`} onClick={showPassHandler} />
                     <img src="/svg/show.svg" alt="show-svg" className={`${isPassShown ? " block" : " hidden"} w-[16px]`} onClick={showPassHandler} />
                   </div>
-
+                  <Link to="/forgotPass" className="flex justify-end cursor-default">
+                    <p className="w-max text-end cursor-pointer hover:text-[#4e4e4e] hover:underline">Forgot Password?</p>
+                  </Link>
                   <button type="submit" className="w-full p-[10px] h-[50px] text-white bg-[#2948FF] hover:bg-blue-700 rounded-md">
                     Login
                   </button>

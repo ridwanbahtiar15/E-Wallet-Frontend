@@ -22,6 +22,8 @@ function Modal({
   const loginErrorHandler = () => {
     closeModal({ isOpen: false, status: null });
   };
+  
+  // const jwt = user.userInfo.token;
 
   const logoutHandler = () => {
     const jwt = user.userInfo.token;
@@ -37,9 +39,11 @@ function Modal({
   };
 
   const onDeleteHandler = () => {
-    deleteTransaction(value.id, value.type).then((res) => {
+    const jwt = user.userInfo.token;
+    const id = user.userInfo.id
+    deleteTransaction(value.id, value.type, jwt).then((res) => {
       console.log(res.data.result);
-      transaction(1).then((res) => dataUser(res.data.result));
+      transaction(jwt, id).then((res) => dataUser(res.data.result));
       closeModal({ isOpen: false, status: null, value: null });
     });
 
@@ -53,7 +57,7 @@ function Modal({
           <div className="flex items-start gap-x-4">
             <h1 className="text-xl font-medium text-dark text-center">{msg}</h1>
           </div>
-          {status == "deleteTransaction" ? (
+          {status === "deleteTransaction" && status !== "Login Error" ? (
             <div className="flex gap-x-6">
               <button type="button" className="p-[10px] bg-primary hover:bg-blue-800 rounded-md text-light text-base font-medium active:ring" onClick={() => onDeleteHandler()}>
                 Confirm
