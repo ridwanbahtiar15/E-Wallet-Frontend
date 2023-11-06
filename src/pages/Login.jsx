@@ -85,8 +85,8 @@ function Login() {
   return (
     <>
       <Title title={"Login"}>
-        <div className="h-screen flex items-center">
-          <div className="flex-1 py-5 h-auto md:flex-initial md:w-2/3 lg:w-1/2 bg-white font-montserrat mx-5 lg:m-0 lg:p-10 md:rounded-r-full">
+        <div className="h-screen flex items-stretch">
+          <div className="flex-1 py-5 md:flex-initial md:w-2/3 lg:w-1/2 bg-white font-montserrat mx-5 lg:m-0 lg:p-10 md:rounded-r-full">
             <div className="flex flex-col gap-[13px]">
               <div className="flex items-center gap-[15px]">
                 <img src="/svg/Money-Wallet-logo.svg" alt="e-wallet-logo" />
@@ -198,7 +198,7 @@ function Login() {
               </div>
             </div>
           </div>
-          <div className="hidden md:bg-cover md:h-full md:flex md:flex-initial md:w-1/3 lg:w-1/2 md:bg-gradient-to-b md:from-[#396AFC] md:to-[#2948FF] md:justify-center md:items-center">
+          <div className="hidden md:bg-cover md:flex md:flex-initial md:w-1/3 lg:w-1/2 md:bg-gradient-to-b md:from-[#396AFC] md:to-[#2948FF] md:justify-center md:items-center">
             <img src="/img/login-side.png" alt="login-img" className="place-self-center object-contain" />
           </div>
         </div>
