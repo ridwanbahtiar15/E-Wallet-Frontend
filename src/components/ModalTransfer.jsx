@@ -1,17 +1,17 @@
 import EnterPin from "./modalTransfer/EnterPin";
-import Success from "./modalTransfer/Success";
-import Failed from "./modalTransfer/Failed";
 
 function ModalTransfer({
   /*  eslint-disable-next-line react/prop-types */
-  modalTransfer: { status },
+  modalTransfer: { status, body },
   closeModalTransfer,
 }) {
   console.log(status);
+  const data = body
+  // console.log(body);
   const switchModal = () => {
     switch (status) {
       case "transfer":
-        return <EnterPin />;
+        return <EnterPin data={data}/>;
         // eslint-disable-next-line no-unreachable
         break;
       case "success":

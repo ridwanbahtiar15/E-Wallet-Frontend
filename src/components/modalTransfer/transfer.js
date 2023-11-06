@@ -1,7 +1,8 @@
 import axios from "axios";
 
-export const getUser = (url, jwt) => {
-    return axios.get(url, {
+export const confirmPin = (body, jwt) => {
+    const url = import.meta.env.VITE_BACKEND_HOST + "/user"
+    return axios.post(url, body, {
         headers: {
             'Authorization': 'Bearer ' + jwt,
         },
@@ -16,3 +17,4 @@ export const createTransfer = (body, jwt) => {
         },
     });
 }
+
