@@ -5,7 +5,6 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { userAction } from "../redux/slices/user";
 
-
 function Modal({
   /*  eslint-disable-next-line react/prop-types */
   modal: { isOpen, status, value },
@@ -13,6 +12,8 @@ function Modal({
   closeModal,
   /*  eslint-disable-next-line react/prop-types */
   dataUser,
+  /*  eslint-disable-next-line react/prop-types */
+  historyMeta,
   /*  eslint-disable-next-line react/prop-types */
   message: { msg },
 }) {
@@ -23,7 +24,7 @@ function Modal({
   const loginErrorHandler = () => {
     closeModal({ isOpen: false, status: null });
   };
-  
+
   // const jwt = user.userInfo.token;
 
   const logoutHandler = () => {
@@ -41,10 +42,12 @@ function Modal({
 
   const onDeleteHandler = () => {
     const jwt = user.userInfo.token;
-    const id = user.userInfo.id
+    const id = user.userInfo.id;
     deleteTransaction(value.id, value.type, jwt).then((res) => {
       console.log(res.data.result);
-      transaction(jwt, id).then((res) => dataUser(res.data.result));
+      transaction(jwt, id).then((res) => {
+        dataUser(res.data.result), historyMeta(res.data.meta);
+      });
       closeModal({ isOpen: false, status: null, value: null });
     });
 
@@ -60,17 +63,10 @@ function Modal({
           </div>
           {status === "deleteTransaction" && status !== "Login Error" ? (
             <div className="flex gap-x-6">
-              <button
-                type="button"
-                className="p-[10px] bg-primary hover:bg-blue-800 rounded-md text-light text-base font-medium active:ring"
-                onClick={() => onDeleteHandler()}
-              >
+              <button type="button" className="p-[10px] bg-primary hover:bg-blue-800 rounded-md text-light text-base font-medium active:ring" onClick={() => onDeleteHandler()}>
                 Confirm
               </button>
-              <button
-                className="p-[10px] bg-light border-2 hover:bg-slate-200 rounded-md text-dark text-base font-medium active:ring active:ring-slate-300"
-                onClick={() => closeModal({ isOpen: false, status: null })}
-              >
+              <button className="p-[10px] bg-light border-2 hover:bg-slate-200 rounded-md text-dark text-base font-medium active:ring active:ring-slate-300" onClick={() => closeModal({ isOpen: false, status: null })}>
                 Cancel
               </button>
             </div>
