@@ -91,7 +91,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/transferDetail",
+    path: "/transfer/:id",
     element: <TransferDetail />,
   },
   {

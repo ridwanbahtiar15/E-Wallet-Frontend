@@ -8,20 +8,19 @@ import DropdownMobile from "../components/DropdownMobile";
 import Modal from "../components/Modal";
 import Title from "../components/Title";
 
-import { topUpPayment, completeTopUp } from '../utils/https/topUp';
-
+import { topUpPayment, completeTopUp } from "../utils/https/topUp";
 
 function Topup() {
-  const user = useSelector(state => state.user.userInfo);
+  const user = useSelector((state) => state.user.userInfo);
   const jwt = user.token;
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [Message, setMessage] = useState({ msg: null, isError: null });
   const [openModal, setOpenModal] = useState({
     isOpen: false,
     status: null,
   });
-  const [err, setErr] = useState(null)
+  const [err, setErr] = useState(null);
   const [isDropdownShown, setIsDropdownShow] = useState(false);
   const [bri, setBri] = useState(true);
   const [dana, setDana] = useState(false);
@@ -29,81 +28,81 @@ function Topup() {
   const [gopay, setGopay] = useState(false);
   const [ovo, setOvo] = useState(false);
 
-  const [token, setToken] = useState()
+  const [token, setToken] = useState();
   const [payment, setPayment] = useState(1);
-  const [methodPayment, setMethodPayment] = useState('')
-  const [nominal, setNominal] = useState(0)
+  const [methodPayment, setMethodPayment] = useState("");
+  const [nominal, setNominal] = useState(0);
 
   const body = {
     name: user.full_name,
     amount: parseInt(nominal),
     payment_type: payment,
     method: methodPayment,
-    id: user.id
-  }
+    id: user.id,
+  };
 
   const onChangeInputNominal = (e) => {
     e.preventDefault();
-    setNominal(e.target.value)
-  }
+    setNominal(e.target.value);
+  };
 
   const submit = () => {
-    if (body.amount < 1) 
-    return setErr("Plese input nominal that greater than 1")
+    if (body.amount < 1)
+      return setErr("Plese input nominal that greater than 1");
     // console.log(body)
-    setErr(null)
+    setErr(null);
     topUpPayment(body)
-        .then((res) => {
-            setErr(null)
-            console.log(res)
-            setToken(res.data.snapToken)
-        })
-        .catch((err) => {
-            console.log(err)
+      .then((res) => {
+        setErr(null);
+        console.log(res);
+        setToken(res.data.snapToken);
       })
-  }
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   useEffect(() => {
     if (token) {
-        window.snap.pay(token, {
-          onSuccess: (result) => {
-            // localStorage.setItem("Payment", JSON.stringify(result));
-            setToken("");
-            completeTopUp(jwt, body)
-                .then((res) => {
-                    console.log(res);
-                })
-                .catch((err) => {
-                    console.log(err);
-                });
-                navigate("/")
-            },
-            onPending: (result) => {
-                // localStorage.setItem("Payment", JSON.stringify(result))
-                setToken("")
-            },
-            onError: (error) => {
-                console.log(error)
-                setToken("")
-                navigate("/")
-            },
-            onClose: () => {
-                console.log("You not pay yet")
-                setToken("")
-            }
-        })
+      window.snap.pay(token, {
+        onSuccess: (result) => {
+          // localStorage.setItem("Payment", JSON.stringify(result));
+          setToken("");
+          completeTopUp(jwt, body)
+            .then((res) => {
+              console.log(res);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+          navigate("/");
+        },
+        onPending: (result) => {
+          // localStorage.setItem("Payment", JSON.stringify(result))
+          setToken("");
+        },
+        onError: (error) => {
+          console.log(error);
+          setToken("");
+          navigate("/");
+        },
+        onClose: () => {
+          console.log("You not pay yet");
+          setToken("");
+        },
+      });
     }
-    }, [token])
-    useEffect(() => {
-      const midtransUrl = "https://app.sandbox.midtrans.com/snap/snap.js";
-      let scriptTag = document.createElement("script")
-      scriptTag.src = midtransUrl
-      const midtransClientKey = import.meta.env.VITE_MIDTRANS_CLIENT_KEY;
-      scriptTag.setAttribute("data-client-key" , midtransClientKey)
-      document.body.appendChild(scriptTag)
-      return () => {
-          document.body.removeChild(scriptTag)
-    }
-  }, [])
+  }, [token]);
+  useEffect(() => {
+    const midtransUrl = "https://app.sandbox.midtrans.com/snap/snap.js";
+    let scriptTag = document.createElement("script");
+    scriptTag.src = midtransUrl;
+    const midtransClientKey = import.meta.env.VITE_MIDTRANS_CLIENT_KEY;
+    scriptTag.setAttribute("data-client-key", midtransClientKey);
+    document.body.appendChild(scriptTag);
+    return () => {
+      document.body.removeChild(scriptTag);
+    };
+  }, []);
   return (
     <>
       <Title title={"Top Up"}>
@@ -117,16 +116,30 @@ function Topup() {
         <main className="flex w-full font-montserrat">
           <aside className="xl:w-1/5 border-r border-[#E8E8E8] py-6 px-11 hidden lg:block">
             <div className="flex flex-col gap-y-4">
-              <Link to="/dashboard" className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary outline-none text-base font-normal text-secondary rounded-md">
+              <Link
+                to="/dashboard"
+                className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary outline-none text-base font-normal text-secondary rounded-md"
+              >
                 <div>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="25"
+                    viewBox="0 0 24 25"
+                    fill="none"
+                  >
                     <path
                       d="M4.92265 5.43523L6.4874 7M22 12.5C22 18.0229 17.5229 22.5 12 22.5C6.47715 22.5 2 18.0229 2 12.5H22ZM22 12.5H20H22ZM22 12.5C22 9.7418 20.8833 7.24435 19.0774 5.43523L22 12.5ZM2 12.5H4H2ZM2 12.5C2 9.74175 3.1167 7.24435 4.92265 5.43523L2 12.5ZM12 2.5V4.5V2.5ZM12 2.5C14.7646 2.5 17.2672 3.62189 19.0774 5.43523L12 2.5ZM12 2.5C9.2354 2.5 6.7328 3.62189 4.92265 5.43523L12 2.5ZM19.0774 5.43523L17.5126 7L19.0774 5.43523Z"
                       stroke="#4F5665"
                       strokeLinecap="round"
                       strokeLinejoin="round"
                     />
-                    <path d="M12 10.5V16.5" stroke="#4F5665" strokeLinecap="round" strokeLinejoin="round" />
+                    <path
+                      d="M12 10.5V16.5"
+                      stroke="#4F5665"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
                     <path
                       d="M19.926 18.598C18.0976 20.9711 15.2273 22.5 11.9999 22.5C8.77248 22.5 5.90218 20.9711 4.07373 18.598C6.41033 17.2629 9.11603 16.5 11.9999 16.5C14.8837 16.5 17.5894 17.2629 19.926 18.598Z"
                       stroke="#4F5665"
@@ -137,9 +150,18 @@ function Topup() {
                 </div>
                 <p className="max-xl:hidden">Dashboard</p>
               </Link>
-              <Link to="/transfer" className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-sm font-normal text-secondary">
+              <Link
+                to="/transfer"
+                className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-sm font-normal text-secondary"
+              >
                 <div>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="21"
+                    viewBox="0 0 20 21"
+                    fill="none"
+                  >
                     <path
                       fillRule="evenodd"
                       clipRule="evenodd"
@@ -150,10 +172,25 @@ function Topup() {
                 </div>
                 <p className="max-xl:hidden">Transfer</p>
               </Link>
-              <Link to="/history" className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-sm font-normal text-secondary">
+              <Link
+                to="/history"
+                className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-sm font-normal text-secondary"
+              >
                 <div>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
-                    <path d="M2.90918 3.86365V7.5H6.54556" stroke="#4F5665" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="25"
+                    viewBox="0 0 24 25"
+                    fill="none"
+                  >
+                    <path
+                      d="M2.90918 3.86365V7.5H6.54556"
+                      stroke="#4F5665"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
                     <path
                       d="M2 12.5C2 18.0229 6.47715 22.5 12 22.5C17.5229 22.5 22 18.0229 22 12.5C22 6.97715 17.5229 2.5 12 2.5C8.299 2.5 5.06755 4.51056 3.33839 7.49905"
                       stroke="#4F5665"
@@ -161,16 +198,43 @@ function Topup() {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                     />
-                    <path d="M12.0026 6.5L12.002 12.5044L16.2417 16.7441" stroke="#4F5665" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    <path
+                      d="M12.0026 6.5L12.002 12.5044L16.2417 16.7441"
+                      stroke="#4F5665"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
                   </svg>
                 </div>
                 <p className="max-xl:hidden">History</p>
               </Link>
-              <Link to="/topup" className="flex items-center gap-x-2 py-2 px-4 bg-primary rounded-md outline-none text-sm font-normal text-light">
+              <Link
+                to="/topup"
+                className="flex items-center gap-x-2 py-2 px-4 bg-primary rounded-md outline-none text-sm font-normal text-light"
+              >
                 <div>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewBox="0 0 20 22" fill="white">
-                    <mask id="mask0_234_227" maskUnits="userSpaceOnUse" x="0" y="7" width="20" height="15">
-                      <path fillRule="evenodd" clipRule="evenodd" d="M0.000488281 7.2941H20.0001V21.0381H0.000488281V7.2941Z" fill="white" />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="22"
+                    viewBox="0 0 20 22"
+                    fill="white"
+                  >
+                    <mask
+                      id="mask0_234_227"
+                      maskUnits="userSpaceOnUse"
+                      x="0"
+                      y="7"
+                      width="20"
+                      height="15"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        clipRule="evenodd"
+                        d="M0.000488281 7.2941H20.0001V21.0381H0.000488281V7.2941Z"
+                        fill="white"
+                      />
                     </mask>
                     <g mask="url(#mask0_234_227)">
                       <path
@@ -180,8 +244,20 @@ function Topup() {
                         fill="white"
                       />
                     </g>
-                    <mask id="mask1_234_227" maskUnits="userSpaceOnUse" x="9" y="0" width="2" height="15">
-                      <path fillRule="evenodd" clipRule="evenodd" d="M9.25 0.500092H10.75V14.041H9.25V0.500092Z" fill="white" />
+                    <mask
+                      id="mask1_234_227"
+                      maskUnits="userSpaceOnUse"
+                      x="9"
+                      y="0"
+                      width="2"
+                      height="15"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        clipRule="evenodd"
+                        d="M9.25 0.500092H10.75V14.041H9.25V0.500092Z"
+                        fill="white"
+                      />
                     </mask>
                     <g mask="url(#mask1_234_227)">
                       <path
@@ -201,9 +277,18 @@ function Topup() {
                 </div>
                 <p className="max-xl:hidden">Top Up</p>
               </Link>
-              <Link to="/profile" className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-sm font-normal text-secondary">
+              <Link
+                to="/profile"
+                className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-sm font-normal text-secondary"
+              >
                 <div>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                  >
                     <path
                       fillRule="evenodd"
                       clipRule="evenodd"
@@ -222,8 +307,20 @@ function Topup() {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                     />
-                    <path d="M14.4829 8.38159C16.0839 8.15659 17.3169 6.78259 17.3199 5.11959C17.3199 3.48059 16.1249 2.12059 14.5579 1.86359" stroke="#4F5665" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                    <path d="M16.5952 12.2322C18.1462 12.4632 19.2292 13.0072 19.2292 14.1272C19.2292 14.8982 18.7192 15.3982 17.8952 15.7112" stroke="#4F5665" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    <path
+                      d="M14.4829 8.38159C16.0839 8.15659 17.3169 6.78259 17.3199 5.11959C17.3199 3.48059 16.1249 2.12059 14.5579 1.86359"
+                      stroke="#4F5665"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M16.5952 12.2322C18.1462 12.4632 19.2292 13.0072 19.2292 14.1272C19.2292 14.8982 18.7192 15.3982 17.8952 15.7112"
+                      stroke="#4F5665"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
                   </svg>
                 </div>
                 <p className="max-xl:hidden">Profile</p>
@@ -237,21 +334,36 @@ function Topup() {
                 }}
               >
                 <div>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="23" viewBox="0 0 22 23" fill="none">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="22"
+                    height="23"
+                    viewBox="0 0 22 23"
+                    fill="none"
+                  >
                     <path
                       d="M12 7.125L12 4.5C12 2.84315 13.3431 1.5 15 1.5L18 1.5C19.6569 1.5 21 2.84315 21 4.5L21 18.5C21 20.1569 19.6569 21.5 18 21.5L15 21.5C13.3431 21.5 12 20.1569 12 18.5L12 16.5"
                       stroke="#D00000"
                       strokeWidth="1.5"
                       strokeLinecap="round"
                     />
-                    <path d="M4 14.5L1.44194 11.9419C1.19786 11.6979 1.19786 11.3021 1.44194 11.0581L4 8.5" stroke="#D00000" strokeWidth="1.5" strokeLinecap="round" />
-                    <path d="M9 11.5L2 11.5" stroke="#D00000" strokeWidth="1.5" strokeLinecap="round" />
+                    <path
+                      d="M4 14.5L1.44194 11.9419C1.19786 11.6979 1.19786 11.3021 1.44194 11.0581L4 8.5"
+                      stroke="#D00000"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                    />
+                    <path
+                      d="M9 11.5L2 11.5"
+                      stroke="#D00000"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                    />
                   </svg>
                 </div>
                 <p className="max-xl:hidden text-danger">Logout</p>
               </button>
             </div>
-            <p className="text-dark font-semibold">Top Up Account</p>
           </aside>
           <section className="flex flex-col gap-y-5 lg:flex-row gap-x-5">
             <section className="w-full flex flex-col border border-[#E8E8E8] py-5 px-8 gap-y-4 lg:w-2/3">
@@ -321,8 +433,8 @@ function Topup() {
                         setBca(false);
                         setGopay(false);
                         setOvo(false);
-                        setPayment(1)
-                        setMethodPayment("bri_va")
+                        setPayment(1);
+                        setMethodPayment("bri_va");
                       }}
                       className="cursor-pointer"
                     >
@@ -353,8 +465,8 @@ function Topup() {
                         setBca(false);
                         setGopay(false);
                         setOvo(false);
-                        setPayment(2)
-                        setMethodPayment("bri_va")
+                        setPayment(2);
+                        setMethodPayment("bri_va");
                       }}
                       className="cursor-pointer"
                     >
@@ -385,8 +497,8 @@ function Topup() {
                         setBca(true);
                         setGopay(false);
                         setOvo(false);
-                        setPayment(3)
-                        setMethodPayment("bca_va")
+                        setPayment(3);
+                        setMethodPayment("bca_va");
                       }}
                       className="cursor-pointer"
                     >
@@ -417,8 +529,8 @@ function Topup() {
                         setBca(false);
                         setGopay(true);
                         setOvo(false);
-                        setPayment(4)
-                        setMethodPayment("gopay")
+                        setPayment(4);
+                        setMethodPayment("gopay");
                       }}
                       className="cursor-pointer"
                     >
@@ -449,8 +561,8 @@ function Topup() {
                         setBca(false);
                         setGopay(false);
                         setOvo(true);
-                        setPayment(5)
-                        setMethodPayment("gopay")
+                        setPayment(5);
+                        setMethodPayment("gopay");
                       }}
                       className="cursor-pointer"
                     >
@@ -482,9 +594,7 @@ function Topup() {
               </header>
               <div className="flex flex-col gap-y-5">
                 <div className="flex justify-between">
-                  <span className="text-sm font-bold text-secondary">
-                    Fee
-                  </span>
+                  <span className="text-sm font-bold text-secondary">Fee</span>
                   <span className="text-sm font-bold text-dark">
                     IDR. {nominal}
                   </span>
@@ -496,7 +606,9 @@ function Topup() {
                   <span className="text-sm font-bold text-dark">IDR. 0</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-sm font-bold text-secondary">Administration Fee</span>
+                  <span className="text-sm font-bold text-secondary">
+                    Administration Fee
+                  </span>
                   <span className="text-sm font-bold text-dark">IDR. 4000</span>
                 </div>
                 <hr />
@@ -508,19 +620,30 @@ function Topup() {
                     IDR. {4000 + parseInt(nominal) || 0}
                   </span>
                 </div>
-                {err && <p className="text-red-600">{err}</p> }
-                <button onClick={submit} className="p-[10px] text-sm font-medium rounded-md text-light bg-primary hover:bg-blue-800 active:ring">
+                {err && <p className="text-red-600">{err}</p>}
+                <button
+                  onClick={submit}
+                  className="p-[10px] text-sm font-medium rounded-md text-light bg-primary hover:bg-blue-800 active:ring"
+                >
                   Submit
                 </button>
                 <p className="text-sm font-normal text-secondary">
                   *Get Discount if you pay with Bank Central Asia
                 </p>
-                </div>
-              </section>
+              </div>
             </section>
+          </section>
         </main>
-        {isDropdownShown && <DropdownMobile isClick={() => setIsDropdownShow(false)} />}
-        {openModal.isOpen && <Modal modal={openModal} closeModal={setOpenModal} message={Message} />}
+        {isDropdownShown && (
+          <DropdownMobile isClick={() => setIsDropdownShow(false)} />
+        )}
+        {openModal.isOpen && (
+          <Modal
+            modal={openModal}
+            closeModal={setOpenModal}
+            message={Message}
+          />
+        )}
       </Title>
     </>
   );
