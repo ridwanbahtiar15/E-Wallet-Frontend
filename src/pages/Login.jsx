@@ -15,12 +15,6 @@ function Login() {
     status: null,
   });
 
-  const [isPassShown, setIsPassShown] = useState(false);
-
-  const showPassHandler = () => {
-    setIsPassShown((state) => !state);
-  };
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
