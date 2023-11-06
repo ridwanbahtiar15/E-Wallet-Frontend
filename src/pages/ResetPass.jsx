@@ -4,6 +4,8 @@ import getImageUrl from "../utils/imageGetter";
 // import { forgotPass } from "../utils/https/forgotPass";
 import Title from "../components/Title";
 import Modal from "../components/Modal";
+import { useSearchParams } from "react-router-dom";
+import { resetPassword } from "../utils/https/resetPass";
 
 function ResetPass() {
   const [Message, setMessage] = useState({ msg: null, isError: null });
@@ -11,6 +13,8 @@ function ResetPass() {
     isOpen: false,
     status: null,
   });
+
+  const [searchParams, setSearchParams] = useSearchParams()
 
   const [isPassShown2, setIsPassShown2] = useState(false);
   const [isPassShown3, setIsPassShown3] = useState(false);
@@ -31,7 +35,26 @@ function ResetPass() {
       setOpenModal({ isOpen: true, status: "resetPassword" });
       return;
     }
-    // Axios yang menyambungkan ke backend
+    const url = import.meta.env.VITE_BACKEND_HOST + "/auth/password?" + searchParams.toString()
+    const body = {
+      password: e.target.password2.value
+    }
+    resetPassword(url, body)
+    .then((res) => {
+      console.log(res)
+      setOpenModal({isOpen: true})
+      setMessage({msg: "Password successfully reset"})
+    })
+    .catch((err) => {
+      console.log(err)
+      if (err.response.status === 400) {
+        setOpenModal({isOpen: true})
+        setMessage({msg: "Your OTP is wrong"})
+        return;
+      }
+      setOpenModal({isOpen: true})
+      setMessage({msg: "Internal Server Error"})
+    })
   };
 
   return (

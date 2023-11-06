@@ -27,38 +27,30 @@ function Transfer() {
     isOpen: false,
     status: null,
   });
+
   const [isDropdownShown, setIsDropdownShow] = useState(false);
   const jwt = useSelector((state) => state.user.userInfo.token)
   const [searchParams, setSearchParams] = useSearchParams({
   
   })
-  const [nameList, setNameList] = useState([
-    {
-      No: 1,
-      // photo_profile: "a",
-      full_name: "Joko",
-      phone_number: "+62-821-1111-2222",
-    },
-    {
-      No: 2,
-      // photo_profile: "a",
-      full_name: "Aldi",
-      phone_number: "+62-821-1332-2132",
-    },
-    {
-      No: 3,
-      // photo_profile: "a",
-      full_name: "Sultan",
-      phone_number: "+62-821-1233-5211",
-    },
-    {
-      No: 4,
-      // photo_profile: "a",
-      full_name: "Anwar",
-      phone_number: "+62-821-8655-1235",
-    },
-  ]);
+  const [nameList, setNameList] = useState([]);
+  const [meta, setMeta] = useState({})
 
+  const url = import.meta.env.VITE_BACKEND_HOST + "/user?" + searchParams.toString()
+
+
+  useEffect(() => {
+    getUser(url, jwt)
+    .then((res) => {
+      console.log(res)
+      setNameList(res.data.result)
+      setMeta(res.data.meta)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }, [])
+  
   const onChangeInputHandler = (e) => {
     e.preventDefault();
     const phoneNumberRegex = /^[\d+-]+$/;
@@ -68,11 +60,11 @@ function Transfer() {
     });
   };
   const searchUser = () => {
-    const url = import.meta.env.VITE_BACKEND_HOST + "/user?" + searchParams.toString()
     getUser(url, jwt)
     .then((res) => {
       console.log(res)
       setNameList(res.data.result)
+      setMeta(res.data.meta)
     })
     .catch((err) => {
       console.log(err)
@@ -408,7 +400,7 @@ function Transfer() {
                     <div className="flex flex-col gap-y-1">
                       <p className="font-semibold text-dark">Find People</p>
                       <p className="text-xs font-medium text-secondary">
-                        8 Result for Ghaluh
+                        {meta && meta.totalUser} Result for Ghaluh
                       </p>
                     </div>
                     <div className="flex flex-col gap-y-4 lg:flex-row lg:gap-x-3 lg:items-end">
