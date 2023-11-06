@@ -5,7 +5,6 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { userAction } from "../redux/slices/user";
 
-
 function Modal({
   /*  eslint-disable-next-line react/prop-types */
   modal: { isOpen, status, value },
@@ -56,17 +55,10 @@ function Modal({
           </div>
           {status == "deleteTransaction" ? (
             <div className="flex gap-x-6">
-              <button
-                type="button"
-                className="p-[10px] bg-primary hover:bg-blue-800 rounded-md text-light text-base font-medium active:ring"
-                onClick={() => onDeleteHandler()}
-              >
+              <button type="button" className="p-[10px] bg-primary hover:bg-blue-800 rounded-md text-light text-base font-medium active:ring" onClick={() => onDeleteHandler()}>
                 Confirm
               </button>
-              <button
-                className="p-[10px] bg-light border-2 hover:bg-slate-200 rounded-md text-dark text-base font-medium active:ring active:ring-slate-300"
-                onClick={() => closeModal({ isOpen: false, status: null })}
-              >
+              <button className="p-[10px] bg-light border-2 hover:bg-slate-200 rounded-md text-dark text-base font-medium active:ring active:ring-slate-300" onClick={() => closeModal({ isOpen: false, status: null })}>
                 Cancel
               </button>
             </div>
@@ -81,6 +73,13 @@ function Modal({
             </div>
           )}
           {status != "Login Error" ? (
+            <div></div>
+          ) : (
+            <button className="w-full p-[10px] bg-light border-2 hover:bg-slate-200 rounded-md text-dark text-base font-medium active:ring active:ring-slate-300" onClick={() => closeModal({ isOpen: false, status: null })}>
+              Ok
+            </button>
+          )}
+          {status != "Register Error" ? (
             <div></div>
           ) : (
             <button className="w-full p-[10px] bg-light border-2 hover:bg-slate-200 rounded-md text-dark text-base font-medium active:ring active:ring-slate-300" onClick={() => closeModal({ isOpen: false, status: null })}>

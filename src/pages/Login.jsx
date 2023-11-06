@@ -16,6 +16,13 @@ function Login() {
     isOpen: false,
     status: null,
   });
+
+  const [isPassShown, setIsPassShown] = useState(false);
+
+  const showPassHandler = () => {
+    setIsPassShown((state) => !state);
+  };
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -86,7 +93,7 @@ function Login() {
                 <h1 className="text-[#2948FF] font-medium">E-Wallet</h1>
               </div>
               <p className="text-lg md:text-2xl font-medium">Hello Welcome Back 👋</p>
-              <p className="text-xs md:leading-6 font-normal">Fill out the form correctly or you can login with several option.</p>
+              <p className="text-sm md:leading-6 font-normal">Fill out the form correctly or you can login with several option.</p>
               <div className="flex gap-[15px] justify-center md:flex-col">
                 <button className="flex flex-1 border border-[#E8E8E8] bg-white h-[51px] p-[10px] gap-[10px] rounded-full justify-center hover:bg-slate-200">
                   <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -143,7 +150,7 @@ function Login() {
                         </clipPath>
                       </defs>
                     </svg>
-                    <input type="text" placeholder="Enter Your Email" id="email" className="flex-1 outline-none text-xs font-normal text-[#4F5665]" />
+                    <input type="text" placeholder="Enter Your Email" id="email" className="flex-1 outline-none text-sm font-normal text-[#4F5665]" />
                   </div>
                   <label htmlFor="password" className="text-base font-medium">
                     Password
@@ -169,7 +176,9 @@ function Login() {
                         strokeLinejoin="round"
                       />
                     </svg>
-                    <input type="password" placeholder="Enter Your Password" id="password" className="flex-1 outline-none text- font-normal text-[#4F5665]" />
+                    <input type={isPassShown ? "text" : "password"} placeholder="Enter Your Password" id="password" className="flex-1 outline-none text-sm font-normal text-[#4F5665]" />
+                    <img src="/svg/hide.svg" alt="hide-svg" className={`${isPassShown ? " hidden" : " block"} w-[16px]`} onClick={showPassHandler} />
+                    <img src="/svg/show.svg" alt="show-svg" className={`${isPassShown ? " block" : " hidden"} w-[16px]`} onClick={showPassHandler} />
                   </div>
 
                   <button type="submit" className="w-full p-[10px] h-[50px] text-white bg-[#2948FF] hover:bg-blue-700 rounded-md">
@@ -179,7 +188,7 @@ function Login() {
                 <p className="text-center font-normal text-xs mt-[13px]">
                   Not Have An Account?{" "}
                   <span>
-                    <Link to="/" className="text-blue-700">
+                    <Link to="/register" className="text-blue-700">
                       Register
                     </Link>
                   </span>
