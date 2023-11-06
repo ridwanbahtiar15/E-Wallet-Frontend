@@ -459,33 +459,35 @@ function Transfer() {
         </main>
         <div className="bg-gray-200 justify-center items-center h-screen opacity-100 absolute z-10" id="confirm-transfer-modal">
           <div className="fixed left-0 top-0 bg-black bg-opacity-50 w-screen h-screen flex justify-center items-center px-[10px] md:px-0">
-            <div className="bg-white w-[700px] h-[590px] rounded shadow-md p-6 flex flex-col gap-y-8 md:w-[55%] lg:w-[35%]">
+            <div className="bg-white w-full rounded shadow-md p-6 flex flex-col gap-y-8 md:w-[55%] lg:w-[35%]">
               <div className="flex font-montserrat items-start flex-col gap-x-4">
-                <h1 className="text-base font-medium text-dark">Transfer to Ghaluh 1</h1>
-                <hr />
-                <p className="text-4xl">Enter Your Pin 👋</p>
-                <p className="text-base text-[#4F5665]">Enter Your Pin For Transaction</p>
-                <div className="pt-6 pb-16">
-                  {otp.map((data, index) => {
-                    return (
-                      <>
-                        <input
-                          type="text"
-                          maxLength="1"
-                          className="border-b lg:w-[50px] lg:h-[50px] w-[30px] h-[30px] text-center mr-1 md:mr-5 outline-none border-primary text-[30px]"
-                          key={index}
-                          value={data}
-                          onChange={(e) => handleChange(e.target, index)}
-                          onFocus={(e) => e.target.select()}
-                        />
-                      </>
-                    );
-                  })}
-                </div>
-                <button className="text-base w-full text-white bg-[#2948FF] p-2.5 rounded-md">Next</button>
-                <div className="flex w-full text-base justify-center">
-                  <p className="">Forgot Your Pin?</p>
-                  <a href="#" className="text-[#2948FF]">Reset</a>
+                <h1 className="text-base font-medium text-dark mb-2.5">Transfer to Ghaluh 1</h1>
+                <hr className="w-full h-1 mb-[70px]"/>
+                <div className="flex flex-col gap-3">
+                  <p className="text-4xl">Enter Your Pin 👋</p>
+                  <p className="text-base text-[#4F5665]">Enter Your Pin For Transaction</p>
+                  <div className="pt-2 pb-2">
+                    {otp.map((data, index) => {
+                      return (
+                        <>
+                          <input
+                            type="text"
+                            maxLength="1"
+                            className="border-b lg:w-[50px] lg:h-[50px] w-[30px] h-[30px] text-center mr-1 md:mr-5 outline-none border-primary text-[30px]"
+                            key={index}
+                            value={data}
+                            onChange={(e) => handleChange(e.target, index)}
+                            onFocus={(e) => e.target.select()}
+                          />
+                        </>
+                      );
+                    })}
+                  </div>
+                  <button className="text-base w-full text-white bg-[#2948FF] p-2.5 rounded-md">Next</button>
+                  <div className="flex w-full text-base justify-center">
+                    <p className="">Forgot Your Pin?</p>
+                    <a href="#" className="text-[#2948FF]">Reset</a>
+                  </div>
                 </div>
               </div>
             </div>
