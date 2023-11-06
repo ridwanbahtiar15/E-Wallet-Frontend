@@ -14,8 +14,13 @@ import EnterPin from "./pages/EnterPin";
 import TransferDetail from "./pages/TransferDetail";
 import Topup from "./pages/Topup";
 import Private from "./components/Private";
+import ResetPass from "./pages/ResetPass";
 
 const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Home />,
+  },
   {
     path: "/dashboard",
     element: (
@@ -66,10 +71,6 @@ const router = createBrowserRouter([
     element: <Login />,
   },
   {
-    path: "/",
-    element: <Home />,
-  },
-  {
     path: "/forgotPass",
     element: <ForgotPass />,
   },
@@ -91,7 +92,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/transferDetail",
-    element: <TransferDetail/>
+    element: <TransferDetail />,
   },
   {
     path: "/topup",
@@ -100,6 +101,10 @@ const router = createBrowserRouter([
         <Topup />,
       </Private>
     ),
+  },
+  {
+    path: "/resetpass",
+    element: <ResetPass />,
   },
 ]);
 

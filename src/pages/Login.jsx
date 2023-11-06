@@ -171,7 +171,9 @@ function Login() {
                     </svg>
                     <input type="password" placeholder="Enter Your Password" id="password" className="flex-1 outline-none text- font-normal text-[#4F5665]" />
                   </div>
-
+                  <Link to="/forgotPass" className="flex justify-end cursor-default">
+                    <p className="w-max text-end cursor-pointer hover:text-[#4e4e4e] hover:underline">Forgot Password?</p>
+                  </Link>
                   <button type="submit" className="w-full p-[10px] h-[50px] text-white bg-[#2948FF] hover:bg-blue-700 rounded-md">
                     Login
                   </button>
@@ -179,7 +181,7 @@ function Login() {
                 <p className="text-center font-normal text-xs mt-[13px]">
                   Not Have An Account?{" "}
                   <span>
-                    <Link to="/" className="text-blue-700">
+                    <Link to="/register" className="text-blue-700">
                       Register
                     </Link>
                   </span>
