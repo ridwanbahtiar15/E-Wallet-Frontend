@@ -1,7 +1,17 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { confirmPin, createTransfer } from "./transfer";
+import getImageUrl from "../../utils/imageGetter";
 
-function EnterPin() {
+
+function EnterPin({
+  /*  eslint-disable-next-line react/prop-types */
+  modalTransfer: { body },
+  closeModalTransfer,
+}) {
+  const data = body
+  const jwt = useSelector((state) => state.user.userInfo.token)
   const [otp, setOtp] = useState(new Array(6).fill(""));
   const handleChange = (element, index) => {
     if (isNaN(element.value)) return false;
@@ -14,12 +24,40 @@ function EnterPin() {
     }
   };
 
-  const handleClick = (e) => {
-    e.preventDefault();
+  const [status, setStatus] = useState("transfer")
 
+  const failed = () => {
+    setOtp((new Array(6).fill("")))
+    setStatus("transfer")
+  }
+
+  const handleClick = () => {
+    const body = {
+      last_pin: otp.join(""),
+    }
     console.log(otp.join(""));
+    console.log(data)
+    confirmPin(body, jwt)
+    .then((res) => {
+      console.log(res)
+      createTransfer(data, jwt) //kalau sukses bakal jalan axios create transaction
+      .then((res) => {
+        console.log(res)
+        setStatus("success") //create transaction berhasil, status success
+      })
+      .catch((err) => {
+        console.log(err)
+        setStatus("failed") //error pada create transaction, status failed
+      })
+    })
+    .catch((err) => {
+      console.log(err)
+      setStatus("failed") //karena pin tidak terkonfirmasi
+    })
   };
   return (
+    <>
+    {status === "transfer" &&
     <div className="bg-white rounded-2xl shadow-md p-6 w-full flex justify-center flex-col gap-y-3 md:w-[70%] lg:w-[50%] xl:w-[40%]">
       <div className="text-left flex flex-col gap-y-3">
         <p className="text-sm lg:text-base font-semibold text-secondary border-b border-[#E8E8E8] pb-1">
@@ -65,6 +103,71 @@ function EnterPin() {
         </Link>
       </p>
     </div>
+    }
+    {status === "failed" &&
+    <div className="bg-white rounded-2xl shadow-md p-6 pb-8 w-full flex justify-center flex-col gap-y-3 md:w-[70%] lg:w-[50%] xl:w-[40%]">
+    <div className="text-left flex flex-col gap-y-3">
+      <p className="text-sm lg:text-base font-semibold text-secondary border-b border-[#E8E8E8] pb-1">
+        TRANSFER TO GALUH
+      </p>
+    </div>
+    <div className="flex flex-col gap-y-3 items-center">
+      <div>
+        <img src={getImageUrl("oh-no", "png")} alt="oh-no" />
+      </div>
+      <p className="text-[22px] font-semibold text-dark">
+        Oops Transfer <span className="text-danger">Failed</span>
+      </p>
+      <p className="text-sm text-secondary">
+        Sorry Theres is an issue for your transfer, try again later !
+      </p>
+    </div>
+    <button
+      type="button" onClick={failed}
+      className="p-3 bg-primary text-light rounded-md font-medium hover:bg-blue-800 focus:ring"
+    >
+      Try Again
+    </button>
+    <Link
+      to="/dashboard"
+      className="p-3 bg-light border border-primary text-primary rounded-md font-medium hover:bg-slate-200 focus:ring flex justify-center items-center"
+    >
+      Back To Dashboard
+    </Link>
+  </div>
+  }
+  {status === "success" &&
+  <div className="bg-white rounded-2xl shadow-md p-6 pb-8 w-full flex justify-center flex-col gap-y-3 md:w-[70%] lg:w-[50%] xl:w-[40%]">
+  <div className="text-left flex flex-col gap-y-3">
+    <p className="text-sm lg:text-base font-semibold text-secondary border-b border-[#E8E8E8] pb-1">
+      TRANSFER TO GALUH
+    </p>
+  </div>
+  <div className="flex flex-col gap-y-3 items-center">
+    <div>
+      <img src={getImageUrl("contact-us", "png")} alt="contact-us" />
+    </div>
+    <p className="text-[22px] font-semibold text-dark">
+      Yeay Transfer <span className="text-success">Success</span>
+    </p>
+    <p className="text-sm text-secondary">
+      Thank you for using this application for your financial
+    </p>
+  </div>
+  <Link
+    to="/dashboard"
+    className="p-3 bg-primary text-light rounded-md font-medium hover:bg-blue-800 focus:ring"
+  >
+    Done
+  </Link>
+  <Link
+    to="/transfer"
+    className="p-3 bg-light border border-primary text-primary rounded-md font-medium hover:bg-slate-200 focus:ring flex justify-center items-center"
+  >
+    Transfer Again
+  </Link>
+</div>}
+    </>
   );
 }
 

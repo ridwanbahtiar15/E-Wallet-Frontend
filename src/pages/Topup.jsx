@@ -372,14 +372,14 @@ function Topup() {
                 <div className="flex flex-col gap-y-4 md:flex-row md:gap-x-4 bg-[#E8E8E84D] p-3 rounded-lg lg:items-start">
                   <div className="">
                     <img
-                      src={getImageUrl("profile", "jpg")}
+                      src={user ? user.photo_profile : getImageUrl("profile", "jpg")}
                       alt="User"
                       className="w-full h-full md:w-[100px] md:h-[100px] rounded-lg"
                     />
                   </div>
                   <div className="text-sm flex flex-col gap-y-4">
-                    <p className="text-sm font-semibold">Ghaluh Wizard</p>
-                    <p className="text-sm text-secondary">(239) 555-0108</p>
+                    <p className="text-sm font-semibold">{user && user.full_name}</p>
+                    <p className="text-sm text-secondary">{user && user.phone_number}</p>
                     <div className="bg-primary flex items-center justify-center self-baseline py-1 px-3 rounded-md gap-x-2">
                       <div>
                         <img

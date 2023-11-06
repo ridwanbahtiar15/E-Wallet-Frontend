@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useSearchParams, useParams } from "react-router-dom";
 import axios from "axios";
 
 import Navbar from "../components/Navbar";
@@ -7,7 +7,10 @@ import getImageUrl from "../utils/imageGetter";
 import DropdownMobile from "../components/DropdownMobile";
 import Modal from "../components/Modal";
 import Title from "../components/Title";
-import ModalTransfer from "../components/ModalTransfer";
+import EnterPin from "../components/modalTransfer/EnterPin";
+
+import { getUser , createTransfer } from "../utils/https/transfer";
+import { useSelector } from "react-redux";
 
 function Transfer() {
   const [Message, setMessage] = useState({ msg: null, isError: null });
@@ -21,41 +24,30 @@ function Transfer() {
     status: null,
   });
   const [isDropdownShown, setIsDropdownShow] = useState(false);
-  const [nameList, setNameList] = useState([
-    {
-      No: 1,
-      photo_profile: "a",
-      full_name: "Joko",
-      phone_number: "+62-821-1111-2222",
-    },
-    {
-      No: 2,
-      photo_profile: "a",
-      full_name: "Aldi",
-      phone_number: "+62-821-1332-2132",
-    },
-    {
-      No: 3,
-      photo_profile: "a",
-      full_name: "Sultan",
-      phone_number: "+62-821-1233-5211",
-    },
-    {
-      No: 4,
-      photo_profile: "a",
-      full_name: "Anwar",
-      phone_number: "+62-821-8655-1235",
-    },
-  ]);
-  const [search, setSearch] = useState("");
-  const [transferStep, setTransferStep] = useState("nominalTransfer");
+  const [user, setUser] = useState({})
+  const jwt = useSelector((state) => state.user.userInfo.token)
+  const id = useParams()
+  useEffect(() => {
+    const url = import.meta.env.VITE_BACKEND_HOST + "/user?id=" + id.id
+    getUser(url, jwt)
+    .then((res) => {
+      console.log(res.data.result[0])
+      setUser(res.data.result[0])
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  },[])
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-
-    setOpenModalTransfer({ isOpen: true, status: "transfer" });
-
-    // axios backend
+    const body = {
+      to: id.id,
+      amount: parseInt(e.target.nominal.value),
+      notes: e.target.notes.value,
+      name: user.full_name
+    }
+    setOpenModalTransfer({ isOpen: true, body: body });
   };
 
   return (
@@ -410,14 +402,14 @@ function Transfer() {
                 >
                   <div>
                     <img
-                      src={nameList.photo_profile}
+                      src={user && user.photo_profile}
                       alt="photo_profile"
-                      className="w-[80px] h-[80px] rounded-md"
+                      className="w-[84px] h-[84px] rounded-md"
                     />
                   </div>
                   <div className="flex flex-col gap-2">
-                    <p className="font-semibold">Ghaluh</p>
-                    <p className="text-[#4F5665]">+62-821-1111-2222</p>
+                    <p className="font-semibold">{user && user.full_name}</p>
+                    <p className="text-[#4F5665]">{user && user.phone_number}</p>
                     <div className="flex px-2 py-1 bg-[#2948FF] text-white w-fit rounded-md gap-1">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -533,10 +525,16 @@ function Transfer() {
           />
         )}
         {openModalTransfer.isOpen && (
-          <ModalTransfer
+        <div
+          className="bg-gray-200 justify-center items-center h-screen opacity-100 absolute z-10 font-montserrat"
+          id="modalTransfer"
+        >
+          <div className="fixed left-0 top-0 bg-black bg-opacity-50 w-screen h-screen flex justify-center items-center px-[10px] md:px-0">
+          <EnterPin
             modalTransfer={openModalTransfer}
-            closeModalTransfer={setOpenModalTransfer}
           />
+          </div>
+        </div>
         )}
       </Title>
     </>

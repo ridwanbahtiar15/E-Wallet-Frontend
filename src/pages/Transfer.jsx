@@ -9,6 +9,9 @@ import Modal from "../components/Modal";
 import Title from "../components/Title";
 import ModalTransfer from "../components/ModalTransfer";
 
+import { getUser } from "../utils/https/transfer";
+import { useSelector } from "react-redux";
+
 function Transfer() {
   const [Message, setMessage] = useState({ msg: null, isError: null });
   const [openModal, setOpenModal] = useState({
@@ -25,42 +28,57 @@ function Transfer() {
     status: null,
   });
   const [isDropdownShown, setIsDropdownShow] = useState(false);
+  const jwt = useSelector((state) => state.user.userInfo.token)
+  const [searchParams, setSearchParams] = useSearchParams({
+  
+  })
   const [nameList, setNameList] = useState([
     {
       No: 1,
-      photo_profile: "a",
+      // photo_profile: "a",
       full_name: "Joko",
       phone_number: "+62-821-1111-2222",
     },
     {
       No: 2,
-      photo_profile: "a",
+      // photo_profile: "a",
       full_name: "Aldi",
       phone_number: "+62-821-1332-2132",
     },
     {
       No: 3,
-      photo_profile: "a",
+      // photo_profile: "a",
       full_name: "Sultan",
       phone_number: "+62-821-1233-5211",
     },
     {
       No: 4,
-      photo_profile: "a",
+      // photo_profile: "a",
       full_name: "Anwar",
       phone_number: "+62-821-8655-1235",
     },
   ]);
-  const [search, setSearch] = useState("");
-  const [transferStep, setTransferStep] = useState("nominalTransfer");
 
-  const onSubmitHandler = (e) => {
+  const onChangeInputHandler = (e) => {
     e.preventDefault();
-
-    setOpenModalTransfer({ isOpen: true, status: "transfer" });
-
-    // axios backend
+    const phoneNumberRegex = /^[\d+-]+$/;
+    setSearchParams({
+      phone: phoneNumberRegex.test(e.target.value) ? e.target.value : "",
+      name: phoneNumberRegex.test(e.target.value) ? "" : e.target.value
+    });
   };
+  const searchUser = () => {
+    const url = import.meta.env.VITE_BACKEND_HOST + "/user?" + searchParams.toString()
+    getUser(url, jwt)
+    .then((res) => {
+      console.log(res)
+      setNameList(res.data.result)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+    // console.log(url)
+  }
 
   return (
     <>
@@ -395,17 +413,18 @@ function Transfer() {
                     </div>
                     <div className="flex flex-col gap-y-4 lg:flex-row lg:gap-x-3 lg:items-end">
                       <div className="font-medium text-secondary lg:w-[340px] relative">
-                        <form>
+                        <div>
                           <input
                             type="text"
                             id="search"
                             className="text-sm p-3 border border-[#E8E8E8] rounded-md  font-medium text-secondary placeholder:font-medium placeholder:text-secondary outline-none focus:border focus:border-primary w-full"
                             placeholder="Enter Number Or Full Name"
-                            // onChange={setSearchHandler}
+                            onInput={onChangeInputHandler}
                           />
                           <button
                             type="submit"
                             className="absolute top-3.5 right-3.5"
+                            onClick={searchUser}
                           >
                             <img
                               src={getImageUrl("Search", "svg")}
@@ -413,7 +432,7 @@ function Transfer() {
                               className="w-5 h-5"
                             />
                           </button>
-                        </form>
+                        </div>
                       </div>
                     </div>
                   </header>
@@ -428,7 +447,7 @@ function Transfer() {
                           <th className="p-6 text-center">Action</th>
                         </tr>
                       </thead>
-                      <tbody>
+                      {/* <tbody>
                         <tr className="border-b border-[#E8E8E84D] bg-[#E8E8E84D]">
                           <td className="p-6">
                             <div className="flex justify-center">
@@ -481,6 +500,53 @@ function Transfer() {
                             </Link>
                           </td>
                         </tr>
+                      </tbody> */}
+                      <tbody>
+                        {nameList.map((result, i) => (
+                          <tr
+                            className={`border-b border-[#E8E8E84D] ${
+                              i % 2 == 0 ? "bg-[#F9FAFB]" : ""
+                            }`}
+                            key={i}
+                          >
+                            <td className="p-6">
+                              <div className="flex justify-center">
+                                <img
+                                  src={
+                                    result.photo_profile
+                                      ? result.photo_profile
+                                      : getImageUrl("foto1", "png")
+                                  }
+                                  alt="product"
+                                  className="w-12 rounded-md"
+                                />
+                              </div>
+                            </td>
+                            <td className="p-6 text-center">
+                              {result.full_name}
+                            </td>
+                            <td className="p-6 text-center">
+                              {result.phone_number ? result.phone_number : "-"}
+                            </td>
+                            <td className="p-6 text-center">
+                              <div className="flex flex-col gap-y-2 items-center xl:flex-row md:gap-x-2 justify-center">
+                                <div
+                                  className="p-1 cursor-pointer"
+                                >
+                                  <img
+                                    src={getImageUrl("Star", "svg")}
+                                    alt="Star"
+                                  />
+                                </div>
+                              </div>
+                            </td>
+                            <td className="p-6 text-center">
+                              <Link to={`/transfer/${result.No}`} className="text-primary">
+                                Detail
+                              </Link>
+                            </td>
+                          </tr>
+                        ))}
                       </tbody>
                     </table>
                   </div>
