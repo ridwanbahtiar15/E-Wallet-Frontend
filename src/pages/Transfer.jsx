@@ -29,48 +29,46 @@ function Transfer() {
   });
 
   const [isDropdownShown, setIsDropdownShow] = useState(false);
-  const jwt = useSelector((state) => state.user.userInfo.token)
-  const [searchParams, setSearchParams] = useSearchParams({
-  
-  })
+  const jwt = useSelector((state) => state.user.userInfo.token);
+  const [searchParams, setSearchParams] = useSearchParams({});
   const [nameList, setNameList] = useState([]);
-  const [meta, setMeta] = useState({})
+  const [meta, setMeta] = useState({});
 
-  const url = import.meta.env.VITE_BACKEND_HOST + "/user?" + searchParams.toString()
-
+  const url =
+    import.meta.env.VITE_BACKEND_HOST + "/user?" + searchParams.toString();
 
   useEffect(() => {
     getUser(url, jwt)
-    .then((res) => {
-      console.log(res)
-      setNameList(res.data.result)
-      setMeta(res.data.meta)
-    })
-    .catch((err) => {
-      console.log(err)
-    })
-  }, [])
-  
+      .then((res) => {
+        console.log(res);
+        setNameList(res.data.result);
+        setMeta(res.data.meta);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   const onChangeInputHandler = (e) => {
     e.preventDefault();
     const phoneNumberRegex = /^[\d+-]+$/;
     setSearchParams({
       phone: phoneNumberRegex.test(e.target.value) ? e.target.value : "",
-      name: phoneNumberRegex.test(e.target.value) ? "" : e.target.value
+      name: phoneNumberRegex.test(e.target.value) ? "" : e.target.value,
     });
   };
   const searchUser = () => {
     getUser(url, jwt)
-    .then((res) => {
-      console.log(res)
-      setNameList(res.data.result)
-      setMeta(res.data.meta)
-    })
-    .catch((err) => {
-      console.log(err)
-    })
+      .then((res) => {
+        console.log(res);
+        setNameList(res.data.result);
+        setMeta(res.data.meta);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     // console.log(url)
-  }
+  };
 
   return (
     <>
@@ -522,9 +520,7 @@ function Transfer() {
                             </td>
                             <td className="p-6 text-center">
                               <div className="flex flex-col gap-y-2 items-center xl:flex-row md:gap-x-2 justify-center">
-                                <div
-                                  className="p-1 cursor-pointer"
-                                >
+                                <div className="p-1 cursor-pointer">
                                   <img
                                     src={getImageUrl("Star", "svg")}
                                     alt="Star"
@@ -533,7 +529,10 @@ function Transfer() {
                               </div>
                             </td>
                             <td className="p-6 text-center">
-                              <Link to={`/transfer/${result.No}`} className="text-primary">
+                              <Link
+                                to={`/transfer/${result.No}`}
+                                className="text-primary"
+                              >
                                 Detail
                               </Link>
                             </td>
