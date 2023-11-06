@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -102,6 +102,11 @@ function Topup() {
       document.body.removeChild(scriptTag);
     };
   }, []);
+
+  const userInfo = useSelector((state) => state.user.userInfo);
+  const photo_profile = user.photo_profile;
+  const full_name = user.full_name;
+  const phone_number = user.phone_number;
   return (
     <>
       <Title title={"Top Up"}>
@@ -364,272 +369,292 @@ function Topup() {
               </button>
             </div>
           </aside>
-          <section className="flex flex-col gap-y-5 lg:flex-row gap-x-5">
-            <section className="w-full flex flex-col border border-[#E8E8E8] py-5 px-8 gap-y-4 lg:w-2/3">
-              <section className="flex flex-col gap-y-4">
-                <p className="font-semibold text-dark">Account Information</p>
-                <div className="flex flex-col gap-y-4 md:flex-row md:gap-x-4 bg-[#E8E8E84D] p-3 rounded-lg lg:items-start">
-                  <div className="">
-                    <img
-                      src={user ? user.photo_profile : getImageUrl("profile", "jpg")}
-                      alt="User"
-                      className="w-full h-full md:w-[100px] md:h-[100px] rounded-lg"
-                    />
-                  </div>
-                  <div className="text-sm flex flex-col gap-y-4">
-                    <p className="text-sm font-semibold">{user && user.full_name}</p>
-                    <p className="text-sm text-secondary">{user && user.phone_number}</p>
-                    <div className="bg-primary flex items-center justify-center self-baseline py-1 px-3 rounded-md gap-x-2">
-                      <div>
-                        <img
-                          src={getImageUrl("verified", "svg")}
-                          alt="verified"
-                          className="w-4 h-4"
-                        />
-                      </div>
-                      <p className="text-light text-sm">Verified</p>
-                    </div>
-                  </div>
-                  <input type="file" className="hidden" id="userImage" />
-                </div>
-              </section>
-              <section className="flex flex-col gap-y-4">
-                <div>
-                  <p className="text-dark font-semibold">Amount</p>
-                  <p className="text-sm text-secondary">
-                    Type the amount you want to transfer to your e-wallet
-                    account
-                  </p>
-                </div>
-                <div className="flex flex-col gap-y-3 relative">
-                  <input
-                    type="number"
-                    id="nominal"
-                    onChange={onChangeInputNominal}
-                    placeholder="Enter Nominal Transfer"
-                    className="py-4 px-10 border rounded-lg border-[#DEDEDE] text-xs tracking-wide outline-none focus:border-primary"
-                  />
-                  <div className="icon-email absolute top-[17px] left-4">
-                    <img
-                      src={getImageUrl("u_money-bill", "svg")}
-                      alt="u_money-bill"
-                      className="w-4 h-4"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <p className="text-dark font-semibold">Payment Method</p>
-                  <p className="text-sm text-secondary">
-                    Choose your payment method for top up account
-                  </p>
-                </div>
-                <div className="flex flex-col gap-y-4">
-                  <div className="flex items-center gap-x-6 p-4 bg-[#E8E8E84D] rounded-lg">
-                    <div
-                      onClick={() => {
-                        setBri(true);
-                        setDana(false);
-                        setBca(false);
-                        setGopay(false);
-                        setOvo(false);
-                        setPayment(1);
-                        setMethodPayment("bri_va");
-                      }}
-                      className="cursor-pointer"
-                    >
-                      {bri ? (
-                        <img
-                          src={getImageUrl("Dots", "svg")}
-                          alt="Dots"
-                          className="w-3.5 h-3.5"
-                        />
-                      ) : (
-                        <img
-                          src={getImageUrl("Dots-unselect", "svg")}
-                          alt="Dots"
-                          className="w-3.5 h-3.5"
-                        />
-                      )}
-                    </div>
-                    <div>
-                      <img src={getImageUrl("bri", "svg")} alt="bri" />
-                    </div>
-                    <p className="text-secondary">Bank Rakyat Indonesia</p>
-                  </div>
-                  <div className="flex items-center gap-x-6 p-4 bg-[#E8E8E84D] rounded-lg">
-                    <div
-                      onClick={() => {
-                        setBri(false);
-                        setDana(true);
-                        setBca(false);
-                        setGopay(false);
-                        setOvo(false);
-                        setPayment(2);
-                        setMethodPayment("bri_va");
-                      }}
-                      className="cursor-pointer"
-                    >
-                      {dana ? (
-                        <img
-                          src={getImageUrl("Dots", "svg")}
-                          alt="Dots"
-                          className="w-3.5 h-3.5"
-                        />
-                      ) : (
-                        <img
-                          src={getImageUrl("Dots-unselect", "svg")}
-                          alt="Dots"
-                          className="w-3.5 h-3.5"
-                        />
-                      )}
-                    </div>
-                    <div>
-                      <img src={getImageUrl("dana", "svg")} alt="dana" />
-                    </div>
-                    <p className="text-secondary">Dana</p>
-                  </div>
-                  <div className="flex items-center gap-x-6 p-4 bg-[#E8E8E84D] rounded-lg">
-                    <div
-                      onClick={() => {
-                        setBri(false);
-                        setDana(false);
-                        setBca(true);
-                        setGopay(false);
-                        setOvo(false);
-                        setPayment(3);
-                        setMethodPayment("bca_va");
-                      }}
-                      className="cursor-pointer"
-                    >
-                      {bca ? (
-                        <img
-                          src={getImageUrl("Dots", "svg")}
-                          alt="Dots"
-                          className="w-3.5 h-3.5"
-                        />
-                      ) : (
-                        <img
-                          src={getImageUrl("Dots-unselect", "svg")}
-                          alt="Dots"
-                          className="w-3.5 h-3.5"
-                        />
-                      )}
-                    </div>
-                    <div>
-                      <img src={getImageUrl("bca", "svg")} alt="bca" />
-                    </div>
-                    <p className="text-secondary">Bank Central Asia</p>
-                  </div>
-                  <div className="flex items-center gap-x-6 p-4 bg-[#E8E8E84D] rounded-lg">
-                    <div
-                      onClick={() => {
-                        setBri(false);
-                        setDana(false);
-                        setBca(false);
-                        setGopay(true);
-                        setOvo(false);
-                        setPayment(4);
-                        setMethodPayment("gopay");
-                      }}
-                      className="cursor-pointer"
-                    >
-                      {gopay ? (
-                        <img
-                          src={getImageUrl("Dots", "svg")}
-                          alt="Dots"
-                          className="w-3.5 h-3.5"
-                        />
-                      ) : (
-                        <img
-                          src={getImageUrl("Dots-unselect", "svg")}
-                          alt="Dots"
-                          className="w-3.5 h-3.5"
-                        />
-                      )}
-                    </div>
-                    <div>
-                      <img src={getImageUrl("gopay", "svg")} alt="gopay" />
-                    </div>
-                    <p className="text-secondary">Gopay</p>
-                  </div>
-                  <div className="flex items-center gap-x-6 p-4 bg-[#E8E8E84D] rounded-lg">
-                    <div
-                      onClick={() => {
-                        setBri(false);
-                        setDana(false);
-                        setBca(false);
-                        setGopay(false);
-                        setOvo(true);
-                        setPayment(5);
-                        setMethodPayment("gopay");
-                      }}
-                      className="cursor-pointer"
-                    >
-                      {ovo ? (
-                        <img
-                          src={getImageUrl("Dots", "svg")}
-                          alt="Dots"
-                          className="w-3.5 h-3.5"
-                        />
-                      ) : (
-                        <img
-                          src={getImageUrl("Dots-unselect", "svg")}
-                          alt="Dots"
-                          className="w-3.5 h-3.5"
-                        />
-                      )}
-                    </div>
-                    <div>
-                      <img src={getImageUrl("ovo", "svg")} alt="ovo" />
-                    </div>
-                    <p className="text-secondary">OVO</p>
-                  </div>
-                </div>
-              </section>
-            </section>
-            <section className="w-full border border-[#E8E8E8] py-5 px-8 gap-y-4 lg:w-1/3 self-baseline">
-              <header className="mb-4">
-                <span className="text-dark font-semibold">Total</span>
-              </header>
-              <div className="flex flex-col gap-y-5">
-                <div className="flex justify-between">
-                  <span className="text-sm font-bold text-secondary">Fee</span>
-                  <span className="text-sm font-bold text-dark">
-                    IDR. {nominal}
-                  </span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-sm font-bold text-secondary">
-                    Delivery
-                  </span>
-                  <span className="text-sm font-bold text-dark">IDR. 0</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-sm font-bold text-secondary">
-                    Administration Fee
-                  </span>
-                  <span className="text-sm font-bold text-dark">IDR. 4000</span>
-                </div>
-                <hr />
-                <div className="flex justify-between">
-                  <span className="text-sm font-bold text-secondary">
-                    Subtotal
-                  </span>
-                  <span className="text-sm font-bold text-dark">
-                    IDR. {4000 + parseInt(nominal) || 0}
-                  </span>
-                </div>
-                {err && <p className="text-red-600">{err}</p>}
-                <button
-                  onClick={submit}
-                  className="p-[10px] text-sm font-medium rounded-md text-light bg-primary hover:bg-blue-800 active:ring"
-                >
-                  Submit
-                </button>
-                <p className="text-sm font-normal text-secondary">
-                  *Get Discount if you pay with Bank Central Asia
-                </p>
+          <section className="py-6 px-5 md:py-8 md:px-10 w-full">
+            <header className="flex gap-x-4 pb-8">
+              <div>
+                <img
+                  src={getImageUrl("Upload", "svg")}
+                  alt="history"
+                  className="w-6 h-6"
+                />
               </div>
+              <p className="text-dark font-semibold">Top Up Account</p>
+            </header>
+            <section className="flex flex-col gap-y-5 lg:flex-row gap-x-5">
+              <section className="w-full flex flex-col border border-[#E8E8E8] py-5 px-8 gap-y-4 lg:w-2/3">
+                <section className="flex flex-col gap-y-4">
+                  <p className="font-semibold text-dark">Account Information</p>
+                  <div className="flex flex-col gap-y-4 md:flex-row md:gap-x-4 bg-[#E8E8E84D] p-3 rounded-lg lg:items-start">
+                    <div className="">
+                      <img
+                        src={
+                          photo_profile
+                            ? photo_profile
+                            : getImageUrl("profile", "jpg")
+                        }
+                        alt="User"
+                        className="w-full h-full md:w-[100px] md:h-[100px] rounded-lg"
+                      />
+                    </div>
+                    <div className="text-sm flex flex-col gap-y-4">
+                      <p className="text-sm font-semibold">{full_name}</p>
+                      <p className="text-sm text-secondary">{phone_number}</p>
+                      <div className="bg-primary flex items-center justify-center self-baseline py-1 px-3 rounded-md gap-x-2">
+                        <div>
+                          <img
+                            src={getImageUrl("verified", "svg")}
+                            alt="verified"
+                            className="w-4 h-4"
+                          />
+                        </div>
+                        <p className="text-light text-sm">Verified</p>
+                      </div>
+                    </div>
+                    <input type="file" className="hidden" id="userImage" />
+                  </div>
+                </section>
+                <section className="flex flex-col gap-y-4">
+                  <div>
+                    <p className="text-dark font-semibold">Amount</p>
+                    <p className="text-sm text-secondary">
+                      Type the amount you want to transfer to your e-wallet
+                      account
+                    </p>
+                  </div>
+                  <div className="flex flex-col gap-y-3 relative">
+                    <input
+                      type="number"
+                      id="nominal"
+                      onChange={onChangeInputNominal}
+                      placeholder="Enter Nominal Transfer"
+                      className="py-4 px-10 border rounded-lg border-[#DEDEDE] text-xs tracking-wide outline-none focus:border-primary"
+                    />
+                    <div className="icon-email absolute top-[17px] left-4">
+                      <img
+                        src={getImageUrl("u_money-bill", "svg")}
+                        alt="u_money-bill"
+                        className="w-4 h-4"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <p className="text-dark font-semibold">Payment Method</p>
+                    <p className="text-sm text-secondary">
+                      Choose your payment method for top up account
+                    </p>
+                  </div>
+                  <div className="flex flex-col gap-y-4">
+                    <div className="flex items-center gap-x-6 p-4 bg-[#E8E8E84D] rounded-lg">
+                      <div
+                        onClick={() => {
+                          setBri(true);
+                          setDana(false);
+                          setBca(false);
+                          setGopay(false);
+                          setOvo(false);
+                          setPayment(1);
+                          setMethodPayment("bri_va");
+                        }}
+                        className="cursor-pointer"
+                      >
+                        {bri ? (
+                          <img
+                            src={getImageUrl("Dots", "svg")}
+                            alt="Dots"
+                            className="w-3.5 h-3.5"
+                          />
+                        ) : (
+                          <img
+                            src={getImageUrl("Dots-unselect", "svg")}
+                            alt="Dots"
+                            className="w-3.5 h-3.5"
+                          />
+                        )}
+                      </div>
+                      <div>
+                        <img src={getImageUrl("bri", "svg")} alt="bri" />
+                      </div>
+                      <p className="text-secondary">Bank Rakyat Indonesia</p>
+                    </div>
+                    <div className="flex items-center gap-x-6 p-4 bg-[#E8E8E84D] rounded-lg">
+                      <div
+                        onClick={() => {
+                          setBri(false);
+                          setDana(true);
+                          setBca(false);
+                          setGopay(false);
+                          setOvo(false);
+                          setPayment(2);
+                          setMethodPayment("bri_va");
+                        }}
+                        className="cursor-pointer"
+                      >
+                        {dana ? (
+                          <img
+                            src={getImageUrl("Dots", "svg")}
+                            alt="Dots"
+                            className="w-3.5 h-3.5"
+                          />
+                        ) : (
+                          <img
+                            src={getImageUrl("Dots-unselect", "svg")}
+                            alt="Dots"
+                            className="w-3.5 h-3.5"
+                          />
+                        )}
+                      </div>
+                      <div>
+                        <img src={getImageUrl("dana", "svg")} alt="dana" />
+                      </div>
+                      <p className="text-secondary">Dana</p>
+                    </div>
+                    <div className="flex items-center gap-x-6 p-4 bg-[#E8E8E84D] rounded-lg">
+                      <div
+                        onClick={() => {
+                          setBri(false);
+                          setDana(false);
+                          setBca(true);
+                          setGopay(false);
+                          setOvo(false);
+                          setPayment(3);
+                          setMethodPayment("bca_va");
+                        }}
+                        className="cursor-pointer"
+                      >
+                        {bca ? (
+                          <img
+                            src={getImageUrl("Dots", "svg")}
+                            alt="Dots"
+                            className="w-3.5 h-3.5"
+                          />
+                        ) : (
+                          <img
+                            src={getImageUrl("Dots-unselect", "svg")}
+                            alt="Dots"
+                            className="w-3.5 h-3.5"
+                          />
+                        )}
+                      </div>
+                      <div>
+                        <img src={getImageUrl("bca", "svg")} alt="bca" />
+                      </div>
+                      <p className="text-secondary">Bank Central Asia</p>
+                    </div>
+                    <div className="flex items-center gap-x-6 p-4 bg-[#E8E8E84D] rounded-lg">
+                      <div
+                        onClick={() => {
+                          setBri(false);
+                          setDana(false);
+                          setBca(false);
+                          setGopay(true);
+                          setOvo(false);
+                          setPayment(4);
+                          setMethodPayment("gopay");
+                        }}
+                        className="cursor-pointer"
+                      >
+                        {gopay ? (
+                          <img
+                            src={getImageUrl("Dots", "svg")}
+                            alt="Dots"
+                            className="w-3.5 h-3.5"
+                          />
+                        ) : (
+                          <img
+                            src={getImageUrl("Dots-unselect", "svg")}
+                            alt="Dots"
+                            className="w-3.5 h-3.5"
+                          />
+                        )}
+                      </div>
+                      <div>
+                        <img src={getImageUrl("gopay", "svg")} alt="gopay" />
+                      </div>
+                      <p className="text-secondary">Gopay</p>
+                    </div>
+                    <div className="flex items-center gap-x-6 p-4 bg-[#E8E8E84D] rounded-lg">
+                      <div
+                        onClick={() => {
+                          setBri(false);
+                          setDana(false);
+                          setBca(false);
+                          setGopay(false);
+                          setOvo(true);
+                          setPayment(5);
+                          setMethodPayment("gopay");
+                        }}
+                        className="cursor-pointer"
+                      >
+                        {ovo ? (
+                          <img
+                            src={getImageUrl("Dots", "svg")}
+                            alt="Dots"
+                            className="w-3.5 h-3.5"
+                          />
+                        ) : (
+                          <img
+                            src={getImageUrl("Dots-unselect", "svg")}
+                            alt="Dots"
+                            className="w-3.5 h-3.5"
+                          />
+                        )}
+                      </div>
+                      <div>
+                        <img src={getImageUrl("ovo", "svg")} alt="ovo" />
+                      </div>
+                      <p className="text-secondary">OVO</p>
+                    </div>
+                  </div>
+                </section>
+              </section>
+              <section className="w-full border border-[#E8E8E8] py-5 px-8 gap-y-4 lg:w-1/3 self-baseline">
+                <header className="mb-4">
+                  <span className="text-dark font-semibold">Total</span>
+                </header>
+                <div className="flex flex-col gap-y-5">
+                  <div className="flex justify-between">
+                    <span className="text-sm font-bold text-secondary">
+                      Fee
+                    </span>
+                    <span className="text-sm font-bold text-dark">
+                      IDR. {nominal}
+                    </span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-sm font-bold text-secondary">
+                      Delivery
+                    </span>
+                    <span className="text-sm font-bold text-dark">IDR. 0</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-sm font-bold text-secondary">
+                      Administration Fee
+                    </span>
+                    <span className="text-sm font-bold text-dark">
+                      IDR. 4000
+                    </span>
+                  </div>
+                  <hr />
+                  <div className="flex justify-between">
+                    <span className="text-sm font-bold text-secondary">
+                      Subtotal
+                    </span>
+                    <span className="text-sm font-bold text-dark">
+                      IDR. {4000 + parseInt(nominal) || 0}
+                    </span>
+                  </div>
+                  {err && <p className="text-red-600">{err}</p>}
+                  <button
+                    onClick={submit}
+                    className="p-[10px] text-sm font-medium rounded-md text-light bg-primary hover:bg-blue-800 active:ring"
+                  >
+                    Submit
+                  </button>
+                  <p className="text-sm font-normal text-secondary">
+                    *Get Discount if you pay with Bank Central Asia
+                  </p>
+                </div>
+              </section>
             </section>
           </section>
         </main>
