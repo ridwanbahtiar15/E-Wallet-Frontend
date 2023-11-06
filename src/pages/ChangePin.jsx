@@ -1,11 +1,15 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 import Navbar from "../components/Navbar";
 import getImageUrl from "../utils/imageGetter";
 import DropdownMobile from "../components/DropdownMobile";
 import Modal from "../components/Modal";
 import Title from "../components/Title";
+
+import { useSelector } from "react-redux";
+
+import { confirmPin, changePin } from "../utils/https/changePin";
 
 function ChangePin() {
   const [Message, setMessage] = useState({ msg: null, isError: null });
@@ -14,7 +18,9 @@ function ChangePin() {
     status: null,
   });
   const [isDropdownShown, setIsDropdownShow] = useState(false);
-
+  const jwt = useSelector((state) => state.user.userInfo.token)
+  const [confirmedPin, setConfirmedPin] = useState(false)
+  const [msgModal, setMsgModal] = useState("")
   const [otp, setOtp] = useState(new Array(6).fill(""));
 
   const handleChange = (element, index) => {
@@ -30,11 +36,45 @@ function ChangePin() {
 
   const handleClick = (e) => {
     e.preventDefault();
-
-    console.log(otp.join(""));
-
-    // axios backend
+    const body = {
+      last_pin: otp.join("")
+    }
+    // console.log(otp.join(""));
+    confirmPin(body, jwt)
+    .then((res) => {
+      console.log(res)
+      setConfirmedPin(true)
+      setOtp(new Array(6).fill(""))
+    })
+    .catch((err) => {
+      console.log(err)
+      if(err.response.status === 400)
+      return setMsgModal("Pin is not matched")
+      if(err.response.status === 401)
+      return setMsgModal("Access ended, please re-log in")
+      setMsgModal("Internal Server Error")
+    })
   };
+
+  const navigate = useNavigate()
+  const submitChangePin = () => {
+    const body = {
+      pin: otp.join("")
+    }
+    changePin(body, jwt)
+    .then((res) => {
+      console.log(res)
+      setConfirmedPin(true)
+      setOtp(new Array(6).fill(""))
+      setMsgModal("Successfully Update Pin")
+    })
+    .catch((err) => {
+      console.log(err)
+      if(err.response.data.msg === 'Pin must 6 numbers')
+      return setMsgModal("Pin must 6 numbers")
+      setMsgModal("Internal Server Error")
+    })
+  }
 
   return (
     <>
@@ -184,7 +224,41 @@ function ChangePin() {
               </button>
             </div>
           </aside>
-          <section className="flex flex-col gap-y-8 md:gap-x-5 py-6 px-5 md:py-8 md:px-10 w-full">
+          {!confirmedPin && <section className="flex flex-col gap-y-8 md:gap-x-5 py-6 px-5 md:py-8 md:px-10 w-full">
+            <header className="flex gap-x-4">
+              <div>
+                <img src={getImageUrl("2-User", "svg")} alt="history" className="w-6 h-6" />
+              </div>
+              <p className="text-dark font-semibold">Profile</p>
+            </header>
+            <section className="w-full flex flex-col border border-[#E8E8E8] py-10 px-8 gap-y-4">
+              <section className="flex flex-col gap-y-4 text-center">
+                <p className="font-semibold text-dark">Enter Your Latest Pin</p>
+                <p className="text-secondary">To process change pin please input your valid pin.</p>
+                <div className="pt-6 pb-16">
+                  {otp.map((data, index) => {
+                    return (
+                      <>
+                        <input
+                          type="text"
+                          maxLength="1"
+                          className="border-b lg:w-[50px] lg:h-[50px] w-[30px] h-[30px] text-center mr-1 md:mr-5 outline-none border-primary text-[30px]"
+                          key={index}
+                          value={data}
+                          onChange={(e) => handleChange(e.target, index)}
+                          onFocus={(e) => e.target.select()}
+                        />
+                      </>
+                    );
+                  })}
+                </div>
+                <button type="button" className="p-3 bg-primary text-light rounded-md text-sm hover:bg-blue-800 focus:ring" onClick={handleClick}>
+                  Submit
+                </button>
+              </section>
+            </section>
+          </section>}
+          {confirmedPin && <section className="flex flex-col gap-y-8 md:gap-x-5 py-6 px-5 md:py-8 md:px-10 w-full">
             <header className="flex gap-x-4">
               <div>
                 <img src={getImageUrl("2-User", "svg")} alt="history" className="w-6 h-6" />
@@ -212,12 +286,27 @@ function ChangePin() {
                     );
                   })}
                 </div>
-                <button type="button" className="p-3 bg-primary text-light rounded-md text-sm hover:bg-blue-800 focus:ring" onClick={handleClick}>
+                <button type="button" className="p-3 bg-primary text-light rounded-md text-sm hover:bg-blue-800 focus:ring" onClick={submitChangePin}>
                   Submit
                 </button>
               </section>
             </section>
-          </section>
+          </section>} 
+            {msgModal &&
+              <div className="bg-gray-200 justify-center items-center h-screen opacity-100 absolute z-10" id="logoutModal">
+            <div className="fixed left-0 top-0 bg-black bg-opacity-50 w-screen h-screen flex justify-center items-center px-[10px] md:px-0">
+              <div className="bg-white rounded shadow-md p-6 w-full flex justify-center items-center flex-col gap-y-8 md:w-[55%] lg:w-[35%]">
+                <div className="flex items-start gap-x-4">
+                  <h1 className="text-xl font-medium text-dark text-center">{msgModal}</h1>
+                </div>
+                  <div className="flex gap-x-6">
+                    <button onClick={() => {navigate("/profile")}} type="button" className="p-[10px] bg-primary hover:bg-blue-800 rounded-md text-light text-base font-medium active:ring">
+                      Close
+                    </button>
+                  </div>
+              </div>
+            </div>
+          </div>}
         </main>
         {isDropdownShown && <DropdownMobile isClick={() => setIsDropdownShow(false)} />}
         {openModal.isOpen && <Modal modal={openModal} closeModal={setOpenModal} message={Message} />}

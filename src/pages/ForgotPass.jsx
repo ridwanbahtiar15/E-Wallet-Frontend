@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import { forgotPass } from "../utils/https/forgotPass";
+import Modal from "../components/Modal";
 import Title from "../components/Title";
 
 function ForgotPass() {
@@ -20,7 +21,6 @@ function ForgotPass() {
       setMessage({ msg: "Email Must Be Filled" });
       return setOpenModal({
         isOpen: true,
-        status: "Login Error",
       });
     }
 
@@ -31,11 +31,15 @@ function ForgotPass() {
     forgotPass(body)
       .then((res) => {
         console.log(res);
+        setMessage({ msg: "Check Your Email for Reset Password" });
+        return setOpenModal({
+          isOpen: true,
+        });
       })
       .catch((err) => {
         console.log(err);
         if (err.response.data.msg === "Your Account not Found") {
-          setMessage({ msg: "Email is Not Registered" });
+          setMessage({ msg: "Email is Not Found" });
           return setOpenModal({
             isOpen: true,
             status: "Login Error",
@@ -44,8 +48,6 @@ function ForgotPass() {
       });
 
     console.log(email);
-
-    // Axios yang menyambungkan ke backend
   };
 
   return (
@@ -105,6 +107,9 @@ function ForgotPass() {
           </div>
         </form>
       </Title>
+      {openModal.isOpen && (
+        <Modal modal={openModal} closeModal={setOpenModal} message={Message} />
+      )}
     </>
   );
 }

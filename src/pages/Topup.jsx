@@ -30,7 +30,7 @@ function Topup() {
 
   const [token, setToken] = useState();
   const [payment, setPayment] = useState(1);
-  const [methodPayment, setMethodPayment] = useState("");
+  const [methodPayment, setMethodPayment] = useState("bri_va");
   const [nominal, setNominal] = useState(0);
 
   const body = {
@@ -74,7 +74,6 @@ function Topup() {
             .catch((err) => {
               console.log(err);
             });
-          navigate("/");
         },
         onPending: (result) => {
           // localStorage.setItem("Payment", JSON.stringify(result))
