@@ -9,25 +9,25 @@ import Modal from "../components/Modal";
 
 import { getProfile, updateProfile } from "../utils/https/profile";
 
-import Title from "../components/Title"
+import Title from "../components/Title";
 
 function Profile() {
-  const user = useSelector((state) => state.user.userInfo)
-  const jwt = user.token
+  const user = useSelector((state) => state.user.userInfo);
+  const jwt = user.token;
 
   const [userData, setUserData] = useState({
     full_name: "",
     phone_number: "",
     email: "",
-  })
+  });
 
   const [Message, setMessage] = useState({ msg: null, isError: null });
   const [openModal, setOpenModal] = useState({
     isOpen: false,
     status: null,
   });
-  const [submitModal, setSubmitModal] = useState(false)
-  const [submitMessage, setSubmitMessage] = useState("")
+  const [submitModal, setSubmitModal] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState("");
   const [isDropdownShown, setIsDropdownShow] = useState(false);
   const [image, setImage] = useState("");
 
@@ -35,7 +35,7 @@ function Profile() {
     const dataClone = { ...userData };
     dataClone[e.target.name] = e.target.value;
     setUserData(dataClone);
-    console.log(dataClone)
+    console.log(dataClone);
   };
 
   // const [imageProfile, setImageProfile] = useState("");
@@ -44,50 +44,50 @@ function Profile() {
     setUserData((prev) => {
       return {
         ...prev,
-        photo_profile : e.target.files[0]
-      }
-    })
+        photo_profile: e.target.files[0],
+      };
+    });
   };
 
   const deleteImageHandler = () => {
     setUserData((prev) => {
       const { photo_profile, ...newUserData } = prev;
-      return newUserData
-    })
-  }
+      return newUserData;
+    });
+  };
 
   useEffect(() => {
     getProfile(jwt)
-    .then((res) => {
-      console.log(res)
-      setUserData({
-        full_name: res.data.res.full_name,
-        phone_number: res.data.res.phone_number,
-        email: res.data.res.email,
+      .then((res) => {
+        console.log(res);
+        setUserData({
+          full_name: res.data.res.full_name,
+          phone_number: res.data.res.phone_number,
+          email: res.data.res.email,
+        });
+        setImage(res.data.res.photo_profile);
       })
-      setImage(res.data.res.photo_profile)
-    })
-    .catch ((err) => {
-      console.log(err)
-    })
-  }, [])
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   const clearanceBeforeSubmit = () => {
-    setSubmitMessage("Are you sure for updating profile?")
-    setSubmitModal(true)
-  }
+    setSubmitMessage("Are you sure for updating profile?");
+    setSubmitModal(true);
+  };
 
   const updateProfileUser = () => {
     updateProfile(userData, jwt)
-    .then((res) => {
-      console.log(res)
-      setSubmitMessage("Profile completed update")
-    })
-    .catch((err) => {
-      console.log(err)
-      setSubmitMessage("Profile didn't updated")
-    })
-  }
+      .then((res) => {
+        console.log(res);
+        setSubmitMessage("Profile completed update");
+      })
+      .catch((err) => {
+        console.log(err);
+        setSubmitMessage("Profile didn't updated");
+      });
+  };
   return (
     <>
       <Title title={"Profile"}>
@@ -101,16 +101,30 @@ function Profile() {
         <main className="flex w-full font-montserrat">
           <aside className="xl:w-1/5 border-r border-[#E8E8E8] py-6 px-11 hidden lg:block">
             <div className="flex flex-col gap-y-4">
-              <Link to="/dashboard" className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary outline-none text-base font-normal text-secondary rounded-md">
+              <Link
+                to="/dashboard"
+                className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary outline-none text-base font-normal text-secondary rounded-md"
+              >
                 <div>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="25"
+                    viewBox="0 0 24 25"
+                    fill="none"
+                  >
                     <path
                       d="M4.92265 5.43523L6.4874 7M22 12.5C22 18.0229 17.5229 22.5 12 22.5C6.47715 22.5 2 18.0229 2 12.5H22ZM22 12.5H20H22ZM22 12.5C22 9.7418 20.8833 7.24435 19.0774 5.43523L22 12.5ZM2 12.5H4H2ZM2 12.5C2 9.74175 3.1167 7.24435 4.92265 5.43523L2 12.5ZM12 2.5V4.5V2.5ZM12 2.5C14.7646 2.5 17.2672 3.62189 19.0774 5.43523L12 2.5ZM12 2.5C9.2354 2.5 6.7328 3.62189 4.92265 5.43523L12 2.5ZM19.0774 5.43523L17.5126 7L19.0774 5.43523Z"
                       stroke="#4F5665"
                       strokeLinecap="round"
                       strokeLinejoin="round"
                     />
-                    <path d="M12 10.5V16.5" stroke="#4F5665" strokeLinecap="round" strokeLinejoin="round" />
+                    <path
+                      d="M12 10.5V16.5"
+                      stroke="#4F5665"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
                     <path
                       d="M19.926 18.598C18.0976 20.9711 15.2273 22.5 11.9999 22.5C8.77248 22.5 5.90218 20.9711 4.07373 18.598C6.41033 17.2629 9.11603 16.5 11.9999 16.5C14.8837 16.5 17.5894 17.2629 19.926 18.598Z"
                       stroke="#4F5665"
@@ -121,9 +135,18 @@ function Profile() {
                 </div>
                 <p className="max-xl:hidden">Dashboard</p>
               </Link>
-              <Link to="/transfer" className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-sm font-normal text-secondary">
+              <Link
+                to="/transfer"
+                className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-sm font-normal text-secondary"
+              >
                 <div>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="21"
+                    viewBox="0 0 20 21"
+                    fill="none"
+                  >
                     <path
                       fillRule="evenodd"
                       clipRule="evenodd"
@@ -134,10 +157,25 @@ function Profile() {
                 </div>
                 <p className="max-xl:hidden">Transfer</p>
               </Link>
-              <Link to="/history" className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-sm font-normal text-secondary">
+              <Link
+                to="/history"
+                className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-sm font-normal text-secondary"
+              >
                 <div>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
-                    <path d="M2.90918 3.86365V7.5H6.54556" stroke="#4F5665" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="25"
+                    viewBox="0 0 24 25"
+                    fill="none"
+                  >
+                    <path
+                      d="M2.90918 3.86365V7.5H6.54556"
+                      stroke="#4F5665"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
                     <path
                       d="M2 12.5C2 18.0229 6.47715 22.5 12 22.5C17.5229 22.5 22 18.0229 22 12.5C22 6.97715 17.5229 2.5 12 2.5C8.299 2.5 5.06755 4.51056 3.33839 7.49905"
                       stroke="#4F5665"
@@ -145,16 +183,43 @@ function Profile() {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                     />
-                    <path d="M12.0026 6.5L12.002 12.5044L16.2417 16.7441" stroke="#4F5665" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    <path
+                      d="M12.0026 6.5L12.002 12.5044L16.2417 16.7441"
+                      stroke="#4F5665"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
                   </svg>
                 </div>
                 <p className="max-xl:hidden">History</p>
               </Link>
-              <Link to="/topup" className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-sm font-normal text-secondary">
+              <Link
+                to="/topup"
+                className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-sm font-normal text-secondary"
+              >
                 <div>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewBox="0 0 20 22" fill="none">
-                    <mask id="mask0_234_227" maskUnits="userSpaceOnUse" x="0" y="7" width="20" height="15">
-                      <path fillRule="evenodd" clipRule="evenodd" d="M0.000488281 7.2941H20.0001V21.0381H0.000488281V7.2941Z" fill="white" />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="22"
+                    viewBox="0 0 20 22"
+                    fill="none"
+                  >
+                    <mask
+                      id="mask0_234_227"
+                      maskUnits="userSpaceOnUse"
+                      x="0"
+                      y="7"
+                      width="20"
+                      height="15"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        clipRule="evenodd"
+                        d="M0.000488281 7.2941H20.0001V21.0381H0.000488281V7.2941Z"
+                        fill="white"
+                      />
                     </mask>
                     <g mask="url(#mask0_234_227)">
                       <path
@@ -164,8 +229,20 @@ function Profile() {
                         fill="#4F5665"
                       />
                     </g>
-                    <mask id="mask1_234_227" maskUnits="userSpaceOnUse" x="9" y="0" width="2" height="15">
-                      <path fillRule="evenodd" clipRule="evenodd" d="M9.25 0.500092H10.75V14.041H9.25V0.500092Z" fill="white" />
+                    <mask
+                      id="mask1_234_227"
+                      maskUnits="userSpaceOnUse"
+                      x="9"
+                      y="0"
+                      width="2"
+                      height="15"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        clipRule="evenodd"
+                        d="M9.25 0.500092H10.75V14.041H9.25V0.500092Z"
+                        fill="white"
+                      />
                     </mask>
                     <g mask="url(#mask1_234_227)">
                       <path
@@ -185,9 +262,18 @@ function Profile() {
                 </div>
                 <p className="max-xl:hidden">Top Up</p>
               </Link>
-              <Link to="/profile" className="flex items-center gap-x-2 py-2 px-4 bg-primary rounded-md outline-none text-sm font-normal text-light">
+              <Link
+                to="/profile"
+                className="flex items-center gap-x-2 py-2 px-4 bg-primary rounded-md outline-none text-sm font-normal text-light"
+              >
                 <div>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                  >
                     <path
                       fillRule="evenodd"
                       clipRule="evenodd"
@@ -206,8 +292,20 @@ function Profile() {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                     />
-                    <path d="M14.4829 8.38159C16.0839 8.15659 17.3169 6.78259 17.3199 5.11959C17.3199 3.48059 16.1249 2.12059 14.5579 1.86359" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                    <path d="M16.5952 12.2322C18.1462 12.4632 19.2292 13.0072 19.2292 14.1272C19.2292 14.8982 18.7192 15.3982 17.8952 15.7112" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    <path
+                      d="M14.4829 8.38159C16.0839 8.15659 17.3169 6.78259 17.3199 5.11959C17.3199 3.48059 16.1249 2.12059 14.5579 1.86359"
+                      stroke="white"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M16.5952 12.2322C18.1462 12.4632 19.2292 13.0072 19.2292 14.1272C19.2292 14.8982 18.7192 15.3982 17.8952 15.7112"
+                      stroke="white"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
                   </svg>
                 </div>
                 <p className="max-xl:hidden">Profile</p>
@@ -221,15 +319,31 @@ function Profile() {
                 }}
               >
                 <div>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="23" viewBox="0 0 22 23" fill="none">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="22"
+                    height="23"
+                    viewBox="0 0 22 23"
+                    fill="none"
+                  >
                     <path
                       d="M12 7.125L12 4.5C12 2.84315 13.3431 1.5 15 1.5L18 1.5C19.6569 1.5 21 2.84315 21 4.5L21 18.5C21 20.1569 19.6569 21.5 18 21.5L15 21.5C13.3431 21.5 12 20.1569 12 18.5L12 16.5"
                       stroke="#D00000"
                       strokeWidth="1.5"
                       strokeLinecap="round"
                     />
-                    <path d="M4 14.5L1.44194 11.9419C1.19786 11.6979 1.19786 11.3021 1.44194 11.0581L4 8.5" stroke="#D00000" strokeWidth="1.5" strokeLinecap="round" />
-                    <path d="M9 11.5L2 11.5" stroke="#D00000" strokeWidth="1.5" strokeLinecap="round" />
+                    <path
+                      d="M4 14.5L1.44194 11.9419C1.19786 11.6979 1.19786 11.3021 1.44194 11.0581L4 8.5"
+                      stroke="#D00000"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                    />
+                    <path
+                      d="M9 11.5L2 11.5"
+                      stroke="#D00000"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                    />
                   </svg>
                 </div>
                 <p className="max-xl:hidden text-danger">Logout</p>
@@ -239,7 +353,11 @@ function Profile() {
           <section className="flex flex-col gap-y-8 md:gap-x-5 py-6 px-5 md:py-8 md:px-10 w-full">
             <header className="flex gap-x-4">
               <div>
-                <img src={getImageUrl("2-User", "svg")} alt="history" className="w-6 h-6" />
+                <img
+                  src={getImageUrl("2-User", "svg")}
+                  alt="history"
+                  className="w-6 h-6"
+                />
               </div>
               <p className="text-dark font-semibold">Profile</p>
             </header>
@@ -247,141 +365,203 @@ function Profile() {
               <section className="flex flex-col gap-y-4">
                 <p className="font-semibold text-dark">Profile Picture</p>
                 <div className="flex flex-col gap-y-4 md:flex-row md:items-center md:gap-x-5">
-                  {userData && userData.photo_profile || image ?(
+                  {(userData && userData.photo_profile) || image ? (
                     <div className="w-full h-full md:w-32 md:h-32">
-                      <img src={userData && userData.photo_profile ? URL.createObjectURL(userData.photo_profile) : image} alt="User" className="w-full h-full rounded-lg bg-cover" />
+                      <img
+                        src={
+                          userData && userData.photo_profile
+                            ? URL.createObjectURL(userData.photo_profile)
+                            : image
+                        }
+                        alt="User"
+                        className="w-full h-full rounded-lg bg-cover"
+                      />
                     </div>
                   ) : (
                     <div className="w-full h-48 md:w-32 md:h-32 bg-[#E8E8E84D] flex items-center justify-center rounded-lg">
-                      <img src={getImageUrl("User", "svg")} alt="User" className="w-[50px] h-[50px]" />
+                      <img
+                        src={getImageUrl("User", "svg")}
+                        alt="User"
+                        className="w-[50px] h-[50px]"
+                      />
                     </div>
                   )}
                   <div className="text-sm flex flex-col gap-y-4">
-                    <label htmlFor="userImage" className="bg-primary text-light flex gap-x-2 items-center justify-center p-2 rounded-md hover:bg-blue-800 active:ring cursor-pointer">
+                    <label
+                      htmlFor="userImage"
+                      className="bg-primary text-light flex gap-x-2 items-center justify-center p-2 rounded-md hover:bg-blue-800 active:ring cursor-pointer"
+                    >
                       <div>
-                        <img src={getImageUrl("EditSquare", "svg")} alt="editSquare" />
+                        <img
+                          src={getImageUrl("EditSquare", "svg")}
+                          alt="editSquare"
+                        />
                       </div>
                       Change Profile
                     </label>
-                    <button className="border border-danger text-danger flex gap-x-2 items-center justify-center p-2 rounded-md hover:bg-slate-200 focus:ring focus:ring-red-300" onClick={deleteImageHandler}>
+                    <button
+                      className="border border-danger text-danger flex gap-x-2 items-center justify-center p-2 rounded-md hover:bg-slate-200 focus:ring focus:ring-red-300"
+                      onClick={deleteImageHandler}
+                    >
                       <div>
                         <img src={getImageUrl("Delete", "svg")} alt="Delete" />
                       </div>
                       Delete Profile
                     </button>
                   </div>
-                  <input type="file" className="hidden" id="userImage" onChange={changeImageHandler} />
+                  <input
+                    type="file"
+                    className="hidden"
+                    id="userImage"
+                    onChange={changeImageHandler}
+                  />
                 </div>
-                <p className="text-sm text-secondary">The profile picture must be 512 x 512 pixels or less</p>
+                <p className="text-sm text-secondary">
+                  The profile picture must be 512 x 512 pixels or less
+                </p>
               </section>
               <section>
                 <form className="flex flex-col gap-y-3">
                   <div className="flex flex-col gap-y-3 relative">
-                    <label htmlFor="fullname" className="text-sm font-semibold text-dark lg:text-base">
+                    <label
+                      htmlFor="fullname"
+                      className="text-sm font-semibold text-dark lg:text-base"
+                    >
                       Full Name
                     </label>
-                    <input type="text" id="fullname" name="full_name" value={userData && userData.full_name} onChange={handleChange} placeholder="Enter Your Full Name" className="py-3.5 px-10 border rounded-lg border-[#DEDEDE] text-xs tracking-wide outline-none focus:border-primary" />
+                    <input
+                      type="text"
+                      id="fullname"
+                      name="full_name"
+                      value={userData && userData.full_name}
+                      onChange={handleChange}
+                      placeholder="Enter Your Full Name"
+                      className="py-3.5 px-10 border rounded-lg border-[#DEDEDE] text-xs tracking-wide outline-none focus:border-primary"
+                    />
                     <div className="icon-email absolute top-[46px] left-4 lg:top-[50px]">
-                      <img src={getImageUrl("User-small", "svg")} alt="User-small" className="w-4 h-4" />
+                      <img
+                        src={getImageUrl("User-small", "svg")}
+                        alt="User-small"
+                        className="w-4 h-4"
+                      />
                     </div>
                   </div>
-                <div className="flex flex-col gap-y-3 relative">
-                  <label
-                    htmlFor="phone"
-                    className="text-sm font-semibold text-dark lg:text-base"
-                  >
-                    Phone
-                  </label>
-                  <input
-                    type="text"
-                    id="phone"
-                    value={userData && userData.phone_number}
-                    name="phone_number"
-                    onChange={handleChange}
-                    placeholder="Enter your Phone"
-                    className="py-3.5 px-10 border rounded-lg border-[#DEDEDE] text-xs tracking-wide outline-none focus:border-primary"
-                  />
-                  <div className="icon-profile absolute top-[46px] left-4 lg:top-[50px]">
-                    <img
-                      src={getImageUrl("Phone", "svg")}
-                      alt="Phone"
-                      className="w-4 h-4"
+                  <div className="flex flex-col gap-y-3 relative">
+                    <label
+                      htmlFor="phone"
+                      className="text-sm font-semibold text-dark lg:text-base"
+                    >
+                      Phone
+                    </label>
+                    <input
+                      type="text"
+                      id="phone"
+                      value={userData && userData.phone_number}
+                      name="phone_number"
+                      onChange={handleChange}
+                      placeholder="Enter your Phone"
+                      className="py-3.5 px-10 border rounded-lg border-[#DEDEDE] text-xs tracking-wide outline-none focus:border-primary"
                     />
+                    <div className="icon-profile absolute top-[46px] left-4 lg:top-[50px]">
+                      <img
+                        src={getImageUrl("Phone", "svg")}
+                        alt="Phone"
+                        className="w-4 h-4"
+                      />
+                    </div>
                   </div>
-                </div>
-                <div className="flex flex-col gap-y-3 relative">
-                  <label
-                    htmlFor="email"
-                    className="text-sm font-semibold text-dark lg:text-base"
-                  >
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    value={userData && userData.email}
-                    disabled
-                    placeholder="Enter Your Email"
-                    className="py-3.5 px-10 border rounded-lg border-[#DEDEDE] text-xs tracking-wide outline-none focus:border-primary"
-                  />
-                  <div className="icon-location absolute top-[46px] left-4 lg:top-[50px]">
-                    <img
-                      src={getImageUrl("mail", "svg")}
-                      alt="mail"
-                      className="w-4 h-4"
+                  <div className="flex flex-col gap-y-3 relative">
+                    <label
+                      htmlFor="email"
+                      className="text-sm font-semibold text-dark lg:text-base"
+                    >
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      value={userData && userData.email}
+                      disabled
+                      placeholder="Enter Your Email"
+                      className="py-3.5 px-10 border rounded-lg border-[#DEDEDE] text-xs tracking-wide outline-none focus:border-primary"
                     />
+                    <div className="icon-location absolute top-[46px] left-4 lg:top-[50px]">
+                      <img
+                        src={getImageUrl("mail", "svg")}
+                        alt="mail"
+                        className="w-4 h-4"
+                      />
+                    </div>
                   </div>
-                </div>
-                <div className="flex flex-col gap-y-3">
-                  <p className="text-dark font-medium">Password</p>
-                  <Link to="/changepassword" className="text-primary">
-                    Change Password
-                  </Link>
-                </div>
-                <div className="flex flex-col gap-y-3">
-                  <p className="text-dark font-medium">Pin</p>
-                  <Link to="/changepin" className="text-primary">
-                    Change Pin
-                  </Link>
-                </div>
-                <button
-                  type="button" onClick={clearanceBeforeSubmit}
-                  className="p-3 bg-primary text-light rounded-md text-sm hover:bg-blue-800 focus:ring"
-                >
-                  Submit
-                </button>
-              </form>
+                  <div className="flex flex-col gap-y-3">
+                    <p className="text-dark font-medium">Password</p>
+                    <Link to="/changepassword" className="text-primary">
+                      Change Password
+                    </Link>
+                  </div>
+                  <div className="flex flex-col gap-y-3">
+                    <p className="text-dark font-medium">Pin</p>
+                    <Link to="/changepin" className="text-primary">
+                      Change Pin
+                    </Link>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={clearanceBeforeSubmit}
+                    className="p-3 bg-primary text-light rounded-md text-sm hover:bg-blue-800 focus:ring"
+                  >
+                    Submit
+                  </button>
+                </form>
+              </section>
             </section>
           </section>
-          </section>
-      </main>
-      {submitModal && 
-        <div className="bg-gray-200 justify-center items-center h-screen opacity-100 absolute z-10" id="logoutModal">
-        <div className="fixed left-0 top-0 bg-black bg-opacity-50 w-screen h-screen flex justify-center items-center px-[10px] md:px-0">
-          <div className="bg-white rounded shadow-md p-6 w-full flex justify-center items-center flex-col gap-y-8 md:w-[55%] lg:w-[35%]">
-            <div className="flex items-start gap-x-4">
-              <h1 className="text-xl font-medium text-dark text-center">{submitMessage}</h1>
-            </div>
-              <div className="flex gap-x-6">
-                <button onClick={updateProfileUser} type="button" className="p-[10px] bg-primary hover:bg-blue-800 rounded-md text-light text-base font-medium active:ring">
-                  Confirm
-                </button>
-                <button onClick={() => {setSubmitModal(false)}} className="p-[10px] bg-light border-2 hover:bg-slate-200 rounded-md text-dark text-base font-medium active:ring active:ring-slate-300">
-                  Cancel
-                </button>
+        </main>
+        {submitModal && (
+          <div
+            className="bg-gray-200 justify-center items-center h-screen opacity-100 absolute z-10"
+            id="logoutModal"
+          >
+            <div className="fixed left-0 top-0 bg-black bg-opacity-50 w-screen h-screen flex justify-center items-center px-[10px] md:px-0">
+              <div className="bg-white rounded shadow-md p-6 w-full flex justify-center items-center flex-col gap-y-8 md:w-[55%] lg:w-[35%]">
+                <div className="flex items-start gap-x-4">
+                  <h1 className="text-xl font-medium text-dark text-center">
+                    {submitMessage}
+                  </h1>
+                </div>
+                <div className="flex gap-x-6">
+                  <button
+                    onClick={updateProfileUser}
+                    type="button"
+                    className="p-[10px] bg-primary hover:bg-blue-800 rounded-md text-light text-base font-medium active:ring"
+                  >
+                    Confirm
+                  </button>
+                  <button
+                    onClick={() => {
+                      setSubmitModal(false);
+                    }}
+                    className="p-[10px] bg-light border-2 hover:bg-slate-200 rounded-md text-dark text-base font-medium active:ring active:ring-slate-300"
+                  >
+                    Cancel
+                  </button>
+                </div>
               </div>
+            </div>
           </div>
-        </div>
-      </div>
-      }
-      {isDropdownShown && (
-        <DropdownMobile isClick={() => setIsDropdownShow(false)} />
-      )}
-      {openModal.isOpen && (
-        <Modal modal={openModal} closeModal={setOpenModal} message={Message} />
-      )}
-     </Title>
-  </>
+        )}
+        {isDropdownShown && (
+          <DropdownMobile isClick={() => setIsDropdownShow(false)} />
+        )}
+        {openModal.isOpen && (
+          <Modal
+            modal={openModal}
+            closeModal={setOpenModal}
+            message={Message}
+          />
+        )}
+      </Title>
+    </>
   );
 }
 

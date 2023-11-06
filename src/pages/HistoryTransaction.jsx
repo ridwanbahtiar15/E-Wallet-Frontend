@@ -400,7 +400,7 @@ function HistoryTransaction() {
                                       ? result.photo_profile
                                       : getImageUrl("foto1", "png")
                                   }
-                                  alt="product"
+                                  alt="photo-profile"
                                   className="w-12 rounded-md"
                                 />
                               </div>
