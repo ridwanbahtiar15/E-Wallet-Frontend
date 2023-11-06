@@ -198,7 +198,7 @@ function Login() {
               </div>
             </div>
           </div>
-          <div className="hidden md:bg-cover md:flex md:flex-initial md:w-1/3 lg:w-1/2 md:bg-gradient-to-b md:from-[#396AFC] md:to-[#2948FF] md:justify-center md:items-center">
+          <div className="hidden md:bg-cover md:h-full md:flex md:flex-initial md:w-1/3 lg:w-1/2 md:bg-gradient-to-b md:from-[#396AFC] md:to-[#2948FF] md:justify-center md:items-center">
             <img src="/img/login-side.png" alt="login-img" className="place-self-center object-contain" />
           </div>
         </div>
