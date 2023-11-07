@@ -50,13 +50,17 @@ function Register() {
           msg: res.data.msg,
           isError: false,
         });
-        setOpenModal({ isOpen: true, status: "User success registered. Please check your email." });
+        setOpenModal({
+          isOpen: true,
+          status: "Login Error",
+        });
         // console.log(res);
       })
       .catch((err) => {
         setMessage({
           msg: err.response.data.msg,
           isError: true,
+          status: "Login Error",
         });
         setOpenModal({ isOpen: true, status: "Something went wrong..." });
         // console.log(err);
@@ -67,18 +71,31 @@ function Register() {
   return (
     <>
       <Title title={"Register"}>
-        <div className="h-auto flex">
-          <div className="flex-1 py-5 h-auto md:flex-initial md:w-2/3 lg:w-1/2 bg-white font-montserrat mx-5 lg:m-0 lg:p-10 md:rounded-r-full">
+        <div className="h-full flex items-stretch">
+          <div className="flex-1 py-5 md:flex-initial md:w-2/3 lg:w-1/2 bg-white font-montserrat mx-5 lg:m-0 lg:p-10 md:rounded-r-full">
             <div className="flex flex-col gap-[13px]">
               <div className="flex items-center gap-[15px]">
                 <img src="/svg/Money-Wallet-logo.svg" alt="e-wallet-logo" />
                 <h1 className="text-[#2948FF] font-medium">E-Wallet</h1>
               </div>
-              <p className="text-lg md:text-2xl font-medium">Start Accessing Banking Needs With All Devices and All Platforms With 30.000+ Users</p>
-              <p className="text-sm md:leading-6 font-normal">Transfering money is eassier than ever, you can access Zwallet wherever you are. Desktop, laptop, mobile phone? we cover all of that for you!</p>
+              <p className="text-lg md:text-2xl font-medium">
+                Start Accessing Banking Needs With All Devices and All Platforms
+                With 30.000+ Users
+              </p>
+              <p className="text-sm md:leading-6 font-normal">
+                Transfering money is eassier than ever, you can access Zwallet
+                wherever you are. Desktop, laptop, mobile phone? we cover all of
+                that for you!
+              </p>
               <div className="flex gap-[15px] justify-center md:flex-col">
                 <button className="flex flex-1 border border-[#E8E8E8] bg-white h-[51px] p-[10px] gap-[10px] rounded-full justify-center hover:bg-slate-200">
-                  <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <svg
+                    width="25"
+                    height="25"
+                    viewBox="0 0 25 25"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
                     <path
                       d="M22.3055 10.5415H21.5V10.5H12.5V14.5H18.1515C17.327 16.8285 15.1115 18.5 12.5 18.5C9.1865 18.5 6.5 15.8135 6.5 12.5C6.5 9.1865 9.1865 6.5 12.5 6.5C14.0295 6.5 15.421 7.077 16.4805 8.0195L19.309 5.191C17.523 3.5265 15.134 2.5 12.5 2.5C6.9775 2.5 2.5 6.9775 2.5 12.5C2.5 18.0225 6.9775 22.5 12.5 22.5C18.0225 22.5 22.5 18.0225 22.5 12.5C22.5 11.8295 22.431 11.175 22.3055 10.5415Z"
                       fill="#FFC107"
@@ -96,16 +113,26 @@ function Register() {
                       fill="#1976D2"
                     />
                   </svg>
-                  <p className="hidden md:text-lg md:text-[#4F5665] md:block">Sign In With Google</p>
+                  <p className="hidden md:text-lg md:text-[#4F5665] md:block">
+                    Sign In With Google
+                  </p>
                 </button>
                 <button className="flex flex-1 border border-[#E8E8E8] h-[51px] p-[10px] gap-[10px] rounded-full justify-center hover:bg-slate-200">
-                  <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <svg
+                    width="25"
+                    height="25"
+                    viewBox="0 0 25 25"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
                     <path
                       d="M12.501 2.50195C6.97901 2.50195 2.50201 6.97895 2.50201 12.501C2.50201 17.491 6.15801 21.627 10.939 22.38V15.392H8.39901V12.501H10.939V10.298C10.939 7.78995 12.432 6.40695 14.715 6.40695C15.809 6.40695 16.955 6.60195 16.955 6.60195V9.06095H15.691C14.451 9.06095 14.063 9.83295 14.063 10.624V12.499H16.834L16.391 15.39H14.063V22.378C18.844 21.629 22.5 17.492 22.5 12.501C22.5 6.97895 18.023 2.50195 12.501 2.50195Z"
                       fill="#395185"
                     />
                   </svg>
-                  <p className="hidden md:text-lg md:text-[#4F5665] md:block">Sign In With Facebook</p>
+                  <p className="hidden md:text-lg md:text-[#4F5665] md:block">
+                    Sign In With Facebook
+                  </p>
                 </button>
               </div>
               <div className="flex justify-center">
@@ -113,12 +140,21 @@ function Register() {
               </div>
               <div>
                 {/* Form register */}
-                <form onSubmit={submitHandler} className="flex flex-col gap-[13px]">
+                <form
+                  onSubmit={submitHandler}
+                  className="flex flex-col gap-[13px]"
+                >
                   <label htmlFor="fullName" className="text-base font-medium">
                     Full Name
                   </label>
                   <div className="flex gap-[15px] px-3 py-[14px] border border-[#DEDEDE] rounded-lg bg-#FCFDFE">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
                       <path
                         fillRule="evenodd"
                         clipRule="evenodd"
@@ -138,13 +174,27 @@ function Register() {
                         strokeLinejoin="round"
                       />
                     </svg>
-                    <input type="text" placeholder="Enter Your Full Name" id="fullName" className="flex-1 outline-none text-sm font-normal text-[#4F5665]" />
+                    <input
+                      type="text"
+                      placeholder="Enter Your Full Name"
+                      id="fullName"
+                      className="flex-1 outline-none text-sm font-normal text-[#4F5665]"
+                    />
                   </div>
                   <label htmlFor="email" className="text-base font-medium">
                     Email
                   </label>
-                  <div id="emailDiv" className="flex gap-[15px] px-3 py-[14px] border border-[#DEDEDE] rounded-lg bg-#FCFDFE">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <div
+                    id="emailDiv"
+                    className="flex gap-[15px] px-3 py-[14px] border border-[#DEDEDE] rounded-lg bg-#FCFDFE"
+                  >
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
                       <g clipPath="url(#clip0_103_1168)">
                         <path
                           fillRule="evenodd"
@@ -159,13 +209,24 @@ function Register() {
                         </clipPath>
                       </defs>
                     </svg>
-                    <input type="text" placeholder="Enter Your Email" id="email" className="flex-1 outline-none text-xs font-normal text-[#4F5665]" />
+                    <input
+                      type="text"
+                      placeholder="Enter Your Email"
+                      id="email"
+                      className="flex-1 outline-none text-xs font-normal text-[#4F5665]"
+                    />
                   </div>
                   <label htmlFor="password" className="text-base font-medium">
                     Password
                   </label>
                   <div className="flex gap-[15px] justify-between px-3 py-[14px] border border-[#DEDEDE] rounded-lg bg-#FCFDFE">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
                       <path
                         fillRule="evenodd"
                         clipRule="evenodd"
@@ -174,8 +235,18 @@ function Register() {
                         strokeLinecap="round"
                         strokeLinejoin="round"
                       />
-                      <path d="M7.12787 8H11.3399V9.23467" stroke="#4F5665" strokeLinecap="round" strokeLinejoin="round" />
-                      <path d="M9.45467 9.23467V8" stroke="#4F5665" strokeLinecap="round" strokeLinejoin="round" />
+                      <path
+                        d="M7.12787 8H11.3399V9.23467"
+                        stroke="#4F5665"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M9.45467 9.23467V8"
+                        stroke="#4F5665"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
                       <path
                         fillRule="evenodd"
                         clipRule="evenodd"
@@ -185,15 +256,43 @@ function Register() {
                         strokeLinejoin="round"
                       />
                     </svg>
-                    <input type={isPassShown1 ? "text" : "password"} placeholder="Enter Your Password" id="password" className="flex-1 outline-none text-sm font-normal text-[#4F5665]" />
-                    <img src="/svg/hide.svg" alt="hide-svg" className={`${isPassShown1 ? " hidden" : " block"} w-[16px]`} onClick={showPassHandler1} />
-                    <img src="/svg/show.svg" alt="show-svg" className={`${isPassShown1 ? " block" : " hidden"} w-[16px]`} onClick={showPassHandler1} />
+                    <input
+                      type={isPassShown1 ? "text" : "password"}
+                      placeholder="Enter Your Password"
+                      id="password"
+                      className="flex-1 outline-none text-sm font-normal text-[#4F5665]"
+                    />
+                    <img
+                      src="/svg/hide.svg"
+                      alt="hide-svg"
+                      className={`${
+                        isPassShown1 ? " hidden" : " block"
+                      } w-[16px]`}
+                      onClick={showPassHandler1}
+                    />
+                    <img
+                      src="/svg/show.svg"
+                      alt="show-svg"
+                      className={`${
+                        isPassShown1 ? " block" : " hidden"
+                      } w-[16px]`}
+                      onClick={showPassHandler1}
+                    />
                   </div>
-                  <label htmlFor="confirmPassword" className="text-base font-medium">
+                  <label
+                    htmlFor="confirmPassword"
+                    className="text-base font-medium"
+                  >
                     Confirm Password
                   </label>
                   <div className="flex justify-between gap-[15px] px-3 py-[14px] border border-[#DEDEDE] rounded-lg bg-#FCFDFE">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
                       <path
                         fillRule="evenodd"
                         clipRule="evenodd"
@@ -202,8 +301,18 @@ function Register() {
                         strokeLinecap="round"
                         strokeLinejoin="round"
                       />
-                      <path d="M7.12787 8H11.3399V9.23467" stroke="#4F5665" strokeLinecap="round" strokeLinejoin="round" />
-                      <path d="M9.45467 9.23467V8" stroke="#4F5665" strokeLinecap="round" strokeLinejoin="round" />
+                      <path
+                        d="M7.12787 8H11.3399V9.23467"
+                        stroke="#4F5665"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M9.45467 9.23467V8"
+                        stroke="#4F5665"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
                       <path
                         fillRule="evenodd"
                         clipRule="evenodd"
@@ -213,11 +322,33 @@ function Register() {
                         strokeLinejoin="round"
                       />
                     </svg>
-                    <input type={isPassShown2 ? "text" : "password"} placeholder="Enter Your Password Again" id="confirmPassword" className="flex-1 outline-none text-sm font-normal text-[#4F5665]" />
-                    <img src="/svg/hide.svg" alt="hide-svg" className={`${isPassShown2 ? " hidden" : " block"} w-[16px]`} onClick={showPassHandler2} />
-                    <img src="/svg/show.svg" alt="show-svg" className={`${isPassShown2 ? " block" : " hidden"} w-[16px]`} onClick={showPassHandler2} />
+                    <input
+                      type={isPassShown2 ? "text" : "password"}
+                      placeholder="Enter Your Password Again"
+                      id="confirmPassword"
+                      className="flex-1 outline-none text-sm font-normal text-[#4F5665]"
+                    />
+                    <img
+                      src="/svg/hide.svg"
+                      alt="hide-svg"
+                      className={`${
+                        isPassShown2 ? " hidden" : " block"
+                      } w-[16px]`}
+                      onClick={showPassHandler2}
+                    />
+                    <img
+                      src="/svg/show.svg"
+                      alt="show-svg"
+                      className={`${
+                        isPassShown2 ? " block" : " hidden"
+                      } w-[16px]`}
+                      onClick={showPassHandler2}
+                    />
                   </div>
-                  <button type="submit" className="w-full p-[10px] h-[50px] text-white bg-[#2948FF] select-none hover:bg-blue-700 rounded-md">
+                  <button
+                    type="submit"
+                    className="w-full p-[10px] h-[50px] text-white bg-[#2948FF] select-none hover:bg-blue-700 rounded-md"
+                  >
                     Register
                   </button>
                 </form>
@@ -232,12 +363,18 @@ function Register() {
               </div>
             </div>
           </div>
-          <div className="hidden md:bg-cover md:h-auto md:flex md:flex-initial md:w-1/3 lg:w-1/2 md:bg-gradient-to-b md:from-[#396AFC] md:to-[#2948FF] md:justify-center md:items-center">
-            <img src="/img/register-side.png" alt="register-img" className="place-self-center object-contain" />
+          <div className="hidden md:bg-cover md:flex md:flex-initial md:w-1/3 lg:w-1/2 md:bg-gradient-to-b md:from-[#396AFC] md:to-[#2948FF] md:justify-center md:items-center">
+            <img
+              src="/img/register-side.png"
+              alt="register-img"
+              className="place-self-center object-contain"
+            />
           </div>
         </div>
       </Title>
-      {openModal.isOpen && <Modal modal={openModal} closeModal={setOpenModal} message={Message} />}
+      {openModal.isOpen && (
+        <Modal modal={openModal} closeModal={setOpenModal} message={Message} />
+      )}
     </>
   );
 }

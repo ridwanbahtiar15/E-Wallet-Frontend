@@ -9,7 +9,7 @@ import Modal from "../components/Modal";
 import Title from "../components/Title";
 import EnterPin from "../components/modalTransfer/EnterPin";
 
-import { getUser , createTransfer } from "../utils/https/transfer";
+import { getUser, createTransfer } from "../utils/https/transfer";
 import { useSelector } from "react-redux";
 
 function Transfer() {
@@ -24,20 +24,20 @@ function Transfer() {
     status: null,
   });
   const [isDropdownShown, setIsDropdownShow] = useState(false);
-  const [user, setUser] = useState({})
-  const jwt = useSelector((state) => state.user.userInfo.token)
-  const id = useParams()
+  const [user, setUser] = useState({});
+  const jwt = useSelector((state) => state.user.userInfo.token);
+  const id = useParams();
   useEffect(() => {
-    const url = import.meta.env.VITE_BACKEND_HOST + "/user?id=" + id.id
+    const url = import.meta.env.VITE_BACKEND_HOST + "/user?id=" + id.id;
     getUser(url, jwt)
-    .then((res) => {
-      console.log(res.data.result[0])
-      setUser(res.data.result[0])
-    })
-    .catch((err) => {
-      console.log(err)
-    })
-  },[])
+      .then((res) => {
+        console.log(res.data.result[0]);
+        setUser(res.data.result[0]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
@@ -45,8 +45,8 @@ function Transfer() {
       to: id.id,
       amount: parseInt(e.target.nominal.value),
       notes: e.target.notes.value,
-      name: user.full_name
-    }
+      name: user.full_name,
+    };
     setOpenModalTransfer({ isOpen: true, body: body });
   };
 
@@ -398,46 +398,54 @@ function Transfer() {
                 </div>
                 <div
                   id="People_Identity"
-                  className="text-sm mb-[26px] px-5 py-2.5 flex bg-[#e8e8e8] gap-5 rounded-md"
+                  className="text-sm mb-[26px] px-5 py-2.5 flex bg-[#e8e8e8] gap-5 rounded-md justify-between"
                 >
-                  <div>
-                    <img
-                      src={user && user.photo_profile}
-                      alt="photo_profile"
-                      className="w-[84px] h-[84px] rounded-md"
-                    />
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <p className="font-semibold">{user && user.full_name}</p>
-                    <p className="text-[#4F5665]">{user && user.phone_number}</p>
-                    <div className="flex px-2 py-1 bg-[#2948FF] text-white w-fit rounded-md gap-1">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="17"
-                        viewBox="0 0 16 17"
-                        fill="none"
-                      >
-                        <g clipPath="url(#clip0_44_327)">
-                          <path
-                            fillRule="evenodd"
-                            clipRule="evenodd"
-                            d="M9.58507 1.01936C8.64181 0.32688 7.3582 0.32688 6.41493 1.01936L5.48738 1.7003C5.33429 1.81269 5.1563 1.88642 4.96858 1.9152L3.8312 2.08958C2.67456 2.26691 1.76691 3.17456 1.58958 4.3312L1.4152 5.46858C1.38642 5.6563 1.31269 5.83429 1.2003 5.98738L0.51936 6.91493C-0.17312 7.8582 -0.17312 9.1418 0.51936 10.0851L1.2003 11.0126C1.31269 11.1657 1.38642 11.3437 1.4152 11.5314L1.58958 12.6688C1.76691 13.8254 2.67456 14.7331 3.8312 14.9104L4.96858 15.0848C5.1563 15.1136 5.33429 15.1873 5.48738 15.2997L6.41493 15.9806C7.3582 16.6731 8.6418 16.6731 9.58507 15.9806L10.5126 15.2997C10.6657 15.1873 10.8437 15.1136 11.0314 15.0848L12.1688 14.9104C13.3254 14.7331 14.2331 13.8254 14.4104 12.6688L14.5848 11.5314C14.6136 11.3437 14.6873 11.1657 14.7997 11.0126L15.4806 10.0851C16.1731 9.1418 16.1731 7.8582 15.4806 6.91493L14.7997 5.98738C14.6873 5.83429 14.6136 5.6563 14.5848 5.46858L14.4104 4.3312C14.2331 3.17456 13.3254 2.26691 12.1688 2.08958L11.0314 1.9152C10.8437 1.88642 10.6657 1.81269 10.5126 1.7003L9.58507 1.01936ZM7.3026 2.22851C7.71762 1.92383 8.28238 1.92383 8.6974 2.22851L9.62494 2.90945C9.9729 3.16489 10.3774 3.33246 10.8041 3.39787L11.9415 3.57225C12.4504 3.65027 12.8497 4.04962 12.9277 4.55852L13.1021 5.69589C13.1675 6.12256 13.3351 6.5271 13.5906 6.87506L14.2715 7.8026C14.5762 8.21762 14.5762 8.78238 14.2715 9.1974L13.5906 10.1249C13.3351 10.4729 13.1675 10.8774 13.1021 11.3041L12.9277 12.4415C12.8497 12.9504 12.4504 13.3497 11.9415 13.4277L10.8041 13.6021C10.3774 13.6675 9.9729 13.8351 9.62494 14.0906L8.6974 14.7715C8.28238 15.0762 7.71762 15.0762 7.3026 14.7715L6.37506 14.0906C6.0271 13.8351 5.62256 13.6675 5.19589 13.6021L4.05852 13.4277C3.54962 13.3497 3.15027 12.9504 3.07225 12.4415L2.89787 11.3041C2.83246 10.8774 2.66489 10.4729 2.40945 10.1249L1.72851 9.1974C1.42383 8.78238 1.42383 8.21762 1.72851 7.8026L2.40945 6.87505C2.66489 6.5271 2.83246 6.12256 2.89787 5.69589L3.07225 4.55852C3.15027 4.04962 3.54962 3.65027 4.05852 3.57225L5.19589 3.39787C5.62256 3.33246 6.0271 3.16489 6.37505 2.90945L7.3026 2.22851ZM11.2803 7.28033C11.5732 6.98744 11.5732 6.51256 11.2803 6.21967C10.9874 5.92678 10.5126 5.92678 10.2197 6.21967L7 9.43934L5.78033 8.21967C5.48744 7.92678 5.01256 7.92678 4.71967 8.21967C4.42678 8.51256 4.42678 8.98744 4.71967 9.28033L6.46967 11.0303C6.76256 11.3232 7.23744 11.3232 7.53033 11.0303L11.2803 7.28033Z"
-                            fill="white"
-                          />
-                        </g>
-                        <defs>
-                          <clipPath id="clip0_44_327">
-                            <rect
-                              width="16"
-                              height="16"
+                  <div className="flex gap-x-4">
+                    <div>
+                      <img
+                        src={
+                          user && user.photo_profile
+                            ? user.photo_profile
+                            : getImageUrl("profile", "jpg")
+                        }
+                        alt="photo_profile"
+                        className="w-[84px] h-[84px] rounded-md"
+                      />
+                    </div>
+                    <div className="flex flex-col gap-2">
+                      <p className="font-semibold">{user && user.full_name}</p>
+                      <p className="text-[#4F5665]">
+                        {user && user.phone_number}
+                      </p>
+                      <div className="flex px-2 py-1 bg-[#2948FF] text-white w-fit rounded-md gap-1">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="17"
+                          viewBox="0 0 16 17"
+                          fill="none"
+                        >
+                          <g clipPath="url(#clip0_44_327)">
+                            <path
+                              fillRule="evenodd"
+                              clipRule="evenodd"
+                              d="M9.58507 1.01936C8.64181 0.32688 7.3582 0.32688 6.41493 1.01936L5.48738 1.7003C5.33429 1.81269 5.1563 1.88642 4.96858 1.9152L3.8312 2.08958C2.67456 2.26691 1.76691 3.17456 1.58958 4.3312L1.4152 5.46858C1.38642 5.6563 1.31269 5.83429 1.2003 5.98738L0.51936 6.91493C-0.17312 7.8582 -0.17312 9.1418 0.51936 10.0851L1.2003 11.0126C1.31269 11.1657 1.38642 11.3437 1.4152 11.5314L1.58958 12.6688C1.76691 13.8254 2.67456 14.7331 3.8312 14.9104L4.96858 15.0848C5.1563 15.1136 5.33429 15.1873 5.48738 15.2997L6.41493 15.9806C7.3582 16.6731 8.6418 16.6731 9.58507 15.9806L10.5126 15.2997C10.6657 15.1873 10.8437 15.1136 11.0314 15.0848L12.1688 14.9104C13.3254 14.7331 14.2331 13.8254 14.4104 12.6688L14.5848 11.5314C14.6136 11.3437 14.6873 11.1657 14.7997 11.0126L15.4806 10.0851C16.1731 9.1418 16.1731 7.8582 15.4806 6.91493L14.7997 5.98738C14.6873 5.83429 14.6136 5.6563 14.5848 5.46858L14.4104 4.3312C14.2331 3.17456 13.3254 2.26691 12.1688 2.08958L11.0314 1.9152C10.8437 1.88642 10.6657 1.81269 10.5126 1.7003L9.58507 1.01936ZM7.3026 2.22851C7.71762 1.92383 8.28238 1.92383 8.6974 2.22851L9.62494 2.90945C9.9729 3.16489 10.3774 3.33246 10.8041 3.39787L11.9415 3.57225C12.4504 3.65027 12.8497 4.04962 12.9277 4.55852L13.1021 5.69589C13.1675 6.12256 13.3351 6.5271 13.5906 6.87506L14.2715 7.8026C14.5762 8.21762 14.5762 8.78238 14.2715 9.1974L13.5906 10.1249C13.3351 10.4729 13.1675 10.8774 13.1021 11.3041L12.9277 12.4415C12.8497 12.9504 12.4504 13.3497 11.9415 13.4277L10.8041 13.6021C10.3774 13.6675 9.9729 13.8351 9.62494 14.0906L8.6974 14.7715C8.28238 15.0762 7.71762 15.0762 7.3026 14.7715L6.37506 14.0906C6.0271 13.8351 5.62256 13.6675 5.19589 13.6021L4.05852 13.4277C3.54962 13.3497 3.15027 12.9504 3.07225 12.4415L2.89787 11.3041C2.83246 10.8774 2.66489 10.4729 2.40945 10.1249L1.72851 9.1974C1.42383 8.78238 1.42383 8.21762 1.72851 7.8026L2.40945 6.87505C2.66489 6.5271 2.83246 6.12256 2.89787 5.69589L3.07225 4.55852C3.15027 4.04962 3.54962 3.65027 4.05852 3.57225L5.19589 3.39787C5.62256 3.33246 6.0271 3.16489 6.37505 2.90945L7.3026 2.22851ZM11.2803 7.28033C11.5732 6.98744 11.5732 6.51256 11.2803 6.21967C10.9874 5.92678 10.5126 5.92678 10.2197 6.21967L7 9.43934L5.78033 8.21967C5.48744 7.92678 5.01256 7.92678 4.71967 8.21967C4.42678 8.51256 4.42678 8.98744 4.71967 9.28033L6.46967 11.0303C6.76256 11.3232 7.23744 11.3232 7.53033 11.0303L11.2803 7.28033Z"
                               fill="white"
-                              transform="translate(0 0.5)"
                             />
-                          </clipPath>
-                        </defs>
-                      </svg>
-                      <p>Verified</p>
+                          </g>
+                          <defs>
+                            <clipPath id="clip0_44_327">
+                              <rect
+                                width="16"
+                                height="16"
+                                fill="white"
+                                transform="translate(0 0.5)"
+                              />
+                            </clipPath>
+                          </defs>
+                        </svg>
+                        <p>Verified</p>
+                      </div>
                     </div>
                   </div>
                   <div className="flex items-center">
@@ -525,16 +533,14 @@ function Transfer() {
           />
         )}
         {openModalTransfer.isOpen && (
-        <div
-          className="bg-gray-200 justify-center items-center h-screen opacity-100 absolute z-10 font-montserrat"
-          id="modalTransfer"
-        >
-          <div className="fixed left-0 top-0 bg-black bg-opacity-50 w-screen h-screen flex justify-center items-center px-[10px] md:px-0">
-          <EnterPin
-            modalTransfer={openModalTransfer}
-          />
+          <div
+            className="bg-gray-200 justify-center items-center h-screen opacity-100 absolute z-10 font-montserrat"
+            id="modalTransfer"
+          >
+            <div className="fixed left-0 top-0 bg-black bg-opacity-50 w-screen h-screen flex justify-center items-center px-[10px] md:px-0">
+              <EnterPin modalTransfer={openModalTransfer} />
+            </div>
           </div>
-        </div>
         )}
       </Title>
     </>

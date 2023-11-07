@@ -1,17 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Chart } from "chart.js/auto";
 import { Bar } from "react-chartjs-2";
 
-function IncomeChart() {
+function IncomeChart(props) {
+  const dateArr = [];
+  const sumArr = [];
+
+  props.data.forEach((result, i) => {
+    dateArr.push(result.date);
+    sumArr.push(result.sum);
+  });
+
+  let bgColor = "#2948FF";
+  props.summary == false ? (bgColor = "#2948FF") : (bgColor = "#D00000");
+
   return (
     <Bar
       data={{
-        labels: ["Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri"],
+        labels: dateArr,
         datasets: [
           {
             label: "# of votes",
-            data: [15000, 1000, 100000, 30000, 40000, 20000, 15000],
-            backgroundColor: "#2948FF",
+            data: sumArr,
+            backgroundColor: bgColor,
             fill: true,
           },
         ],
@@ -30,11 +41,12 @@ function IncomeChart() {
           },
           y: {
             ticks: {
-              stepSize: 25000,
+              stepSize: 100000,
             },
             beginAtZero: true,
           },
         },
+        maintainAspectRatio: false,
       }}
       height={400}
       width={600}

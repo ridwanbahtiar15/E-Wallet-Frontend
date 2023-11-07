@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import { useNavigate, Link } from "react-router-dom";
 import { transaction, deleteTransaction } from "../utils/https/transaction";
@@ -55,7 +56,10 @@ function Modal({
   };
 
   return (
-    <div className="bg-gray-200 justify-center items-center h-screen opacity-100 absolute z-10" id="logoutModal">
+    <div
+      className="bg-gray-200 justify-center items-center h-screen opacity-100 absolute z-10"
+      id="logoutModal"
+    >
       <div className="fixed left-0 top-0 bg-black bg-opacity-50 w-screen h-screen flex justify-center items-center px-[10px] md:px-0">
         <div className="bg-white rounded shadow-md p-6 w-full flex justify-center items-center flex-col gap-y-8 md:w-[55%] lg:w-[35%]">
           <div className="flex items-start gap-x-4">
@@ -63,24 +67,48 @@ function Modal({
           </div>
           {status == "deleteTransaction" ? (
             <div className="flex gap-x-6">
-              <button type="button" className="p-[10px] bg-primary hover:bg-blue-800 rounded-md text-light text-base font-medium active:ring" onClick={() => onDeleteHandler()}>
+              <button
+                type="button"
+                className="p-[10px] bg-primary hover:bg-blue-800 rounded-md text-light text-base font-medium active:ring"
+                onClick={() => onDeleteHandler()}
+              >
                 Confirm
               </button>
-              <button className="p-[10px] bg-light border-2 hover:bg-slate-200 rounded-md text-dark text-base font-medium active:ring active:ring-slate-300" onClick={() => closeModal({ isOpen: false, status: null })}>
+              <button
+                className="p-[10px] bg-light border-2 hover:bg-slate-200 rounded-md text-dark text-base font-medium active:ring active:ring-slate-300"
+                onClick={() => closeModal({ isOpen: false, status: null })}
+              >
                 Cancel
               </button>
             </div>
           ) : status == "logout" ? (
             <div className="flex gap-x-6">
-              <button type="button" className="p-[10px] bg-primary hover:bg-blue-800 rounded-md text-light text-base font-medium active:ring" onClick={logoutHandler}>
+              <button
+                type="button"
+                className="p-[10px] bg-primary hover:bg-blue-800 rounded-md text-light text-base font-medium active:ring"
+                onClick={logoutHandler}
+              >
                 Confirm
               </button>
-              <button className="p-[10px] bg-light border-2 hover:bg-slate-200 rounded-md text-dark text-base font-medium active:ring active:ring-slate-300" onClick={() => closeModal({ isOpen: false, status: null })}>
+              <button
+                className="p-[10px] bg-light border-2 hover:bg-slate-200 rounded-md text-dark text-base font-medium active:ring active:ring-slate-300"
+                onClick={() => closeModal({ isOpen: false, status: null })}
+              >
                 Cancel
               </button>
             </div>
           ) : status == "Login Error" ? (
-            <button className="w-full p-[10px] bg-light border-2 hover:bg-slate-200 rounded-md text-dark text-base font-medium active:ring active:ring-slate-300" onClick={() => closeModal({ isOpen: false, status: null })}>
+            <button
+              className="w-full p-[10px] bg-light border-2 hover:bg-slate-200 rounded-md text-dark text-base font-medium active:ring active:ring-slate-300"
+              onClick={() => closeModal({ isOpen: false, status: null })}
+            >
+              Ok
+            </button>
+          ) : status == "forgot pass error" ? (
+            <button
+              className="w-full p-[10px] bg-light border-2 hover:bg-slate-200 rounded-md text-dark text-base font-medium active:ring active:ring-slate-300"
+              onClick={() => closeModal({ isOpen: false, status: null })}
+            >
               Ok
             </button>
           ) : (
