@@ -41,6 +41,14 @@ function Transfer() {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
+    if (!e.target.nominal.value) {
+      setOpenModal({ isOpen: true, status: "Login Error" });
+      return setMessage({ msg: "Please Enter Your Transfer Amount" });
+    }
+    if (parseInt(e.target.nominal.value) < 10000) {
+      setOpenModal({ isOpen: true, status: "Login Error" });
+      return setMessage({ msg: "Minimum Transfer is Rp. 10.000" });
+    }
     const body = {
       to: id.id,
       amount: parseInt(e.target.nominal.value),
@@ -63,30 +71,16 @@ function Transfer() {
         <main className="flex font-montserrat">
           <aside className="xl:w-1/5 border-r border-[#E8E8E8] py-6 px-11 hidden lg:block">
             <div className="flex flex-col gap-y-4">
-              <Link
-                to="/dashboard"
-                className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-base font-normal text-secondary"
-              >
+              <Link to="/dashboard" className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-base font-normal text-secondary">
                 <div>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="25"
-                    viewBox="0 0 24 25"
-                    fill="none"
-                  >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
                     <path
                       d="M4.92265 5.43523L6.4874 7M22 12.5C22 18.0229 17.5229 22.5 12 22.5C6.47715 22.5 2 18.0229 2 12.5H22ZM22 12.5H20H22ZM22 12.5C22 9.7418 20.8833 7.24435 19.0774 5.43523L22 12.5ZM2 12.5H4H2ZM2 12.5C2 9.74175 3.1167 7.24435 4.92265 5.43523L2 12.5ZM12 2.5V4.5V2.5ZM12 2.5C14.7646 2.5 17.2672 3.62189 19.0774 5.43523L12 2.5ZM12 2.5C9.2354 2.5 6.7328 3.62189 4.92265 5.43523L12 2.5ZM19.0774 5.43523L17.5126 7L19.0774 5.43523Z"
                       stroke="#4F5665"
                       strokeLinecap="round"
                       strokeLinejoin="round"
                     />
-                    <path
-                      d="M12 10.5V16.5"
-                      stroke="#4F5665"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
+                    <path d="M12 10.5V16.5" stroke="#4F5665" strokeLinecap="round" strokeLinejoin="round" />
                     <path
                       d="M19.926 18.598C18.0976 20.9711 15.2273 22.5 11.9999 22.5C8.77248 22.5 5.90218 20.9711 4.07373 18.598C6.41033 17.2629 9.11603 16.5 11.9999 16.5C14.8837 16.5 17.5894 17.2629 19.926 18.598Z"
                       stroke="#4F5665"
@@ -97,18 +91,9 @@ function Transfer() {
                 </div>
                 <p className="max-xl:hidden">Dashboard</p>
               </Link>
-              <Link
-                to="/transfer"
-                className="flex items-center gap-x-2 py-2 px-4 bg-primary rounded-md outline-none text-sm font-normal text-light"
-              >
+              <Link to="/transfer" className="flex items-center gap-x-2 py-2 px-4 bg-primary rounded-md outline-none text-sm font-normal text-light">
                 <div>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="21"
-                    viewBox="0 0 20 21"
-                    fill="none"
-                  >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
                     <path
                       fillRule="evenodd"
                       clipRule="evenodd"
@@ -119,25 +104,10 @@ function Transfer() {
                 </div>
                 <p className="max-xl:hidden">Transfer</p>
               </Link>
-              <Link
-                to="/history"
-                className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-sm font-normal text-secondary"
-              >
+              <Link to="/history" className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-sm font-normal text-secondary">
                 <div>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="25"
-                    viewBox="0 0 24 25"
-                    fill="none"
-                  >
-                    <path
-                      d="M2.90918 3.86365V7.5H6.54556"
-                      stroke="#4F5665"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                    <path d="M2.90918 3.86365V7.5H6.54556" stroke="#4F5665" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                     <path
                       d="M2 12.5C2 18.0229 6.47715 22.5 12 22.5C17.5229 22.5 22 18.0229 22 12.5C22 6.97715 17.5229 2.5 12 2.5C8.299 2.5 5.06755 4.51056 3.33839 7.49905"
                       stroke="#4F5665"
@@ -145,43 +115,16 @@ function Transfer() {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                     />
-                    <path
-                      d="M12.0026 6.5L12.002 12.5044L16.2417 16.7441"
-                      stroke="#4F5665"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
+                    <path d="M12.0026 6.5L12.002 12.5044L16.2417 16.7441" stroke="#4F5665" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </div>
                 <p className="max-xl:hidden">History</p>
               </Link>
-              <Link
-                to="/topup"
-                className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-sm font-normal text-secondary"
-              >
+              <Link to="/topup" className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-sm font-normal text-secondary">
                 <div>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="22"
-                    viewBox="0 0 20 22"
-                    fill="none"
-                  >
-                    <mask
-                      id="mask0_234_227"
-                      maskUnits="userSpaceOnUse"
-                      x="0"
-                      y="7"
-                      width="20"
-                      height="15"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        clipRule="evenodd"
-                        d="M0.000488281 7.2941H20.0001V21.0381H0.000488281V7.2941Z"
-                        fill="white"
-                      />
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewBox="0 0 20 22" fill="none">
+                    <mask id="mask0_234_227" maskUnits="userSpaceOnUse" x="0" y="7" width="20" height="15">
+                      <path fillRule="evenodd" clipRule="evenodd" d="M0.000488281 7.2941H20.0001V21.0381H0.000488281V7.2941Z" fill="white" />
                     </mask>
                     <g mask="url(#mask0_234_227)">
                       <path
@@ -191,20 +134,8 @@ function Transfer() {
                         fill="#4F5665"
                       />
                     </g>
-                    <mask
-                      id="mask1_234_227"
-                      maskUnits="userSpaceOnUse"
-                      x="9"
-                      y="0"
-                      width="2"
-                      height="15"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        clipRule="evenodd"
-                        d="M9.25 0.500092H10.75V14.041H9.25V0.500092Z"
-                        fill="white"
-                      />
+                    <mask id="mask1_234_227" maskUnits="userSpaceOnUse" x="9" y="0" width="2" height="15">
+                      <path fillRule="evenodd" clipRule="evenodd" d="M9.25 0.500092H10.75V14.041H9.25V0.500092Z" fill="white" />
                     </mask>
                     <g mask="url(#mask1_234_227)">
                       <path
@@ -224,18 +155,9 @@ function Transfer() {
                 </div>
                 <p className="max-xl:hidden">Top Up</p>
               </Link>
-              <Link
-                to="/profile"
-                className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-sm font-normal text-secondary"
-              >
+              <Link to="/profile" className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-sm font-normal text-secondary">
                 <div>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 20 20"
-                    fill="none"
-                  >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                     <path
                       fillRule="evenodd"
                       clipRule="evenodd"
@@ -254,20 +176,8 @@ function Transfer() {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                     />
-                    <path
-                      d="M14.4829 8.38159C16.0839 8.15659 17.3169 6.78259 17.3199 5.11959C17.3199 3.48059 16.1249 2.12059 14.5579 1.86359"
-                      stroke="#4F5665"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="M16.5952 12.2322C18.1462 12.4632 19.2292 13.0072 19.2292 14.1272C19.2292 14.8982 18.7192 15.3982 17.8952 15.7112"
-                      stroke="#4F5665"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
+                    <path d="M14.4829 8.38159C16.0839 8.15659 17.3169 6.78259 17.3199 5.11959C17.3199 3.48059 16.1249 2.12059 14.5579 1.86359" stroke="#4F5665" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M16.5952 12.2322C18.1462 12.4632 19.2292 13.0072 19.2292 14.1272C19.2292 14.8982 18.7192 15.3982 17.8952 15.7112" stroke="#4F5665" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </div>
                 <p className="max-xl:hidden">Profile</p>
@@ -281,49 +191,24 @@ function Transfer() {
                 }}
               >
                 <div>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="22"
-                    height="23"
-                    viewBox="0 0 22 23"
-                    fill="none"
-                  >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="23" viewBox="0 0 22 23" fill="none">
                     <path
                       d="M12 7.125L12 4.5C12 2.84315 13.3431 1.5 15 1.5L18 1.5C19.6569 1.5 21 2.84315 21 4.5L21 18.5C21 20.1569 19.6569 21.5 18 21.5L15 21.5C13.3431 21.5 12 20.1569 12 18.5L12 16.5"
                       stroke="#D00000"
                       strokeWidth="1.5"
                       strokeLinecap="round"
                     />
-                    <path
-                      d="M4 14.5L1.44194 11.9419C1.19786 11.6979 1.19786 11.3021 1.44194 11.0581L4 8.5"
-                      stroke="#D00000"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                    />
-                    <path
-                      d="M9 11.5L2 11.5"
-                      stroke="#D00000"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                    />
+                    <path d="M4 14.5L1.44194 11.9419C1.19786 11.6979 1.19786 11.3021 1.44194 11.0581L4 8.5" stroke="#D00000" strokeWidth="1.5" strokeLinecap="round" />
+                    <path d="M9 11.5L2 11.5" stroke="#D00000" strokeWidth="1.5" strokeLinecap="round" />
                   </svg>
                 </div>
                 <p className="max-xl:hidden text-danger">Logout</p>
               </button>
             </div>
           </aside>
-          <div
-            id="Header"
-            className="lg:ml-[40px] mx-[21px] mt-[26px] lg:mr-[79px] mb-[98px] w-full"
-          >
+          <div id="Header" className="lg:ml-[40px] mx-[21px] mt-[26px] lg:mr-[79px] mb-[98px] w-full">
             <div className="flex gap-[17px] items-center mb-[15px]">
-              <svg
-                width={20}
-                height={20}
-                viewBox="0 0 20 20"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg width={20} height={20} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g id="Send">
                   <path
                     id="Send_2"
@@ -334,97 +219,47 @@ function Transfer() {
                   />
                 </g>
               </svg>
-              <h1 className="text-[#0B132A] font-montserrat text-base font-semibold">
-                Transfer Money
-              </h1>
+              <h1 className="text-[#0B132A] font-montserrat text-base font-semibold">Transfer Money</h1>
             </div>
             <div className="lg:flex hidden items-center gap-[13px]">
               <div className="px-2 py-1 flex gap-2">
-                <div className="bg-[#2948FF] w-6 h-6 rounded-full flex justify-center items-center text-white text-xs">
-                  1
-                </div>
-                <h1 className="font-montserrat lg:text-base text-xs text-primary">
-                  Find People
-                </h1>
+                <div className="bg-[#2948FF] w-6 h-6 rounded-full flex justify-center items-center text-white text-xs">1</div>
+                <h1 className="font-montserrat lg:text-base text-xs text-primary">Find People</h1>
               </div>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width={85}
-                height={1}
-                viewBox="0 0 85 1"
-                fill="none"
-              >
+              <svg xmlns="http://www.w3.org/2000/svg" width={85} height={1} viewBox="0 0 85 1" fill="none">
                 <path d="M0 0.5H85" stroke="#2948FF" strokeDasharray="4 4" />
               </svg>
               <div className="px-2 py-1 flex gap-2">
-                <div className="bg-primary w-6 h-6 rounded-full flex justify-center items-center text-white text-xs">
-                  2
-                </div>
+                <div className="bg-primary w-6 h-6 rounded-full flex justify-center items-center text-white text-xs">2</div>
 
-                <h1 className="font-montserrat text-base text-primary">
-                  Set Nominal
-                </h1>
+                <h1 className="font-montserrat text-base text-primary">Set Nominal</h1>
               </div>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width={85}
-                height={1}
-                viewBox="0 0 85 1"
-                fill="none"
-              >
+              <svg xmlns="http://www.w3.org/2000/svg" width={85} height={1} viewBox="0 0 85 1" fill="none">
                 <path d="M0 0.5H85" stroke="#4F5665" strokeDasharray="4 4" />
               </svg>
               <div className="px-2 py-1 flex gap-2">
-                <div className="bg-secondary w-6 h-6 rounded-full flex justify-center items-center text-white text-xs">
-                  3
-                </div>
+                <div className="bg-secondary w-6 h-6 rounded-full flex justify-center items-center text-white text-xs">3</div>
 
-                <h1 className="font-montserrat text-base text-secondary">
-                  Finish
-                </h1>
+                <h1 className="font-montserrat text-base text-secondary">Finish</h1>
               </div>
             </div>
             <div className="border-[1px] mt-4 pt-[26px] lg:pl-[31px] px-5 pb-[43px] lg:pr-[27px]">
               <section className="">
-                <div
-                  id="People_Information"
-                  className="lg:flex w-full justify-between mb-[26px]"
-                >
+                <div id="People_Information" className="lg:flex w-full justify-between mb-[26px]">
                   <div className="flex lg:block">
-                    <h1 className="text-[#0B132A] font-montserrat text-base font-semibold mb-[1px]">
-                      People Information
-                    </h1>
+                    <h1 className="text-[#0B132A] font-montserrat text-base font-semibold mb-[1px]">People Information</h1>
                   </div>
                 </div>
-                <div
-                  id="People_Identity"
-                  className="text-sm mb-[26px] px-5 py-2.5 flex bg-[#e8e8e8] gap-5 rounded-md justify-between"
-                >
+                <div id="People_Identity" className="text-sm mb-[26px] px-5 py-2.5 flex bg-[#e8e8e8] gap-5 rounded-md justify-between">
                   <div className="flex gap-x-4">
                     <div>
-                      <img
-                        src={
-                          user && user.photo_profile
-                            ? user.photo_profile
-                            : getImageUrl("profile", "jpg")
-                        }
-                        alt="photo_profile"
-                        className="w-[84px] h-[84px] rounded-md"
-                      />
+                      <img src={user && user.photo_profile ? user.photo_profile : getImageUrl("profile", "jpg")} alt="photo_profile" className="w-[84px] h-[84px] rounded-md" />
                     </div>
                     <div className="flex flex-col gap-2">
                       <p className="font-semibold">{user && user.full_name}</p>
-                      <p className="text-[#4F5665]">
-                        {user && user.phone_number}
-                      </p>
+                      <p className="text-[#4F5665]">{user && user.phone_number}</p>
                       <div className="flex px-2 py-1 bg-[#2948FF] text-white w-fit rounded-md gap-1">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="17"
-                          viewBox="0 0 16 17"
-                          fill="none"
-                        >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
                           <g clipPath="url(#clip0_44_327)">
                             <path
                               fillRule="evenodd"
@@ -435,12 +270,7 @@ function Transfer() {
                           </g>
                           <defs>
                             <clipPath id="clip0_44_327">
-                              <rect
-                                width="16"
-                                height="16"
-                                fill="white"
-                                transform="translate(0 0.5)"
-                              />
+                              <rect width="16" height="16" fill="white" transform="translate(0 0.5)" />
                             </clipPath>
                           </defs>
                         </svg>
@@ -449,13 +279,7 @@ function Transfer() {
                     </div>
                   </div>
                   <div className="flex items-center">
-                    <svg
-                      width={25}
-                      height={24}
-                      viewBox="0 0 25 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
+                    <svg width={25} height={24} viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <g id="Star">
                         <path
                           id="Vector"
@@ -471,37 +295,18 @@ function Transfer() {
                 </div>
                 <form onSubmit={onSubmitHandler}>
                   <div id="amount_input" className="mb-[26px]">
-                    <p className="text-[#0B132A] font-montserrat text-base font-semibold mb-[1px]">
-                      Amount
-                    </p>
-                    <p className="text-sm mb-[15px] font-montserrat text-[#4F5665]">
-                      Type the amount you want to transfer and then press
-                      continue to the next steps.
-                    </p>
+                    <p className="text-[#0B132A] font-montserrat text-base font-semibold mb-[1px]">Amount</p>
+                    <p className="text-sm mb-[15px] font-montserrat text-[#4F5665]">Type the amount you want to transfer and then press continue to the next steps.</p>
                     <div className="flex flex-col gap-y-3 relative">
-                      <input
-                        type="number"
-                        id="nominal"
-                        placeholder="Enter Nominal Transfer"
-                        className="py-4 px-10 border rounded-lg border-[#DEDEDE] text-sm tracking-wide outline-none focus:border-primary placeholder:text-secondary"
-                      />
+                      <input type="number" id="nominal" placeholder="Enter Nominal Transfer" className="py-4 px-10 border rounded-lg border-[#DEDEDE] text-sm tracking-wide outline-none focus:border-primary placeholder:text-secondary" />
                       <div className="icon-email absolute top-[18px] left-4">
-                        <img
-                          src={getImageUrl("u_money-bill", "svg")}
-                          alt="u_money-bill"
-                          className="w-4 h-4"
-                        />
+                        <img src={getImageUrl("u_money-bill", "svg")} alt="u_money-bill" className="w-4 h-4" />
                       </div>
                     </div>
                   </div>
                   <div id="notes_input" className="mb-[26px]">
-                    <p className="text-[#0B132A] font-montserrat text-base font-semibold mb-[1px]">
-                      Notes
-                    </p>
-                    <p className="text-sm mb-[15px] font-montserrat text-[#4F5665]">
-                      You can add some notes for this transfer such as payment
-                      coffee or something
-                    </p>
+                    <p className="text-[#0B132A] font-montserrat text-base font-semibold mb-[1px]">Notes</p>
+                    <p className="text-sm mb-[15px] font-montserrat text-[#4F5665]">You can add some notes for this transfer such as payment coffee or something</p>
                     <textarea
                       name="notes"
                       id="notes"
@@ -511,10 +316,7 @@ function Transfer() {
                       placeholder="Enter Some Notes"
                     ></textarea>
                   </div>
-                  <button
-                    type="submit"
-                    className="p-[12px] text-sm rounded-md text-light bg-primary hover:bg-blue-800 active:ring w-full"
-                  >
+                  <button type="submit" className="p-[12px] text-sm rounded-md text-light bg-primary hover:bg-blue-800 active:ring w-full">
                     Submit & Transfer
                   </button>
                 </form>
@@ -522,21 +324,10 @@ function Transfer() {
             </div>
           </div>
         </main>
-        {isDropdownShown && (
-          <DropdownMobile isClick={() => setIsDropdownShow(false)} />
-        )}
-        {openModal.isOpen && (
-          <Modal
-            modal={openModal}
-            closeModal={setOpenModal}
-            message={Message}
-          />
-        )}
+        {isDropdownShown && <DropdownMobile isClick={() => setIsDropdownShow(false)} />}
+        {openModal.isOpen && <Modal modal={openModal} closeModal={setOpenModal} message={Message} />}
         {openModalTransfer.isOpen && (
-          <div
-            className="bg-gray-200 justify-center items-center h-screen opacity-100 absolute z-10 font-montserrat"
-            id="modalTransfer"
-          >
+          <div className="bg-gray-200 justify-center items-center h-screen opacity-100 absolute z-10 font-montserrat" id="modalTransfer">
             <div className="fixed left-0 top-0 bg-black bg-opacity-50 w-screen h-screen flex justify-center items-center px-[10px] md:px-0">
               <EnterPin modalTransfer={openModalTransfer} />
             </div>

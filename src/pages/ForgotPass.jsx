@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { forgotPass } from "../utils/https/forgotPass";
 import Modal from "../components/Modal";
 import Title from "../components/Title";
+import { Link } from "react-router-dom";
 
 function ForgotPass() {
   const [email, setEmail] = useState();
@@ -56,46 +57,28 @@ function ForgotPass() {
     <>
       <Title title={"Forgot Password"}>
         <form onSubmit={handleSubmit}>
-          <div className="bg-[#3969FD] w-full h-screen flex justify-center items-center">
-            <div className="bg-white py-[40px] px-[25px] lg:py-[70px] lg:px-[70px] lg:w-[600px] h-auto lg:my-[70px] my-[100px] rounded-[20px]">
+          <div className="bg-[#3969FD] w-full h-screen flex justify-center items-center px-3 md:px-0">
+            <div className="bg-white py-[40px] px-[25px] lg:py-[70px] lg:px-[70px] w-screen md:w-[600px] h-auto lg:my-[70px] my-[100px] rounded-[20px]">
               {/* Bagian E-Wallet */}
               <div className="flex items-center gap-[15px] mb-[25px]">
-                <img
-                  src="img/wallet.png"
-                  alt=""
-                  className="w-8 h-8 object-cover"
-                />
-                <h1 className="font-nunito text-[#2948FF] text-xl font-semibold">
-                  E-Wallet
-                </h1>
+                <img src="img/wallet.png" alt="" className="w-8 h-8 object-cover" />
+                <h1 className="font-nunito text-[#2948FF] text-xl font-semibold">E-Wallet</h1>
               </div>
 
               {/* Bagian Fill out form correctly */}
               <div className="mb-[25px]">
-                <h1 className="text-[#0B132A] font-montserrat lg:text-3xl text-lg font-medium">
-                  Fill Out Form Correctly 👋
-                </h1>
+                <h1 className="text-[#0B132A] font-montserrat lg:text-3xl text-lg font-medium">Fill Out Form Correctly 👋</h1>
               </div>
 
               {/* Bagian we willl ..... */}
               <div className="mb-[25px]">
-                <h2 className="text-[#4F5665] lg:text-base text-xs font-normal font-montserrat">
-                  We will send new password to your email
-                </h2>
+                <h2 className="text-[#4F5665] lg:text-base text-xs font-normal font-montserrat">We will send new password to your email</h2>
               </div>
 
               {/* Bagian input email */}
-              <h1 className="text-[#0B132A] text-base font-medium font-montserrat mb-[13px]">
-                Email
-              </h1>
-              <div className="flex items-center gap-[10px] border-[1px] rounded-lg pl-[14px] mb-[25px]">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width={16}
-                  height={16}
-                  viewBox="0 0 16 16"
-                  fill="none"
-                >
+              <h1 className="text-[#0B132A] text-base font-medium font-montserrat mb-[13px]">Email</h1>
+              <div className="flex items-center gap-[10px] border-[1px] rounded-lg pl-[14px] mb-[15px]">
+                <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} viewBox="0 0 16 16" fill="none">
                   <g clipPath="url(#clip0_9_276)">
                     <path
                       fillRule="evenodd"
@@ -118,21 +101,18 @@ function ForgotPass() {
                   onChange={Email}
                 />
               </div>
-
+              <Link to="/login" className="cursor-default flex justify-end">
+                <p className="mb-4 w-max text-end cursor-pointer hover:underline">Go To Login Page</p>
+              </Link>
               {/* Bagian button submit */}
-              <button
-                type="submit"
-                className="bg-primary p-3 rounded-md flex justify-center items-center gap-x-2 hover:bg-blue-800 focus:ring w-full text-white"
-              >
+              <button type="submit" className="bg-primary p-3 rounded-md flex justify-center items-center gap-x-2 hover:bg-blue-800 focus:ring w-full text-white">
                 Submit
               </button>
             </div>
           </div>
         </form>
       </Title>
-      {openModal.isOpen && (
-        <Modal modal={openModal} closeModal={setOpenModal} message={Message} />
-      )}
+      {openModal.isOpen && <Modal modal={openModal} closeModal={setOpenModal} message={Message} />}
     </>
   );
 }
