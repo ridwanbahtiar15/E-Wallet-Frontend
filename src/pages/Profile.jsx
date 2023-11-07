@@ -77,16 +77,22 @@ function Profile() {
     setSubmitModal(true)
   }
 
+  const [successUpdate, setSuccessUpdate] = useState(false)
   const updateProfileUser = () => {
     updateProfile(userData, jwt)
     .then((res) => {
       console.log(res)
       setSubmitMessage("Profile completed update")
+      setSuccessUpdate(true)
     })
     .catch((err) => {
       console.log(err)
       setSubmitMessage("Profile didn't updated")
     })
+  }
+  const setShowSubmitModals = () => {
+    setSubmitModal(false)
+    setSuccessUpdate(false)
   }
   return (
     <>
@@ -363,12 +369,21 @@ function Profile() {
               <h1 className="text-xl font-medium text-dark text-center">{submitMessage}</h1>
             </div>
               <div className="flex gap-x-6">
+                {!successUpdate && 
                 <button onClick={updateProfileUser} type="button" className="p-[10px] bg-primary hover:bg-blue-800 rounded-md text-light text-base font-medium active:ring">
                   Confirm
                 </button>
-                <button onClick={() => {setSubmitModal(false)}} className="p-[10px] bg-light border-2 hover:bg-slate-200 rounded-md text-dark text-base font-medium active:ring active:ring-slate-300">
+                }
+                {successUpdate && 
+                <button onClick={setShowSubmitModals} type="button" className="p-[10px] bg-primary hover:bg-blue-800 rounded-md text-light text-base font-medium active:ring">
+                  Ok
+                </button>
+                }
+                {!successUpdate && 
+                <button onClick={setShowSubmitModals} className="p-[10px] bg-light border-2 hover:bg-slate-200 rounded-md text-dark text-base font-medium active:ring active:ring-slate-300">
                   Cancel
                 </button>
+                }
               </div>
           </div>
         </div>
