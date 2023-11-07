@@ -48,8 +48,7 @@ function HistoryTransaction() {
       })
       .catch((err) => {
         console.log(err);
-        if (err.response.data.msg === "Access ended, please re-log in")
-          navigate("/login");
+        if (err.response.data.msg === "Access ended, please re-log in") navigate("/login");
       });
   }, []);
 
@@ -86,19 +85,42 @@ function HistoryTransaction() {
   const OnSubmitHandler = (e) => {
     e.preventDefault();
 
-    let urlUser = `/transaction/${id}`;
+    let urlUser = `/transaction`;
+    if (e.target.search.value === "") {
+      setSearchParams(() => {
+        return { page: 1 };
+      });
+    }
     if (e.target.search.value) {
-      setSearchParams((prev) => ({
-        ...prev,
-        name: e.target.search.value,
-      }));
-      urlUser = `/transaction/${id}?name=${e.target.search.value}&page=1`;
+      setSearchParams((prev) => {
+        const prevSearchParams = {};
+        prev.forEach((value, key) => {
+          Object.assign(prevSearchParams, { [key]: value });
+        });
+        if (!searchParams.get("name")) {
+          return {
+            name: e.target.search.value,
+            ...prevSearchParams,
+          };
+        }
+        return {
+          ...prevSearchParams,
+          name: e.target.search.value,
+        };
+      });
+      urlUser = `/transaction/?name=${e.target.search.value}&page=${searchParams.get("page")}`;
     }
 
     authAxios
       .get(urlUser)
-      .then((res) => console.log(res.data))
-      .catch((err) => console.log(err));
+      .then((res) => {
+        setUser(res.data.result), setMeta(res.data.meta);
+      })
+      .catch((err) => {
+        if (err.response.data.msg === "No Transaction Found") {
+          setUser(err.response.data.result), setMeta([]);
+        }
+      });
   };
 
   const prevPage = () => {
@@ -113,17 +135,17 @@ function HistoryTransaction() {
           page: parseInt(searchParams.get("page")) - 1,
         };
       });
-      const query = `${
-        searchParams.get("name") ? `name=${searchParams.get("name")}` : ``
-      }page=${parseInt(searchParams.get("page")) - 1}`;
+      const query = `${searchParams.get("name") ? `name=${searchParams.get("name")}` : ``}&page=${parseInt(searchParams.get("page")) - 1}`;
       console.log(query);
       transaction(token, query)
         .then((res) => {
           setUser(res.data.result), setMeta(res.data.meta), console.log(user);
         })
         .catch((err) => {
-          if (err.response.data.msg === "Access ended, please re-log in")
-            navigate("/login");
+          if (err.response.data.msg === "Access ended, please re-log in") return navigate("/login");
+          if (err.response.data.msg === "No Transaction Found") {
+            return setUser(err.response.data.result), setMeta([]);
+          }
         });
     }
   };
@@ -139,9 +161,7 @@ function HistoryTransaction() {
           page: parseInt(searchParams.get("page")) + 1,
         };
       });
-      const query = `${
-        searchParams.get("name") ? `name=${searchParams.get("name")}` : ``
-      }page=${parseInt(searchParams.get("page")) + 1}`;
+      const query = `${searchParams.get("name") ? `name=${searchParams.get("name")}` : ``}&page=${parseInt(searchParams.get("page")) + 1}`;
 
       // const query = searchParams.toString();
       console.log(query);
@@ -150,8 +170,10 @@ function HistoryTransaction() {
           setUser(res.data.result), setMeta(res.data.meta), console.log(user);
         })
         .catch((err) => {
-          if (err.response.data.msg === "Access ended, please re-log in")
-            navigate("/login");
+          if (err.response.data.msg === "Access ended, please re-log in") return navigate("/login");
+          if (err.response.data.msg === "No Transaction Found") {
+            return setUser(err.response.data.result), setMeta([]);
+          }
         });
     }
   };
@@ -169,30 +191,16 @@ function HistoryTransaction() {
         <main className="flex w-full font-montserrat">
           <aside className="xl:w-1/5 border-r border-[#E8E8E8] py-6 px-11 hidden lg:block">
             <div className="flex flex-col gap-y-4">
-              <Link
-                to="/dashboard"
-                className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-base font-normal text-secondary"
-              >
+              <Link to="/dashboard" className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-base font-normal text-secondary">
                 <div>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="25"
-                    viewBox="0 0 24 25"
-                    fill="none"
-                  >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
                     <path
                       d="M4.92265 5.43523L6.4874 7M22 12.5C22 18.0229 17.5229 22.5 12 22.5C6.47715 22.5 2 18.0229 2 12.5H22ZM22 12.5H20H22ZM22 12.5C22 9.7418 20.8833 7.24435 19.0774 5.43523L22 12.5ZM2 12.5H4H2ZM2 12.5C2 9.74175 3.1167 7.24435 4.92265 5.43523L2 12.5ZM12 2.5V4.5V2.5ZM12 2.5C14.7646 2.5 17.2672 3.62189 19.0774 5.43523L12 2.5ZM12 2.5C9.2354 2.5 6.7328 3.62189 4.92265 5.43523L12 2.5ZM19.0774 5.43523L17.5126 7L19.0774 5.43523Z"
                       stroke="#4F5665"
                       strokeLinecap="round"
                       strokeLinejoin="round"
                     />
-                    <path
-                      d="M12 10.5V16.5"
-                      stroke="#4F5665"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
+                    <path d="M12 10.5V16.5" stroke="#4F5665" strokeLinecap="round" strokeLinejoin="round" />
                     <path
                       d="M19.9265 18.598C18.0981 20.9711 15.2278 22.5 12.0004 22.5C8.77296 22.5 5.90266 20.9711 4.07422 18.598C6.41081 17.2629 9.11651 16.5 12.0004 16.5C14.8842 16.5 17.5899 17.2629 19.9265 18.598Z"
                       stroke="#4F5665"
@@ -203,18 +211,9 @@ function HistoryTransaction() {
                 </div>
                 <p className="max-xl:hidden">Dashboard</p>
               </Link>
-              <Link
-                to="/transfer"
-                className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-sm font-normal text-secondary"
-              >
+              <Link to="/transfer" className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-sm font-normal text-secondary">
                 <div>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="21"
-                    viewBox="0 0 20 21"
-                    fill="none"
-                  >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
                     <path
                       fillRule="evenodd"
                       clipRule="evenodd"
@@ -225,25 +224,10 @@ function HistoryTransaction() {
                 </div>
                 <p className="max-xl:hidden">Transfer</p>
               </Link>
-              <Link
-                to="/history"
-                className="flex items-center gap-x-2 py-2 px-4 bg-primary rounded-md outline-none text-sm font-normal text-light"
-              >
+              <Link to="/history" className="flex items-center gap-x-2 py-2 px-4 bg-primary rounded-md outline-none text-sm font-normal text-light">
                 <div>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="25"
-                    viewBox="0 0 24 25"
-                    fill="none"
-                  >
-                    <path
-                      d="M2.90918 3.86365V7.5H6.54556"
-                      stroke="white"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                    <path d="M2.90918 3.86365V7.5H6.54556" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                     <path
                       d="M2 12.5C2 18.0229 6.47715 22.5 12 22.5C17.5229 22.5 22 18.0229 22 12.5C22 6.97715 17.5229 2.5 12 2.5C8.299 2.5 5.06755 4.51056 3.33839 7.49905"
                       stroke="white"
@@ -251,43 +235,16 @@ function HistoryTransaction() {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                     />
-                    <path
-                      d="M12.0026 6.5L12.002 12.5044L16.2417 16.7441"
-                      stroke="white"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
+                    <path d="M12.0026 6.5L12.002 12.5044L16.2417 16.7441" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </div>
                 <p className="max-xl:hidden">History</p>
               </Link>
-              <Link
-                to="/topup"
-                className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-sm font-normal text-secondary"
-              >
+              <Link to="/topup" className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-sm font-normal text-secondary">
                 <div>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="22"
-                    viewBox="0 0 20 22"
-                    fill="none"
-                  >
-                    <mask
-                      id="mask0_234_227"
-                      maskUnits="userSpaceOnUse"
-                      x="0"
-                      y="7"
-                      width="20"
-                      height="15"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        clipRule="evenodd"
-                        d="M0.000488281 7.2941H20.0001V21.0381H0.000488281V7.2941Z"
-                        fill="white"
-                      />
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewBox="0 0 20 22" fill="none">
+                    <mask id="mask0_234_227" maskUnits="userSpaceOnUse" x="0" y="7" width="20" height="15">
+                      <path fillRule="evenodd" clipRule="evenodd" d="M0.000488281 7.2941H20.0001V21.0381H0.000488281V7.2941Z" fill="white" />
                     </mask>
                     <g mask="url(#mask0_234_227)">
                       <path
@@ -297,20 +254,8 @@ function HistoryTransaction() {
                         fill="#4F5665"
                       />
                     </g>
-                    <mask
-                      id="mask1_234_227"
-                      maskUnits="userSpaceOnUse"
-                      x="9"
-                      y="0"
-                      width="2"
-                      height="15"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        clipRule="evenodd"
-                        d="M9.25 0.500092H10.75V14.041H9.25V0.500092Z"
-                        fill="white"
-                      />
+                    <mask id="mask1_234_227" maskUnits="userSpaceOnUse" x="9" y="0" width="2" height="15">
+                      <path fillRule="evenodd" clipRule="evenodd" d="M9.25 0.500092H10.75V14.041H9.25V0.500092Z" fill="white" />
                     </mask>
                     <g mask="url(#mask1_234_227)">
                       <path
@@ -330,18 +275,9 @@ function HistoryTransaction() {
                 </div>
                 <p className="max-xl:hidden">Top Up</p>
               </Link>
-              <Link
-                to="/profile"
-                className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-sm font-normal text-secondary"
-              >
+              <Link to="/profile" className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-sm font-normal text-secondary">
                 <div>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 20 20"
-                    fill="none"
-                  >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                     <path
                       fillRule="evenodd"
                       clipRule="evenodd"
@@ -360,20 +296,8 @@ function HistoryTransaction() {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                     />
-                    <path
-                      d="M14.4829 8.38159C16.0839 8.15659 17.3169 6.78259 17.3199 5.11959C17.3199 3.48059 16.1249 2.12059 14.5579 1.86359"
-                      stroke="#4F5665"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="M16.5952 12.2322C18.1462 12.4632 19.2292 13.0072 19.2292 14.1272C19.2292 14.8982 18.7192 15.3982 17.8952 15.7112"
-                      stroke="#4F5665"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
+                    <path d="M14.4829 8.38159C16.0839 8.15659 17.3169 6.78259 17.3199 5.11959C17.3199 3.48059 16.1249 2.12059 14.5579 1.86359" stroke="#4F5665" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M16.5952 12.2322C18.1462 12.4632 19.2292 13.0072 19.2292 14.1272C19.2292 14.8982 18.7192 15.3982 17.8952 15.7112" stroke="#4F5665" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </div>
                 <p className="max-xl:hidden">Profile</p>
@@ -387,31 +311,15 @@ function HistoryTransaction() {
                 }}
               >
                 <div>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="22"
-                    height="23"
-                    viewBox="0 0 22 23"
-                    fill="none"
-                  >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="23" viewBox="0 0 22 23" fill="none">
                     <path
                       d="M12 7.125L12 4.5C12 2.84315 13.3431 1.5 15 1.5L18 1.5C19.6569 1.5 21 2.84315 21 4.5L21 18.5C21 20.1569 19.6569 21.5 18 21.5L15 21.5C13.3431 21.5 12 20.1569 12 18.5L12 16.5"
                       stroke="#D00000"
                       strokeWidth="1.5"
                       strokeLinecap="round"
                     />
-                    <path
-                      d="M4 14.5L1.44194 11.9419C1.19786 11.6979 1.19786 11.3021 1.44194 11.0581L4 8.5"
-                      stroke="#D00000"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                    />
-                    <path
-                      d="M9 11.5L2 11.5"
-                      stroke="#D00000"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                    />
+                    <path d="M4 14.5L1.44194 11.9419C1.19786 11.6979 1.19786 11.3021 1.44194 11.0581L4 8.5" stroke="#D00000" strokeWidth="1.5" strokeLinecap="round" />
+                    <path d="M9 11.5L2 11.5" stroke="#D00000" strokeWidth="1.5" strokeLinecap="round" />
                   </svg>
                 </div>
                 <p className="max-xl:hidden text-danger">Logout</p>
@@ -421,11 +329,7 @@ function HistoryTransaction() {
           <section className="flex flex-col gap-y-8 md:gap-x-5 py-6 px-5 md:py-8 md:px-10 md:justify-between w-full">
             <header className="flex gap-x-4">
               <div>
-                <img
-                  src={getImageUrl("history", "svg")}
-                  alt="history"
-                  className="w-6 h-6"
-                />
+                <img src={getImageUrl("history", "svg")} alt="history" className="w-6 h-6" />
               </div>
               <p className="text-dark font-semibold">History Transaction</p>
             </header>
@@ -444,15 +348,8 @@ function HistoryTransaction() {
                             placeholder="Enter Number Or Full Name"
                             // onChange={setSearchHandler}
                           />
-                          <button
-                            type="submit"
-                            className="absolute top-3.5 right-3.5"
-                          >
-                            <img
-                              src={getImageUrl("Search", "svg")}
-                              alt="Search"
-                              className="w-5 h-5"
-                            />
+                          <button type="submit" className="absolute top-3.5 right-3.5">
+                            <img src={getImageUrl("Search", "svg")} alt="Search" className="w-5 h-5" />
                           </button>
                         </form>
                       </div>
@@ -472,56 +369,19 @@ function HistoryTransaction() {
                         </thead>
                         <tbody>
                           {user.map((result, i) => (
-                            <tr
-                              className={`border-b border-[#E8E8E84D] ${
-                                i % 2 == 0 ? "bg-[#F9FAFB]" : ""
-                              }`}
-                              key={i}
-                            >
+                            <tr className={`border-b border-[#E8E8E84D] ${i % 2 == 0 ? "bg-[#F9FAFB]" : ""}`} key={i}>
                               <td className="p-6">
                                 <div className="flex justify-center">
-                                  <img
-                                    src={
-                                      result.photo_profile
-                                        ? result.photo_profile
-                                        : getImageUrl("foto1", "png")
-                                    }
-                                    alt="product"
-                                    className="w-12 rounded-md"
-                                  />
+                                  <img src={result.photo_profile ? result.photo_profile : getImageUrl("foto1", "png")} alt="product" className="w-12 rounded-md" />
                                 </div>
                               </td>
-                              <td className="p-6 text-center">
-                                {result.full_name}
-                              </td>
-                              <td className="p-6 text-center">
-                                {result.phone_number
-                                  ? result.phone_number
-                                  : "-"}
-                              </td>
-                              <td
-                                className={`p-6 text-center text-xs ${
-                                  result.summary == "Income"
-                                    ? "text-success"
-                                    : "text-danger"
-                                }`}
-                              >{`Rp. ${result.transaction_amount}`}</td>
+                              <td className="p-6 text-center">{result.full_name}</td>
+                              <td className="p-6 text-center">{result.phone_number ? result.phone_number : "-"}</td>
+                              <td className={`p-6 text-center text-xs ${result.summary == "Income" ? "text-success" : "text-danger"}`}>{`Rp. ${result.transaction_amount}`}</td>
                               <td className="p-6 text-center">
                                 <div className="flex flex-col gap-y-2 items-center xl:flex-row md:gap-x-2 justify-center">
-                                  <div
-                                    className="p-1 cursor-pointer"
-                                    onClick={() =>
-                                      onDeleteHandler(
-                                        result.id,
-                                        result.transaction_type
-                                      )
-                                    }
-                                  >
-                                    <img
-                                      src={getImageUrl("Trash", "svg")}
-                                      alt="Trash"
-                                      className="w-6"
-                                    />
+                                  <div className="p-1 cursor-pointer" onClick={() => onDeleteHandler(result.id, result.transaction_type)}>
+                                    <img src={getImageUrl("Trash", "svg")} alt="Trash" className="w-6" />
                                   </div>
                                 </div>
                               </td>
@@ -531,17 +391,10 @@ function HistoryTransaction() {
                       </table>
                     </div>
                   ) : (
-                    <p className="text-center text-xl text-black py-5">
-                      {" "}
-                      No Transaction Found
-                    </p>
+                    <p className="text-center text-xl text-black py-5"> No Transaction Found</p>
                   )}
                   <div className="flex justify-between items-center px-4">
-                    <p className="text-xs font-normal text-secondary">{`Show ${
-                      user.length
-                    } History of ${
-                      meta.totalData ? meta.totalData : 0
-                    } History`}</p>
+                    <p className="text-xs font-normal text-secondary">{`Show ${user.length} History of ${meta.totalData ? meta.totalData : 0} History`}</p>
 
                     <div>
                       <div className="text-xs font-medium text-secondary flex gap-x-4">
@@ -558,11 +411,7 @@ function HistoryTransaction() {
                             maxLength={"2"}
                             size={"2"}
                             onInput={(e) => {
-                              if (e.target.value.length > e.target.maxLength)
-                                e.target.value = e.target.value.slice(
-                                  0,
-                                  e.target.maxLength
-                                );
+                              if (e.target.value.length > e.target.maxLength) e.target.value = e.target.value.slice(0, e.target.maxLength);
                               // e.preventDefault();
                             }}
                           />
@@ -571,9 +420,7 @@ function HistoryTransaction() {
                           Next
                         </p>
                       </div>
-                      <p className="text-xs text-end tracking-widest font-normal text-secondary">{`Page ${searchParams.get(
-                        "page"
-                      )} of ${meta.totalPage ? meta.totalPage : 0}`}</p>
+                      <p className="text-xs text-end tracking-widest font-normal text-secondary">{`Page ${searchParams.get("page")} of ${meta.totalPage ? meta.totalPage : 0}`}</p>
                     </div>
                   </div>
                 </section>
@@ -581,18 +428,8 @@ function HistoryTransaction() {
             </section>
           </section>
         </main>
-        {isDropdownShown && (
-          <DropdownMobile isClick={() => setIsDropdownShow(false)} />
-        )}
-        {openModal.isOpen && (
-          <Modal
-            modal={openModal}
-            closeModal={setOpenModal}
-            message={Message}
-            dataUser={setUser}
-            historyMeta={setMeta}
-          />
-        )}
+        {isDropdownShown && <DropdownMobile isClick={() => setIsDropdownShow(false)} />}
+        {openModal.isOpen && <Modal modal={openModal} closeModal={setOpenModal} message={Message} dataUser={setUser} historyMeta={setMeta} />}
       </Title>
     </>
   );

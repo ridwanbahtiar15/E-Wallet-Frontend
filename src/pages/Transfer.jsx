@@ -34,8 +34,7 @@ function Transfer() {
   const [nameList, setNameList] = useState([]);
   const [meta, setMeta] = useState({});
 
-  const url =
-    import.meta.env.VITE_BACKEND_HOST + "/user?" + searchParams.toString();
+  const url = import.meta.env.VITE_BACKEND_HOST + "/user?" + searchParams.toString();
 
   useEffect(() => {
     getUser(url, jwt)
@@ -83,30 +82,16 @@ function Transfer() {
         <main className="flex font-montserrat">
           <aside className="xl:w-1/5 border-r border-[#E8E8E8] py-6 px-11 hidden lg:block">
             <div className="flex flex-col gap-y-4">
-              <Link
-                to="/dashboard"
-                className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-base font-normal text-secondary"
-              >
+              <Link to="/dashboard" className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-base font-normal text-secondary">
                 <div>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="25"
-                    viewBox="0 0 24 25"
-                    fill="none"
-                  >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
                     <path
                       d="M4.92265 5.43523L6.4874 7M22 12.5C22 18.0229 17.5229 22.5 12 22.5C6.47715 22.5 2 18.0229 2 12.5H22ZM22 12.5H20H22ZM22 12.5C22 9.7418 20.8833 7.24435 19.0774 5.43523L22 12.5ZM2 12.5H4H2ZM2 12.5C2 9.74175 3.1167 7.24435 4.92265 5.43523L2 12.5ZM12 2.5V4.5V2.5ZM12 2.5C14.7646 2.5 17.2672 3.62189 19.0774 5.43523L12 2.5ZM12 2.5C9.2354 2.5 6.7328 3.62189 4.92265 5.43523L12 2.5ZM19.0774 5.43523L17.5126 7L19.0774 5.43523Z"
                       stroke="#4F5665"
                       strokeLinecap="round"
                       strokeLinejoin="round"
                     />
-                    <path
-                      d="M12 10.5V16.5"
-                      stroke="#4F5665"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
+                    <path d="M12 10.5V16.5" stroke="#4F5665" strokeLinecap="round" strokeLinejoin="round" />
                     <path
                       d="M19.926 18.598C18.0976 20.9711 15.2273 22.5 11.9999 22.5C8.77248 22.5 5.90218 20.9711 4.07373 18.598C6.41033 17.2629 9.11603 16.5 11.9999 16.5C14.8837 16.5 17.5894 17.2629 19.926 18.598Z"
                       stroke="#4F5665"
@@ -117,18 +102,9 @@ function Transfer() {
                 </div>
                 <p className="max-xl:hidden">Dashboard</p>
               </Link>
-              <Link
-                to="/transfer"
-                className="flex items-center gap-x-2 py-2 px-4 bg-primary rounded-md outline-none text-sm font-normal text-light"
-              >
+              <Link to="/transfer" className="flex items-center gap-x-2 py-2 px-4 bg-primary rounded-md outline-none text-sm font-normal text-light">
                 <div>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="21"
-                    viewBox="0 0 20 21"
-                    fill="none"
-                  >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
                     <path
                       fillRule="evenodd"
                       clipRule="evenodd"
@@ -139,25 +115,10 @@ function Transfer() {
                 </div>
                 <p className="max-xl:hidden">Transfer</p>
               </Link>
-              <Link
-                to="/history"
-                className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-sm font-normal text-secondary"
-              >
+              <Link to="/history" className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-sm font-normal text-secondary">
                 <div>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="25"
-                    viewBox="0 0 24 25"
-                    fill="none"
-                  >
-                    <path
-                      d="M2.90918 3.86365V7.5H6.54556"
-                      stroke="#4F5665"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                    <path d="M2.90918 3.86365V7.5H6.54556" stroke="#4F5665" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                     <path
                       d="M2 12.5C2 18.0229 6.47715 22.5 12 22.5C17.5229 22.5 22 18.0229 22 12.5C22 6.97715 17.5229 2.5 12 2.5C8.299 2.5 5.06755 4.51056 3.33839 7.49905"
                       stroke="#4F5665"
@@ -165,43 +126,16 @@ function Transfer() {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                     />
-                    <path
-                      d="M12.0026 6.5L12.002 12.5044L16.2417 16.7441"
-                      stroke="#4F5665"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
+                    <path d="M12.0026 6.5L12.002 12.5044L16.2417 16.7441" stroke="#4F5665" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </div>
                 <p className="max-xl:hidden">History</p>
               </Link>
-              <Link
-                to="/topup"
-                className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-sm font-normal text-secondary"
-              >
+              <Link to="/topup" className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-sm font-normal text-secondary">
                 <div>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="22"
-                    viewBox="0 0 20 22"
-                    fill="none"
-                  >
-                    <mask
-                      id="mask0_234_227"
-                      maskUnits="userSpaceOnUse"
-                      x="0"
-                      y="7"
-                      width="20"
-                      height="15"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        clipRule="evenodd"
-                        d="M0.000488281 7.2941H20.0001V21.0381H0.000488281V7.2941Z"
-                        fill="white"
-                      />
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewBox="0 0 20 22" fill="none">
+                    <mask id="mask0_234_227" maskUnits="userSpaceOnUse" x="0" y="7" width="20" height="15">
+                      <path fillRule="evenodd" clipRule="evenodd" d="M0.000488281 7.2941H20.0001V21.0381H0.000488281V7.2941Z" fill="white" />
                     </mask>
                     <g mask="url(#mask0_234_227)">
                       <path
@@ -211,20 +145,8 @@ function Transfer() {
                         fill="#4F5665"
                       />
                     </g>
-                    <mask
-                      id="mask1_234_227"
-                      maskUnits="userSpaceOnUse"
-                      x="9"
-                      y="0"
-                      width="2"
-                      height="15"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        clipRule="evenodd"
-                        d="M9.25 0.500092H10.75V14.041H9.25V0.500092Z"
-                        fill="white"
-                      />
+                    <mask id="mask1_234_227" maskUnits="userSpaceOnUse" x="9" y="0" width="2" height="15">
+                      <path fillRule="evenodd" clipRule="evenodd" d="M9.25 0.500092H10.75V14.041H9.25V0.500092Z" fill="white" />
                     </mask>
                     <g mask="url(#mask1_234_227)">
                       <path
@@ -244,18 +166,9 @@ function Transfer() {
                 </div>
                 <p className="max-xl:hidden">Top Up</p>
               </Link>
-              <Link
-                to="/profile"
-                className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-sm font-normal text-secondary"
-              >
+              <Link to="/profile" className="flex items-center gap-x-2 py-2 px-4 hover:bg-primary rounded-md outline-none text-sm font-normal text-secondary">
                 <div>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 20 20"
-                    fill="none"
-                  >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                     <path
                       fillRule="evenodd"
                       clipRule="evenodd"
@@ -274,20 +187,8 @@ function Transfer() {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                     />
-                    <path
-                      d="M14.4829 8.38159C16.0839 8.15659 17.3169 6.78259 17.3199 5.11959C17.3199 3.48059 16.1249 2.12059 14.5579 1.86359"
-                      stroke="#4F5665"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="M16.5952 12.2322C18.1462 12.4632 19.2292 13.0072 19.2292 14.1272C19.2292 14.8982 18.7192 15.3982 17.8952 15.7112"
-                      stroke="#4F5665"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
+                    <path d="M14.4829 8.38159C16.0839 8.15659 17.3169 6.78259 17.3199 5.11959C17.3199 3.48059 16.1249 2.12059 14.5579 1.86359" stroke="#4F5665" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M16.5952 12.2322C18.1462 12.4632 19.2292 13.0072 19.2292 14.1272C19.2292 14.8982 18.7192 15.3982 17.8952 15.7112" stroke="#4F5665" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </div>
                 <p className="max-xl:hidden">Profile</p>
@@ -301,31 +202,15 @@ function Transfer() {
                 }}
               >
                 <div>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="22"
-                    height="23"
-                    viewBox="0 0 22 23"
-                    fill="none"
-                  >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="23" viewBox="0 0 22 23" fill="none">
                     <path
                       d="M12 7.125L12 4.5C12 2.84315 13.3431 1.5 15 1.5L18 1.5C19.6569 1.5 21 2.84315 21 4.5L21 18.5C21 20.1569 19.6569 21.5 18 21.5L15 21.5C13.3431 21.5 12 20.1569 12 18.5L12 16.5"
                       stroke="#D00000"
                       strokeWidth="1.5"
                       strokeLinecap="round"
                     />
-                    <path
-                      d="M4 14.5L1.44194 11.9419C1.19786 11.6979 1.19786 11.3021 1.44194 11.0581L4 8.5"
-                      stroke="#D00000"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                    />
-                    <path
-                      d="M9 11.5L2 11.5"
-                      stroke="#D00000"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                    />
+                    <path d="M4 14.5L1.44194 11.9419C1.19786 11.6979 1.19786 11.3021 1.44194 11.0581L4 8.5" stroke="#D00000" strokeWidth="1.5" strokeLinecap="round" />
+                    <path d="M9 11.5L2 11.5" stroke="#D00000" strokeWidth="1.5" strokeLinecap="round" />
                   </svg>
                 </div>
                 <p className="max-xl:hidden text-danger">Logout</p>
@@ -336,58 +221,30 @@ function Transfer() {
             <header className="flex flex-col gap-y-4">
               <div className="flex gap-x-4">
                 <div>
-                  <img
-                    src={getImageUrl("Send-primary", "svg")}
-                    alt="Send-primary"
-                    className="w-6 h-6"
-                  />
+                  <img src={getImageUrl("Send-primary", "svg")} alt="Send-primary" className="w-6 h-6" />
                 </div>
                 <p className="text-dark font-semibold">Transfer Money</p>
               </div>
               <div className="lg:flex hidden items-center gap-[13px]">
                 <div className="px-2 py-1 flex gap-2">
-                  <div className="bg-[#2948FF] w-6 h-6 rounded-full flex justify-center items-center text-white text-xs">
-                    1
-                  </div>
-                  <h1 className="font-montserrat lg:text-base text-xs text-[#2948FF]">
-                    Find People
-                  </h1>
+                  <div className="bg-[#2948FF] w-6 h-6 rounded-full flex justify-center items-center text-white text-xs">1</div>
+                  <h1 className="font-montserrat lg:text-base text-xs text-[#2948FF]">Find People</h1>
                 </div>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width={85}
-                  height={1}
-                  viewBox="0 0 85 1"
-                  fill="none"
-                >
+                <svg xmlns="http://www.w3.org/2000/svg" width={85} height={1} viewBox="0 0 85 1" fill="none">
                   <path d="M0 0.5H85" stroke="#4F5665" strokeDasharray="4 4" />
                 </svg>
                 <div className="px-2 py-1 flex gap-2">
-                  <div className="bg-[#4F5665] w-6 h-6 rounded-full flex justify-center items-center text-white text-xs">
-                    2
-                  </div>
+                  <div className="bg-[#4F5665] w-6 h-6 rounded-full flex justify-center items-center text-white text-xs">2</div>
 
-                  <h1 className="font-montserrat text-base text-[#4F5665]">
-                    Set Nominal
-                  </h1>
+                  <h1 className="font-montserrat text-base text-[#4F5665]">Set Nominal</h1>
                 </div>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width={85}
-                  height={1}
-                  viewBox="0 0 85 1"
-                  fill="none"
-                >
+                <svg xmlns="http://www.w3.org/2000/svg" width={85} height={1} viewBox="0 0 85 1" fill="none">
                   <path d="M0 0.5H85" stroke="#4F5665" strokeDasharray="4 4" />
                 </svg>
                 <div className="px-2 py-1 flex gap-2">
-                  <div className="bg-[#4F5665] w-6 h-6 rounded-full flex justify-center items-center text-white text-xs">
-                    3
-                  </div>
+                  <div className="bg-[#4F5665] w-6 h-6 rounded-full flex justify-center items-center text-white text-xs">3</div>
 
-                  <h1 className="font-montserrat text-base text-[#4F5665]">
-                    Finish
-                  </h1>
+                  <h1 className="font-montserrat text-base text-[#4F5665]">Finish</h1>
                 </div>
               </div>
             </header>
@@ -397,9 +254,7 @@ function Transfer() {
                   <header className="flex flex-col gap-y-4 lg:items-center lg:flex-row justify-between w-full px-4">
                     <div className="flex flex-col gap-y-1">
                       <p className="font-semibold text-dark">Find People</p>
-                      <p className="text-xs font-medium text-secondary">
-                        {meta && meta.totalUser} Result for Ghaluh
-                      </p>
+                      <p className="text-xs font-medium text-secondary">{meta && meta.totalUser} Result for Ghaluh</p>
                     </div>
                     <div className="flex flex-col gap-y-4 lg:flex-row lg:gap-x-3 lg:items-end">
                       <div className="font-medium text-secondary lg:w-[340px] relative">
@@ -411,16 +266,8 @@ function Transfer() {
                             placeholder="Enter Number Or Full Name"
                             onInput={onChangeInputHandler}
                           />
-                          <button
-                            type="submit"
-                            className="absolute top-3.5 right-3.5"
-                            onClick={searchUser}
-                          >
-                            <img
-                              src={getImageUrl("Search", "svg")}
-                              alt="Search"
-                              className="w-5 h-5"
-                            />
+                          <button type="submit" className="absolute top-3.5 right-3.5" onClick={searchUser}>
+                            <img src={getImageUrl("Search", "svg")} alt="Search" className="w-5 h-5" />
                           </button>
                         </div>
                       </div>
@@ -493,46 +340,23 @@ function Transfer() {
                       </tbody> */}
                       <tbody>
                         {nameList.map((result, i) => (
-                          <tr
-                            className={`border-b border-[#E8E8E84D] ${
-                              i % 2 == 0 ? "bg-[#F9FAFB]" : ""
-                            }`}
-                            key={i}
-                          >
+                          <tr className={`border-b border-[#E8E8E84D] ${i % 2 == 0 ? "bg-[#F9FAFB]" : ""}`} key={i}>
                             <td className="p-6">
                               <div className="flex justify-center">
-                                <img
-                                  src={
-                                    result.photo_profile
-                                      ? result.photo_profile
-                                      : getImageUrl("foto1", "png")
-                                  }
-                                  alt="product"
-                                  className="w-12 rounded-md"
-                                />
+                                <img src={result.photo_profile ? result.photo_profile : getImageUrl("profile", "jpg")} alt="product" className="w-12 rounded-md" />
                               </div>
                             </td>
-                            <td className="p-6 text-center">
-                              {result.full_name}
-                            </td>
-                            <td className="p-6 text-center">
-                              {result.phone_number ? result.phone_number : "-"}
-                            </td>
+                            <td className="p-6 text-center">{result.full_name}</td>
+                            <td className="p-6 text-center">{result.phone_number ? result.phone_number : "-"}</td>
                             <td className="p-6 text-center">
                               <div className="flex flex-col gap-y-2 items-center xl:flex-row md:gap-x-2 justify-center">
                                 <div className="p-1 cursor-pointer">
-                                  <img
-                                    src={getImageUrl("Star", "svg")}
-                                    alt="Star"
-                                  />
+                                  <img src={getImageUrl("Star", "svg")} alt="Star" />
                                 </div>
                               </div>
                             </td>
                             <td className="p-6 text-center">
-                              <Link
-                                to={`/transfer/${result.No}`}
-                                className="text-primary"
-                              >
+                              <Link to={`/transfer/${result.No}`} className="text-primary">
                                 Detail
                               </Link>
                             </td>
@@ -546,23 +370,9 @@ function Transfer() {
             </section>
           </section>
         </main>
-        {isDropdownShown && (
-          <DropdownMobile isClick={() => setIsDropdownShow(false)} />
-        )}
-        {openModal.isOpen && (
-          <Modal
-            modal={openModal}
-            closeModal={setOpenModal}
-            message={Message}
-          />
-        )}
-        {openModalTransfer.isOpen && (
-          <ModalTransfer
-            modalTransfer={openModalTransfer}
-            closeModalTransfer={setOpenModalTransfer}
-            messageTransfer={MessageTransfer}
-          />
-        )}
+        {isDropdownShown && <DropdownMobile isClick={() => setIsDropdownShow(false)} />}
+        {openModal.isOpen && <Modal modal={openModal} closeModal={setOpenModal} message={Message} />}
+        {openModalTransfer.isOpen && <ModalTransfer modalTransfer={openModalTransfer} closeModalTransfer={setOpenModalTransfer} messageTransfer={MessageTransfer} />}
       </Title>
     </>
   );
