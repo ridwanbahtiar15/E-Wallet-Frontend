@@ -41,7 +41,7 @@ function Dashboard() {
   const [dataCard, setDataCard] = useState([]);
 
   useEffect(() => {
-    if (!user.userPin) {
+    if (!user.pin) {
       return navigate("/EnterPin");
     }
     transactionChart(token, userId, startFormatDate, endFormatDate, summary).then((res) => {
