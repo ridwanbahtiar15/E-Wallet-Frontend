@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import Navbar from "../components/Navbar";
@@ -23,6 +23,7 @@ function Dashboard() {
   const [isSummary, setIsSummary] = useState(false);
   const [summary, setSummary] = useState("Income");
   const [valueSummary, setValueSummary] = useState(false);
+  const navigate = useNavigate();
 
   const date = new Date();
   const startDate = date;
@@ -40,6 +41,9 @@ function Dashboard() {
   const [dataCard, setDataCard] = useState([]);
 
   useEffect(() => {
+    if (!user.pin) {
+      return navigate("/EnterPin");
+    }
     transactionChart(token, userId, startFormatDate, endFormatDate, summary).then((res) => {
       setDataChart(res.data.result.chart_data);
       setDataCard(res.data.result);
