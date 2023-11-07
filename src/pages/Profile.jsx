@@ -77,17 +77,23 @@ function Profile() {
     setSubmitModal(true);
   };
 
+  const [successUpdate, setSuccessUpdate] = useState(false)
   const updateProfileUser = () => {
     updateProfile(userData, jwt)
-      .then((res) => {
-        console.log(res);
-        setSubmitMessage("Profile completed update");
-      })
-      .catch((err) => {
-        console.log(err);
-        setSubmitMessage("Profile didn't updated");
-      });
-  };
+    .then((res) => {
+      console.log(res)
+      setSubmitMessage("Profile completed update")
+      setSuccessUpdate(true)
+    })
+    .catch((err) => {
+      console.log(err)
+      setSubmitMessage("Profile didn't updated")
+    })
+  }
+  const setShowSubmitModals = () => {
+    setSubmitModal(false)
+    setSuccessUpdate(false)
+  }
   return (
     <>
       <Title title={"Profile"}>
@@ -516,52 +522,43 @@ function Profile() {
               </section>
             </section>
           </section>
-        </main>
-        {submitModal && (
-          <div
-            className="bg-gray-200 justify-center items-center h-screen opacity-100 absolute z-10"
-            id="logoutModal"
-          >
-            <div className="fixed left-0 top-0 bg-black bg-opacity-50 w-screen h-screen flex justify-center items-center px-[10px] md:px-0">
-              <div className="bg-white rounded shadow-md p-6 w-full flex justify-center items-center flex-col gap-y-8 md:w-[55%] lg:w-[35%]">
-                <div className="flex items-start gap-x-4">
-                  <h1 className="text-xl font-medium text-dark text-center">
-                    {submitMessage}
-                  </h1>
-                </div>
-                <div className="flex gap-x-6">
-                  <button
-                    onClick={updateProfileUser}
-                    type="button"
-                    className="p-[10px] bg-primary hover:bg-blue-800 rounded-md text-light text-base font-medium active:ring"
-                  >
-                    Confirm
-                  </button>
-                  <button
-                    onClick={() => {
-                      setSubmitModal(false);
-                    }}
-                    className="p-[10px] bg-light border-2 hover:bg-slate-200 rounded-md text-dark text-base font-medium active:ring active:ring-slate-300"
-                  >
-                    Cancel
-                  </button>
-                </div>
-              </div>
+      </main>
+      {submitModal && 
+        <div className="bg-gray-200 justify-center items-center h-screen opacity-100 absolute z-10" id="logoutModal">
+        <div className="fixed left-0 top-0 bg-black bg-opacity-50 w-screen h-screen flex justify-center items-center px-[10px] md:px-0">
+          <div className="bg-white rounded shadow-md p-6 w-full flex justify-center items-center flex-col gap-y-8 md:w-[55%] lg:w-[35%]">
+            <div className="flex items-start gap-x-4">
+              <h1 className="text-xl font-medium text-dark text-center">{submitMessage}</h1>
             </div>
+              <div className="flex gap-x-6">
+                {!successUpdate && 
+                <button onClick={updateProfileUser} type="button" className="p-[10px] bg-primary hover:bg-blue-800 rounded-md text-light text-base font-medium active:ring">
+                  Confirm
+                </button>
+                }
+                {successUpdate && 
+                <button onClick={setShowSubmitModals} type="button" className="p-[10px] bg-primary hover:bg-blue-800 rounded-md text-light text-base font-medium active:ring">
+                  Ok
+                </button>
+                }
+                {!successUpdate && 
+                <button onClick={setShowSubmitModals} className="p-[10px] bg-light border-2 hover:bg-slate-200 rounded-md text-dark text-base font-medium active:ring active:ring-slate-300">
+                  Cancel
+                </button>
+                }
+              </div>
           </div>
-        )}
-        {isDropdownShown && (
-          <DropdownMobile isClick={() => setIsDropdownShow(false)} />
-        )}
-        {openModal.isOpen && (
-          <Modal
-            modal={openModal}
-            closeModal={setOpenModal}
-            message={Message}
-          />
-        )}
-      </Title>
-    </>
+        </div>
+      </div>
+      }
+      {isDropdownShown && (
+        <DropdownMobile isClick={() => setIsDropdownShow(false)} />
+      )}
+      {openModal.isOpen && (
+        <Modal modal={openModal} closeModal={setOpenModal} message={Message} />
+      )}
+     </Title>
+  </>
   );
 }
 
