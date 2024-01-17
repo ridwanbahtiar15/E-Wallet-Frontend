@@ -1,27 +1,76 @@
 /* eslint-disable react/no-unknown-property */
 // eslint-disable-next-line no-unused-vars
-import React from "react";
+import { React, useState } from "react";
 import { register } from "../utils/https/auth";
 // import { useState } from "react";
 // import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import Modal from "../components/Modal";
 import Title from "../components/Title";
 
 function Register() {
+  // const navigate = useNavigate()
+
+  const [Message, setMessage] = useState({ msg: null, isError: null });
+  const [openModal, setOpenModal] = useState({
+    isOpen: false,
+    status: null,
+  });
+
+  const [isPassShown1, setIsPassShown1] = useState(false);
+  const [isPassShown2, setIsPassShown2] = useState(false);
+
+  const showPassHandler1 = () => {
+    setIsPassShown1((state) => !state);
+  };
+
+  const showPassHandler2 = () => {
+    setIsPassShown2((state) => !state);
+  };
+
   const submitHandler = (e) => {
     e.preventDefault();
-    if (e.target.password.value !== e.target.confirmPassword.value) return console.log("error");
+    if (!e.target.email.value || !e.target.password.value || !e.target.confirmPassword.value) {
+      setMessage({ msg: "Please Fill The Form" });
+      return setOpenModal({
+        isOpen: true,
+        status: "Login Error",
+      });
+    }
+    if (e.target.password.value !== e.target.confirmPassword.value) {
+      setMessage({ msg: "The passwords do not match" });
+      return setOpenModal({
+        isOpen: true,
+        status: "Login Error",
+      });
+    }
+    // return console.log("error");
+
     const body = {
-      name: e.target.fullName.value,
+      // name: e.target.fullName.value,
       email: e.target.email.value,
       password: e.target.password.value,
     };
     register(body)
       .then((res) => {
-        console.log(res);
+        setMessage({
+          msg: "Please Check Your Email to Verify",
+          isError: false,
+        });
+        setOpenModal({
+          isOpen: true,
+          status: "Register Success",
+        });
+        // console.log(res);
       })
       .catch((err) => {
-        console.log(err);
+        setMessage({
+          msg: err.response.data.msg,
+          isError: true,
+          status: "Login Error",
+        });
+        setOpenModal({ isOpen: true, status: "Something went wrong..." });
+        // console.log(err);
       });
     // console.log(body);
   };
@@ -29,15 +78,15 @@ function Register() {
   return (
     <>
       <Title title={"Register"}>
-        <div className="h-auto flex">
-          <div className="flex-1 py-5 h-auto md:flex-initial md:w-2/3 lg:w-1/2 bg-white font-montserrat mx-5 lg:m-0 lg:p-10 md:rounded-r-full">
+        <div className="h-full xl:h-screen flex items-stretch">
+          <div className="flex-1 py-5 md:flex-initial md:w-2/3 lg:w-1/2 bg-white font-montserrat mx-5 lg:m-0 lg:p-10 md:rounded-r-full">
             <div className="flex flex-col gap-[13px]">
               <div className="flex items-center gap-[15px]">
                 <img src="/svg/Money-Wallet-logo.svg" alt="e-wallet-logo" />
                 <h1 className="text-[#2948FF] font-medium">E-Wallet</h1>
               </div>
               <p className="text-lg md:text-2xl font-medium">Start Accessing Banking Needs With All Devices and All Platforms With 30.000+ Users</p>
-              <p className="text-xs md:leading-6 font-normal">Transfering money is eassier than ever, you can access Zwallet wherever you are. Desktop, laptop, mobile phone? we cover all of that for you!</p>
+              <p className="text-sm md:leading-6 font-normal">Transfering money is eassier than ever, you can access Zwallet wherever you are. Desktop, laptop, mobile phone? we cover all of that for you!</p>
               <div className="flex gap-[15px] justify-center md:flex-col">
                 <button className="flex flex-1 border border-[#E8E8E8] bg-white h-[51px] p-[10px] gap-[10px] rounded-full justify-center hover:bg-slate-200">
                   <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -76,7 +125,7 @@ function Register() {
               <div>
                 {/* Form register */}
                 <form onSubmit={submitHandler} className="flex flex-col gap-[13px]">
-                  <label htmlFor="fullName" className="text-base font-medium">
+                  {/* <label htmlFor="fullName" className="text-base font-medium">
                     Full Name
                   </label>
                   <div className="flex gap-[15px] px-3 py-[14px] border border-[#DEDEDE] rounded-lg bg-#FCFDFE">
@@ -100,8 +149,8 @@ function Register() {
                         strokeLinejoin="round"
                       />
                     </svg>
-                    <input type="text" placeholder="Enter Your Full Name" id="fullName" className="flex-1 outline-none text-xs font-normal text-[#4F5665]" />
-                  </div>
+                    <input type="text" placeholder="Enter Your Full Name" id="fullName" className="flex-1 outline-none text-sm font-normal text-[#4F5665]" />
+                  </div> */}
                   <label htmlFor="email" className="text-base font-medium">
                     Email
                   </label>
@@ -126,7 +175,7 @@ function Register() {
                   <label htmlFor="password" className="text-base font-medium">
                     Password
                   </label>
-                  <div className="flex gap-[15px] px-3 py-[14px] border border-[#DEDEDE] rounded-lg bg-#FCFDFE">
+                  <div className="flex gap-[15px] items-center justify-between px-3 py-[14px] border border-[#DEDEDE] rounded-lg bg-#FCFDFE">
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         fillRule="evenodd"
@@ -147,12 +196,14 @@ function Register() {
                         strokeLinejoin="round"
                       />
                     </svg>
-                    <input type="password" placeholder="Enter Your Password" id="password" className="flex-1 outline-none text-xs font-normal text-[#4F5665]" />
+                    <input type={isPassShown1 ? "text" : "password"} placeholder="Enter Your Password" id="password" className="flex-1 outline-none text-sm font-normal text-[#4F5665]" />
+                    <img src="/svg/hide.svg" alt="hide-svg" className={`${isPassShown1 ? " hidden" : " block"} w-[16px]`} onClick={showPassHandler1} />
+                    <img src="/svg/show.svg" alt="show-svg" className={`${isPassShown1 ? " block" : " hidden"} w-[16px]`} onClick={showPassHandler1} />
                   </div>
                   <label htmlFor="confirmPassword" className="text-base font-medium">
                     Confirm Password
                   </label>
-                  <div className="flex gap-[15px] px-3 py-[14px] border border-[#DEDEDE] rounded-lg bg-#FCFDFE">
+                  <div className="flex justify-between items-center gap-[15px] px-3 py-[14px] border border-[#DEDEDE] rounded-lg bg-#FCFDFE">
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         fillRule="evenodd"
@@ -173,16 +224,18 @@ function Register() {
                         strokeLinejoin="round"
                       />
                     </svg>
-                    <input type="password" placeholder="Enter Your Password Again" id="confirmPassword" className="flex-1 outline-none text-xs font-normal text-[#4F5665]" />
+                    <input type={isPassShown2 ? "text" : "password"} placeholder="Enter Your Password Again" id="confirmPassword" className="flex-1 outline-none text-sm font-normal text-[#4F5665]" />
+                    <img src="/svg/hide.svg" alt="hide-svg" className={`${isPassShown2 ? " hidden" : " block"} w-[16px]`} onClick={showPassHandler2} />
+                    <img src="/svg/show.svg" alt="show-svg" className={`${isPassShown2 ? " block" : " hidden"} w-[16px]`} onClick={showPassHandler2} />
                   </div>
-                  <button type="submit" className="w-full p-[10px] h-[50px] text-white bg-[#2948FF] hover:bg-blue-700 rounded-md">
+                  <button type="submit" className="w-full p-[10px] h-[50px] text-white bg-[#2948FF] select-none hover:bg-blue-700 rounded-md">
                     Register
                   </button>
                 </form>
                 <p className="text-center font-normal text-xs mt-[13px]">
                   Have An Account?{" "}
                   <span>
-                    <Link to="/login" className="text-blue-700">
+                    <Link to="/login" className="text-blue-700 select-none">
                       Login
                     </Link>
                   </span>
@@ -190,11 +243,12 @@ function Register() {
               </div>
             </div>
           </div>
-          <div className="hidden md:bg-cover md:h-auto md:flex md:flex-initial md:w-1/3 lg:w-1/2 md:bg-gradient-to-b md:from-[#396AFC] md:to-[#2948FF] md:justify-center md:items-center">
+          <div className="hidden md:bg-cover md:flex md:flex-initial md:w-1/3 lg:w-1/2 md:bg-gradient-to-b md:from-[#396AFC] md:to-[#2948FF] md:justify-center md:items-center">
             <img src="/img/register-side.png" alt="register-img" className="place-self-center object-contain" />
           </div>
         </div>
       </Title>
+      {openModal.isOpen && <Modal modal={openModal} closeModal={setOpenModal} message={Message} />}
     </>
   );
 }

@@ -15,6 +15,7 @@ import TransferDetail from "./pages/TransferDetail";
 import Topup from "./pages/Topup";
 import Private from "./components/Private";
 import ResetPass from "./pages/ResetPass";
+import IsLogin from "./components/IsLogin";
 
 const router = createBrowserRouter([
   {
@@ -63,16 +64,28 @@ const router = createBrowserRouter([
   },
   {
     path: "/register",
-    element: <Register />,
+    element: (
+      <IsLogin>
+        <Register />,
+      </IsLogin>
+    ),
     // errorElement: "",
   },
   {
     path: "/login",
-    element: <Login />,
+    element: (
+      <IsLogin>
+        <Login />,
+      </IsLogin>
+    ),
   },
   {
     path: "/forgotPass",
-    element: <ForgotPass />,
+    element: (
+      <IsLogin>
+        <ForgotPass />,
+      </IsLogin>
+    ),
   },
   {
     path: "/transfer",
@@ -91,7 +104,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/transferDetail",
+    path: "/transfer/:id",
     element: <TransferDetail />,
   },
   {

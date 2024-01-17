@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import getImageUrl from "../utils/imageGetter";
 import "../styles/style.css";
@@ -10,6 +11,9 @@ function Navbar(props) {
   const btnArrowHandle = () => {
     setBtnArrow((state) => !state);
   };
+
+  const user = useSelector((state) => state.user.userInfo);
+  const photo_profile = user.photo_profile;
   return (
     <nav className="w-full flex justify-between py-4 px-5 items-center font-montserrat bg-light md:px-11 lg:px-11 border-b border-[#E8E8E8]">
       <div className="nav-start">
@@ -28,11 +32,11 @@ function Navbar(props) {
       </div>
       <div className="nav-end flex gap-x-[22px] items-center">
         <p className="text-secondary text-base font-normal hidden lg:block">
-          Ghaluh Wizard
+          {user.full_name ? user.full_name : ""}
         </p>
         <Link to="/profile">
           <img
-            src={getImageUrl("1", "png")}
+            src={photo_profile ? photo_profile : getImageUrl("profile", "jpg")}
             alt="icon-profile"
             className="rounded-full w-12 h-12 hidden lg:block"
           />

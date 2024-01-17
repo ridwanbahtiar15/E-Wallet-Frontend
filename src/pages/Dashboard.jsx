@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import Navbar from "../components/Navbar";
 import getImageUrl from "../utils/imageGetter";
@@ -7,6 +8,7 @@ import IncomeChart from "../components/IncomeChart";
 import DropdownMobile from "../components/DropdownMobile";
 import Modal from "../components/Modal";
 import Title from "../components/Title";
+import { transaction, transactionChart } from "../utils/https/transaction";
 
 function Dashboard() {
   const [Message, setMessage] = useState({ msg: null, isError: null });
@@ -20,6 +22,8 @@ function Dashboard() {
   const [sumDate, setSumDate] = useState({ time: "Weekly", values: 7 });
   const [isSummary, setIsSummary] = useState(false);
   const [summary, setSummary] = useState("Income");
+  const [valueSummary, setValueSummary] = useState(false);
+  const navigate = useNavigate();
 
   const date = new Date();
   const startDate = date;
@@ -29,9 +33,43 @@ function Dashboard() {
 
   const endFormatDate = `${endDate.getFullYear()}-${endDate.getMonth() + 1}-${endDate.getDate()}`;
 
-  console.log("start date: " + startFormatDate);
-  console.log("end date: " + endFormatDate);
-  console.log("summary: " + summary);
+  const user = useSelector((state) => state.user.userInfo);
+  const userId = user.id;
+  const token = user.token;
+
+  const [dataChart, setDataChart] = useState([]);
+  const [dataCard, setDataCard] = useState([]);
+
+  useEffect(() => {
+    if (!user.pin) {
+      return navigate("/EnterPin");
+    }
+    transactionChart(token, userId, startFormatDate, endFormatDate, summary).then((res) => {
+      setDataChart(res.data.result.chart_data);
+      setDataCard(res.data.result);
+    });
+  }, []);
+
+  const onsubmitHandler = () => {
+    setIsSumDate(false);
+    setIsSummary(false);
+
+    transactionChart(token, userId, startFormatDate, endFormatDate, summary).then((res) => {
+      setDataChart(res.data.result.chart_data);
+      summary == "Income" ? setValueSummary(false) : setValueSummary(true);
+    });
+  };
+
+  const [userData, setUserData] = useState([]);
+  useEffect(() => {
+    transaction(token).then((res) => setUserData(res.data.result));
+  }, []);
+
+  let idr = new Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency: "IDR",
+    maximumSignificantDigits: 3,
+  });
 
   return (
     <>
@@ -192,7 +230,7 @@ function Dashboard() {
                     <p className="text-secondary">Balance</p>
                   </div>
                   <div>
-                    <p className="text-xl xl:text-2xl text-dark font-medium">Rp. 120.000</p>
+                    <p className="text-lg xl:text-2xl text-dark font-medium">{dataCard && dataCard.userBalance ? idr.format(dataCard.userBalance.balance) : 0}</p>
                   </div>
                   <div className="flex items-center gap-x-1 text-xs text-success">
                     <p className="">+2%</p>
@@ -210,7 +248,7 @@ function Dashboard() {
                     <p className="text-secondary">Income</p>
                   </div>
                   <div>
-                    <p className="text-xl xl:text-2xl text-dark font-medium">Rp. 2.120.000</p>
+                    <p className="text-lg xl:text-2xl text-dark font-medium">{dataCard && dataCard.thisWeekData ? idr.format(dataCard.thisWeekData.income.sum) : 0}</p>
                   </div>
                   <div className="flex items-center gap-x-1 text-xs text-success">
                     <p className="">+11.01%</p>
@@ -227,7 +265,7 @@ function Dashboard() {
                     <p className="text-secondary">Expense</p>
                   </div>
                   <div>
-                    <p className="text-xl xl:text-2xl text-dark font-medium">Rp. 200.000</p>
+                    <p className="text-lg xl:text-2xl text-dark font-medium">{dataCard && dataCard.thisWeekData ? idr.format(dataCard.thisWeekData.expense.sum) : 0}</p>
                   </div>
                   <div className="flex items-center gap-x-1 text-xs text-danger">
                     <p className="">-5.06%</p>
@@ -240,14 +278,14 @@ function Dashboard() {
               <section className="border border-[#E8E8E8] p-[19px] rounded-md flex flex-col gap-y-3 md:flex-row justify-between md:items-center">
                 <p className="font-medium">Fast Service</p>
                 <div className="flex flex-col gap-y-3 md:flex-row md:gap-x-[14px]">
-                  <button className="bg-primary p-3 rounded-md flex justify-center items-center gap-x-2 hover:bg-blue-800 focus:ring">
+                  <Link to="/topup" className="bg-primary p-3 rounded-md flex justify-center items-center gap-x-2 hover:bg-blue-800 focus:ring">
                     <img src={getImageUrl("u_money-insert", "svg")} alt="u_money_insert" className="w-6 h-6" />
                     <p className="text-sm xl:text-base text-light">Top Up</p>
-                  </button>
-                  <button className="bg-primary p-3 rounded-md flex justify-center items-center gap-x-2 hover:bg-blue-800 focus:ring">
+                  </Link>
+                  <Link to="/transfer" className="bg-primary p-3 rounded-md flex justify-center items-center gap-x-2 hover:bg-blue-800 focus:ring">
                     <img src={getImageUrl("Send", "svg")} alt="Send" className="w-6 h-6" />
                     <p className="text-sm xl:text-base text-light">Transfer</p>
-                  </button>
+                  </Link>
                 </div>
               </section>
               <section className="border border-[#E8E8E8] p-[19px] rounded-md flex flex-col items-center gap-y-4">
@@ -308,15 +346,18 @@ function Dashboard() {
                               setSummary("Expense");
                             }}
                           >
-                            Expanse
+                            Expense
                           </p>
                         </div>
                       )}
                     </div>
+                    <button className="p-3 bg-[#F1F1F1] rounded-md text-sm font-medium" onClick={onsubmitHandler}>
+                      Submit
+                    </button>
                   </div>
                 </div>
                 <div className="w-full">
-                  <IncomeChart></IncomeChart>
+                  <IncomeChart data={dataChart} summary={valueSummary}></IncomeChart>
                 </div>
               </section>
             </section>
@@ -328,92 +369,32 @@ function Dashboard() {
                     See All
                   </Link>
                 </div>
-                <div className="flex flex-col gap-y-7">
-                  <div className="flex flex-row gap-x-6">
-                    <div className="lg:self-start">
-                      <img src={getImageUrl("1", "png")} alt="profile" className="w-14 h-14" />
-                    </div>
-                    <div className="flex flex-row gap-x-6 lg:flex-col xl:flex-row">
-                      <div className="flex flex-col gap-y-1">
-                        <p className="text-dark font-semibold">Robert Fox</p>
-                        <p className="text-secondary">Transfer</p>
+                {userData.length > 0 ? (
+                  <div className="flex flex-col gap-y-7">
+                    {userData.map((result, i) => (
+                      <div className="flex flex-row justify-between gap-x-4 min-[1440px]:gap-x-0" key={i}>
+                        <div className="lg:self-start">
+                          <img src={result.photo_profile ? result.photo_profile : getImageUrl("foto1", "png")} alt="photo-profile" className="w-12 rounded-md" />
+                        </div>
+                        <div className="flex flex-row gap-x-6 lg:flex-col xl:flex-row justify-between w-[75%]">
+                          <div className="flex flex-col gap-y-1">
+                            <p className="text-dark font-semibold whitespace-nowrap w-[80px] md:w-auto xl:w-[80px] overflow-hidden md:overflow-visible xl:overflow-hidden text-ellipsis">{result.full_name}</p>
+                            <p className="text-secondary">{result.transaction_type}</p>
+                          </div>
+                          <div>
+                            {result.summary == "Income" ? (
+                              <p className="font-semibold text-success w-[80px] md:w-auto xl:w-[80px] overflow-hidden md:overflow-visible xl:overflow-hidden text-ellipsis">{`+Rp${result.transaction_amount}`}</p>
+                            ) : (
+                              <p className="font-semibold text-danger w-[80px] md:w-auto xl:w-[80px] overflow-hidden md:overflow-visible xl:overflow-hidden text-ellipsis">{`-Rp${result.transaction_amount}`}</p>
+                            )}
+                          </div>
+                        </div>
                       </div>
-                      <div>
-                        <p className="font-semibold text-success">+Rp50.000</p>
-                      </div>
-                    </div>
+                    ))}
                   </div>
-                  <div className="flex flex-row gap-x-6">
-                    <div className="lg:self-start">
-                      <img src={getImageUrl("1", "png")} alt="profile" className="w-14 h-14" />
-                    </div>
-                    <div className="flex flex-row gap-x-6 lg:flex-col xl:flex-row">
-                      <div className="flex flex-col gap-y-1">
-                        <p className="text-dark font-semibold">Robert Fox</p>
-                        <p className="text-secondary">Transfer</p>
-                      </div>
-                      <div>
-                        <p className="font-semibold text-success">+Rp50.000</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex flex-row gap-x-6">
-                    <div className="lg:self-start">
-                      <img src={getImageUrl("1", "png")} alt="profile" className="w-14 h-14" />
-                    </div>
-                    <div className="flex flex-row gap-x-6 lg:flex-col xl:flex-row">
-                      <div className="flex flex-col gap-y-1">
-                        <p className="text-dark font-semibold">Robert Fox</p>
-                        <p className="text-secondary">Transfer</p>
-                      </div>
-                      <div>
-                        <p className="font-semibold text-success">+Rp50.000</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex flex-row gap-x-6">
-                    <div className="lg:self-start">
-                      <img src={getImageUrl("1", "png")} alt="profile" className="w-14 h-14" />
-                    </div>
-                    <div className="flex flex-row gap-x-6 lg:flex-col xl:flex-row">
-                      <div className="flex flex-col gap-y-1">
-                        <p className="text-dark font-semibold">Robert Fox</p>
-                        <p className="text-secondary">Transfer</p>
-                      </div>
-                      <div>
-                        <p className="font-semibold text-success">+Rp50.000</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex flex-row gap-x-6">
-                    <div className="lg:self-start">
-                      <img src={getImageUrl("1", "png")} alt="profile" className="w-14 h-14" />
-                    </div>
-                    <div className="flex flex-row gap-x-6 lg:flex-col xl:flex-row">
-                      <div className="flex flex-col gap-y-1">
-                        <p className="text-dark font-semibold">Robert Fox</p>
-                        <p className="text-secondary">Transfer</p>
-                      </div>
-                      <div>
-                        <p className="font-semibold text-success">+Rp50.000</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex flex-row gap-x-6">
-                    <div className="lg:self-start">
-                      <img src={getImageUrl("1", "png")} alt="profile" className="w-14 h-14" />
-                    </div>
-                    <div className="flex flex-row gap-x-6 lg:flex-col xl:flex-row">
-                      <div className="flex flex-col gap-y-1">
-                        <p className="text-dark font-semibold">Robert Fox</p>
-                        <p className="text-secondary">Transfer</p>
-                      </div>
-                      <div>
-                        <p className="font-semibold text-success">+Rp50.000</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                ) : (
+                  <p className="text-xl text-center">No History</p>
+                )}
               </div>
             </aside>
           </section>

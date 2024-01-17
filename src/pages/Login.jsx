@@ -1,11 +1,9 @@
-/* eslint-disable react/no-unknown-property */
-// eslint-disable-next-line no-unused-vars
-import { React, useState } from "react";
-// import { useState } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { userAction } from "../redux/slices/user";
+
+import getImageUrl from "../utils/imageGetter";
 import Modal from "../components/Modal";
 import Title from "../components/Title";
 
@@ -16,8 +14,14 @@ function Login() {
     isOpen: false,
     status: null,
   });
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const [isPassShown, setIsPassShown] = useState(false);
+  const showPassHandler = () => {
+    setIsPassShown((state) => !state);
+  };
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -78,15 +82,15 @@ function Login() {
   return (
     <>
       <Title title={"Login"}>
-        <div className="h-screen flex items-center">
-          <div className="flex-1 py-5 h-auto md:flex-initial md:w-2/3 lg:w-1/2 bg-white font-montserrat mx-5 lg:m-0 lg:p-10 md:rounded-r-full">
+        <div className="h-screen flex items-stretch">
+          <div className="flex-1 py-5 md:flex-initial md:w-2/3 lg:w-1/2 bg-white font-montserrat mx-5 lg:m-0 lg:p-10 md:rounded-r-full">
             <div className="flex flex-col gap-[13px]">
               <div className="flex items-center gap-[15px]">
                 <img src="/svg/Money-Wallet-logo.svg" alt="e-wallet-logo" />
                 <h1 className="text-[#2948FF] font-medium">E-Wallet</h1>
               </div>
               <p className="text-lg md:text-2xl font-medium">Hello Welcome Back 👋</p>
-              <p className="text-xs md:leading-6 font-normal">Fill out the form correctly or you can login with several option.</p>
+              <p className="text-sm md:text-base md:leading-6 font-normal">Fill out the form correctly or you can login with several option.</p>
               <div className="flex gap-[15px] justify-center md:flex-col">
                 <button className="flex flex-1 border border-[#E8E8E8] bg-white h-[51px] p-[10px] gap-[10px] rounded-full justify-center hover:bg-slate-200">
                   <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -107,7 +111,7 @@ function Login() {
                       fill="#1976D2"
                     />
                   </svg>
-                  <p className="hidden md:text-lg md:text-[#4F5665] md:block">Sign In With Google</p>
+                  <p className="hidden font-medium md:text-lg md:text-[#4F5665] md:block">Sign In With Google</p>
                 </button>
                 <button className="flex flex-1 border border-[#E8E8E8] h-[51px] p-[10px] gap-[10px] rounded-full justify-center hover:bg-slate-200">
                   <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -116,7 +120,7 @@ function Login() {
                       fill="#395185"
                     />
                   </svg>
-                  <p className="hidden md:text-lg md:text-[#4F5665] md:block">Sign In With Facebook</p>
+                  <p className="hidden font-medium md:text-lg md:text-[#4F5665] md:block">Sign In With Facebook</p>
                 </button>
               </div>
               <div className="flex justify-center">
@@ -124,61 +128,43 @@ function Login() {
               </div>
               <div>
                 <form onSubmit={submitHandler} className="flex flex-col gap-[13px]">
-                  <label htmlFor="email" className="text-base font-medium">
-                    Email
-                  </label>
-                  <div id="emailDiv" className="flex gap-[15px] px-3 py-[14px] border border-[#DEDEDE] rounded-lg bg-#FCFDFE">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <g clipPath="url(#clip0_103_1168)">
-                        <path
-                          fillRule="evenodd"
-                          clipRule="evenodd"
-                          d="M1.75 2C0.783502 2 4.49654e-09 2.7835 4.49654e-09 3.75V4.48577C-0.000162957 4.49479 -0.000162567 4.50381 4.49654e-09 4.51282V12.25C4.49654e-09 13.2165 0.783501 14 1.75 14H14.25C15.2165 14 16 13.2165 16 12.25V4.51265C16.0002 4.50376 16.0002 4.49485 16 4.48594V3.75C16 2.7835 15.2165 2 14.25 2H1.75ZM14.5 4.07029V3.75C14.5 3.61193 14.3881 3.5 14.25 3.5H1.75C1.61193 3.5 1.5 3.61193 1.5 3.75V4.07029L8 7.88063L14.5 4.07029ZM1.5 5.80902V12.25C1.5 12.3881 1.61193 12.5 1.75 12.5H14.25C14.3881 12.5 14.5 12.3881 14.5 12.25V5.80902L8.37929 9.39702C8.14507 9.53432 7.85493 9.53432 7.62071 9.39702L1.5 5.80902Z"
-                          fill="#4F5665"
-                        />
-                      </g>
-                      <defs>
-                        <clipPath id="clip0_103_1168">
-                          <rect width="16" height="16" fill="white" />
-                        </clipPath>
-                      </defs>
-                    </svg>
-                    <input type="text" placeholder="Enter Your Email" id="email" className="flex-1 outline-none text-xs font-normal text-[#4F5665]" />
+                  <div className="flex flex-col gap-y-3 relative">
+                    <label htmlFor="email" className="text-sm font-semibold text-dark lg:text-base">
+                      Email
+                    </label>
+                    <input type="email" id="email" placeholder="Enter Your Email" className="py-3.5 px-10 border rounded-lg border-[#DEDEDE] text-xs tracking-wide outline-none focus:border-primary" />
+                    <div className="icon-location absolute top-[46px] left-4 lg:top-[50px]">
+                      <img src={getImageUrl("mail", "svg")} alt="mail" className="w-4 h-4" />
+                    </div>
                   </div>
-                  <label htmlFor="password" className="text-base font-medium">
-                    Password
-                  </label>
-                  <div className="flex gap-[15px] px-3 py-[14px] border border-[#DEDEDE] rounded-lg bg-#FCFDFE">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path
-                        fillRule="evenodd"
-                        clipRule="evenodd"
-                        d="M7.12583 7.99932C7.12583 8.68132 6.57316 9.23398 5.89116 9.23398C5.20916 9.23398 4.65649 8.68132 4.65649 7.99932C4.65649 7.31732 5.20916 6.76465 5.89116 6.76465H5.89316C6.57449 6.76532 7.12583 7.31798 7.12583 7.99932Z"
-                        stroke="#4F5665"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                      <path d="M7.12787 8H11.3399V9.23467" stroke="#4F5665" strokeLinecap="round" strokeLinejoin="round" />
-                      <path d="M9.45467 9.23467V8" stroke="#4F5665" strokeLinecap="round" strokeLinejoin="round" />
-                      <path
-                        fillRule="evenodd"
-                        clipRule="evenodd"
-                        d="M1.83325 7.99967C1.83325 3.37501 3.37525 1.83301 7.99992 1.83301C12.6246 1.83301 14.1666 3.37501 14.1666 7.99967C14.1666 12.6243 12.6246 14.1663 7.99992 14.1663C3.37525 14.1663 1.83325 12.6243 1.83325 7.99967Z"
-                        stroke="#4F5665"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                    <input type="password" placeholder="Enter Your Password" id="password" className="flex-1 outline-none text- font-normal text-[#4F5665]" />
+                  <div className="flex flex-col gap-y-3 relative">
+                    <label htmlFor="password" className="text-sm md:text-base font-semibold text-[#0B132A] lg:text-base">
+                      Password
+                    </label>
+                    <input
+                      type={isPassShown ? "text" : "password"}
+                      id="password"
+                      placeholder="Enter Your Existing Password"
+                      className="py-3.5 px-10 border rounded-lg border-[#DEDEDE] text-xs tracking-wider outline-none focus:border-primary placeholder:tracking-wider"
+                    />
+                    <div className="icon-password absolute top-[46px] left-4 md:top-[50px]">
+                      <img src={getImageUrl("Password", "svg")} alt="Password" className="w-full h-full" />
+                    </div>
+                    <div className={`absolute top-[46px] right-4 md:top-[50px]${isPassShown ? " hidden" : " block"} cursor-pointer`} id="btnHiddenPassword" onClick={showPassHandler}>
+                      <img src={getImageUrl("EyeSlash", "svg")} alt="EyeSlash" className="w-full h-full" />
+                    </div>
+                    <div className={`absolute top-[45px] right-[15px] md:top-[49px]${isPassShown ? " block" : " hidden"} cursor-pointer`} id="btn-show-password" onClick={showPassHandler}>
+                      <img src={getImageUrl("eye", "svg")} alt="eye" className="w-[18px] h-[18px]" />
+                    </div>
                   </div>
                   <Link to="/forgotPass" className="flex justify-end cursor-default">
                     <p className="w-max text-end cursor-pointer hover:text-[#4e4e4e] hover:underline">Forgot Password?</p>
                   </Link>
-                  <button type="submit" className="w-full p-[10px] h-[50px] text-white bg-[#2948FF] hover:bg-blue-700 rounded-md">
+                  <button type="submit" className="w-full p-[10px] h-[50px] text-white bg-[#2948FF] hover:bg-blue-700 rounded-md active:ring">
                     Login
                   </button>
                 </form>
-                <p className="text-center font-normal text-xs mt-[13px]">
+                <p className="text-center font-normal mt-[13px]">
                   Not Have An Account?{" "}
                   <span>
                     <Link to="/register" className="text-blue-700">
