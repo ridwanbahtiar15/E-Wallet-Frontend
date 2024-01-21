@@ -79,7 +79,7 @@ Start the server
 This project has been deployed on Netlify
 
 ```bash
-  https://master--coffeeshop-gilang.netlify.app/
+  https://e-wallet-frontend-three.vercel.app/
 ```
 
 ## Screenshots
