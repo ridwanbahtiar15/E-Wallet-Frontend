@@ -62,7 +62,9 @@ function Dashboard() {
 
   const [userData, setUserData] = useState([]);
   useEffect(() => {
-    transaction(token).then((res) => setUserData(res.data.result));
+    transaction(token)
+    .then((res) => setUserData(res.data.result))
+    .catch((err) => console.log(err));
   }, []);
 
   let idr = new Intl.NumberFormat("id-ID", {
