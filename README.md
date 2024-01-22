@@ -1,32 +1,27 @@
 # E Wallet Front-End Team Project with React JS
 
 <div align="center">
-  <img src="https://res.cloudinary.com/doncmmfaa/image/upload/v1705848222/E-Wallet%20By%20FWG%2016/Frame_12_yzmexw.png" alt="Logo" />
+  <img src="https://res.cloudinary.com/doncmmfaa/image/upload/v1705848222/E-Wallet%20By%20FWG%2016/Frame_12_yzmexw.png" alt="Logo"  width="340" height="100"/>
 </div>
 
 Introducing a digital wallet that's not just about transactions but a seamless journey in the digital realm. It empowers users with features like peer-to-peer transfers, easy top-ups, and a comprehensive transaction history tracker. This project, a collaborative team effort, unfolded its magic over a dynamic week, following the agile SCRUM methodology. Fueled by defined requirements, our goal was clear, and the result is a digital wallet experience that goes beyond just handling money – it fosters a connection between users and their financial journey.
 
 ## Technologies used in this project
 
-- Vite React JS \
+- [Vite React JS](https://vitejs.dev/guide/) \
   A build tool designed for web development, and when paired with React JS, it provides a fast and efficient development environment. \
-  [Vite Documentation](https://vitejs.dev/guide/)
 
-- React Redux \
-  A state management library for React applications.\
-  [Redux Documentation](https://react-redux.js.org/introduction/getting-started)
+- [Redux Redux](https://react-redux.js.org/introduction/getting-started) \
+  A state management library for React applications. \
 
-- React Router \
+- [React Router](https://reactrouter.com/en/main/start/overview) \
   Library for handling navigation in React applications. \
-  [React Router Documentation](https://reactrouter.com/en/main/start/overview)
 
-- Tailwind \
+- [Tailwind](https://tailwindcss.com/docs/installation) \
   A utility-first CSS framework that simplifies styling in web development. \
-  [Tailwind Documentation](https://tailwindcss.com/docs/installation)
 
-- Axios \
+- [Axios](https://axios-http.com/docs/intro) \
   Promise-based HTTP client for the browser and Node.js. \
-  [Axios Documentation](https://axios-http.com/docs/intro)
 
 ## Environment Variables
 
@@ -39,25 +34,28 @@ VITE_MIDTRANS_CLIENT_KEY = "YOUR MIDTRANS CLIENT KEY"
 
 ## Run Locally
 
-Clone the project
+1. Clone the project
 
 ```bash
   $ git clone https://github.com/GilangRizaltin/E-Wallet
 ```
 
-Go to the project directory
+2. Go to the project directory
 
 ```bash
   $ cd E-Wallet
 ```
 
-Install dependencies
+3. Install dependencies
 
 ```bash
   $ npm install
 ```
 
-Start the server
+4. Preparing backend \
+   Don't forget to run the backend of this project: [Backend E-Wallet (Javascript)](https://github.com/GilangRizaltin/E-Wallet)
+
+5. Start the server
 
 ```bash
   $ npm run dev
@@ -65,48 +63,56 @@ Start the server
 
 ## Route
 
-| Route          | Description         |
-| :------------- | :------------------ |
-| `"/"`          | Home page           |
-| `"/login"`     | Login page          |
-| `"/register"`  | register page       |
-| `"/dashboard"` | Dashboard page      |
-| `"/product"`   | Product list page   |
-| `"/profile"`   | User's profile page |
+| Route              | Description         |
+| :----------------- | :------------------ |
+| `"/"`              | Home page           |
+| `"/auth/login"`    | Login page          |
+| `"/auth/register"` | register page       |
+| `"/dashboard"`     | Dashboard page      |
+| `"/product"`       | Product list page   |
+| `"/profile"`       | User's profile page |
 
 ## Deployment
 
-This project has been deployed on Netlify
-
-```bash
-  https://e-wallet-frontend-three.vercel.app/
-```
+[E-Wallet Front End Deployment](https://e-wallet-frontend-three.vercel.app/)
 
 ## Screenshots
 
-Welcome Page
+| Welcome Page                                                                                                                                        | Login                                                                                                                                 |
+| --------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| ![Welcome Page Screenshot](https://res.cloudinary.com/doncmmfaa/image/upload/v1705844604/E-Wallet%20By%20FWG%2016/e-wallet-welcome-page_qvb7ui.png) | ![Login Screenshot](https://res.cloudinary.com/doncmmfaa/image/upload/v1705844604/E-Wallet%20By%20FWG%2016/e-wallet-login_pytm3i.png) |
+
+<!-- Welcome Page
 
 <img src="https://res.cloudinary.com/doncmmfaa/image/upload/v1705844604/E-Wallet%20By%20FWG%2016/e-wallet-welcome-page_qvb7ui.png" width="400" height="200" />
 
 Login
 
-<img src="https://res.cloudinary.com/doncmmfaa/image/upload/v1705844604/E-Wallet%20By%20FWG%2016/e-wallet-login_pytm3i.png" width="400" height="200" />
+<img src="https://res.cloudinary.com/doncmmfaa/image/upload/v1705844604/E-Wallet%20By%20FWG%2016/e-wallet-login_pytm3i.png" width="400" height="200" /> -->
 
-Profile
+| Profile                                                                                                                                   | Transfer                                                                                                                                    |
+| ----------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| ![Profile Screenshot](https://res.cloudinary.com/doncmmfaa/image/upload/v1705844603/E-Wallet%20By%20FWG%2016/e-wallet_profile_zosnez.png) | ![Transfer Screenshot](https://res.cloudinary.com/doncmmfaa/image/upload/v1705844603/E-Wallet%20By%20FWG%2016/e-wallet_transfer_gwip0p.png) |
+
+<!-- Profile
 
 <img src="https://res.cloudinary.com/doncmmfaa/image/upload/v1705844603/E-Wallet%20By%20FWG%2016/e-wallet_profile_zosnez.png" width="400" height="200" />
 
 Transfer
 
-<img src="https://res.cloudinary.com/doncmmfaa/image/upload/v1705844603/E-Wallet%20By%20FWG%2016/e-wallet_transfer_gwip0p.png" alt="App Screenshot" width="400" height="200" />
+<img src="https://res.cloudinary.com/doncmmfaa/image/upload/v1705844603/E-Wallet%20By%20FWG%2016/e-wallet_transfer_gwip0p.png" alt="App Screenshot" width="400" height="200" /> -->
 
-Top Up
+| Top Up                                                                                                                                 |
+| -------------------------------------------------------------------------------------------------------------------------------------- |
+| ![Top Up Screenshot](https://res.cloudinary.com/doncmmfaa/image/upload/v1705844603/E-Wallet%20By%20FWG%2016/e-wallet_topup_pqepgy.png) |
 
-<img src="https://res.cloudinary.com/doncmmfaa/image/upload/v1705844603/E-Wallet%20By%20FWG%2016/e-wallet_topup_pqepgy.png" alt="App Screenshot" width="400" height="200" />
+<!-- Top Up
+
+<img src="https://res.cloudinary.com/doncmmfaa/image/upload/v1705844603/E-Wallet%20By%20FWG%2016/e-wallet_topup_pqepgy.png" alt="App Screenshot" width="400" height="200" /> -->
 
 ## Related Project
 
-[Backend (Javascript)](https://github.com/GilangRizaltin/E-Wallet)
+[Backend E-Wallet (Javascript)](https://github.com/GilangRizaltin/E-Wallet)
 
 ## Collaborators
 
@@ -116,4 +122,4 @@ Top Up
 
 ## Support
 
-For support, email gilangzaltin@gmail.com.
+For support, email gilangzaltin@gmail.com
