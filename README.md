@@ -1,9 +1,12 @@
 # E Wallet Front-End Team Project with React JS
 
+<br>
+<br>
 <div align="center">
   <img src="https://res.cloudinary.com/doncmmfaa/image/upload/v1705848222/E-Wallet%20By%20FWG%2016/Frame_12_yzmexw.png" alt="Logo"  width="340" height="100"/>
 </div>
-
+<br>
+<br>
 Introducing a digital wallet that's not just about transactions but a seamless journey in the digital realm. It empowers users with features like peer-to-peer transfers, easy top-ups, and a comprehensive transaction history tracker. This project, a collaborative team effort, unfolded its magic over a dynamic week, following the agile SCRUM methodology. Fueled by defined requirements, our goal was clear, and the result is a digital wallet experience that goes beyond just handling money – it fosters a connection between users and their financial journey.
 
 ## Technologies used in this project
