@@ -14,7 +14,7 @@ Introducing a digital wallet that's not just about transactions but a seamless j
 - [Vite React JS](https://vitejs.dev/guide/) \
   A build tool designed for web development, and when paired with React JS, it provides a fast and efficient development environment.
 
-- [Redux Redux](https://react-redux.js.org/introduction/getting-started) \
+- [Redux](https://react-redux.js.org/introduction/getting-started) \
   A state management library for React applications.
 
 - [React Router](https://reactrouter.com/en/main/start/overview) \
