@@ -12,19 +12,19 @@ Introducing a digital wallet that's not just about transactions but a seamless j
 ## Technologies used in this project
 
 - [Vite React JS](https://vitejs.dev/guide/) \
-  A build tool designed for web development, and when paired with React JS, it provides a fast and efficient development environment. \
+  A build tool designed for web development, and when paired with React JS, it provides a fast and efficient development environment.
 
 - [Redux Redux](https://react-redux.js.org/introduction/getting-started) \
-  A state management library for React applications. \
+  A state management library for React applications.
 
 - [React Router](https://reactrouter.com/en/main/start/overview) \
-  Library for handling navigation in React applications. \
+  Library for handling navigation in React applications.
 
 - [Tailwind](https://tailwindcss.com/docs/installation) \
-  A utility-first CSS framework that simplifies styling in web development. \
+  A utility-first CSS framework that simplifies styling in web development.
 
 - [Axios](https://axios-http.com/docs/intro) \
-  Promise-based HTTP client for the browser and Node.js. \
+  Promise-based HTTP client for the browser and Node.js.
 
 ## Environment Variables
 
@@ -81,37 +81,13 @@ VITE_MIDTRANS_CLIENT_KEY = "YOUR MIDTRANS CLIENT KEY"
 
 ## Screenshots
 
-| Welcome Page                                                                                                                                        | Login                                                                                                                                 |
-| --------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| ![Welcome Page Screenshot](https://res.cloudinary.com/doncmmfaa/image/upload/v1705844604/E-Wallet%20By%20FWG%2016/e-wallet-welcome-page_qvb7ui.png) | ![Login Screenshot](https://res.cloudinary.com/doncmmfaa/image/upload/v1705844604/E-Wallet%20By%20FWG%2016/e-wallet-login_pytm3i.png) |
-
-<!-- Welcome Page
-
-<img src="https://res.cloudinary.com/doncmmfaa/image/upload/v1705844604/E-Wallet%20By%20FWG%2016/e-wallet-welcome-page_qvb7ui.png" width="400" height="200" />
-
-Login
-
-<img src="https://res.cloudinary.com/doncmmfaa/image/upload/v1705844604/E-Wallet%20By%20FWG%2016/e-wallet-login_pytm3i.png" width="400" height="200" /> -->
-
-| Profile                                                                                                                                   | Transfer                                                                                                                                    |
-| ----------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| ![Profile Screenshot](https://res.cloudinary.com/doncmmfaa/image/upload/v1705844603/E-Wallet%20By%20FWG%2016/e-wallet_profile_zosnez.png) | ![Transfer Screenshot](https://res.cloudinary.com/doncmmfaa/image/upload/v1705844603/E-Wallet%20By%20FWG%2016/e-wallet_transfer_gwip0p.png) |
-
-<!-- Profile
-
-<img src="https://res.cloudinary.com/doncmmfaa/image/upload/v1705844603/E-Wallet%20By%20FWG%2016/e-wallet_profile_zosnez.png" width="400" height="200" />
-
-Transfer
-
-<img src="https://res.cloudinary.com/doncmmfaa/image/upload/v1705844603/E-Wallet%20By%20FWG%2016/e-wallet_transfer_gwip0p.png" alt="App Screenshot" width="400" height="200" /> -->
-
-| Top Up                                                                                                                                 |
-| -------------------------------------------------------------------------------------------------------------------------------------- |
-| ![Top Up Screenshot](https://res.cloudinary.com/doncmmfaa/image/upload/v1705844603/E-Wallet%20By%20FWG%2016/e-wallet_topup_pqepgy.png) |
-
-<!-- Top Up
-
-<img src="https://res.cloudinary.com/doncmmfaa/image/upload/v1705844603/E-Wallet%20By%20FWG%2016/e-wallet_topup_pqepgy.png" alt="App Screenshot" width="400" height="200" /> -->
+| Welcome Page                                                                                                                                        | Login                                                                                                                                       |
+| --------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| ![Welcome Page Screenshot](https://res.cloudinary.com/doncmmfaa/image/upload/v1705844604/E-Wallet%20By%20FWG%2016/e-wallet-welcome-page_qvb7ui.png) | ![Login Screenshot](https://res.cloudinary.com/doncmmfaa/image/upload/v1705844604/E-Wallet%20By%20FWG%2016/e-wallet-login_pytm3i.png)       |
+| Profile                                                                                                                                             | Transfer                                                                                                                                    |
+| ![Profile Screenshot](https://res.cloudinary.com/doncmmfaa/image/upload/v1705844603/E-Wallet%20By%20FWG%2016/e-wallet_profile_zosnez.png)           | ![Transfer Screenshot](https://res.cloudinary.com/doncmmfaa/image/upload/v1705844603/E-Wallet%20By%20FWG%2016/e-wallet_transfer_gwip0p.png) |
+| Top Up                                                                                                                                              |
+| ![Top Up Screenshot](https://res.cloudinary.com/doncmmfaa/image/upload/v1705844603/E-Wallet%20By%20FWG%2016/e-wallet_topup_pqepgy.png)              |
 
 ## Related Project
 
