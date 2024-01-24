@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 function Private({ children }) {
   const user = useSelector((state) => state.user);
   if (user.isUserAvailable === true) return children;
-  return <Navigate to="/login" replace={true} />;
+  return <Navigate to="/auth/login" replace={true} />;
 }
 
 export default Private;

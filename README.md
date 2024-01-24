@@ -1,92 +1,106 @@
-# E Wallet With React JS
+# E Wallet Front-End Team Project with React JS
 
-<!-- ABOUT THE PROJECT -->
+<br>
+<br>
+<div align="center">
+  <img src="https://res.cloudinary.com/doncmmfaa/image/upload/v1705848222/E-Wallet%20By%20FWG%2016/Frame_12_yzmexw.png" alt="Logo"  width="340" height="100"/>
+</div>
+<br>
+<br>
+Introducing a digital wallet that's not just about transactions but a seamless journey in the digital realm. It empowers users with features like peer-to-peer transfers, easy top-ups, and a comprehensive transaction history tracker. This project, a collaborative team effort, unfolded its magic over a dynamic week, following the agile SCRUM methodology. Fueled by defined requirements, our goal was clear, and the result is a digital wallet experience that goes beyond just handling money – it fosters a connection between users and their financial journey.
 
-## About The Project
+## Technologies used in this project
 
-A Front End project for transfer and receive money online on digital wallets. The main feature in this project is using a Single Page Application (SPA), Dynamic Web and Responsive website for mobile, tablet and laptop.
+- [Vite React JS](https://vitejs.dev/guide/) \
+  A build tool designed for web development, and when paired with React JS, it provides a fast and efficient development environment.
 
-## Screenshot
+- [Redux](https://react-redux.js.org/introduction/getting-started) \
+  A state management library for React applications.
 
-Login Page
+- [React Router](https://reactrouter.com/en/main/start/overview) \
+  Library for handling navigation in React applications.
 
-<img src="./src/assets/ss_ewallet/login.png" alt="image" style="width:360px;"/>
+- [Tailwind](https://tailwindcss.com/docs/installation) \
+  A utility-first CSS framework that simplifies styling in web development.
 
-Home Page
+- [Axios](https://axios-http.com/docs/intro) \
+  Promise-based HTTP client for the browser and Node.js.
 
-<img src="./src/assets/ss_ewallet/home.png" alt="image" style="width:360px;"/>
+## Environment Variables
 
-## Link Deployment
+To run this project, you will need to add the following environment variables to your .env file
 
-https://e-wallet-frontend-three.vercel.app
+```bash
+VITE_BACKEND_HOST = "YOUR BACKEND URL"
+VITE_MIDTRANS_CLIENT_KEY = "YOUR MIDTRANS CLIENT KEY"
+```
 
-## Built With
+## Run Locally
 
-- [![ReactJs][ReactJs-logo]][ReactJs-url]
-- [![TailwindCSS][TailwindCSS-logo]][TailwindCSS-url]
-- [![Redux][Redux-logo]][Redux-url]
-- [![ChartJs][ChartJs-logo]][ChartJs-url]
+1. Clone the project
 
-### Package
+```bash
+  $ git clone https://github.com/GilangRizaltin/E-Wallet
+```
 
-- [![Axios][Axios-logo]][Axios-url]
-- [![ReactDom][ReactDom-logo]][ReactDom-url]
-- [![ReactRouterDom][ReactRouterDom-logo]][ReactRouterDom-url]
-- [![ReactRedux][ReactRedux-logo]][ReactRedux-url]
+2. Go to the project directory
 
-## Install And Run Locally
+```bash
+  $ cd E-Wallet
+```
 
-Clone project from github repository
+3. Install dependencies
 
-    $ git clone https://github.com/ridwanbahtiar15/E-Wallet-Frontend.git
+```bash
+  $ npm install
+```
 
-go to folder E-Wallet-Frontend
+4. Preparing backend \
+   Don't forget to run the backend of this project: [Backend](#backend)
 
-    $ cd E-Wallet-Frontend
+5. Start the server
 
-install dependencies
+```bash
+  $ npm run dev
+```
 
-    $ npm install
+## Route
 
-Start the server
+| Route              | Description         |
+| :----------------- | :------------------ |
+| `"/"`              | Home page           |
+| `"/auth/login"`    | Login page          |
+| `"/auth/register"` | register page       |
+| `"/dashboard"`     | Dashboard page      |
+| `"/product"`       | Product list page   |
+| `"/profile"`       | User's profile page |
 
-    $ npm run dev
+## Deployment
 
-## Configure app
+[E-Wallet Front End Deployment](https://e-wallet-frontend-three.vercel.app/)
 
-Create file `.env` then edit it with your settings
-according to your needs. You will need:
+## Screenshots
 
-| Key               | Value                        |
-| ----------------- | ---------------------------- |
-| VITE_BACKEND_HOST | Your Backend Express JS Host |
+| Welcome Page                                                                                                                                        | Login                                                                                                                                       |
+| --------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| ![Welcome Page Screenshot](https://res.cloudinary.com/doncmmfaa/image/upload/v1705844604/E-Wallet%20By%20FWG%2016/e-wallet-welcome-page_qvb7ui.png) | ![Login Screenshot](https://res.cloudinary.com/doncmmfaa/image/upload/v1705844604/E-Wallet%20By%20FWG%2016/e-wallet-login_pytm3i.png)       |
+| Profile                                                                                                                                             | Transfer                                                                                                                                    |
+| ![Profile Screenshot](https://res.cloudinary.com/doncmmfaa/image/upload/v1705844603/E-Wallet%20By%20FWG%2016/e-wallet_profile_zosnez.png)           | ![Transfer Screenshot](https://res.cloudinary.com/doncmmfaa/image/upload/v1705844603/E-Wallet%20By%20FWG%2016/e-wallet_transfer_gwip0p.png) |
+| Top Up                                                                                                                                              |
+| ![Top Up Screenshot](https://res.cloudinary.com/doncmmfaa/image/upload/v1705844603/E-Wallet%20By%20FWG%2016/e-wallet_topup_pqepgy.png)              |
 
 ## Related Project
 
-[Back End With Express JS](https://github.com/ridwanbahtiar15/E-Wallet)
+<a name="backend"></a>
 
-## Collaborator
+[Backend E-Wallet (Javascript)](https://github.com/GilangRizaltin/E-Wallet)
 
-[Akbar Syarif](https://github.com/akbarsyarif)
-[Gilang Rizaltin](https://github.com/GilangRizaltin)
-[F Thema W](https://github.com/themawaras)
-[Ridwan Bahtiar](https://github.com/ridwanbahtiar15)
+## Collaborators
 
-<!-- MARKDOWN LINKS & IMAGES -->
+- [@Akbar Syarif](https://github.com/akbarsyarif)
+- [@F Thema W](https://github.com/themawaras)
+- [@Ridwan Bahtiar](https://github.com/ridwanbahtiar15)
 
-[ReactJs-url]: https://go.dev/
-[ReactJs-logo]: https://img.shields.io/badge/React%20JS-blue
-[TailwindCSS-url]: https://tailwindcss.com/
-[TailwindCSS-logo]: https://img.shields.io/badge/Tailwind%20CSS-lightskyblue
-[Axios-url]: https://www.Axios.org/
-[Axios-logo]: https://img.shields.io/badge/Axios-red
-[ReactDom-url]: https://www.npmjs.com/package/react-dom
-[ReactDom-logo]: https://img.shields.io/badge/React%20DOM-black
-[ReactRouterDom-url]: https://github.com/ReactRouterDom/ReactRouterDom-go
-[ReactRouterDom-logo]: https://img.shields.io/badge/React%20Router%20DOM-grey
-[Redux-url]: https://redux.js.org/
-[Redux-logo]: https://img.shields.io/badge/Redux-blue
-[ReactRedux-url]: https://www.npmjs.com/package/react-redux
-[ReactRedux-logo]: https://img.shields.io/badge/React%20Redux-lightskyblue
-[ChartJs-url]: https://www.chartjs.org/
-[ChartJs-logo]: https://img.shields.io/badge/Chart%20JS-red
+## Support
+
+For support, email gilangzaltin@gmail.com

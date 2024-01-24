@@ -63,7 +63,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/register",
+    path: "/auth/register",
     element: (
       <IsLogin>
         <Register />,
@@ -72,7 +72,7 @@ const router = createBrowserRouter([
     // errorElement: "",
   },
   {
-    path: "/login",
+    path: "/auth/login",
     element: (
       <IsLogin>
         <Login />,
@@ -80,7 +80,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/forgotPass",
+    path: "/auth/forgotPass",
     element: (
       <IsLogin>
         <ForgotPass />,
