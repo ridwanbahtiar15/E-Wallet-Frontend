@@ -56,7 +56,7 @@ VITE_MIDTRANS_CLIENT_KEY = "YOUR MIDTRANS CLIENT KEY"
 ```
 
 4. Preparing backend \
-   Don't forget to run the backend of this project: [Backend E-Wallet (Javascript)](https://github.com/GilangRizaltin/E-Wallet)
+   Don't forget to run the backend of this project: [Backend](#backend)
 
 5. Start the server
 
@@ -90,6 +90,8 @@ VITE_MIDTRANS_CLIENT_KEY = "YOUR MIDTRANS CLIENT KEY"
 | ![Top Up Screenshot](https://res.cloudinary.com/doncmmfaa/image/upload/v1705844603/E-Wallet%20By%20FWG%2016/e-wallet_topup_pqepgy.png)              |
 
 ## Related Project
+
+<a name="backend"></a>
 
 [Backend E-Wallet (Javascript)](https://github.com/GilangRizaltin/E-Wallet)
 
