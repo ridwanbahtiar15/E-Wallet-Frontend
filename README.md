@@ -59,10 +59,7 @@ according to your needs. You will need:
 
 ## Collaborator
 
-[Akbar Syarif](https://github.com/akbarsyarif)
-
-[Gilang Rizaltin](https://github.com/GilangRizaltin)
-
-[F Thema W](https://github.com/themawaras)
-
-[Ridwan Bahtiar](https://github.com/ridwanbahtiar15)
+- [Akbar Syarif](https://github.com/akbarsyarif)
+- [Gilang Rizaltin](https://github.com/GilangRizaltin)
+- [F Thema W](https://github.com/themawaras)
+- [Ridwan Bahtiar](https://github.com/ridwanbahtiar15)
