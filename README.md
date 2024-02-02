@@ -1,9 +1,9 @@
 # E Wallet With React JS
 
-<div align="center">
+<p align="center">
         <img src="./src/assets/img/logo.png" width="30px" alt="logo"></img>
         <img src="./src/assets/img/e-wallet.png" width="100px" alt="logo"></img>
-</div>
+</p>
 
 A Front End project for transfer and receive money online on digital wallets. The main feature in this project is using a Single Page Application (SPA), Dynamic Web and Responsive website for mobile, tablet and laptop.
 
