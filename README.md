@@ -7,10 +7,6 @@
 
 A Front End project for transfer and receive money online on digital wallets. The main feature in this project is using a Single Page Application (SPA), Dynamic Web and Responsive website for mobile, tablet and laptop.
 
-## Link Deployment
-
-https://e-wallet-frontend-three.vercel.app
-
 ## Built With
 
 - [React JS](https://go.dev/)
@@ -54,6 +50,10 @@ according to your needs. You will need:
 | Login                                                                           | Home                                                                           |
 | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
 | <img src="./src/assets/ss_ewallet/login.png" alt="image" style="width:360px;"/> | <img src="./src/assets/ss_ewallet/home.png" alt="image" style="width:360px;"/> |
+
+## Link Deployment
+
+[E Wallet](https://e-wallet-frontend-three.vercel.app)
 
 ## Related Project
 
