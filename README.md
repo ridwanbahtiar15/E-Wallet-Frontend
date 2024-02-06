@@ -51,6 +51,10 @@ according to your needs. You will need:
 | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
 | <img src="./src/assets/ss_ewallet/login.png" alt="image" style="width:360px;"/> | <img src="./src/assets/ss_ewallet/home.png" alt="image" style="width:360px;"/> |
 
+| Dashboard                                                                           | Profile                                                                           |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| <img src="[./src/assets/ss_ewallet/login.png](https://res.cloudinary.com/dhxdnljzm/image/upload/v1707243030/e-wallet/FireShot_Capture_026_-_E-Wallet_-_Dashboard_-_e-wallet-frontend-three.vercel.app_rxsdfx.png)" alt="image" style="width:360px;"/> | <img src="[./src/assets/ss_ewallet/home.png](https://res.cloudinary.com/dhxdnljzm/image/upload/v1707243023/e-wallet/FireShot_Capture_027_-_E-Wallet_-_Profile_-_e-wallet-frontend-three.vercel.app_kj4ocs.png)" alt="image" style="width:360px;"/> |
+
 ## Link Deployment
 
 [E Wallet](https://e-wallet-frontend-three.vercel.app)
